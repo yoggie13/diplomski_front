@@ -1,4 +1,11 @@
-import React from 'react'
+import React from 'react';
+
+function handleChangeEmail() {
+
+}
+function handleChangePassword() {
+
+}
 
 export default function UserInfo() {
     return (
