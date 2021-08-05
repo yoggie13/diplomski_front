@@ -1,11 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Varela&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap");
 body {
   margin: 0;
+  overflow-x: hidden;
 }
+#root {
+  width: 100vw;
+  min-height: 100vh;
+}
+.App {
+  display: grid;
+  grid-template-columns: 25vw 75vw;
+  height: 100vh;
+}
+
 .sidebar {
+  grid-column: 1;
   position: fixed;
-  width: 270px;
+  min-width: 225px;
+  width: 20vw;
   background-color: #0d63e3;
   height: 100vh;
   margin: 0;
@@ -16,29 +29,31 @@ body {
 .sidebar ul {
   padding: 0;
   list-style-type: none;
-  margin-top: 30%;
+  margin-top: 10vh;
   align-self: flex-start;
   margin-left: 50px;
 }
 .sidebar ul li,
-p {
+#sidebarFooter p {
   font-family: "Varela";
-  font-size: 24px;
   margin-bottom: 15px;
   text-align: left;
 }
-p {
+.sidebar ul li {
   font-size: 20px;
+}
+#sidebarFooter p {
+  font-size: 16px;
 }
 .sidebar img {
   max-width: 80px;
   height: auto;
-  margin-left: 20px;
-  margin-top: 20px;
+  margin-left: 30px;
+  margin-top: 30px;
 }
-.sidebar #sidebarFotter {
-  margin-left: 20px;
-  margin-right: 20px;
+#sidebarFooter {
+  margin-left: 30px;
+  margin-right: 30px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,6 +63,78 @@ p {
   bottom: 20px;
 }
 .sidebar p {
-  margin-right: 52px;
-  margin-left: 20px;
+  margin-left: 20%;
+}
+.sidebar ul li,
+.sidebar i:hover {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1441px) {
+  .sidebar p {
+    margin-left: 4vw;
+  }
+  .sidebar ul li,
+  p {
+    font-size: 26px;
+  }
+  #sidebarFooter p {
+    font-size: 20px;
+  }
+  .sidebar ul {
+    margin-left: 60px;
+  }
+  .UserInfo {
+    margin-left: 90px;
+    margin-right: 90px;
+  }
+}
+.UserInfo {
+  grid-column: 2;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-left: 50px;
+  margin-right: 40px;
+  margin-top: 10vh;
+  text-align: left;
+  font-family: "Varela";
+  font-size: 22px;
+  color: #020b3f;
+}
+.UserInfo .statWrap {
+  display: flex;
+  flex-direction: row;
+  margin-top: 16x;
+  margin-bottom: 16px;
+  justify-content: flex-start;
+}
+.UserInfo .statWrap .result {
+  margin-left: auto;
+}
+.UserInfo h1 {
+  margin-top: 0px;
+  font-family: "Nunito";
+  font-weight: 800;
+  font-size: 50px;
+  color: #24044d;
+}
+#buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+#buttons button {
+  border-radius: 30px;
+  font-family: "Varela";
+  font-size: 16px;
+  padding: 14px 16px 12px 14px;
+  margin-bottom: 20px;
+  background-color: #0d63e3;
+  color: white;
+  border: none;
+}
+#buttons button:hover {
+  cursor: pointer;
 }

@@ -1,10 +1,14 @@
 import './App.css';
 import Sidebar from './Sidebar';
+import UserInfo from './UserInfo';
 
 function App() {
   return (
     <div className="App">
-      <Sidebar />
+      <>
+        <Sidebar />
+        <UserInfo />
+      </>
     </div>
   );
 }
