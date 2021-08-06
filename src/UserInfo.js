@@ -1,11 +1,5 @@
 import React from 'react';
 
-function handleChangeEmail() {
-
-}
-function handleChangePassword() {
-
-}
 
 export default function UserInfo() {
     return (
@@ -39,7 +33,6 @@ export default function UserInfo() {
                 </div>
             </div >
             <div id="buttons">
-                <button>Promeni email</button>
                 <button>Promeni šifru</button>
             </div>
         </div >

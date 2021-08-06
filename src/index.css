@@ -5,6 +5,7 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
+
 .App {
   width: 100vw;
   min-height: 100vh;
@@ -12,6 +13,25 @@ body {
 #root {
   width: 100vw;
   min-height: 100vh;
+}
+h1 {
+  font-family: "Nunito";
+  font-weight: 800;
+  color: #24044d;
+}
+button {
+  font-family: "Varela";
+  border-radius: 30px;
+  border: none;
+  padding: 14px 16px 14px 16px;
+  background-color: #0d63e3;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #e30d63;
 }
 .UserPanel {
   display: grid;
@@ -88,23 +108,6 @@ body {
 .sidebar i:hover {
   cursor: pointer;
 }
-
-@media screen and (min-width: 1441px) {
-  .sidebar ul li,
-  p {
-    font-size: 26px;
-  }
-  #sidebarFooter p {
-    font-size: 20px;
-  }
-  .sidebar ul {
-    margin-left: 60px;
-  }
-  .UserInfo {
-    margin-left: 90px;
-    margin-right: 90px;
-  }
-}
 .UserInfo {
   grid-column: 2;
   margin: auto;
@@ -122,9 +125,12 @@ body {
 .UserInfo .statWrap {
   display: flex;
   flex-direction: row;
-  margin-top: 10x;
-  margin-bottom: 10px;
+  margin-top: 26px;
+  margin-bottom: 26px;
   justify-content: flex-start;
+}
+.UserInfo .statWrap p {
+  margin: 0px;
 }
 .UserInfo .statWrap .result {
   margin-left: auto;
@@ -133,28 +139,12 @@ body {
 }
 .UserInfo h1 {
   margin-top: 0px;
-  font-family: "Nunito";
-  font-weight: 800;
   font-size: 50px;
-  color: #24044d;
 }
 #buttons {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-}
-#buttons button {
-  border-radius: 30px;
-  font-family: "Varela";
-  font-size: 16px;
-  padding: 14px 16px 12px 14px;
-  margin-bottom: 20px;
-  background-color: #0d63e3;
-  color: white;
-  border: none;
-}
-#buttons button:hover {
-  cursor: pointer;
 }
 
 .FormClass {
@@ -227,4 +217,81 @@ body {
 .Header img {
   margin-left: 30px;
   max-height: 65%;
+}
+
+.Homepage {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.Homepage #left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-column: 1;
+  text-align: left;
+  margin-left: 10vw;
+  font-family: "Varela";
+  font-size: 28px;
+  color: #444444;
+}
+.Homepage #left h1 {
+  font-size: 60px;
+  margin-top: 0px;
+}
+.Homepage #left p {
+  margin-top: 0px;
+}
+.Homepage #right {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-right: 10vw;
+}
+.Homepage #right img {
+  width: 80%;
+  height: auto;
+}
+.Homepage #left button {
+  width: 150px;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 900px) {
+  .Homepage {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  .Homepage #left {
+    font-size: 22px;
+    margin-left: 0px;
+  }
+}
+
+@media screen and (min-width: 1441px) {
+  .sidebar ul li,
+  .sidebar p {
+    font-size: 26px;
+  }
+  #sidebarFooter p {
+    font-size: 20px;
+  }
+  .sidebar ul {
+    margin-left: 60px;
+  }
+  .UserInfo {
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-top: 100px;
+  }
+  .UserInfo .statWrap {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
 }
