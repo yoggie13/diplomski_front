@@ -2,10 +2,10 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import UserInfo from './UserInfo';
 
-export default function UserPanel() {
+export default function UserPanel({ LogoutLogic }) {
     return (
         <div className="UserPanel">
-            <Sidebar />
+            <Sidebar LogoutLogic={LogoutLogic} />
             <UserInfo />
         </div>
     )
