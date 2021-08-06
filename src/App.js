@@ -1,16 +1,24 @@
+import { useState } from 'react';
 import './App.css';
-import Sidebar from './Sidebar';
-import UserInfo from './UserInfo';
-import Login from './Login';
+import BasicTemplate from './BasicTemplate';
+import UserPanel from './UserPanel';
+
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState({ loggedIn: false });
+
+  const LoginLogic = details => {
+
+    if (details.email === "on20170077@student.fon.bg.ac.rs" && details.password === "123") {
+      setLoggedIn(true);
+    }
+  }
   return (
     <div className="App">
-      {/* <>
-        <Sidebar />
-        <UserInfo />
-      </> */}
-      <Login />
+      {loggedIn === true
+        ? <UserPanel />
+        : <BasicTemplate LoginLogic={LoginLogic} />
+      }
     </div>
   );
 }
