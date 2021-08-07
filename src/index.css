@@ -280,6 +280,9 @@ i:hover {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  margin-left: 30px;
+  margin-right: 40px;
+  margin-top: 30px;
 }
 table {
   width: 90%;
@@ -311,6 +314,13 @@ td {
   }
   .UserInfo {
     grid-column: 2;
+  }
+  .Scoreboard th {
+    font-size: 14px;
+  }
+  .Scoreboard p,
+  td {
+    font-size: 12px;
   }
 }
 

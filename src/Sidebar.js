@@ -17,11 +17,11 @@ export default function Sidebar({ LogoutLogic, changePanelRender }) {
     }
     const handleFinishedGamesClick = e => {
         e.preventDefault();
-        changePanelRender("activegames");
+        changePanelRender("finishedgames");
     }
     const handleScoreboardClick = e => {
         e.preventDefault();
-        changePanelRender("activegames");
+        changePanelRender("scoreboard");
     }
 
     return (
@@ -34,7 +34,7 @@ export default function Sidebar({ LogoutLogic, changePanelRender }) {
                 <li>
                     Završene igre
                 </li>
-                <li>
+                <li onClick={handleScoreboardClick}>
                     Scoreboard
                 </li>
             </ul>
