@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import ChangePassword from './ChangePassword';
+import Scoreboard from './Scoreboard';
 import Sidebar from './Sidebar';
 import UserInfo from './UserInfo';
 
@@ -9,7 +10,7 @@ export default function UserPanel({ LogoutLogic }) {
         sidebarStatus: window.innerWidth >= 900 ? true : false
     });
     const [panelState, setPanelState] = useState({
-        whatToRender: "userinfo"
+        whatToRender: "scoreboard"
     });
 
     const handleResize = e => {
@@ -46,15 +47,17 @@ export default function UserPanel({ LogoutLogic }) {
         <div className="UserPanel" onClick={closeSidebar}>
             {
                 sidebarState.sidebarStatus
-                    ? <Sidebar LogoutLogic={LogoutLogic} />
+                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} />
                     : <i className="fas fa-bars fa-2x" onClick={openSidebar}></i>
             }
             {
                 panelState.whatToRender === "userinfo"
                     ? <UserInfo changeRender={changeRender} />
-                    : panelState.whatToRender === "changepassword"
-                        ? <ChangePassword changeRender={changeRender} />
-                        : null
+                    : panelState.whatToRender === "scoreboard"
+                        ? <Scoreboard />
+                        : panelState.whatToRender === "changepassword"
+                            ? <ChangePassword changeRender={changeRender} />
+                            : null
             }
         </div>
     )
