@@ -286,7 +286,9 @@ i:hover {
 }
 table {
   width: 90%;
+  border-collapse: collapse;
 }
+
 th {
   font-size: 22px;
   text-align: right;
@@ -295,6 +297,9 @@ td {
   font-family: "Varela";
   font-size: 18px;
   text-align: right;
+  border: 1px solid lightgray;
+  border-left: 0px;
+  border-right: 0px;
 }
 @media screen and (max-width: 900px) {
   .Homepage {

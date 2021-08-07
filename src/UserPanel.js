@@ -10,7 +10,7 @@ export default function UserPanel({ LogoutLogic }) {
         sidebarStatus: window.innerWidth >= 900 ? true : false
     });
     const [panelState, setPanelState] = useState({
-        whatToRender: "scoreboard"
+        whatToRender: "userinfo"
     });
 
     const handleResize = e => {
