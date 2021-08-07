@@ -6,23 +6,21 @@ import HomePage from './HomePage';
 
 
 export default function BasicTemplate({ LoginLogic }) {
-    const [renderer, setRenderer] = useState({ whatToRender: "homepage" });
+    const [state, setState] = useState({ whatToRender: "homepage" });
 
     const changeRender = what => {
-        setRenderer({ whatToRender: what });
+        setState({ whatToRender: what });
     }
 
     return (
         <div className="BasicTemplate">
             <Header />
             {
-                renderer.whatToRender === "homepage"
+                state.whatToRender === "homepage"
                     ? <HomePage changeRender={changeRender} />
-                    : renderer.whatToRender === "login"
+                    : state.whatToRender === "login"
                         ? <Login LoginLogic={LoginLogic} />
-                        : renderer.whatToRender === "changePassword"
-                            ? <ChangePassword />
-                            : null
+                        : null
             }
         </div>
     )

@@ -1,7 +1,12 @@
 import React from 'react';
 
 
-export default function UserInfo() {
+export default function UserInfo({ changeRender }) {
+
+    const handleClick = e => {
+        e.preventDefault();
+        changeRender("changepassword");
+    }
     return (
         <div className="UserInfo">
             <h1>Ognjen Nikolić</h1>
@@ -33,7 +38,7 @@ export default function UserInfo() {
                 </div>
             </div >
             <div id="buttons">
-                <button>Promeni šifru</button>
+                <button onClick={handleClick}>Promeni šifru</button>
             </div>
         </div >
     )

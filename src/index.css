@@ -174,6 +174,9 @@ i:hover {
 #changePasswordForm {
   min-height: 400px;
 }
+#changePasswordDiv {
+  grid-column: 2;
+}
 .FormClass form input[type="text"],
 .FormClass form input[type="password"] {
   width: 80%;

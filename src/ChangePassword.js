@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function ChangePassword() {
+export default function ChangePassword({ changeRender }) {
     return (
-        <div className="FormClass">
+        <div className="FormClass" id="changePasswordDiv">
             <form id="changePasswordForm">
                 <label>
                     Stari password
