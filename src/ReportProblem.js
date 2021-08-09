@@ -4,6 +4,7 @@ export default function ReportProblem() {
     const reportHandler = e => {
         e.preventDefault();
 
+        //konekt na api pa sa apija da se salje
         return;
     }
     return (
