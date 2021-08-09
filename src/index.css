@@ -196,7 +196,7 @@ i:hover {
   margin-bottom: 20px;
   border: solid 1px lightgray;
   font-size: 16px;
-  border-radius: ;
+  border-radius: 5px;
 }
 .FormClass form input[type="file"] {
   width: 80%;
@@ -229,6 +229,21 @@ i:hover {
 .FormClass form a {
   color: #0d63e3;
   font-size: 14px;
+}
+
+.PlayGameForm input[type="submit"] {
+  border: none;
+  margin-top: 10px;
+  border-radius: 30px;
+  padding: 12px 14px 12px 14px;
+  width: fit-content;
+  font-size: 16px;
+  background-color: #0d63e3;
+  color: white;
+}
+.PlayGameForm input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #e30d63;
 }
 .Header {
   grid-row: 1;

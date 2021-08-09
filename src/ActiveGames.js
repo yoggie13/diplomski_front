@@ -1,6 +1,11 @@
 import React from 'react'
 
-export default function ActiveGames() {
+export default function ActiveGames({ changeRender }) {
+    const handleClick = e => {
+        e.preventDefault();
+
+        changeRender("game");
+    }
     return (
         <div className="ActiveGames">
             <h1>Aktivne igre</h1>
@@ -20,7 +25,7 @@ export default function ActiveGames() {
                         <td>2</td>
                         <td>2</td>
                         <td>12.8.2021</td>
-                        <td><i class="fas fa-chevron-right fa-lg"></i></td>
+                        <td><i class="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
                     </tr>
                 </tbody>
             </table>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ActiveGames from './ActiveGames';
 import ChangePassword from './ChangePassword';
 import FinishedGames from './FinishedGames';
+import Game from './Game';
 import ReportProblem from './ReportProblem';
 import Scoreboard from './Scoreboard';
 import Sidebar from './Sidebar';
@@ -60,14 +61,16 @@ export default function UserPanel({ LogoutLogic }) {
                         : panelState.whatToRender === "scoreboard"
                             ? <Scoreboard />
                             : panelState.whatToRender === "activegames"
-                                ? <ActiveGames />
-                                : panelState.whatToRender === "finishedgames"
-                                    ? <FinishedGames />
-                                    : panelState.whatToRender === "reportproblem"
-                                        ? <ReportProblem />
-                                        : panelState.whatToRender === "changepassword"
-                                            ? <ChangePassword changeRender={changeRender} />
-                                            : null
+                                ? <ActiveGames changeRender={changeRender} />
+                                : panelState.whatToRender === "game"
+                                    ? <Game />
+                                    : panelState.whatToRender === "finishedgames"
+                                        ? <FinishedGames />
+                                        : panelState.whatToRender === "reportproblem"
+                                            ? <ReportProblem />
+                                            : panelState.whatToRender === "changepassword"
+                                                ? <ChangePassword changeRender={changeRender} />
+                                                : null
                 }
             </div>
         </div>
