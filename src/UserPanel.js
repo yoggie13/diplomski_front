@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import ActiveGames from './ActiveGames';
 import ChangePassword from './ChangePassword';
+import FinishedGames from './FinishedGames';
+import ReportProblem from './ReportProblem';
 import Scoreboard from './Scoreboard';
 import Sidebar from './Sidebar';
 import UserInfo from './UserInfo';
@@ -50,15 +53,23 @@ export default function UserPanel({ LogoutLogic }) {
                     ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} />
                     : <i className="fas fa-bars fa-2x" onClick={openSidebar}></i>
             }
-            {
-                panelState.whatToRender === "userinfo"
-                    ? <UserInfo changeRender={changeRender} />
-                    : panelState.whatToRender === "scoreboard"
-                        ? <Scoreboard />
-                        : panelState.whatToRender === "changepassword"
-                            ? <ChangePassword changeRender={changeRender} />
-                            : null
-            }
+            <div id='mainPart'>
+                {
+                    panelState.whatToRender === "userinfo"
+                        ? <UserInfo changeRender={changeRender} />
+                        : panelState.whatToRender === "scoreboard"
+                            ? <Scoreboard />
+                            : panelState.whatToRender === "activegames"
+                                ? <ActiveGames />
+                                : panelState.whatToRender === "finishedgames"
+                                    ? <FinishedGames />
+                                    : panelState.whatToRender === "reportproblem"
+                                        ? <ReportProblem />
+                                        : panelState.whatToRender === "changepassword"
+                                            ? <ChangePassword changeRender={changeRender} />
+                                            : null
+                }
+            </div>
         </div>
     )
 }

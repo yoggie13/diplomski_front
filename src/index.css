@@ -19,6 +19,8 @@ th {
   font-family: "Nunito";
   font-weight: 800;
   color: #24044d;
+  margin-top: 0px;
+  font-size: 50px;
 }
 button {
   font-family: "Varela";
@@ -115,7 +117,7 @@ i:hover {
 .sidebar ul li {
   cursor: pointer;
 }
-.UserInfo {
+#mainPart {
   grid-column: 2;
   margin: auto;
   display: flex;
@@ -128,6 +130,8 @@ i:hover {
   font-family: "Varela";
   font-size: 22px;
   color: #020b3f;
+}
+.UserInfo {
 }
 .UserInfo .statWrap {
   display: flex;
@@ -144,10 +148,7 @@ i:hover {
   font-family: "Nunito";
   font-weight: 700;
 }
-.UserInfo h1 {
-  margin-top: 0px;
-  font-size: 50px;
-}
+
 #buttons {
   display: flex;
   flex-direction: column;
@@ -178,9 +179,7 @@ i:hover {
 #changePasswordForm {
   min-height: 400px;
 }
-#changePasswordDiv {
-  grid-column: 2;
-}
+
 .FormClass form input[type="text"],
 .FormClass form input[type="password"] {
   width: 80%;
@@ -190,6 +189,20 @@ i:hover {
   border-bottom: solid 1px lightgray;
   font-size: 18px;
 }
+.FormClass form select,
+.FormClass form textarea {
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: solid 1px lightgray;
+  font-size: 16px;
+  border-radius: ;
+}
+.FormClass form input[type="file"] {
+  width: 80%;
+  font-size: 12px;
+}
+
 .FormClass form input[type="text"],
 .FormClass form input[type="password"]:focus {
   outline: none;
@@ -275,15 +288,6 @@ i:hover {
   color: #2b0a55;
 }
 
-.Scoreboard {
-  grid-column: 2;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  margin-left: 30px;
-  margin-right: 40px;
-  margin-top: 30px;
-}
 table {
   width: 90%;
   border-collapse: collapse;
@@ -316,9 +320,6 @@ td {
   }
   .UserPanel {
     grid-template-columns: 5vw 90vw;
-  }
-  .UserInfo {
-    grid-column: 2;
   }
   .Scoreboard th {
     font-size: 14px;
