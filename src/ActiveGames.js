@@ -25,7 +25,7 @@ export default function ActiveGames({ changeRender }) {
                         <td>2</td>
                         <td>2</td>
                         <td>12.8.2021</td>
-                        <td><i class="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
+                        <td><i className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
                     </tr>
                 </tbody>
             </table>
