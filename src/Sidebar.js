@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './img/laboi_logo.png';
+import { useState } from 'react';
 
-export default function Sidebar({ LogoutLogic, changePanelRender }) {
+export default function Sidebar({ LogoutLogic, changePanelRender, admin }) {
 
+    const [state, setstate] = useState({ admin: false });
     const handleLogout = e => {
         e.preventDefault();
         LogoutLogic(e);
@@ -27,21 +29,50 @@ export default function Sidebar({ LogoutLogic, changePanelRender }) {
         e.preventDefault();
         changePanelRender("reportproblem");
     }
+    const handleAdminAllGames = e => {
+        e.preventDefault();
+        changePanelRender("allgames");
+    }
+    const handleCreateGameClick = e => {
+        e.preventDefault();
+        changePanelRender("creategame");
+    }
+    const handleTablesClick = e => {
+        e.preventDefault();
+        changePanelRender("alltables");
+    }
+
 
     return (
         <div className="sidebar">
             <img src={logo} />
-            <ul>
-                <li onClick={handleActiveGamesClick}>
-                    Aktivne igre
-                </li>
-                <li onClick={handleFinishedGamesClick}>
-                    Završene igre
-                </li>
-                <li onClick={handleScoreboardClick}>
-                    Scoreboard
-                </li>
-            </ul>
+            {
+                admin === false
+                    ? <ul>
+                        <li onClick={handleActiveGamesClick}>
+                            Aktivne igre
+                        </li>
+                        <li onClick={handleFinishedGamesClick}>
+                            Završene igre
+                        </li>
+                        <li onClick={handleScoreboardClick}>
+                            Scoreboard
+                        </li>
+                    </ul>
+                    : admin === true
+                        ? <ul>
+                            <li onClick={handleCreateGameClick}>
+                                Kreiraj igru
+                            </li>
+                            <li onClick={handleAdminAllGames}>
+                                Sve igre
+                            </li>
+                            <li onClick={handleTablesClick}>
+                                Tabele
+                            </li>
+                        </ul>
+                        : null
+            }
             <div id='sidebarFooter'>
                 <i onClick={handleReportClick} className="fas fa-exclamation-circle fa-2x" id="report"></i>
                 <p onClick={handleUsernameClick}>on20170077</p>

@@ -1,20 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
-import ActiveGames from './ActiveGames';
+import ActiveGames from './UserPanels/ActiveGames';
 import ChangePassword from './ChangePassword';
-import FinishedGames from './FinishedGames';
-import Game from './Game';
+import FinishedGames from './UserPanels/FinishedGames';
+import Game from './UserPanels/Game';
 import ReportProblem from './ReportProblem';
 import Scoreboard from './Scoreboard';
 import Sidebar from './Sidebar';
-import UserInfo from './UserInfo';
+import UserInfo from './UserPanels/UserInfo';
+import CreateGame from './AdminPanels/CreateGame';
+import AllGames from './AdminPanels/AllGames';
+import AllTables from './AdminPanels/AllTables';
+import GameDashboard from './AdminPanels/GameDashboard';
 
-export default function UserPanel({ LogoutLogic }) {
+export default function UserPanel({ LogoutLogic, admin }) {
     const [sidebarState, setSidebarState] = useState({
         sidebarStatus: window.innerWidth >= 900 ? true : false
     });
     const [panelState, setPanelState] = useState({
-        whatToRender: "userinfo"
+        whatToRender: admin === false ? "userinfo" : "gamedashboard"
     });
 
     const handleResize = e => {
@@ -51,13 +55,13 @@ export default function UserPanel({ LogoutLogic }) {
         <div className="UserPanel" onClick={closeSidebar}>
             {
                 sidebarState.sidebarStatus
-                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} />
+                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} admin={admin} />
                     : <i className="fas fa-bars fa-2x" onClick={openSidebar}></i>
             }
             <div id='mainPart'>
                 {
                     panelState.whatToRender === "userinfo"
-                        ? <UserInfo changeRender={changeRender} />
+                        ? <UserInfo changeRender={changeRender} admin={admin} />
                         : panelState.whatToRender === "scoreboard"
                             ? <Scoreboard />
                             : panelState.whatToRender === "activegames"
@@ -70,7 +74,15 @@ export default function UserPanel({ LogoutLogic }) {
                                             ? <ReportProblem />
                                             : panelState.whatToRender === "changepassword"
                                                 ? <ChangePassword changeRender={changeRender} />
-                                                : null
+                                                : panelState.whatToRender === "gamedashboard"
+                                                    ? <GameDashboard />
+                                                    : panelState.whatToRender === "creategame"
+                                                        ? <CreateGame />
+                                                        : panelState.whatToRender === "allgames"
+                                                            ? <AllGames />
+                                                            : panelState.whatToRender === "alltables"
+                                                                ? <AllTables />
+                                                                : "GREŠKA"
                 }
             </div>
         </div>

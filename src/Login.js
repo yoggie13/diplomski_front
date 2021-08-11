@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import App from './App';
 
 export default function Login({ LoginLogic }) {
     const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });

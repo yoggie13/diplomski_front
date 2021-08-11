@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Scoreboard() {
+export default function Scoreboard({ group }) {
     return (
         <div className="Scoreboard">
             <h1>Scoreboard</h1>

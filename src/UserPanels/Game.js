@@ -24,11 +24,11 @@ export default function Game() {
             <form className="PlayGameForm">
                 <label htmlFor="1">A</label>
                 <input type="radio" id="1" name="Strategy" value="A"
-                    checked={state.checkedRadioButtonID == 1}
+                    checked={state.checkedRadioButtonID === 1}
                     onChange={handleCheck}></input>
                 <label htmlFor="2">B</label>
                 <input type="radio" id="2" name="Strategy" value="B"
-                    checked={state.checkedRadioButtonID == 2}
+                    checked={state.checkedRadioButtonID === 2}
                     onChange={handleCheck}></input>
                 <input type="submit" value="Odigraj"></input>
             </form>

@@ -131,8 +131,6 @@ i:hover {
   font-size: 22px;
   color: #020b3f;
 }
-.UserInfo {
-}
 .UserInfo .statWrap {
   display: flex;
   flex-direction: row;
@@ -319,6 +317,21 @@ td {
   border: 1px solid lightgray;
   border-left: 0px;
   border-right: 0px;
+}
+
+.pageMover {
+  display: flex;
+  width: 90%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pageMover i {
+  margin-left: 30px;
+}
+.CreateGameForm {
+  display: flex;
+  flex-direction: column;
 }
 @media screen and (max-width: 900px) {
   .Homepage {

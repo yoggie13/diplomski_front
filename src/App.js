@@ -6,24 +6,25 @@ import UserPanel from './UserPanel';
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState({ isLoggedIn: localStorage.getItem("email") !== null ? true : false });
+  const [state, setState] = useState({ isLoggedIn: localStorage.getItem("email") !== null ? true : false, admin: true });
 
   const LoginLogic = details => {
     if (details.email === "on20170077@student.fon.bg.ac.rs" && details.password === "123") {
-      setLoggedIn({ isLoggedIn: true });
+      setState({ isLoggedIn: true, admin: true });
       localStorage.setItem("email", details.email);
     }
 
   }
   const LogutLogic = e => {
     localStorage.removeItem("email");
-    setLoggedIn({ isLoggedIn: false });
+    setState({ isLoggedIn: false, admin: false });
   }
   return (
     <div className="App">
-      {loggedIn.isLoggedIn === true
-        ? <UserPanel LogoutLogic={LogutLogic} />
-        : <BasicTemplate LoginLogic={LoginLogic} />
+      {
+        state.isLoggedIn === true
+          ? <UserPanel LogoutLogic={LogutLogic} admin={state.admin} />
+          : <BasicTemplate LoginLogic={LoginLogic} />
       }
     </div>
   );
