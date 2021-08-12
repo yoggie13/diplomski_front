@@ -160,9 +160,11 @@ i:hover {
   align-items: center;
   font-family: "Varela";
 }
-.FormClass form {
+form {
   display: flex;
   flex-direction: column;
+}
+.FormClass form {
   justify-content: center;
   align-items: center;
   border: 1px solid #2b0a55;
@@ -178,34 +180,42 @@ i:hover {
   min-height: 400px;
 }
 
-.FormClass form input[type="text"],
-.FormClass form input[type="password"] {
-  width: 80%;
-  margin-top: 20px;
-  margin-bottom: 30px;
+form input[type="text"],
+form input[type="password"] {
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 20px;
   border: none;
   border-bottom: solid 1px lightgray;
   font-size: 18px;
 }
-.FormClass form select,
-.FormClass form textarea {
-  width: 80%;
-  margin-top: 20px;
+form select,
+form textarea {
+  width: 90%;
+  margin-top: 10px;
   margin-bottom: 20px;
   border: solid 1px lightgray;
   font-size: 16px;
   border-radius: 5px;
 }
-.FormClass form input[type="file"] {
+form textarea {
+  height: 100px;
+  overflow-y: scroll;
+}
+form select {
+  height: 30px;
+  padding-left: 5px;
+}
+form input[type="file"] {
   width: 80%;
   font-size: 12px;
 }
 
-.FormClass form input[type="text"],
-.FormClass form input[type="password"]:focus {
+form input[type="text"],
+form input[type="password"]:focus {
   outline: none;
 }
-.FormClass form input[type="submit"] {
+form input[type="submit"] {
   border: none;
   margin-top: 10px;
   border-radius: 30px;
@@ -215,10 +225,22 @@ i:hover {
   background-color: #2b0a55;
   color: white;
 }
-.FormClass form input[type="submit"]:hover {
+form input[type="submit"]:hover {
   cursor: pointer;
   background-color: #e30d63;
 }
+.FormClass form input[type="text"],
+.FormClass form input[type="password"] {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.FormClass form input[type="text"],
+.FormClass form input[type="password"],
+.FormClass form select,
+.FormClass form textarea {
+  width: 80% !important;
+}
+
 .FormClass form label {
   align-self: flex-start;
   margin-left: 10%;
@@ -242,6 +264,10 @@ i:hover {
 .PlayGameForm input[type="submit"]:hover {
   cursor: pointer;
   background-color: #e30d63;
+}
+.StrategyInput {
+  display: flex;
+  flex-direction: column;
 }
 .Header {
   grid-row: 1;
@@ -329,9 +355,8 @@ td {
 .pageMover i {
   margin-left: 30px;
 }
-.CreateGameForm {
-  display: flex;
-  flex-direction: column;
+.StrategyInput .fas.fa-plus {
+  align-self: center;
 }
 @media screen and (max-width: 900px) {
   .Homepage {
