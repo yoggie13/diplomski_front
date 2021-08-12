@@ -399,6 +399,41 @@ td {
 .StrategyInput .fas.fa-plus {
   align-self: center;
 }
+
+.Chat {
+  width: 400px;
+  border: 1px solid #0d63e3;
+  border-radius: 5px;
+}
+#Messages {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+#Messages .opponent {
+  justify-content: flex-start;
+  text-align: left;
+  margin-left: 5px;
+}
+#Messages .player {
+  justify-content: flex-end;
+  text-align: right;
+  margin-right: 5px;
+}
+#sendMessage {
+  display: flex;
+  flex-direction: row;
+}
+#sendMessage {
+  align-items: baseline;
+}
+#sendMessage input[type="text"] {
+  overflow-y: scroll;
+  font-size: 14px;
+}
 @media screen and (max-width: 900px) {
   .Homepage {
     margin-top: 60px;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import Chat from './Chat';
 
 
 export default function Game() {
@@ -32,6 +33,7 @@ export default function Game() {
                     onChange={handleCheck}></input>
                 <input type="submit" value="Odigraj"></input>
             </form>
+            <Chat />
         </div >
     );
 }
