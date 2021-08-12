@@ -12,7 +12,7 @@ import CreateGame from './AdminPanels/CreateGame';
 import AllGames from './AdminPanels/AllGames';
 import AllTables from './AdminPanels/AllTables';
 import GameDashboard from './AdminPanels/GameDashboard';
-
+import Rewards from './AdminPanels/Rewards';
 export default function UserPanel({ LogoutLogic, admin }) {
     const [sidebarState, setSidebarState] = useState({
         sidebarStatus: window.innerWidth >= 900 ? true : false
@@ -77,12 +77,14 @@ export default function UserPanel({ LogoutLogic, admin }) {
                                                 : panelState.whatToRender === "gamedashboard"
                                                     ? <GameDashboard />
                                                     : panelState.whatToRender === "creategame"
-                                                        ? <CreateGame />
+                                                        ? <CreateGame changeRender={changeRender} />
                                                         : panelState.whatToRender === "allgames"
                                                             ? <AllGames />
                                                             : panelState.whatToRender === "alltables"
                                                                 ? <AllTables />
-                                                                : "GREŠKA"
+                                                                : panelState.whatToRender === "rewards"
+                                                                    ? <Rewards />
+                                                                    : "GREŠKA"
                 }
             </div>
         </div>

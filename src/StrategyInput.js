@@ -1,7 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-export default function StrategyInput({ player }) {
+export default function StrategyInput({ player, changeRender }) {
     var numberOfStrategies = 1;
+    const handleClick = e => {
+        e.preventDefault();
+
+        changeRender(player === 1 ? e : "rewards");
+    }
+
     return (
         <div className="StrategyInput" id="firstplayerstrategies">
             <h2>Strategije {player === 1 ? "prvog" : "drugog"} igrača</h2>
@@ -9,8 +15,8 @@ export default function StrategyInput({ player }) {
             <input type="text" id={`${player}.1`} />
             <i className="fas fa-plus"></i>
             <div className="pageMover">
-                <p>Pređi na sledećeg igrača</p>
-                <i className="fas fa-chevron-right fa-lg"></i>
+                <p>{player === 1 ? "Pređi na sledećeg igrača" : "Pređi na unos isplata"}</p>
+                <i className="fas fa-chevron-right fa-lg" onClick={handleClick}></i>
             </div>
 
         </div>
