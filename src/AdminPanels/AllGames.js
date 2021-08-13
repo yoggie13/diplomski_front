@@ -1,6 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
 
 export default function AllGames() {
+    const [state, setstate] = useState({ active: false });
     return (
         <div className="AllGames">
             <h1>Pregled igara</h1>
@@ -17,8 +19,13 @@ export default function AllGames() {
                     <tr>
                         <td>Dilema zatvorenika</td>
                         <td>2</td>
-                        <td>:check:</td>
-                        <td><i className="fas fa-chevron-right fa-lg"></i></td>
+                        <td id="center">{
+                            state.active === true
+                                ? <i class="fas fa-check-circle"></i>
+                                : <i class="fas fa-times-circle"></i>
+                        }
+                        </td>
+                        <td id="center"><i className="fas fa-chevron-right"></i></td>
                     </tr>
                 </tbody>
             </table>

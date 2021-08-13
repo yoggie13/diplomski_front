@@ -390,6 +390,9 @@ td {
   border-left: 0px;
   border-right: 0px;
 }
+#center {
+  text-align: center;
+}
 
 .pageMover {
   display: flex;
