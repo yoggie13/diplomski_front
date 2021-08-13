@@ -1,13 +1,25 @@
 import React from 'react'
 import { useState } from 'react';
+import Messages from './Messages';
 
 export default function Chat() {
-    const [state, setstate] = useState({ renderChat: false });
+    const [state, setstate] = useState({ renderChat: false, message: "", numberOfMessages: [1, 2] });
 
     const handleClick = e => {
         e.preventDefault();
 
         setstate({ renderChat: !state.renderChat });
+    }
+    const sendMessage = e => {
+        e.preventDefault();
+
+
+        setstate({ ...state, message: "" });
+    }
+    const changeMessage = e => {
+        e.preventDefault();
+
+        setstate({ ...state, message: e.target.value });
     }
     return (
         <div className="Chat">
@@ -15,20 +27,17 @@ export default function Chat() {
                 state.renderChat === true
                     ? <div id="chatOpened">
                         <div id="taskbar">
-                            <i class="fas fa-times" onClick={handleClick}></i>
+                            <i className="fas fa-times" onClick={handleClick}></i>
                         </div>
                         <hr></hr>
-                        <div id="Messages">
-                            <p className="opponent">Ovo je prva poruka od strane protivnika koji preti baš opasno</p>
-                            <p className="player">Ovo je prva poruka od našeg igrača koji se strahovito brani i zadaje kontra udarac</p>
-                        </div>
+                        <Messages />
                         <hr></hr>
                         <form id="sendMessage">
-                            <textarea></textarea>
-                            <i className="fas fa-paper-plane"></i>
+                            <textarea name="message" value={state.message} onChange={changeMessage}></textarea>
+                            <i className="fas fa-paper-plane" onClick={sendMessage}></i>
                         </form>
                     </div>
-                    : <i id="chatIcon" class="fas fa-comments fa-lg" onClick={handleClick}></i>
+                    : <i id="chatIcon" className="fas fa-comments fa-lg" onClick={handleClick}></i>
             }
         </div>
     )

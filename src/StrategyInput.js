@@ -46,7 +46,6 @@ export default function StrategyInput({ player, changeRender }) {
                 state.numberOfStrategies.map((number) =>
                     <Strategy player={player} numberOfStrategies={number} addNew={addNew} />)
             }
-
             <div className="pageMover">
                 <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={handlePreviousClick}></i>
                 <div className="next">
@@ -54,7 +53,6 @@ export default function StrategyInput({ player, changeRender }) {
                     <i className="fas fa-chevron-right fa-lg" onClick={handleNextClick}></i>
                 </div>
             </div>
-
         </div>
     )
 }

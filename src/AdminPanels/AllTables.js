@@ -12,7 +12,7 @@ export default function AllTables() {
     return (
         <div className="AllTables">
             <Scoreboard group={state.groupID} />
-            <div className="pageMover">
+            <div className="tableMover">
                 <p>{state.groupID} od 12</p>
                 <i className="fas fa-chevron-right" onClick={handleNextClick}></i>
             </div>

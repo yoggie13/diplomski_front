@@ -275,10 +275,32 @@ form input[type="submit"]:hover {
   cursor: pointer;
   background-color: #e30d63;
 }
+/* .PlayGameForm input[type="radio"] {
+  display:none;
+} */
+#radioButtons label {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2b0a55;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+#radioButtons label:hover {
+  background-color: #e30d63;
+}
+#radioButtons label:checked {
+  background-color: #e30d63;
+}
 .PlayGameForm #radioButtons {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 .StrategyInput {
   display: flex;
@@ -418,6 +440,16 @@ td {
 }
 .pageMover #chevron-left {
   margin-left: 0px;
+}
+.tableMover {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.tableMover i {
+  margin-left: 30px;
 }
 .next {
   display: flex;
