@@ -6,11 +6,11 @@ import UserPanel from './UserPanel';
 
 
 function App() {
-  const [state, setState] = useState({ isLoggedIn: localStorage.getItem("email") !== null ? true : false, admin: false });
+  const [state, setState] = useState({ isLoggedIn: localStorage.getItem("email") !== null ? true : false, admin: true });
 
   const LoginLogic = details => {
     if (details.email === "on20170077@student.fon.bg.ac.rs" && details.password === "123") {
-      setState({ isLoggedIn: true, admin: false });
+      setState({ isLoggedIn: true, admin: true });
       localStorage.setItem("email", details.email);
     }
 

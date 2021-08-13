@@ -3,6 +3,7 @@ import React from 'react'
 export default function Rewards() {
     return (
         <div className="Rewards">
+            <h1>Isplate</h1>
             <form>
                 <div id="RewardMatrix">
                     <div id="AA">
