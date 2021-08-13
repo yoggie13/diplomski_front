@@ -1,16 +1,35 @@
 import React from 'react'
+import { useState } from 'react';
 
 export default function Chat() {
+    const [state, setstate] = useState({ renderChat: false });
+
+    const handleClick = e => {
+        e.preventDefault();
+
+        setstate({ renderChat: !state.renderChat });
+    }
     return (
         <div className="Chat">
-            <div id="Messages">
-                <p className="opponent">Prva poruka</p>
-                <p className="player">Druga poruka</p>
-            </div>
-            <form id="sendMessage">
-                <input type="text" />
-                <input type="submit" value="Pošalji" />
-            </form>
+            {
+                state.renderChat === true
+                    ? <div id="chatOpened">
+                        <div id="taskbar">
+                            <i class="fas fa-times" onClick={handleClick}></i>
+                        </div>
+                        <hr></hr>
+                        <div id="Messages">
+                            <p className="opponent">Ovo je prva poruka od strane protivnika koji preti baš opasno</p>
+                            <p className="player">Ovo je prva poruka od našeg igrača koji se strahovito brani i zadaje kontra udarac</p>
+                        </div>
+                        <hr></hr>
+                        <form id="sendMessage">
+                            <input type="text" />
+                            <input type="submit" value="Pošalji" />
+                        </form>
+                    </div>
+                    : <i class="far fa-comments fa-2x" onClick={handleClick}></i>
+            }
         </div>
     )
 }
