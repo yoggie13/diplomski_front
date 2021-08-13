@@ -4,13 +4,14 @@ import { useState } from 'react';
 import Rewards from './Rewards';
 
 export default function CreateGame({ changeRender }) {
-    const [state, setstate] = useState({ typeOfGame: 3, page: 3 });
+    const [state, setstate] = useState({ typeOfGame: 3, page: 2 });
 
-    const handleNextClick = e => {
-        e.preventDefault();
-        var newPage = state.page + 1;
+    const handleClick = number => {
+        var newPage = state.page + number;
         setstate({ page: newPage });
     }
+
+
     return (
         <div className="CreateGame">
             <h1>Kreiraj igru</h1>
@@ -35,7 +36,7 @@ export default function CreateGame({ changeRender }) {
                             </select>
                             <div className="pageMover">
                                 <p>Nastavi sa unosom strategija</p>
-                                <i className="fas fa-chevron-right fa-lg" onClick={handleNextClick}></i>
+                                <i className="fas fa-chevron-right fa-lg" onClick={handleClick(1)}></i>
                             </div>
                         </>
                         : state.page === 2 && state.typeOfGame < 3
@@ -47,7 +48,7 @@ export default function CreateGame({ changeRender }) {
                             </>
                             : state.page === 2 && state.typeOfGame > 2
 
-                                ? <StrategyInput player={1} changeRender={handleNextClick} />
+                                ? <StrategyInput player={1} changeRender={handleClick} />
                                 : state.page === 3 && state.typeOfGame > 2
                                     ? <StrategyInput player={2} changeRender={changeRender} />
                                     : null

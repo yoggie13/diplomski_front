@@ -199,7 +199,9 @@ form textarea {
   border: solid 1px lightgray;
   font-size: 16px;
   border-radius: 5px;
+  resize: none;
 }
+
 form textarea {
   height: 100px;
   overflow-y: auto;
@@ -252,7 +254,13 @@ form input[type="submit"]:hover {
   color: #0d63e3;
   font-size: 14px;
 }
-
+#chevron-left {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
 .PlayGameForm input[type="submit"] {
   border: none;
   margin-top: 10px;
@@ -399,12 +407,24 @@ td {
   width: 90%;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .pageMover i {
   margin-left: 30px;
 }
-.StrategyInput .fas.fa-plus {
+.Strategy {
+  display: flex;
+  flex-direction: column;
+}
+.pageMover #chevron-left {
+  margin-left: 0px;
+}
+.next {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.Strategy .fas.fa-plus {
   align-self: center;
 }
 .Chat {
@@ -485,7 +505,6 @@ hr {
   border-left: none;
   border-right: none;
   outline: none;
-  resize: none;
   margin: 0px;
 }
 #sendMessage i {

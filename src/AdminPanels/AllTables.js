@@ -14,7 +14,7 @@ export default function AllTables() {
             <Scoreboard group={state.groupID} />
             <div className="pageMover">
                 <p>{state.groupID} od 12</p>
-                <i class="fas fa-chevron-right fa-lg" onClick={handleNextClick}></i>
+                <i className="fas fa-chevron-right" onClick={handleNextClick}></i>
             </div>
         </div>
     )
