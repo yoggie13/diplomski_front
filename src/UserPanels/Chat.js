@@ -24,11 +24,11 @@ export default function Chat() {
                         </div>
                         <hr></hr>
                         <form id="sendMessage">
-                            <input type="text" />
-                            <input type="submit" value="Pošalji" />
+                            <textarea></textarea>
+                            <i className="fas fa-paper-plane"></i>
                         </form>
                     </div>
-                    : <i class="far fa-comments fa-2x" onClick={handleClick}></i>
+                    : <i id="chatIcon" class="fas fa-comments fa-lg" onClick={handleClick}></i>
             }
         </div>
     )

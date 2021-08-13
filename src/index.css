@@ -202,7 +202,7 @@ form textarea {
 }
 form textarea {
   height: 100px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 form select {
   height: 30px;
@@ -266,6 +266,11 @@ form input[type="submit"]:hover {
 .PlayGameForm input[type="submit"]:hover {
   cursor: pointer;
   background-color: #e30d63;
+}
+.PlayGameForm #radioButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .StrategyInput {
   display: flex;
@@ -399,14 +404,23 @@ td {
 .StrategyInput .fas.fa-plus {
   align-self: center;
 }
-
 .Chat {
   max-width: 400px;
   margin: 20px 0px 20px 0px;
   z-index: 1;
-  position: absolute;
+  position: fixed;
   right: 80px;
   bottom: 30px;
+}
+.Chat #chatIcon {
+  color: #2b0a55;
+  border: 2px solid #2b0a55;
+  border-radius: 50%;
+  padding: 8px;
+}
+.Chat #chatIcon:hover {
+  color: #e30d63;
+  border-color: #e30d63;
 }
 .Chat #chatOpened {
   border: 1px solid #0d63e3;
@@ -422,6 +436,7 @@ td {
 }
 hr {
   margin: 5px 0px 5px 0px;
+  color: lightgray;
 }
 #Messages {
   display: flex;
@@ -456,13 +471,27 @@ hr {
   display: flex;
   flex-direction: row;
   padding: 0px 10px 0px 10px;
+  align-items: center;
+  height: 40px;
 }
-#sendMessage {
-  align-items: baseline;
-}
-#sendMessage input[type="text"] {
-  overflow-y: scroll;
+#sendMessage textarea {
   font-size: 14px;
+  word-wrap: break-word;
+  height: 20px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  resize: none;
+  margin: 0px;
+}
+#sendMessage i {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #2b0a55;
+}
+#sendMessage i:hover {
+  color: #e30d63;
 }
 @media screen and (max-width: 900px) {
   .Homepage {
@@ -486,6 +515,10 @@ hr {
   .Scoreboard p,
   td {
     font-size: 12px;
+  }
+  .Chat {
+    max-width: 90%;
+    right: 5%;
   }
 }
 
