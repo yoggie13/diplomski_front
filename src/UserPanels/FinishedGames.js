@@ -18,7 +18,7 @@ export default function FinishedGames() {
                         <td>Dilema zatvorenika</td>
                         <td>2</td>
                         <td>2</td>
-                        <td><i class="fas fa-chevron-right fa-lg"></i></td>
+                        <td id="center"><i className="fas fa-chevron-right fa-lg"></i></td>
                     </tr>
                 </tbody>
             </table>

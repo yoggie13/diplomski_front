@@ -460,12 +460,14 @@ td {
   align-self: center;
 }
 .Chat {
-  max-width: 400px;
+  width: 350px;
   margin: 20px 0px 20px 0px;
   z-index: 1;
   position: fixed;
   right: 80px;
   bottom: 30px;
+  display: flex;
+  justify-content: flex-end;
 }
 .Chat #chatIcon {
   color: #2b0a55;
@@ -479,6 +481,7 @@ td {
 }
 .Chat #chatOpened {
   border: 1px solid #0d63e3;
+  width: 100%;
   border-radius: 5px;
   background: white;
 }
@@ -513,11 +516,11 @@ hr {
   text-align: left;
 }
 
-#Messages .opponent {
+#Messages .Opponent {
   justify-content: flex-start;
   margin-left: 10px;
 }
-#Messages .player {
+#Messages .Player {
   justify-content: flex-end;
   margin-right: 10px;
   margin-left: 55%;

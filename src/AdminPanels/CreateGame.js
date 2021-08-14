@@ -1,10 +1,10 @@
 import React from 'react'
-import StrategyInput from '../StrategyInput';
+import StrategyInput from './StrategyInput';
 import { useState } from 'react';
 import Rewards from './Rewards';
 
 export default function CreateGame({ changeRender }) {
-    const [state, setstate] = useState({ typeOfGame: 3, page: 2 });
+    const [state, setstate] = useState({ typeOfGame: 2, page: 2 });
 
     const handleClick = number => {
         var newPage = state.page + number;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import Strategy from './AdminPanels/Strategy';
+import Strategy from './Strategy';
 export default function StrategyInput({ player, changeRender }) {
     const [state, setState] = useState({ numberOfStrategies: [1] });
     const handleNextClick = e => {
@@ -44,7 +44,7 @@ export default function StrategyInput({ player, changeRender }) {
             <h2>Strategije {player === 1 ? "prvog" : "drugog"} igrača</h2>
             {
                 state.numberOfStrategies.map((number) =>
-                    <Strategy player={player} numberOfStrategies={number} addNew={addNew} />)
+                    <Strategy key={number} player={player} numberOfStrategies={number} addNew={addNew} />)
             }
             <div className="pageMover">
                 <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={handlePreviousClick}></i>

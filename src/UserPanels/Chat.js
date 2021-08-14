@@ -1,8 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
-import Messages from './Messages';
 
-export default function Chat() {
+export default function Chat({ messages }) {
     const [state, setstate] = useState({ renderChat: false, message: "", numberOfMessages: [1, 2] });
 
     const handleClick = e => {
@@ -30,7 +29,13 @@ export default function Chat() {
                             <i className="fas fa-times" onClick={handleClick}></i>
                         </div>
                         <hr></hr>
-                        <Messages />
+                        <div id="Messages">
+                            {
+                                messages.map((message, index) =>
+                                    <p key={index + 1} className={message.PlayerOrOpponent}>{message.MessageText}</p>
+                                )
+                            }
+                        </div>
                         <hr></hr>
                         <form id="sendMessage">
                             <textarea name="message" value={state.message} onChange={changeMessage}></textarea>
