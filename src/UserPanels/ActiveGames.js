@@ -27,9 +27,6 @@ export default function ActiveGames({ changeRender }) {
                 headers: {
                     'Content-Type': 'application/json',
                 }
-                // body: JSON.stringify({
-                //     // Email: "on20170077@student.fon.bg.ac.rs"
-                // })
             })
             .then(res => res.json())
             .then(response => {

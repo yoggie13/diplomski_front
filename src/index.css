@@ -485,6 +485,9 @@ td {
   border-radius: 5px;
   background: white;
 }
+#error {
+  color: #e30d38;
+}
 #taskbar {
   display: flex;
   align-items: center;
