@@ -20,6 +20,9 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
     const [panelState, setPanelState] = useState({
         whatToRender: admin === false ? "userinfo" : "gamedashboard"
     });
+    const [IDState, setIDState] = useState({
+        id: null
+    });
 
     const handleResize = e => {
         if (window.innerWidth < 900 && sidebarState.sidebarStatus !== false) {
@@ -46,7 +49,8 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
 
     }
 
-    const changeRender = what => {
+    const changeRender = (what, id = null) => {
+        setIDState({ id: id });
         setPanelState({ whatToRender: what });
     }
 
@@ -55,7 +59,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
         <div className="UserPanel" onClick={closeSidebar}>
             {
                 sidebarState.sidebarStatus
-                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} admin={admin} />
+                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} admin={admin} Username={User.Email} />
                     : <i className="fas fa-bars fa-2x" onClick={openSidebar}></i>
             }
             <div id='mainPart'>
@@ -67,9 +71,9 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                             : panelState.whatToRender === "activegames"
                                 ? <ActiveGames changeRender={changeRender} />
                                 : panelState.whatToRender === "game"
-                                    ? <Game />
+                                    ? <Game id={IDState.id} />
                                     : panelState.whatToRender === "finishedgames"
-                                        ? <FinishedGames />
+                                        ? <FinishedGames changeRender={changeRender} />
                                         : panelState.whatToRender === "reportproblem"
                                             ? <ReportProblem />
                                             : panelState.whatToRender === "changepassword"

@@ -1,9 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 
-export default function FinishedGames() {
+export default function FinishedGames({ changeRender }) {
 
     const [state, setstate] = useState({ games: [] });
+
+    const handleClick = e => {
+        e.preventDefault();
+
+        changeRender("game", e.target.id);
+    }
 
     useEffect(() => {
         fetch(
@@ -43,7 +49,7 @@ export default function FinishedGames() {
                                 <td>{game.Name}</td>
                                 <td>{game.NumberOfPlayers}</td>
                                 <td>{game.PointsGotten}</td>
-                                <td id="center"><i className="fas fa-chevron-right fa-lg"></i></td>
+                                <td id="center"><i id={game.ID} className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
                             </tr>
                         )
                     }

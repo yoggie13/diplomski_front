@@ -2,7 +2,11 @@ import React from 'react';
 import logo from './img/laboi_logo.png';
 import { useState } from 'react';
 
-export default function Sidebar({ LogoutLogic, changePanelRender, admin }) {
+function formatUsername(Username) {
+    return Username.split('@')[0];
+}
+
+export default function Sidebar({ LogoutLogic, changePanelRender, admin, Username }) {
 
     const [state, setstate] = useState({ admin: false });
     const handleLogout = e => {
@@ -75,7 +79,7 @@ export default function Sidebar({ LogoutLogic, changePanelRender, admin }) {
             }
             <div id='sidebarFooter'>
                 <i onClick={handleReportClick} className="fas fa-exclamation-circle fa-2x" id="report"></i>
-                <p onClick={handleUsernameClick}>on20170077</p>
+                <p onClick={handleUsernameClick}>{formatUsername(Username)}</p>
                 <i className="fas fa-sign-out-alt fa-2x" id="logOut" onClick={handleLogout}></i>
             </div>
         </div>

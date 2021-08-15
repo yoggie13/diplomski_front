@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import Chat from './Chat';
 
 
-export default function Game() {
+export default function Game({ id }) {
     const [state, setstate] = useState({ checkedRadioButtonID: "radio_4" });
-    const [gameState, setGameState] = useState({ name: "", text: "", strategies: [], chat: false, messages: [] });
+    const [gameState, setGameState] = useState({ name: "", text: "", strategies: [], chat: false, messages: [], active: false });
 
     const handleCheck = event => {
         setstate({ checkedRadioButtonID: event.target.id });
@@ -13,7 +13,7 @@ export default function Game() {
 
     useEffect(() => {
         fetch(
-            'http://localhost:46824/api/game/20170077/7',
+            `http://localhost:46824/api/game/20170077/${id}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -30,7 +30,6 @@ export default function Game() {
                     chat: response.Chat,
                     messages: response.Messages
                 });
-                console.log(gameState.strategies)
             })
             .catch(error => console.log(error))
     }, [])
@@ -52,13 +51,17 @@ export default function Game() {
                                 <input type="radio" id={`radio_${strategy.StrategyID}`} name="Strategy" value={`${strategy.StrategyName}`}
                                     checked={state.checkedRadioButtonID === `${strategy.StrategyID}`}
                                     onChange={handleCheck}></input>
-                                <label htmlFor={`radio_${strategy.StrategyID}`}>{`${strategy.StrategyName}`}
+                                <label key={`${strategy.StrategyID}`} htmlFor={`radio_${strategy.StrategyID}`}>{`${strategy.StrategyName}`}
                                 </label>
                             </>
                         )
                     }
                 </div>
-                <input type="submit" value="Odigraj"></input>
+                {
+                    gameState.active === true
+                        ? <input type="submit" value="Odigraj"></input>
+                        : null
+                }
             </form>
             {
                 gameState.chat === true

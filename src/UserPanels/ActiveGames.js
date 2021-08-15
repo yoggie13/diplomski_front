@@ -14,7 +14,7 @@ export default function ActiveGames({ changeRender }) {
     const handleClick = e => {
         e.preventDefault();
 
-        changeRender("game");
+        changeRender("game", e.target.id);
     }
 
 
@@ -58,7 +58,7 @@ export default function ActiveGames({ changeRender }) {
                                 <td>{game.numberOfPlayers}</td>
                                 {/* <td>2</td> */}
                                 <td>{formatDate(game.dueDate)}</td>
-                                <td id="center"><i className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
+                                <td id="center"><i id={game.id} className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
                             </tr>
                         )
                     }
