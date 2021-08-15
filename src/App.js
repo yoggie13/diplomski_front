@@ -11,7 +11,7 @@ function App() {
   const LoginLogic = details => {
     // if (details.admin === false) {
     setState({ isLoggedIn: true, admin: false, User: details });
-    localStorage.setItem("email", details.email);
+    localStorage.setItem("email", details.Email);
     // }
     // else if (details.admin === true) {
     //   setState({ isLoggedIn: true, admin: true, user: details });

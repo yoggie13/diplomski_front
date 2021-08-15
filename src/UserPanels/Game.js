@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Chat from './Chat';
 
 
-export default function Game({ id }) {
+export default function Game({ id, userID }) {
     const [state, setstate] = useState({ checkedRadioButtonID: "radio_4" });
     const [gameState, setGameState] = useState({ name: "", text: "", strategies: [], chat: false, messages: [], active: false });
 
@@ -65,7 +65,7 @@ export default function Game({ id }) {
             </form>
             {
                 gameState.chat === true
-                    ? < Chat messages={gameState.messages} />
+                    ? < Chat messages={gameState.messages} id={id} userID={userID} />
                     : null
             }
         </div >

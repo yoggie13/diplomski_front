@@ -184,6 +184,7 @@ form input[type="text"],
 form input[type="password"],
 form input[type="number"] {
   width: 90%;
+  width: 90%;
   margin-top: 10px;
   margin-bottom: 20px;
   border: none;
@@ -214,6 +215,9 @@ form input[type="file"] {
   width: 80%;
   font-size: 12px;
 }
+/* #file-upload-button {
+  background-color: #0d63e3;
+} */
 
 form input[type="text"],
 form input[type="password"]:focus {

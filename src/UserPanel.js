@@ -71,7 +71,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                             : panelState.whatToRender === "activegames"
                                 ? <ActiveGames changeRender={changeRender} />
                                 : panelState.whatToRender === "game"
-                                    ? <Game id={IDState.id} />
+                                    ? <Game id={IDState.id} userID={User.ID} />
                                     : panelState.whatToRender === "finishedgames"
                                         ? <FinishedGames changeRender={changeRender} />
                                         : panelState.whatToRender === "reportproblem"
