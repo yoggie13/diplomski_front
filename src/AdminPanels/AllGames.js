@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import Loading from '../Loading';
 
 
 function checkDate(dueDate) {
@@ -9,8 +10,12 @@ function checkDate(dueDate) {
 export default function AllGames() {
 
     const [state, setstate] = useState({ games: [] });
+    const [loadingState, setLoadingState] = useState(true);
+
 
     useEffect(() => {
+        setLoadingState(true)
+
         fetch(
             'http://localhost:46824/api/admin/games',
             {
@@ -25,39 +30,46 @@ export default function AllGames() {
                 setstate({
                     games: response
                 })
+                setLoadingState(false)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                setLoadingState(false);
+            })
+
     }, [])
 
     return (
-        <div className="AllGames">
-            <h1>Pregled igara</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Naziv igre</th>
-                        <th>Broj igrača koji su odigrali</th>
-                        <th>Aktivna</th>
-                        <th>Više info</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        state.games.map((game) =>
-                            <tr key={game.id}>
-                                <td>{game.name}</td>
-                                <td>{game.playersPlayed}</td>
-                                <td id="center">{
-                                    checkDate(game.dueDate) === true
-                                        ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                        : <i className="fas fa-times-circle" id="icon-false"></i>
-                                }
-                                </td>
-                                <td id="center"><i id={game.id} className="fas fa-chevron-right"></i></td>
-                            </tr>
-                        )}
-                </tbody>
-            </table>
-        </div>
+        loadingState === true
+            ? <Loading />
+            : <div className="AllGames">
+                <h1>Pregled igara</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Naziv igre</th>
+                            <th>Broj igrača koji su odigrali</th>
+                            <th>Aktivna</th>
+                            <th>Više info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            state.games.map((game) =>
+                                <tr key={game.id}>
+                                    <td>{game.name}</td>
+                                    <td>{game.playersPlayed}</td>
+                                    <td id="center">{
+                                        checkDate(game.dueDate) === true
+                                            ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                            : <i className="fas fa-times-circle" id="icon-false"></i>
+                                    }
+                                    </td>
+                                    <td id="center"><i id={game.id} className="fas fa-chevron-right"></i></td>
+                                </tr>
+                            )}
+                    </tbody>
+                </table>
+            </div>
     )
 }

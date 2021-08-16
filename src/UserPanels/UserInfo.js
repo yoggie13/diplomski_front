@@ -44,7 +44,7 @@ export default function UserInfo({ changeRender, admin, User }) {
                         <div id="profileInfo">
                             <div className="statWrap">
                                 <p>Zvanje:</p>
-                                <p className="result">Dr.Mr.</p>
+                                <p className="result">{User.title}</p>
                             </div>
                             <div className="statWrap">
                                 <p>Email:</p>

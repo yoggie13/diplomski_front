@@ -1,9 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
+import Loading from '../Loading';
 
 export default function Chat({ messages, id, userID }) {
     const [state, setstate] = useState({ renderChat: false, message: { MessageText: "", PlayerOrOpponent: "Player" } });
     const [message, setMessageState] = useState({ MessageText: "", PlayerOrOpponent: "Player" });
+    const [loadingState, setLoadingState] = useState(true);
+
 
     const handleClick = e => {
         e.preventDefault();
@@ -12,6 +15,8 @@ export default function Chat({ messages, id, userID }) {
     }
     const sendMessage = e => {
         e.preventDefault();
+
+        setLoadingState(true);
 
         fetch(
             `http://localhost:46824/api/game/message/${id}/${userID}`,
@@ -29,11 +34,12 @@ export default function Chat({ messages, id, userID }) {
                 if (res.status == 200)
                     messages.push(message);
                 setMessageState({ ...message, MessageText: "" });
+                setLoadingState(false)
             })
             .catch(error => {
-                console.log(error)
-            }
-            );
+                console.log(error);
+                setLoadingState(false);
+            });
     }
 
 

@@ -1,9 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import Loading from '../Loading';
 
 export default function FinishedGames({ changeRender }) {
 
     const [state, setstate] = useState({ games: [] });
+    const [loadingState, setLoadingState] = useState(true);
+
 
     const handleClick = e => {
         e.preventDefault();
@@ -12,6 +15,7 @@ export default function FinishedGames({ changeRender }) {
     }
 
     useEffect(() => {
+        setLoadingState(true);
         fetch(
             'http://localhost:46824/api/game/finishedgames/20170077',
             {
@@ -26,35 +30,44 @@ export default function FinishedGames({ changeRender }) {
                 setstate({
                     games: response.Games
                 })
+                setLoadingState(false)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                setLoadingState(false);
+            })
+
+
     }, [])
 
     return (
-        <div className="FinishedGames">
-            <h1>Završene igre</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Naziv igre</th>
-                        <th>Broj igrača</th>
-                        <th>Osvojenih poena</th>
-                        <th>Link do igre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        state.games.map((game) =>
-                            <tr key={game.ID}>
-                                <td>{game.Name}</td>
-                                <td>{game.NumberOfPlayers}</td>
-                                <td>{game.PointsGotten}</td>
-                                <td id="center"><i id={game.ID} className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
-                            </tr>
-                        )
-                    }
-                </tbody>
-            </table>
-        </div>
+        loadingState === true
+            ? <Loading />
+            :
+            <div className="FinishedGames">
+                <h1>Završene igre</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Naziv igre</th>
+                            <th>Broj igrača</th>
+                            <th>Osvojenih poena</th>
+                            <th>Link do igre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            state.games.map((game) =>
+                                <tr key={game.ID}>
+                                    <td>{game.Name}</td>
+                                    <td>{game.NumberOfPlayers}</td>
+                                    <td>{game.PointsGotten}</td>
+                                    <td id="center"><i id={game.ID} className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div>
     )
 }

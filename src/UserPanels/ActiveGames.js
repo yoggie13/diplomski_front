@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import Loading from '../Loading';
 
 function formatDate(dueDate) {
     var arr = dueDate.split('-');
@@ -11,6 +12,8 @@ function formatDate(dueDate) {
 export default function ActiveGames({ changeRender }) {
 
     const [state, setstate] = useState({ games: [] });
+    const [loadingState, setLoadingState] = useState(true);
+
     const handleClick = e => {
         e.preventDefault();
 
@@ -19,6 +22,8 @@ export default function ActiveGames({ changeRender }) {
 
 
     useEffect(() => {
+
+        setLoadingState(true);
         fetch(
             'http://localhost:46824/api/game/activegames',
             {
@@ -33,11 +38,18 @@ export default function ActiveGames({ changeRender }) {
                 setstate({
                     games: response
                 })
+                setLoadingState(false)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                setLoadingState(false);
+            })
+
     }, [])
 
-    return (
+    return (loadingState === true
+        ? <Loading />
+        :
         <div className="ActiveGames">
             <h1>Aktivne igre</h1>
             <table>

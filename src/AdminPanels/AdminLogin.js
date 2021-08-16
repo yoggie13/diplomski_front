@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import Loading from '../Loading';
+
 
 export default function AdminLogin({ LoginLogic, backToUser }) {
     const [loginDetails, setLoginDetails] = useState({ email: "", password: "", status: 500 });
-    const [state, setState] = useState({ error: false });
+    const [state, setState] = useState({ error: false, loading: true });
+    const [loadingState, setLoadingState] = useState(false);
 
 
     const loginHandler = e => {
         e.preventDefault();
 
+        setLoadingState(true);
 
         fetch(
             'http://localhost:46824/api/admin/login',
@@ -25,24 +29,30 @@ export default function AdminLogin({ LoginLogic, backToUser }) {
             })
             .then(res => {
                 if (res.status === 200) {
+                    setLoadingState(false);
+
                     return res.json();
                 }
                 else {
+                    setLoadingState(false);
                     setState({ error: true });
                     throw new Error();
                 }
 
             })
             .then(response => {
+                setLoadingState(false);
                 setState({ error: false });
                 LoginLogic(response, true);
             })
             .catch(error => {
+                setLoadingState(false);
                 return;
             });
     }
 
     return (
+
         <div className="FormClass">
             <form id="loginForm" onSubmit={loginHandler}>
                 <label htmlFor="email">
@@ -59,7 +69,11 @@ export default function AdminLogin({ LoginLogic, backToUser }) {
                         : null
                 }
                 <a>Zaboravio si/la lozinku?</a>
-                <input type="submit" value="Prijavi se" />
+                {
+                    loadingState === true
+                        ? <Loading smallerSize={true} />
+                        : <input type="submit" value="Prijavi se" />
+                }
                 <div id="gobacktouserlogin" onClick={backToUser}>
                     <i className="fas fa-chevron-right fa-sm" id="chevron-left"></i>
                     <p>Loguj se kao korisnik</p>

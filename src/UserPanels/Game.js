@@ -1,19 +1,23 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import Chat from './Chat';
+import Loading from '../Loading';
 
 
 export default function Game({ id, userID }) {
     const [state, setstate] = useState({ checkedRadioButtonID: "radio_4" });
     const [gameState, setGameState] = useState({ name: "", text: "", strategies: [], chat: false, messages: [], active: false });
+    const [loadingState, setLoadingState] = useState(true);
 
     const handleCheck = event => {
         setstate({ checkedRadioButtonID: event.target.id });
     }
 
     useEffect(() => {
+
+        setLoadingState(true)
         fetch(
-            `http://localhost:46824/api/game/20170077/${id}`,
+            `http://localhost:46824/api/game/${userID}/${id}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -30,44 +34,52 @@ export default function Game({ id, userID }) {
                     chat: response.Chat,
                     messages: response.Messages
                 });
+                setLoadingState(false);
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                setLoadingState(false);
+            })
+
     }, [])
 
     return (
-        <div className="Game">
+        loadingState === true
+            ? <Loading />
+            :
+            <div className="Game">
 
-            <h1>
-                {gameState.name}
-            </h1>
+                <h1>
+                    {gameState.name}
+                </h1>
 
-            <p>{gameState.text}</p>
+                <p>{gameState.text}</p>
 
-            <form className="PlayGameForm">
-                <div id="radioButtons">
+                <form className="PlayGameForm">
+                    <div id="radioButtons">
+                        {
+                            gameState.strategies.map((strategy) =>
+                                <>
+                                    <input type="radio" id={`radio_${strategy.StrategyID}`} name="Strategy" value={`${strategy.StrategyName}`}
+                                        checked={state.checkedRadioButtonID === `${strategy.StrategyID}`}
+                                        onChange={handleCheck}></input>
+                                    <label key={`${strategy.StrategyID}`} htmlFor={`radio_${strategy.StrategyID}`}>{`${strategy.StrategyName}`}
+                                    </label>
+                                </>
+                            )
+                        }
+                    </div>
                     {
-                        gameState.strategies.map((strategy) =>
-                            <>
-                                <input type="radio" id={`radio_${strategy.StrategyID}`} name="Strategy" value={`${strategy.StrategyName}`}
-                                    checked={state.checkedRadioButtonID === `${strategy.StrategyID}`}
-                                    onChange={handleCheck}></input>
-                                <label key={`${strategy.StrategyID}`} htmlFor={`radio_${strategy.StrategyID}`}>{`${strategy.StrategyName}`}
-                                </label>
-                            </>
-                        )
+                        gameState.active === true
+                            ? <input type="submit" value="Odigraj"></input>
+                            : null
                     }
-                </div>
+                </form>
                 {
-                    gameState.active === true
-                        ? <input type="submit" value="Odigraj"></input>
+                    gameState.chat === true
+                        ? < Chat messages={gameState.messages} id={id} userID={userID} />
                         : null
                 }
-            </form>
-            {
-                gameState.chat === true
-                    ? < Chat messages={gameState.messages} id={id} userID={userID} />
-                    : null
-            }
-        </div >
+            </div >
     );
 }

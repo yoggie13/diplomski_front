@@ -6,6 +6,7 @@ import Rewards from './Rewards';
 function SaveGame() {
 
     fetch(
+
         'http://localhost:46824/api/admin/game',
         {
             method: "POST",

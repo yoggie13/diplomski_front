@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import Loading from './Loading';
 
 export default function Login({ LoginLogic, falseEntry }) {
     const [loginDetails, setLoginDetails] = useState({ email: "", password: "", status: 500 });
     const [state, setState] = useState({ error: falseEntry });
+    const [loadingState, setLoadingState] = useState(false);
 
     const loginHandler = e => {
         e.preventDefault();
 
-
+        setLoadingState(true);
         fetch(
             'http://localhost:46824/api/students/login',
             {
@@ -24,19 +26,23 @@ export default function Login({ LoginLogic, falseEntry }) {
             })
             .then(res => {
                 if (res.status === 200) {
+                    setLoadingState(false);
                     return res.json();
                 }
                 else {
                     setState({ error: true });
+                    setLoadingState(false);
                     throw new Error();
                 }
 
             })
             .then(response => {
                 setState({ error: false });
+                setLoadingState(false);
                 LoginLogic(response);
             })
             .catch(error => {
+                setLoadingState(false);
                 return;
             });
     }
@@ -58,7 +64,11 @@ export default function Login({ LoginLogic, falseEntry }) {
                         : null
                 }
                 <a>Zaboravio si/la lozinku?</a>
-                <input type="submit" value="Prijavi se" />
+                {
+                    loadingState === true
+                        ? <Loading smallerSize={true} />
+                        : <input type="submit" value="Prijavi se" />
+                }
             </form>
         </div>
     );
