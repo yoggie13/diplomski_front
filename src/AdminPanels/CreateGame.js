@@ -23,7 +23,6 @@ function SaveGame() {
                 localStorage.removeItem("Game");
             }
             else {
-                console.log(res);
                 throw new Error();
             }
 
@@ -109,7 +108,7 @@ export default function CreateGame({ changeRender }) {
                             <select id="noofplayers" value={gameState.NumberOfPlayers} onChange={e => setGameState({ NumberOfPlayers: e.target.value })}>
                                 {getNumberOfPlayersPossible()}
                             </select>
-                            <input type="date" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
+                            <input type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
                             <div className="pageMover">
                                 <p>Nastavi sa unosom strategija</p>
                                 <i className="fas fa-chevron-right fa-lg" onClick={(event) => handleClick(event, 1)}></i>

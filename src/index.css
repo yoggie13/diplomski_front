@@ -183,7 +183,7 @@ form {
 form input[type="text"],
 form input[type="password"],
 form input[type="number"],
-form input[type="date"] {
+form input[type="datetime-local"] {
   width: 90%;
   width: 90%;
   margin-top: 10px;
@@ -452,7 +452,12 @@ td {
 #center {
   text-align: center;
 }
-
+#icon-true {
+  color: #0de38e;
+}
+#icon-false {
+  color: #e30d63;
+}
 .pageMover {
   display: flex;
   width: 90%;

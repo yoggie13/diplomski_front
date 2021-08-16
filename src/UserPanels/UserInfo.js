@@ -10,8 +10,6 @@ export default function UserInfo({ changeRender, admin, User }) {
     return (
         <div className="UserInfo">
             <h1>{User.name + " " + User.surname}</h1>
-            {console.log(User)}
-
             {
                 admin === false
                     ?
