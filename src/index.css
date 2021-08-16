@@ -218,7 +218,25 @@ form input[type="file"] {
 /* #file-upload-button {
   background-color: #0d63e3;
 } */
-
+#gobacktouserlogin {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  align-self: flex-start;
+  margin-bottom: 0px;
+  margin-left: 10%;
+  margin-top: 10px;
+}
+#gobacktouserlogin:hover {
+  cursor: pointer;
+}
+#gobacktouserlogin p {
+  font-size: 14px;
+  margin-left: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
 form input[type="text"],
 form input[type="password"]:focus {
   outline: none;

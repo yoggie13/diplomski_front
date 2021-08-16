@@ -59,7 +59,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
         <div className="UserPanel" onClick={closeSidebar}>
             {
                 sidebarState.sidebarStatus
-                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} admin={admin} Username={User.Email} />
+                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} admin={admin} Username={User.email} />
                     : <i className="fas fa-bars fa-2x" onClick={openSidebar}></i>
             }
             <div id='mainPart'>

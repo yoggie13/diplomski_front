@@ -9,7 +9,8 @@ export default function UserInfo({ changeRender, admin, User }) {
     }
     return (
         <div className="UserInfo">
-            <h1>{User.Name + " " + User.Surname}</h1>
+            <h1>{User.name + " " + User.surname}</h1>
+            {console.log(User)}
 
             {
                 admin === false
@@ -18,26 +19,26 @@ export default function UserInfo({ changeRender, admin, User }) {
                         <div id="stats">
                             <div className="statWrap">
                                 <p>Mesto na listi:</p>
-                                <p className="result">{User.PlaceOnList}</p>
+                                <p className="result">{User.placeOnList}</p>
                             </div>
                             <div className="statWrap">
                                 <p>Ukupno osvojenih poena:</p>
-                                <p className="result">{User.PointsGotten}</p>
+                                <p className="result">{User.pointsGotten}</p>
                             </div>
                             <div className="statWrap">
                                 <p>Ukupno odigranih igara:</p>
-                                <p className="result">{User.GamesPlayed}</p>
+                                <p className="result">{User.gamesPlayed}</p>
                             </div>
                         </div>
                         <hr></hr>
                         <div id="profileInfo">
                             <div className="statWrap">
                                 <p>Broj indeksa:</p>
-                                <p className="result">{User.ID}</p>
+                                <p className="result">{User.id}</p>
                             </div>
                             <div className="statWrap">
                                 <p>Email:</p>
-                                <p className="result">{User.Email}</p>
+                                <p className="result">{User.email}</p>
                             </div>
                         </div>
                     </div >

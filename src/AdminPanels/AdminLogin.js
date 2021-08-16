@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-export default function AdminLogin({ LoginLogic }) {
+export default function AdminLogin({ LoginLogic, backToUser }) {
     const [loginDetails, setLoginDetails] = useState({ email: "", password: "", status: 500 });
     const [state, setState] = useState({ error: false });
+
 
     const loginHandler = e => {
         e.preventDefault();
@@ -59,6 +60,10 @@ export default function AdminLogin({ LoginLogic }) {
                 }
                 <a>Zaboravio si/la lozinku?</a>
                 <input type="submit" value="Prijavi se" />
+                <div id="gobacktouserlogin" onClick={backToUser}>
+                    <i className="fas fa-chevron-right fa-sm" id="chevron-left"></i>
+                    <p>Loguj se kao korisnik</p>
+                </div>
             </form>
         </div>
     );

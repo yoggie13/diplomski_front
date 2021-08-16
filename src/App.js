@@ -6,24 +6,15 @@ import UserPanel from './UserPanel';
 
 
 function App() {
-  const [state, setState] = useState({ isLoggedIn: localStorage.getItem("email") !== null ? true : false, admin: false, User: null });
+  const [state, setState] = useState({ isLoggedIn: localStorage.getItem("User") !== null ? true : false, admin: localStorage.getItem("Admin") === null ? false : JSON.parse(localStorage.getItem("Admin")), User: JSON.parse(localStorage.getItem("User")) });
 
-  const LoginLogic = details => {
-    // if (details.admin === false) {
-    setState({ isLoggedIn: true, admin: false, User: details });
-    localStorage.setItem("email", details.Email);
-    // }
-    // else if (details.admin === true) {
-    //   setState({ isLoggedIn: true, admin: true, user: details });
-    //   localStorage.setItem("email", details.email);
-    // }
-    // else {
-    //   return;
-    // }
-
+  const LoginLogic = (details, adminStatus = false) => {
+    localStorage.setItem("User", JSON.stringify(details));
+    localStorage.setItem("Admin", adminStatus);
+    setState({ isLoggedIn: true, admin: adminStatus, User: JSON.parse(localStorage.getItem("User")) });
   }
   const LogutLogic = e => {
-    localStorage.removeItem("email");
+    localStorage.removeItem("User");
     setState({ isLoggedIn: false, admin: false, User: null });
   }
   return (
@@ -31,7 +22,7 @@ function App() {
       {
         state.isLoggedIn === true
           ? <UserPanel LogoutLogic={LogutLogic} admin={state.admin} User={state.User} />
-          : <BasicTemplate LoginLogic={LoginLogic} falseEntry={state.falseEntry} />
+          : <BasicTemplate LoginLogic={LoginLogic} User={state.User} />
       }
     </div>
   );
