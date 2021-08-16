@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Strategy from './Strategy';
 export default function StrategyInput({ player, changeRender }) {
     const [state, setState] = useState({ numberOfStrategies: [1] });
-    const handleNextClick = e => {
+    const handleNextClick = (e, number) => {
         e.preventDefault();
 
         if (state.player === 1) {
@@ -14,11 +14,10 @@ export default function StrategyInput({ player, changeRender }) {
             if (localStorage.getItem("secondStrategies") === null)
                 setState({ numberOfStrategies: [1] });
         }
-        changeRender(player === 1 ? 1 : "rewards");
+        changeRender(player === 1 ? number : "rewards");
     }
-    const handlePreviousClick = e => {
+    const handlePreviousClick = (e, number) => {
         e.preventDefault();
-
 
         if (state.player === 1) {
             if (localStorage.getItem("firstStrategies") === null)
@@ -47,10 +46,10 @@ export default function StrategyInput({ player, changeRender }) {
                     <Strategy key={number} player={player} numberOfStrategies={number} addNew={addNew} />)
             }
             <div className="pageMover">
-                <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={handlePreviousClick}></i>
+                <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={(event) => handlePreviousClick(event, -1)}></i>
                 <div className="next">
                     <p>{player === 1 ? "Pređi na sledećeg igrača" : "Pređi na unos isplata"}</p>
-                    <i className="fas fa-chevron-right fa-lg" onClick={handleNextClick}></i>
+                    <i className="fas fa-chevron-right fa-lg" onClick={(event) => handleNextClick(event, 1)}></i>
                 </div>
             </div>
         </div>

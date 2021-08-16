@@ -3,19 +3,31 @@ import StrategyInput from './StrategyInput';
 import { useState } from 'react';
 import Rewards from './Rewards';
 
-export default function CreateGame({ changeRender }) {
-    const [state, setstate] = useState({ typeOfGame: 2, page: 2 });
 
-    const handleClick = number => {
-        var newPage = state.page + number;
+export default function CreateGame({ changeRender }) {
+    const [state, setstate] = useState({ typeOfGame: 2, page: 1 });
+
+    const handleClick = (e, number) => {
+        console.log(e)
+        if (typeof (e) != "number" && typeof (e) != "string") {
+            e.preventDefault();
+            var newPage = state.page + number;
+        }
+        else if (typeof (e) === "string") {
+            changeRender(e);
+        }
+        else
+            newPage = state.page + e;
+
         setstate({ page: newPage });
     }
-
 
     return (
         <div className="CreateGame">
             <h1>Kreiraj igru</h1>
             <form className="CreateGameForm">
+                {console.log(state.page)}
+
                 {
                     state.page === 1
                         ? <>
@@ -36,22 +48,21 @@ export default function CreateGame({ changeRender }) {
                             </select>
                             <div className="pageMover">
                                 <p>Nastavi sa unosom strategija</p>
-                                <i className="fas fa-chevron-right fa-lg" onClick={handleClick(1)}></i>
+                                <i className="fas fa-chevron-right fa-lg" onClick={(event) => handleClick(event, 1)}></i>
                             </div>
                         </>
-                        : state.page === 2 && state.typeOfGame < 3
-                            ? <>
-                                <label htmlFor="range1">Od</label>
-                                <input id="range1" type="number" />
-                                <label htmlFor="range2">Do</label>
-                                <input id="range2" type="number" />
-                            </>
-                            : state.page === 2 && state.typeOfGame > 2
-
-                                ? <StrategyInput player={1} changeRender={handleClick} />
-                                : state.page === 3 && state.typeOfGame > 2
-                                    ? <StrategyInput player={2} changeRender={changeRender} />
-                                    : null
+                        : state.page === 2
+                            ? state.typeOfGame < 3
+                                ? <>
+                                    <label htmlFor="range1">Od</label>
+                                    <input id="range1" type="number" />
+                                    <label htmlFor="range2">Do</label>
+                                    <input id="range2" type="number" />
+                                </>
+                                : <StrategyInput player={1} changeRender={handleClick} />
+                            : state.page === 3
+                                ? <StrategyInput player={2} changeRender={handleClick} />
+                                : null
                 }
             </form>
         </div >
