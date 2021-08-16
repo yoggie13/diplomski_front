@@ -182,7 +182,8 @@ form {
 
 form input[type="text"],
 form input[type="password"],
-form input[type="number"] {
+form input[type="number"],
+form input[type="date"] {
   width: 90%;
   width: 90%;
   margin-top: 10px;
@@ -214,6 +215,10 @@ form select {
 form input[type="file"] {
   width: 80%;
   font-size: 12px;
+}
+small {
+  font-size: 14px;
+  color: gray;
 }
 /* #file-upload-button {
   background-color: #0d63e3;
