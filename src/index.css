@@ -15,12 +15,16 @@ body {
   min-height: 100vh;
 }
 h1,
+h2,
 th {
   font-family: "Nunito";
   font-weight: 800;
   color: #24044d;
   margin-top: 0px;
   font-size: 50px;
+}
+h2 {
+  font-size: 36px;
 }
 button {
   font-family: "Varela";
@@ -152,22 +156,57 @@ i:hover {
   width: 50px;
   height: 50px;
 }
-.UserInfo .statWrap {
+.statWrap {
   display: flex;
   flex-direction: row;
   margin-top: 26px;
   margin-bottom: 26px;
   justify-content: flex-start;
 }
-.UserInfo .statWrap p {
+.statWrap p {
   margin: 0px;
 }
-.UserInfo .statWrap .result {
+.statWrap .result {
   margin-left: auto;
   font-family: "Nunito";
   font-weight: 700;
 }
+.PieCharts {
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.PieWithInfo {
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.PieWithInfo ul {
+  padding-left: 0px;
+  margin-left: 10px;
+  list-style-type: none;
+  margin-right: 10px;
+  font-size: 20px;
+}
 
+.PieWithInfo ul li::before {
+  content: "■";
+  width: 20px;
+  margin-left: -5px;
+  margin-right: 5px;
+}
+
+#color0d63e3::before {
+  color: #0d63e3;
+}
+#colore30d63::before {
+  color: #e30d63;
+}
+#c2b0a55::before {
+  color: #2b0a55;
+}
 #buttons {
   display: flex;
   flex-direction: column;
@@ -345,12 +384,13 @@ form input[type="submit"]:hover {
   color: white;
   text-align: center;
   border-radius: 5px;
-  margin-right: 10px;
+  margin-right: 15px;
+  font-size: 16px;
 }
 #radioButtons label:hover {
   background-color: #e30d63;
 }
-#radioButtons label:checked {
+#radioButtons label:focus {
   background-color: #e30d63;
 }
 .PlayGameForm #radioButtons {
@@ -641,6 +681,9 @@ hr {
   .Chat {
     max-width: 90%;
     right: 5%;
+  }
+  .PieCharts {
+    display: block;
   }
 }
 

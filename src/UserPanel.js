@@ -7,7 +7,7 @@ import Game from './UserPanels/Game';
 import ReportProblem from './ReportProblem';
 import Scoreboard from './Scoreboard';
 import Sidebar from './Sidebar';
-import UserInfo from './UserPanels/UserInfo';
+import UserInfo from './UserInfo';
 import CreateGame from './AdminPanels/CreateGame';
 import AllGames from './AdminPanels/AllGames';
 import AllTables from './AdminPanels/AllTables';

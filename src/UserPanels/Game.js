@@ -9,7 +9,7 @@ export default function Game({ id, userID }) {
     const [loadingState, setLoadingState] = useState(true);
 
     const handleCheck = event => {
-        setstate({ checkedStrategy: event.target.id });
+        setstate({ ...state, checkedStrategy: event.target.id });
     }
     const handleInput = event => {
         var number = event.target.value;
@@ -21,11 +21,16 @@ export default function Game({ id, userID }) {
         setstate({ checkedStrategy: number })
     }
 
+    const getStrategyID = e => {
+        return gameState.game.type < 3 ? (parseInt(state.checkedStrategy) + 1) : parseInt(state.checkedStrategy)
+    }
+
 
     useEffect(() => {
 
         setLoadingState(true)
         fetch(
+
             `http://localhost:46824/api/game/${userID}/${id}`,
             {
                 method: "GET",
@@ -66,12 +71,21 @@ export default function Game({ id, userID }) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    ID: (parseInt(state.checkedStrategy) + 1)
+                    ID: getStrategyID()
                 })
             })
             .then(res => {
-                if (res.status === 200)
-                    alert("Sačuvano")
+                if (res.status === 200) {
+                    alert("Sačuvano");
+                    setGameState(gameState => ({
+                        game: {
+                            ...gameState.game,
+                            active: false
+                        }
+                    }))
+                } else if (res.status === 409) {
+                    alert("Već ste uneli odgovor na ovu igru");
+                }
                 else {
                     alert("Nije uspelo")
                 }
@@ -89,6 +103,7 @@ export default function Game({ id, userID }) {
             ? <Loading />
             :
             <div className="Game">
+                {console.log(state.checkedStrategy)}
 
                 <h1>
                     {gameState.game.name}
@@ -96,7 +111,6 @@ export default function Game({ id, userID }) {
 
                 <p>{gameState.game.text}</p>
                 {
-
                     gameState.game.active === true
                         ? <form className="PlayGameForm">
                             {
@@ -105,10 +119,11 @@ export default function Game({ id, userID }) {
                                         {
                                             gameState.game.strategies.map((strategy) =>
                                                 <>
-                                                    <input type="radio" id={`${strategy.strategyID}`} name="Strategy" value={`${strategy.strategyName}`}
-                                                        checked={state.checkedStrategy === `${strategy.strategyID}`}
-                                                        onChange={handleCheck}></input>
-                                                    <label key={`${strategy.strategyID}`} htmlFor={`${strategy.strategyID}`}>{`${strategy.strategyName}`}
+                                                    <label key={`${strategy.strategyID}`} htmlFor={`${strategy.strategyID}`}>
+                                                        <input type="radio" id={`${strategy.strategyID}`} name="Strategy" value={`${strategy.strategyID}`}
+                                                            checked={state.checkedStrategy === `${strategy.strategyID}`}
+                                                            onChange={handleCheck}></input>
+                                                        {`${strategy.strategyName}`}
                                                     </label>
                                                 </>
                                             )
