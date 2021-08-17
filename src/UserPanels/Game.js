@@ -119,7 +119,9 @@ export default function Game({ id, userID }) {
                                         <input type="number" id="numberInput" value={state.checkedStrategy} onChange={handleInput} min={gameState.game.strategies[0].strategyName} max={gameState.game.strategies[gameState.game.strategies.length - 1].strategyName} />
                                     </>
                             }
+
                             <input type="submit" value="Odigraj" onClick={playAGame}></input>
+
                         </form>
                         : null
                 }
