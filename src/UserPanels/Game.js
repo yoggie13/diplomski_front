@@ -3,15 +3,24 @@ import { useState, useEffect } from 'react';
 import Chat from './Chat';
 import Loading from '../Loading';
 
-
 export default function Game({ id, userID }) {
-    const [state, setstate] = useState({ checkedRadioButtonID: "radio_4" });
-    const [gameState, setGameState] = useState({ name: "", text: "", strategies: [], chat: false, messages: [], active: false });
+    const [state, setstate] = useState({ checkedStrategy: "" });
+    const [gameState, setGameState] = useState({ game: null });
     const [loadingState, setLoadingState] = useState(true);
 
     const handleCheck = event => {
-        setstate({ checkedRadioButtonID: event.target.id });
+        setstate({ checkedStrategy: event.target.id });
     }
+    const handleInput = event => {
+        var number = event.target.value;
+        if (event.target.value < parseInt(gameState.game.strategies[0].strategyName))
+            number = parseInt(gameState.game.strategies[0].strategyName);
+        if (event.target.value > parseInt(gameState.game.strategies[gameState.game.strategies.length - 1].strategyName))
+            number = parseInt(gameState.game.strategies[gameState.game.strategies.length - 1].strategyName);
+
+        setstate({ checkedStrategy: number })
+    }
+
 
     useEffect(() => {
 
@@ -28,11 +37,7 @@ export default function Game({ id, userID }) {
             .then(res => res.json())
             .then(response => {
                 setGameState({
-                    name: response.Name,
-                    text: response.Text,
-                    strategies: response.Strategies,
-                    chat: response.Chat,
-                    messages: response.Messages
+                    ...gameState, game: response
                 });
                 setLoadingState(false);
             })
@@ -43,6 +48,42 @@ export default function Game({ id, userID }) {
 
     }, [])
 
+    const playAGame = e => {
+        e.preventDefault();
+
+        if (state.checkedStrategy === "" || state.checkedStrategy === null) {
+            alert("Morate uneti ispravnu strategiju");
+            return;
+        }
+        setLoadingState(true);
+
+        fetch(
+            `http://localhost:46824/api/game/${id}/${userID}`,
+            {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ID: (parseInt(state.checkedStrategy) + 1)
+                })
+            })
+            .then(res => {
+                if (res.status === 200)
+                    alert("Sačuvano")
+                else {
+                    alert("Nije uspelo")
+                }
+                setLoadingState(false);
+
+            })
+            .catch(error => {
+                alert("Nije uspelo");
+                setLoadingState(false);
+            })
+    }
+
     return (
         loadingState === true
             ? <Loading />
@@ -50,34 +91,41 @@ export default function Game({ id, userID }) {
             <div className="Game">
 
                 <h1>
-                    {gameState.name}
+                    {gameState.game.name}
                 </h1>
 
-                <p>{gameState.text}</p>
+                <p>{gameState.game.text}</p>
+                {
 
-                <form className="PlayGameForm">
-                    <div id="radioButtons">
-                        {
-                            gameState.strategies.map((strategy) =>
-                                <>
-                                    <input type="radio" id={`radio_${strategy.StrategyID}`} name="Strategy" value={`${strategy.StrategyName}`}
-                                        checked={state.checkedRadioButtonID === `${strategy.StrategyID}`}
-                                        onChange={handleCheck}></input>
-                                    <label key={`${strategy.StrategyID}`} htmlFor={`radio_${strategy.StrategyID}`}>{`${strategy.StrategyName}`}
-                                    </label>
-                                </>
-                            )
-                        }
-                    </div>
-                    {
-                        gameState.active === true
-                            ? <input type="submit" value="Odigraj"></input>
-                            : null
-                    }
-                </form>
+                    gameState.game.active === true
+                        ? <form className="PlayGameForm">
+                            {
+                                gameState.game.type > 2
+                                    ? <div id="radioButtons">
+                                        {
+                                            gameState.game.strategies.map((strategy) =>
+                                                <>
+                                                    <input type="radio" id={`${strategy.strategyID}`} name="Strategy" value={`${strategy.strategyName}`}
+                                                        checked={state.checkedStrategy === `${strategy.strategyID}`}
+                                                        onChange={handleCheck}></input>
+                                                    <label key={`${strategy.strategyID}`} htmlFor={`${strategy.strategyID}`}>{`${strategy.strategyName}`}
+                                                    </label>
+                                                </>
+                                            )
+                                        }
+                                    </div>
+                                    : <>
+                                        <label htmlFor="numberInput">Unesite broj</label>
+                                        <input type="number" id="numberInput" value={state.checkedStrategy} onChange={handleInput} min={gameState.game.strategies[0].strategyName} max={gameState.game.strategies[gameState.game.strategies.length - 1].strategyName} />
+                                    </>
+                            }
+                            <input type="submit" value="Odigraj" onClick={playAGame}></input>
+                        </form>
+                        : null
+                }
                 {
                     gameState.chat === true
-                        ? < Chat messages={gameState.messages} id={id} userID={userID} />
+                        ? < Chat messages={gameState.game.messages} id={id} userID={userID} />
                         : null
                 }
             </div >
