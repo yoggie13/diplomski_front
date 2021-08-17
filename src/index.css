@@ -140,8 +140,8 @@ i:hover {
   justify-content: center;
 }
 #LoadingSmaller {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   margin-top: 10px;
 }
 .Loading img {
@@ -196,6 +196,13 @@ form {
   width: 40vh;
   height: 40vh;
   padding-top: 10px;
+}
+#reportProblemForm {
+  height: 450px;
+}
+.acceptTerms {
+  margin-left: 10%;
+  margin-top: 20px;
 }
 #changePasswordForm {
   min-height: 400px;
