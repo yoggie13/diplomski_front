@@ -98,10 +98,10 @@ export default function ReportProblem({ userID }) {
                             Kratak opis problema*
                         </label>
                         <textarea required id="problemDescription" value={reportState.Description} onChange={e => setReportState({ ...reportState, Description: e.target.value })}></textarea>
-                        <label htmlFor="problemPhoto">
+                        {/* <label htmlFor="problemPhoto">
                             Prilog skrinšota
                         </label>
-                        <input type="file" accept="image/*" value={reportState.ImageUrl} onChange={handleUpload} id="problemPhoto" />
+                        <input type="file" accept="image/*" value={reportState.ImageUrl} onChange={handleUpload} id="problemPhoto" /> */}
                         <div className="acceptTerms">
                             <small>Saglasan/na da pošaljem svoj indeks uz opis problema</small>
                             <input type="checkbox" value={checkboxState} onChange={handleCheck} />

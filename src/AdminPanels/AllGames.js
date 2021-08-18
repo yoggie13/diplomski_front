@@ -7,7 +7,7 @@ function checkDate(dueDate) {
     return Date.parse(dueDate) > Date.now();
 }
 
-export default function AllGames() {
+export default function AllGames({ changeRender }) {
 
     const [state, setstate] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
@@ -39,6 +39,11 @@ export default function AllGames() {
 
     }, [])
 
+    const handleClick = e => {
+        e.preventDefault();
+
+        changeRender("gamedashboard", e.target.id);
+    }
     return (
         loadingState === true
             ? <Loading />
@@ -65,7 +70,7 @@ export default function AllGames() {
                                             : <i className="fas fa-times-circle" id="icon-false"></i>
                                     }
                                     </td>
-                                    <td id="center"><i id={game.id} className="fas fa-chevron-right"></i></td>
+                                    <td id="center"><i id={game.id} onClick={handleClick} className="fas fa-chevron-right"></i></td>
                                 </tr>
                             )}
                     </tbody>

@@ -19,7 +19,7 @@ h2,
 th {
   font-family: "Nunito";
   font-weight: 800;
-  color: #24044d;
+  color: #2b0a55;
   margin-top: 0px;
   font-size: 50px;
 }
@@ -129,7 +129,7 @@ i:hover {
   width: 80%;
   margin-left: 50px;
   margin-right: 40px;
-  margin-top: 10vh;
+  margin-top: 60px;
   text-align: left;
   font-family: "Varela";
   font-size: 22px;
@@ -185,9 +185,10 @@ i:hover {
 }
 .PieWithInfo ul {
   padding-left: 0px;
-  margin-left: 10px;
+  margin-left: 20px;
   list-style-type: none;
   margin-right: 10px;
+  margin-top: 30px;
   font-size: 20px;
 }
 
@@ -204,8 +205,22 @@ i:hover {
 #colore30d63::before {
   color: #e30d63;
 }
-#c2b0a55::before {
+#colorc2b0a55::before {
   color: #2b0a55;
+}
+#colore38e0d::before {
+  color: #e38e0d;
+}
+#color0dcee3::before {
+  color: #0dcee3;
+}
+#colorcee30d::before {
+  color: #cee30d;
+}
+
+svg text {
+  font-size: 10px;
+  color: white !important;
 }
 #buttons {
   display: flex;
@@ -698,13 +713,9 @@ hr {
   .sidebar ul {
     margin-left: 60px;
   }
-  .UserInfo {
-    margin-left: 60px;
-    margin-right: 60px;
-    margin-top: 100px;
-  }
+
   .UserInfo .statWrap {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
 }

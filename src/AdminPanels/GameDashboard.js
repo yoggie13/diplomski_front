@@ -4,9 +4,17 @@ import { useState, useEffect } from 'react'
 import Loading from '../Loading';
 import { map } from 'async';
 
-export default function GameDashboard({ gameID = 12 }) {
+function formatDate(dueDate) {
+    var splitDate = dueDate.split('-');
+    var dayAndTime = splitDate[2].split('T');
+
+    return `${dayAndTime[0]}.${splitDate[1]}.${splitDate[0]} - ${dayAndTime[1]}`
+
+}
+export default function GameDashboard({ gameID }) {
     const [gameState, setGameState] = useState([{ gameInfo: [] }]);
     const [loadingState, setLoadingState] = useState(true);
+    const [apiState, setApiState] = useState(gameID != undefined ? `game/${gameID}` : "dashboard")
 
 
     useEffect(() => {
@@ -14,7 +22,7 @@ export default function GameDashboard({ gameID = 12 }) {
         setLoadingState(true)
         fetch(
 
-            `http://localhost:46824/api/admin/game/${gameID}`,
+            `http://localhost:46824/api/admin/${apiState}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -42,7 +50,8 @@ export default function GameDashboard({ gameID = 12 }) {
             {
                 loadingState === false
                     ? <>
-                        <h1>{gameState.gameInfo.name}</h1>
+                        <h1>Dashboard</h1>
+                        <h2>{gameState.gameInfo.name}</h2>
                         <p>{gameState.gameInfo.text}</p>
                         <div id="text">
                             <div id="stats">
@@ -52,7 +61,7 @@ export default function GameDashboard({ gameID = 12 }) {
                                 </div>
                                 <div className="statWrap">
                                     <p>Datum isteka:</p>
-                                    <p className="result">{gameState.gameInfo.dueDate}</p>
+                                    <p className="result">{formatDate(gameState.gameInfo.dueDate)}</p>
                                 </div>
                                 {
                                     gameState.gameInfo.finalValue != null
@@ -72,6 +81,8 @@ export default function GameDashboard({ gameID = 12 }) {
                                     <PieChart
                                         animate={true}
                                         data={gameState.gameInfo.strategiesPlayerOne}
+                                        label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
+
                                     />
                                     <ul>
                                         {
