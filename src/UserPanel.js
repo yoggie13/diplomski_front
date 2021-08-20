@@ -14,6 +14,7 @@ import AllTables from './AdminPanels/AllTables';
 import GameDashboard from './AdminPanels/GameDashboard';
 import Rewards from './AdminPanels/Rewards';
 import Loading from './Loading';
+import Confirmation from './AdminPanels/Confirmation';
 export default function UserPanel({ LogoutLogic, admin, User }) {
     const [sidebarState, setSidebarState] = useState({
         sidebarStatus: window.innerWidth >= 900 ? true : false
@@ -86,13 +87,15 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                                                         ? <GameDashboard gameID={IDState.id} />
                                                         : panelState.whatToRender === "creategame"
                                                             ? <CreateGame changeRender={changeRender} />
-                                                            : panelState.whatToRender === "allgames"
-                                                                ? <AllGames changeRender={changeRender} />
-                                                                : panelState.whatToRender === "alltables"
-                                                                    ? <AllTables />
-                                                                    : panelState.whatToRender === "rewards"
-                                                                        ? <Rewards />
-                                                                        : "GREŠKA"
+                                                            : panelState.whatToRender === "confirmation"
+                                                                ? <Confirmation game={IDState.id} changeRender={changeRender} />
+                                                                : panelState.whatToRender === "allgames"
+                                                                    ? <AllGames changeRender={changeRender} />
+                                                                    : panelState.whatToRender === "alltables"
+                                                                        ? <AllTables />
+                                                                        : panelState.whatToRender === "rewards"
+                                                                            ? <Rewards gameID={IDState.id} />
+                                                                            : "GREŠKA"
                 }
             </div>
         </div>

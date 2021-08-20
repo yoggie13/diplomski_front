@@ -1,8 +1,9 @@
 import React from 'react'
 
-export default function Rewards() {
+export default function Rewards({ gameID }) {
     return (
         <div className="Rewards">
+            {console.log(gameID)}
             <h1>Isplate</h1>
             <form>
                 <div id="RewardMatrix">

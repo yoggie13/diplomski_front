@@ -1,56 +1,70 @@
 import React from 'react'
-import StrategyInput from './StrategyInput';
-import { useState } from 'react';
-import Rewards from './Rewards';
+import { useState, useEffect } from 'react';
 
-function SaveGame() {
 
-    fetch(
-
-        'http://localhost:46824/api/admin/game',
-        {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body:
-                localStorage.getItem("Game")
-
-        })
-        .then(res => {
-            if (res.status === 200) {
-                alert("Sačuvano");
-                localStorage.removeItem("Game");
-            }
-            else {
-                throw new Error();
-            }
-
-        })
-        .catch(error => {
-            alert(error);
-        });
-}
 export default function CreateGame({ changeRender }) {
     const [state, setstate] = useState({ page: 1 });
-    const [gameState, setGameState] = useState({ Type: 1, Name: "", Text: "", Strategies: [], NumberOfPlayers: 10, DueDate: Date.now() });
+    const [gameState, setGameState] = useState({
+        Type: 1, Name: "", Text: "", Strategies: [], NumberOfPlayers: 10, DueDate: Date.now()
+    });
+    const [strategiesState, setStrategiesState] = useState({
+        firstPlayerStrategies: [
+            {
+                Text: "",
+                FirstOrSecondPlayer: 1
+            },
+            {
+                Text: "",
+                FirstOrSecondPlayer: 1
+
+            }
+        ], secondPlayerStrategies: [
+            {
+                Text: "",
+                FirstOrSecondPlayer: 2
+            },
+            {
+                Text: "",
+                FirstOrSecondPlayer: 2
+
+            }
+        ]
+    })
     const [oneTwoState, setOneTwoState] = useState({ minLimit: 0, maxLimit: 0, default: 0 });
 
-    const handleClick = (e, number) => {
+    const handleNextPage = (e, number) => {
+        localStorage.setItem("Game", JSON.stringify(gameState));
+
         if (typeof (e) != "number" && typeof (e) != "string") {
             e.preventDefault();
             var newPage = state.page + number;
         }
-        else if (typeof (e) === "string") {
-            changeRender(e);
-        }
-        else
-            newPage = state.page + e;
+        if (newPage === 3) {
+            cleanEmptyStrategies()
+                .then(() => {
+                    var strategies = strategiesState.firstPlayerStrategies.concat(strategiesState.secondPlayerStrategies);
+                    setGameState({
+                        ...gameState,
+                        Strategies: strategies
+                    })
+                    return strategies;
+                })
+                .then((response) => {
+                    var game = gameState;
+                    game.Strategies = response;
+                    localStorage.setItem("Game", JSON.stringify(game));
+                    return game;
+                })
+                .then((res) => {
+                    changeRender("confirmation", res)
+                })
 
-        localStorage.setItem("Game", JSON.stringify(gameState));
+        }
+
+
         setstate({ page: newPage });
     }
+
     const handleTypesOneTwo = e => {
         e.preventDefault();
 
@@ -72,8 +86,10 @@ export default function CreateGame({ changeRender }) {
 
         localStorage.setItem("Game", JSON.stringify(gameState));
 
-        SaveGame();
+        changeRender("confirmation");
     }
+
+
     const getNumberOfPlayersPossible = e => {
         return <>
             {
@@ -87,6 +103,63 @@ export default function CreateGame({ changeRender }) {
             <option name="number" id="10" value="10">10</option>
         </>
     }
+    const handleInput = (e, index, player) => {
+        if (player === 1) {
+            const strategies = strategiesState.firstPlayerStrategies;
+            strategies[index].Text = e.target.value;
+            setStrategiesState({ ...strategiesState, firstPlayerStrategies: strategies });
+        } else if (player === 2) {
+            const strategies = strategiesState.secondPlayerStrategies;
+            strategies[index].Text = e.target.value;
+            setStrategiesState({ ...strategiesState, secondPlayerStrategies: strategies });
+        }
+
+    }
+    const cleanEmptyStrategies = async () => {
+        const firstStrategies = strategiesState.firstPlayerStrategies;
+
+        for (let i = 0; i < firstStrategies.length; i++) {
+            if (firstStrategies[i].Text === undefined || firstStrategies[i].Text === null || firstStrategies[i].Text === "") {
+                firstStrategies.splice(i, 1);
+            }
+        }
+        setStrategiesState({ ...strategiesState, firstPlayerStrategies: firstStrategies });
+
+        const secondStrategies = strategiesState.secondPlayerStrategies;
+
+        for (let i = 0; i < secondStrategies.length; i++) {
+            if (secondStrategies[i].Text === undefined || secondStrategies[i].Text === null || secondStrategies[i].Text === "") {
+                secondStrategies.splice(i, 1);
+            }
+        }
+
+        setStrategiesState({ ...strategiesState, secondPlayerStrategies: secondStrategies });
+
+        return true;
+    }
+
+
+
+    const addNew = (e, player) => {
+        e.preventDefault();
+
+        if (player === 1) {
+            const strategies = strategiesState.firstPlayerStrategies;
+            strategies.push({
+                Text: "",
+                FirstOrSecondPlayer: 1
+            });
+            setStrategiesState({ ...strategiesState, firstPlayerStrategies: strategies });
+        } else if (player === 2) {
+            const strategies = strategiesState.secondPlayerStrategies;
+            strategies.push({
+                Text: "",
+                FirstOrSecondPlayer: 2
+            });;
+            setStrategiesState({ ...strategiesState, secondPlayerStrategies: strategies });
+        }
+    }
+
 
     return (
         <div className="CreateGame">
@@ -96,7 +169,7 @@ export default function CreateGame({ changeRender }) {
                     state.page === 1
                         ? <>
                             <label htmlFor="typeofgame">Tip igre</label>
-                            <select id="typeofgame" value={gameState.Type} onChange={e => setGameState({ Type: e.target.value })}>
+                            <select id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
                                 <option name="number" id="1" value="1">The p-Beauty contest</option>
                                 <option name="number" id="2" value="2">All-pay aukcije</option>
                                 <option name="number" id="3" value="3">Dilema zatvorenika</option>
@@ -106,14 +179,11 @@ export default function CreateGame({ changeRender }) {
                             <label htmlFor="text">Opis igre</label>
                             <textarea id="text" value={gameState.Text} onChange={e => setGameState({ ...gameState, Text: e.target.value })}></textarea>
                             <label htmlFor="noofplayers">Broj igrača</label>
-                            <select id="noofplayers" value={gameState.NumberOfPlayers} onChange={e => setGameState({ NumberOfPlayers: e.target.value })}>
+                            <select id="noofplayers" value={gameState.NumberOfPlayers} onChange={e => setGameState({ ...gameState, NumberOfPlayers: parseInt(e.target.value) })}>
                                 {getNumberOfPlayersPossible()}
                             </select>
                             <input type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
-                            <div className="pageMover">
-                                <p>Nastavi sa unosom strategija</p>
-                                <i className="fas fa-chevron-right fa-lg" onClick={(event) => handleClick(event, 1)}></i>
-                            </div>
+
                         </>
                         : state.page === 2
                             ? gameState.Type < 3
@@ -126,16 +196,47 @@ export default function CreateGame({ changeRender }) {
                                     <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
                                     <input id="defaultNumber" type="number" value={oneTwoState.default} onChange={e => setOneTwoState({ ...oneTwoState, default: e.target.value })} />
                                     <div className="pageMover">
-                                        <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={(event) => handleClick(event, -1)}></i>
+                                        <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={(event) => handleNextPage(event, -1)}></i>
                                         <input type="submit" value="Završi unos" onClick={handleTypesOneTwo} />
                                     </div>
                                 </>
-                                : <StrategyInput player={1} strategies={gameState.Strategies} changeRender={handleClick} />
-                            : state.page === 3
-                                ? <StrategyInput player={2} strategies={gameState.Strategies} changeRender={handleClick} />
-                                : null
+                                :
+                                <div id="strategyInputWrapper">
+                                    <div className="StrategyInput" id="firstPlayerStrategies">
+                                        <h2>Strategije prvog igrača</h2>
+                                        {
+                                            strategiesState.firstPlayerStrategies.map((strategy, index) => {
+                                                return <div className="Strategy">
+                                                    <label htmlFor={index}>{index + 1}. strategija</label>
+                                                    <input id={index} value={strategy.Text} onChange={e => handleInput(e, index, 1)} type="text" />
+                                                </div>
+                                            })
+                                        }
+                                        < i className="fas fa-plus" onClick={e => addNew(e, 1)} ></i>
+
+                                    </div >
+                                    <div className="StrategyInput" id="secondPlayerStrategies">
+                                        <h2>Strategije drugog igrača</h2>
+                                        {
+                                            strategiesState.secondPlayerStrategies.map((strategy, index) => {
+                                                return <div className="Strategy">
+                                                    <label htmlFor={index}>{index + 1}. strategija</label>
+                                                    <input id={index} value={strategy.Text} onChange={e => handleInput(e, index, 2)} type="text" />
+                                                </div>
+                                            })
+                                        }
+                                        < i className="fas fa-plus" onClick={e => addNew(e, 2)}  ></i>
+
+                                    </div >
+                                </div>
+                            : null
                 }
             </form>
+            <div className="pageMover">
+                <p> Pređite na sledećeg igrača</p>
+                <i className="fas fa-chevron-right fa-lg" onClick={e => handleNextPage(e, 1)}></i>
+            </div>
+
         </div >
     )
 }

@@ -53,7 +53,7 @@ export default function UserInfo({ changeRender, admin, User }) {
                         </div>
                     </div>
             }
-            <div id="buttons">
+            <div className="ButtonsAlignRight">
                 <button onClick={handleClick}>Promeni šifru</button>
             </div>
         </div >
