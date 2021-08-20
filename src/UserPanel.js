@@ -20,10 +20,10 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
         sidebarStatus: window.innerWidth >= 900 ? true : false
     });
     const [panelState, setPanelState] = useState({
-        whatToRender: admin === false ? "userinfo" : "gamedashboard",
+        whatToRender: admin === false ? "userinfo" : "rewards",
     });
     const [IDState, setIDState] = useState({
-        id: null
+        id: 31
     });
 
 
@@ -94,7 +94,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                                                                     : panelState.whatToRender === "alltables"
                                                                         ? <AllTables />
                                                                         : panelState.whatToRender === "rewards"
-                                                                            ? <Rewards gameID={IDState.id} />
+                                                                            ? <Rewards gameID={IDState.id} changeRender={changeRender} />
                                                                             : "GREŠKA"
                 }
             </div>

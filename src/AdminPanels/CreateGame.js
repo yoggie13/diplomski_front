@@ -11,22 +11,26 @@ export default function CreateGame({ changeRender }) {
         firstPlayerStrategies: [
             {
                 Text: "",
-                FirstOrSecondPlayer: 1
+                FirstOrSecondPlayer: 1,
+                Default: true
             },
             {
                 Text: "",
-                FirstOrSecondPlayer: 1
+                FirstOrSecondPlayer: 1,
+                Default: false
+
 
             }
         ], secondPlayerStrategies: [
             {
                 Text: "",
-                FirstOrSecondPlayer: 2
+                FirstOrSecondPlayer: 2,
+                Default: true
             },
             {
                 Text: "",
-                FirstOrSecondPlayer: 2
-
+                FirstOrSecondPlayer: 2,
+                Default: false
             }
         ]
     })
@@ -207,8 +211,14 @@ export default function CreateGame({ changeRender }) {
                                         {
                                             strategiesState.firstPlayerStrategies.map((strategy, index) => {
                                                 return <div className="Strategy">
-                                                    <label htmlFor={index}>{index + 1}. strategija</label>
-                                                    <input id={index} value={strategy.Text} onChange={e => handleInput(e, index, 1)} type="text" />
+                                                    <div>
+                                                        <label htmlFor={index}>{index + 1}. strategija</label>
+                                                        <input id={index} value={strategy.Text} onChange={e => handleInput(e, index, 1)} type="text" />
+                                                    </div>
+                                                    <div >
+                                                        <label htmlFor={`defaultRadio${index}`}>Default:</label>
+                                                        <input type="radio" id={`defaultRadio${index}`} name="default1" value={index} checked={strategy.Default} />
+                                                    </div>
                                                 </div>
                                             })
                                         }
@@ -220,8 +230,15 @@ export default function CreateGame({ changeRender }) {
                                         {
                                             strategiesState.secondPlayerStrategies.map((strategy, index) => {
                                                 return <div className="Strategy">
-                                                    <label htmlFor={index}>{index + 1}. strategija</label>
-                                                    <input id={index} value={strategy.Text} onChange={e => handleInput(e, index, 2)} type="text" />
+                                                    <div>
+                                                        <label htmlFor={index}>{index + 1}. strategija</label>
+                                                        <input id={index} value={strategy.Text} onChange={e => handleInput(e, index, 2)} type="text" />
+                                                    </div>
+                                                    <div >
+                                                        <label htmlFor={`defaultRadio${index}`}>Default:</label>
+                                                        <input type="radio" id={`defaultRadio${index}`} name="default2" value={index} checked={strategy.Default} />
+                                                    </div>
+
                                                 </div>
                                             })
                                         }

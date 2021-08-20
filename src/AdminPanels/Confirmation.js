@@ -71,8 +71,16 @@ export default function ({ game, changeRender }) {
                                 <h3>Strategije prvog igrača</h3>
                                 <ul>{
                                     game.Strategies.map((strategy) => {
-                                        if (strategy.FirstOrSecondPlayer === 1)
-                                            return <li>{strategy.Text}</li>
+                                        if (strategy.FirstOrSecondPlayer === 1) {
+                                            return <>
+                                                <li>{strategy.Text} {
+                                                    strategy.Default === true
+                                                        ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                        : null
+                                                }</li>
+
+                                            </>
+                                        }
                                     })
                                 }
                                 </ul>
@@ -81,8 +89,15 @@ export default function ({ game, changeRender }) {
                                 <h3>Strategije drugog igrača</h3>
                                 <ul>{
                                     game.Strategies.map((strategy) => {
-                                        if (strategy.FirstOrSecondPlayer === 2)
-                                            return <li>{strategy.Text}</li>
+                                        if (strategy.FirstOrSecondPlayer === 2) {
+                                            return <>
+                                                <li>{strategy.Text} {
+                                                    strategy.Default === true
+                                                        ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                        : null
+                                                }</li>
+                                            </>
+                                        }
                                     })
                                 }
                                 </ul>
