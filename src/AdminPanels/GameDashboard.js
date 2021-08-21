@@ -12,7 +12,7 @@ function formatDate(dueDate) {
 
 }
 export default function GameDashboard({ gameID }) {
-    const [gameState, setGameState] = useState([{ gameInfo: [] }]);
+    const [gameState, setGameState] = useState([{ game: [] }]);
     const [loadingState, setLoadingState] = useState(true);
     const [apiState, setApiState] = useState(gameID != undefined ? `game/${gameID}` : "dashboard")
 
@@ -30,10 +30,16 @@ export default function GameDashboard({ gameID }) {
                     'Content-Type': 'application/json',
                 }
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 200)
+                    return res.json()
+                else if (res.status === 404)
+                    return false;
+            })
             .then(response => {
+                console.log(response)
                 setGameState({
-                    ...gameState, gameInfo: response
+                    ...gameState, game: response
                 });
                 setLoadingState(false);
             })
@@ -46,85 +52,80 @@ export default function GameDashboard({ gameID }) {
 
 
     return (
-        <div className="GameDashboard">
+        <div className="GameDashboard">{console.log(gameState.game)}
             {
-                loadingState === false
-                    ? <>
-                        <h1>Dashboard</h1>
-                        <h2>{gameState.gameInfo.name}</h2>
-                        <p>{gameState.gameInfo.text}</p>
-                        <div id="text">
-                            <div id="stats">
-                                <div className="statWrap">
-                                    <p>Broj igrača koji su odigrali:</p>
-                                    <p className="result">{gameState.gameInfo.playersPlayed}</p>
+                loadingState === true
+                    ? <Loading />
+                    : gameState.game != false
+                        ? <>
+                            <h1>Dashboard</h1>
+                            <h2>{gameState.game.name}</h2>
+                            <p>{gameState.game.text}</p>
+                            <div id="text">
+                                <div id="stats">
+                                    <div className="statWrap">
+                                        <p>Broj igrača koji su odigrali:</p>
+                                        <p className="result">{gameState.game.playersPlayed}</p>
+                                    </div>
+                                    <div className="statWrap">
+                                        <p>Datum isteka:</p>
+                                        <p className="result">{formatDate(gameState.game.dueDate)}</p>
+                                    </div>
+                                    {
+                                        gameState.game.finalValue != null
+                                            ? <div className="statWrap">
+                                                <p>Trenutna konačna vrednost:</p>
+                                                <p className="result">{gameState.game.finalValue}</p>
+                                            </div>
+                                            : null
+                                    }
                                 </div>
-                                <div className="statWrap">
-                                    <p>Datum isteka:</p>
-                                    <p className="result">{formatDate(gameState.gameInfo.dueDate)}</p>
+                                <hr></hr>
+                            </div>
+                            <div className="PieCharts">
+                                <div id="firstPlayer">
+                                    <h2>Prvi igrač</h2>
+                                    <div className="PieWithInfo">
+                                        <PieChart
+                                            animate={true}
+                                            data={gameState.game.strategiesPlayerOne}
+                                            label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
+
+                                        />
+                                        <ul>
+                                            {
+                                                gameState.game.strategiesPlayerOne.map((strategy, index) =>
+                                                    <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
+                                                )
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
                                 {
-                                    gameState.gameInfo.finalValue != null
-                                        ? <div className="statWrap">
-                                            <p>Trenutna konačna vrednost:</p>
-                                            <p className="result">{gameState.gameInfo.finalValue}</p>
+                                    gameState.game.hasSecondPlayer === true
+                                        ? <div id="secondPlayer">
+                                            <h2>Drugi igrač</h2>
+                                            <div className="PieWithInfo">
+                                                <PieChart
+                                                    animate={true}
+                                                    data={gameState.game.strategiesPlayerTwo}
+                                                    label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
+
+                                                />
+                                                <ul>
+                                                    {
+                                                        gameState.game.strategiesPlayerTwo.map((strategy, index) =>
+                                                            <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
+                                                        )
+                                                    }
+                                                </ul>
+                                            </div>
                                         </div>
                                         : null
                                 }
                             </div>
-                            <hr></hr>
-                        </div>
-                        <div className="PieCharts">
-                            <div id="firstPlayer">
-                                <h2>Prvi igrač</h2>
-                                <div className="PieWithInfo">
-                                    <PieChart
-                                        animate={true}
-                                        data={gameState.gameInfo.strategiesPlayerOne}
-                                        label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-
-                                    />
-                                    <ul>
-                                        {
-                                            gameState.gameInfo.strategiesPlayerOne.map((strategy, index) =>
-                                                <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
-                                            )
-                                        }
-                                    </ul>
-                                </div>
-                            </div>
-                            {
-                                gameState.gameInfo.hasSecondPlayer === true
-                                    ? <div id="secondPlayer">
-                                        <h2>Drugi igrač</h2>
-                                        <div className="PieWithInfo">
-                                            <PieChart
-                                                animate={true}
-                                                data={[
-                                                    { title: 'One', value: 10, color: '#E38627' },
-                                                    { title: 'Two', value: 15, color: '#C13C37' },
-                                                    { title: 'Three', value: 20, color: '#6A2135' },
-                                                ]
-                                                }
-                                            />
-                                            <ul>
-                                                <li>
-                                                    One
-                                                </li>
-                                                <li>
-                                                    Two
-                                                </li>
-                                                <li>
-                                                    Three
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    : null
-                            }
-                        </div>
-                    </>
-                    : <Loading />
+                        </>
+                        : <p>Trenutno nema aktivnih igara</p>
             }
         </div >
     )

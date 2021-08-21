@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import Loading from './Loading';
+import Config from './config.json';
 
 export default function ChangePassword({ changeRender, userID }) {
     const [state, setState] = useState({ oldPassword: "", newPassword: "", confirmPassword: "" });
@@ -23,8 +24,11 @@ export default function ChangePassword({ changeRender, userID }) {
 
         setLoadingState(true)
 
+        var db = localStorage.getItem("Admin") == true ? "admin" : "students";
+        console.log(localStorage.getItem("Admin"))
+
         fetch(
-            `http://localhost:46824/api/students/changePass`,
+            `http://${Config.BASE_URL}:46824/api/${db}/changePass`,
             {
                 method: "POST",
                 mode: "cors",
@@ -41,6 +45,7 @@ export default function ChangePassword({ changeRender, userID }) {
                 if (res.status === 200) {
                     setLoadingState(false);
                     alert("Izmenjeno");
+                    setState({ oldPassword: "", newPassword: "", confirmPassword: "" })
                     return;
                 }
                 else if (res.status === 415) {

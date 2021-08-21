@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 export default function CreateGame({ changeRender }) {
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Type: 1, Name: "", Text: "", Strategies: [], NumberOfPlayers: 10, DueDate: Date.now()
+        Type: 1, Name: "", Text: "", Strategies: [], NumberOfPlayers: 10, Chat: false, DueDate: Date.now()
     });
     const [strategiesState, setStrategiesState] = useState({
         firstPlayerStrategies: [
@@ -90,7 +90,7 @@ export default function CreateGame({ changeRender }) {
 
         localStorage.setItem("Game", JSON.stringify(gameState));
 
-        changeRender("confirmation");
+        changeRender("confirmation", gameState);
     }
 
 
@@ -187,7 +187,9 @@ export default function CreateGame({ changeRender }) {
                                 {getNumberOfPlayersPossible()}
                             </select>
                             <input type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
-
+                            <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
+                                <input type="checkbox" id="chatCheck" value={gameState.Chat} onChange={e => setGameState({ ...gameState, Chat: e.target.value })} />
+                            </div>
                         </>
                         : state.page === 2
                             ? gameState.Type < 3

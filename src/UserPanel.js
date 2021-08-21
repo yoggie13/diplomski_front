@@ -20,10 +20,10 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
         sidebarStatus: window.innerWidth >= 900 ? true : false
     });
     const [panelState, setPanelState] = useState({
-        whatToRender: admin === false ? "userinfo" : "rewards",
+        whatToRender: admin === false ? "userinfo" : "gamedashboard",
     });
     const [IDState, setIDState] = useState({
-        id: 31
+        id: null
     });
 
 

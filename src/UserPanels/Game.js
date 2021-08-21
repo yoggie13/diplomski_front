@@ -56,7 +56,7 @@ export default function Game({ id, userID }) {
     const playAGame = e => {
         e.preventDefault();
 
-        if (state.checkedStrategy === "" || state.checkedStrategy === null) {
+        if (state.checkedStrategy === "" || state.checkedStrategy === null || state.checkedStrategy === undefined) {
             alert("Morate uneti ispravnu strategiju");
             return;
         }
@@ -134,9 +134,9 @@ export default function Game({ id, userID }) {
                                         <input type="number" id="numberInput" value={state.checkedStrategy} onChange={handleInput} min={gameState.game.strategies[0].strategyName} max={gameState.game.strategies[gameState.game.strategies.length - 1].strategyName} />
                                     </>
                             }
-
-                            <input type="submit" value="Odigraj" onClick={playAGame}></input>
-
+                            <div className="ButtonsAlignRight">
+                                <input type="submit" value="Odigraj" onClick={playAGame}></input>
+                            </div>
                         </form>
                         : null
                 }
