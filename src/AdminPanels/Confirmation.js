@@ -34,7 +34,7 @@ export default function ({ game, changeRender }) {
             .then(res => {
                 if (res.status === 200) {
                     alert("Sačuvano");
-                    // localStorage.removeItem("Game");
+                    localStorage.removeItem("Game");
                     return res.json();
                 }
                 else {
@@ -44,7 +44,7 @@ export default function ({ game, changeRender }) {
             })
             .then(response => {
                 console.log(response);
-                if (game.Type < 3)
+                if (game.Type < 4)
                     changeRender("allgames");
                 else {
                     debugger;

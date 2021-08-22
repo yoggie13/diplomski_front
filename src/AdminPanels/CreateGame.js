@@ -57,7 +57,7 @@ export default function CreateGame({ changeRender }) {
             var newPage = state.page + number;
         }
         if (newPage === 3) {
-            if (gameState.Type < 3) {
+            if (gameState.Type < 4) {
                 handleTypesOneTwo();
                 return;
             }
@@ -87,6 +87,7 @@ export default function CreateGame({ changeRender }) {
     }
 
     const handleTypesOneTwo = () => {
+        debugger;
 
         for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
             if (i != oneTwoState.default) {
@@ -99,6 +100,21 @@ export default function CreateGame({ changeRender }) {
                 gameState.Strategies.push({
                     "Text": i + "",
                     "FirstOrSecondPlayer": 1,
+                    "Default": true
+                });
+            }
+        }
+        for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
+            if (i != oneTwoState.default) {
+                gameState.Strategies.push({
+                    "Text": i + "",
+                    "FirstOrSecondPlayer": 2
+                });
+            }
+            else {
+                gameState.Strategies.push({
+                    "Text": i + "",
+                    "FirstOrSecondPlayer": 2,
                     "Default": true
                 });
             }
@@ -196,7 +212,8 @@ export default function CreateGame({ changeRender }) {
                                         <select id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
                                             <option name="number" id="1" value="1">The p-Beauty contest</option>
                                             <option name="number" id="2" value="2">All-pay aukcije</option>
-                                            <option name="number" id="3" value="3">Dilema zatvorenika</option>
+                                            <option name="number" id="3" value="3">Dilema putnika</option>
+                                            <option name="number" id="4" value="4">Dilema zatvorenika</option>
                                         </select>
                                         <label htmlFor="gamename">Naziv igre</label>
                                         <input id="gamename" type="text" value={gameState.Name} onChange={e => setGameState({ ...gameState, Name: e.target.value })} />
@@ -212,15 +229,15 @@ export default function CreateGame({ changeRender }) {
                                         </div>
                                     </>
                                     : state.page === 2
-                                        ? gameState.Type < 3
+                                        ? gameState.Type < 4
                                             ? <>
                                                 <label htmlFor="range1">Od</label>
-                                                <input id="range1" type="number" value={oneTwoState.minLimit} onChange={e => setOneTwoState({ ...oneTwoState, minLimit: e.target.value })} />
+                                                <input id="range1" type="number" value={oneTwoState.minLimit} onChange={e => setOneTwoState({ ...oneTwoState, minLimit: parseInt(e.target.value) })} />
                                                 <label htmlFor="range2">Do</label>
-                                                <input id="range2" type="number" value={oneTwoState.maxLimit} onChange={e => setOneTwoState({ ...oneTwoState, maxLimit: e.target.value })} />
+                                                <input id="range2" type="number" value={oneTwoState.maxLimit} onChange={e => setOneTwoState({ ...oneTwoState, maxLimit: parseInt(e.target.value) })} />
                                                 <label htmlFor="defaultNumber">Default vrednost</label>
                                                 <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
-                                                <input id="defaultNumber" type="number" value={oneTwoState.default} onChange={e => setOneTwoState({ ...oneTwoState, default: e.target.value })} />
+                                                <input id="defaultNumber" type="number" value={oneTwoState.default} onChange={e => setOneTwoState({ ...oneTwoState, default: parseInt(e.target.value) })} />
 
                                             </>
                                             :

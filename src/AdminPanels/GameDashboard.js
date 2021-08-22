@@ -18,40 +18,46 @@ export default function GameDashboard({ gameID, changeRender }) {
     const [gameState, setGameState] = useState([{ game: [] }]);
     const [loadingState, setLoadingState] = useState(true);
     const [apiState, setApiState] = useState(gameID != undefined ? `game/${gameID}` : "dashboard")
+    const [refreshState, setRefreshState] = useState(true);
 
 
     useEffect(() => {
 
-        setLoadingState(true)
-        fetch(
+        if (refreshState === true) {
 
-            `http://localhost:46824/api/admin/${apiState}`,
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 200)
-                    return res.json()
-                else if (res.status === 404)
-                    return false;
-            })
-            .then(response => {
-                console.log(response)
-                setGameState({
-                    ...gameState, game: response
-                });
-                setLoadingState(false);
-            })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            })
+            setLoadingState(true)
+            fetch(
 
-    }, [])
+                `http://localhost:46824/api/admin/${apiState}`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(res => {
+                    if (res.status === 200)
+                        return res.json()
+                    else if (res.status === 404)
+                        return false;
+                })
+                .then(response => {
+                    console.log(response)
+                    setGameState({
+                        ...gameState, game: response
+                    });
+                    setRefreshState(false);
+                    setLoadingState(false);
+                })
+                .catch(error => {
+                    console.log(error);
+                    setRefreshState(false);
+                    setLoadingState(false);
+                })
+        }
+
+    }, [refreshState])
 
     const finishGame = e => {
         e.preventDefault();
@@ -70,7 +76,7 @@ export default function GameDashboard({ gameID, changeRender }) {
             .then(res => {
                 if (res.status === 200) {
                     alert("Igra završena");
-                    changeRender("gamedashboard", gameState.game.id);
+                    setRefreshState(true);
                     setLoadingState(false);
 
                     return;

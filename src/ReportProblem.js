@@ -58,7 +58,6 @@ export default function ReportProblem({ userID }) {
                 return;
             });
 
-        //konekt na api pa sa apija da se salje
         return;
     }
     const handleUpload = e => {
