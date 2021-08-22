@@ -741,12 +741,16 @@ hr {
   color: #e30d63;
 }
 .ButtonsAlignRight {
+  width: 100%;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 }
-.Confirmation button {
+.ButtonsAlignRight button {
   width: 150px;
 }
+
 @media screen and (max-width: 900px) {
   .Homepage {
     margin-top: 60px;
@@ -776,6 +780,9 @@ hr {
   }
   .PieCharts {
     display: block;
+  }
+  #dashboardButtons {
+    margin-top: 300px;
   }
 }
 

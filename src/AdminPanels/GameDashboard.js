@@ -11,7 +11,10 @@ function formatDate(dueDate) {
     return `${dayAndTime[0]}.${splitDate[1]}.${splitDate[0]} - ${dayAndTime[1]}`
 
 }
-export default function GameDashboard({ gameID }) {
+function checkDate(dueDate) {
+    return Date.parse(dueDate) > Date.now();
+}
+export default function GameDashboard({ gameID, changeRender }) {
     const [gameState, setGameState] = useState([{ game: [] }]);
     const [loadingState, setLoadingState] = useState(true);
     const [apiState, setApiState] = useState(gameID != undefined ? `game/${gameID}` : "dashboard")
@@ -50,6 +53,68 @@ export default function GameDashboard({ gameID }) {
 
     }, [])
 
+    const finishGame = e => {
+        e.preventDefault();
+
+        setLoadingState(true);
+
+        fetch(
+            `http://localhost:46824/api/admin/game/${gameState.game.id}/finish`,
+            {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    alert("Igra završena");
+                    changeRender("gamedashboard", gameState.game.id);
+                    return;
+                }
+                else {
+                    alert(res.statusText)
+                }
+                setLoadingState(false);
+
+            })
+            .catch(error => {
+                alert("Nije uspelo");
+                setLoadingState(false);
+            })
+
+    }
+    const deleteGame = e => {
+        setLoadingState(true);
+
+        fetch(
+            `http://localhost:46824/api/admin/game/${gameState.game.id}`,
+            {
+                method: "DELETE",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    alert("Igra obrisana");
+                    changeRender("allgames");
+                    return;
+                }
+                else {
+                    alert(res.statusText)
+                }
+                setLoadingState(false);
+
+            })
+            .catch(error => {
+                alert("Nije uspelo");
+                setLoadingState(false);
+            })
+
+    }
 
     return (
         <div className="GameDashboard">{console.log(gameState.game)}
@@ -123,6 +188,14 @@ export default function GameDashboard({ gameID }) {
                                         </div>
                                         : null
                                 }
+
+                            </div>
+                            <div className="ButtonsAlignRight" ID="dashboardButtons">
+                                {
+                                    checkDate(gameState.game.dueDate) === true
+                                        ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
+                                        : null}
+                                <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
                             </div>
                         </>
                         : <p>Trenutno nema aktivnih igara</p>

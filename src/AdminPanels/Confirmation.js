@@ -69,6 +69,14 @@ export default function ({ game, changeRender }) {
                             <p>Datum isteka:</p>
                             <p className="result">{formatDate(game.DueDate)}</p>
                         </div>
+                        <div className="statWrap">
+                            <p>Chat: </p>
+                            <p className="result">{
+                                game.Chat === true ?
+                                    <i className="fas fa-check-circle" id="icon-true"></i>
+                                    : <i className="fas fa-times-circle" id="icon-false"></i>
+                            }</p>
+                        </div>
                         <div id="strategyInputWrapper">
                             <div className="StrategyShow" id="firstPlayerStrategies">
                                 <h3>Strategije prvog igrača</h3>

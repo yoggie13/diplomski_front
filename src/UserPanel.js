@@ -76,7 +76,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                                 : panelState.whatToRender === "activegames"
                                     ? <ActiveGames changeRender={changeRender} />
                                     : panelState.whatToRender === "game"
-                                        ? <Game id={IDState.id} userID={User.id} />
+                                        ? <Game id={IDState.id} userID={User.id} changeRender={changeRender} />
                                         : panelState.whatToRender === "finishedgames"
                                             ? <FinishedGames changeRender={changeRender} />
                                             : panelState.whatToRender === "reportproblem"
@@ -84,7 +84,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                                                 : panelState.whatToRender === "changepassword"
                                                     ? <ChangePassword changeRender={changeRender} userID={User.id} />
                                                     : panelState.whatToRender === "gamedashboard"
-                                                        ? <GameDashboard gameID={IDState.id} />
+                                                        ? <GameDashboard gameID={IDState.id} changeRender={changeRender} />
                                                         : panelState.whatToRender === "creategame"
                                                             ? <CreateGame changeRender={changeRender} />
                                                             : panelState.whatToRender === "confirmation"

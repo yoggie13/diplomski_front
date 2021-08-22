@@ -188,7 +188,7 @@ export default function CreateGame({ changeRender }) {
                             </select>
                             <input type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
                             <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
-                                <input type="checkbox" id="chatCheck" value={gameState.Chat} onChange={e => setGameState({ ...gameState, Chat: e.target.value })} />
+                                <input type="checkbox" id="chatCheck" value={gameState.Chat} onChange={e => setGameState({ ...gameState, Chat: (e.target.value === "true") })} />
                             </div>
                         </>
                         : state.page === 2

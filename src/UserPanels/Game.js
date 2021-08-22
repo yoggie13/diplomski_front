@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Chat from './Chat';
 import Loading from '../Loading';
 
-export default function Game({ id, userID }) {
+export default function Game({ id, userID, changeRender }) {
     const [state, setstate] = useState({ checkedStrategy: "" });
     const [gameState, setGameState] = useState({ game: null });
     const [loadingState, setLoadingState] = useState(true);
@@ -39,8 +39,18 @@ export default function Game({ id, userID }) {
                     'Content-Type': 'application/json',
                 }
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 200)
+                    return res.json();
+                else if (res.status === 404) {
+                    return false;
+                }
+            })
             .then(response => {
+                if (response === false) {
+                    alert("Ta igra je izbrisana");
+                    changeRender("activegames");
+                }
                 setGameState({
                     ...gameState, game: response
                 });
@@ -85,6 +95,10 @@ export default function Game({ id, userID }) {
                     }))
                 } else if (res.status === 409) {
                     alert("Već ste uneli odgovor na ovu igru");
+                }
+                else if (res.status === 404) {
+                    alert("Ta igra je izbrisana");
+                    changeRender("activegames");
                 }
                 else {
                     alert("Nije uspelo")
@@ -141,7 +155,7 @@ export default function Game({ id, userID }) {
                         : null
                 }
                 {
-                    gameState.chat === true
+                    gameState.game.chat === true
                         ? < Chat messages={gameState.game.messages} id={id} userID={userID} />
                         : null
                 }
