@@ -2,27 +2,23 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Loading from './Loading';
 
-export default function Scoreboard({ admin = false, group, handleLoading }) {
+export default function Scoreboard({ admin = false, userID = null, group, handleLoading }) {
 
     const [state, setState] = useState({ students: [], admin: admin })
     const [loadingState, setLoadingState] = useState(true);
-    useEffect(() => {
 
+    useEffect(() => {
         setLoadingState(true);
         if (state.admin === false) {
 
             fetch(
-                'http://localhost:46824/api/students/scoreboard/',
+                `http://localhost:46824/api/students/scoreboard/${userID}`,
                 {
-                    method: "POST",
+                    method: "GET",
                     mode: "cors",
                     headers: {
                         'Content-Type': 'application/json',
-                    },
-                    body:
-                        JSON.stringify({
-                            Email: "on20170077@student.fon.bg.ac.rs"
-                        })
+                    }
                 })
                 .then(res => res.json())
                 .then(response => {
@@ -37,7 +33,9 @@ export default function Scoreboard({ admin = false, group, handleLoading }) {
                     setLoadingState(false);
 
                 })
-        } else if (state.admin === true) {
+        }
+        else {
+
             fetch(
                 `http://localhost:46824/api/admin/scoreboard/${group}`,
                 {
@@ -61,7 +59,7 @@ export default function Scoreboard({ admin = false, group, handleLoading }) {
 
                 })
         }
-    }, [])
+    }, [group])
 
 
     return (

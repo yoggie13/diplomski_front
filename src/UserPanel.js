@@ -72,7 +72,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                         : panelState.whatToRender === "userinfo"
                             ? <UserInfo changeRender={changeRender} admin={admin} User={User} />
                             : panelState.whatToRender === "scoreboard"
-                                ? <Scoreboard />
+                                ? <Scoreboard userID={User.id} />
                                 : panelState.whatToRender === "activegames"
                                     ? <ActiveGames changeRender={changeRender} />
                                     : panelState.whatToRender === "game"

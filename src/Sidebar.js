@@ -78,7 +78,11 @@ export default function Sidebar({ LogoutLogic, changePanelRender, admin, Usernam
                         : null
             }
             <div id='sidebarFooter'>
-                <i onClick={handleReportClick} className="fas fa-exclamation-circle fa-2x" id="report"></i>
+                {
+                    admin === false
+                        ? <i onClick={handleReportClick} className="fas fa-exclamation-circle fa-2x" id="report"></i>
+                        : null
+                }
                 <p onClick={handleUsernameClick}>{formatUsername(Username)}</p>
                 <i className="fas fa-sign-out-alt fa-2x" id="logOut" onClick={handleLogout}></i>
             </div>

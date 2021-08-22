@@ -38,10 +38,10 @@ export default function AllTables() {
             })
     }, [])
 
-    const handleNextClick = e => {
+    const handleArrowClick = (e, number) => {
         e.preventDefault();
 
-        setState({ ...state, counter: state.counter + 1 });
+        setState({ ...state, counter: state.counter + number });
     }
     return (
         loadingState === true
@@ -53,8 +53,17 @@ export default function AllTables() {
                         ? <>
                             <Scoreboard admin={true} group={state.groups[state.counter - 1].id} />
                             <div className="tableMover">
+                                {
+                                    state.counter > 1
+                                        ? <i className="fas fa-chevron-right" id="chevron-left" onClick={e => handleArrowClick(e, -1)}></i>
+                                        : null
+                                }
                                 <p>{state.counter} od {state.groups.length}</p>
-                                <i className="fas fa-chevron-right" onClick={handleNextClick}></i>
+                                {
+                                    state.counter < state.groups.length
+                                        ? <i className="fas fa-chevron-right" onClick={e => handleArrowClick(e, 1)}></i>
+                                        : null
+                                }
                             </div>
                         </>
                         : null
