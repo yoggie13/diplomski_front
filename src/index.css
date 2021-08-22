@@ -370,13 +370,7 @@ form input[type="submit"]:hover {
   color: #0d63e3;
   font-size: 14px;
 }
-#chevron-left {
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
+
 .PlayGameForm input[type="submit"] {
   border: none;
   margin-top: 10px;
@@ -615,18 +609,36 @@ td {
   color: #e30d63;
 }
 .pageMover {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 50%;
   width: 90%;
-  flex-direction: row;
+  margin-top: 50px;
+}
+#back,
+#forward {
+  display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+#back {
+  grid-column: 1;
+  justify-content: flex-start;
+}
+#forward {
+  grid-column: 2;
+  justify-content: flex-end;
 }
 .pageMover i {
   margin-left: 30px;
 }
 
-.pageMover #chevron-left {
+#chevron-left {
   margin-left: 0px;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  margin-right: 30px;
 }
 .tableMover {
   width: 90%;

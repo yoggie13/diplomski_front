@@ -71,6 +71,8 @@ export default function GameDashboard({ gameID, changeRender }) {
                 if (res.status === 200) {
                     alert("Igra završena");
                     changeRender("gamedashboard", gameState.game.id);
+                    setLoadingState(false);
+
                     return;
                 }
                 else {
@@ -194,7 +196,8 @@ export default function GameDashboard({ gameID, changeRender }) {
                                 {
                                     checkDate(gameState.game.dueDate) === true
                                         ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
-                                        : null}
+                                        : null
+                                }
                                 <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
                             </div>
                         </>

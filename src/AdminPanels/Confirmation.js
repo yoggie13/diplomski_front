@@ -46,8 +46,10 @@ export default function ({ game, changeRender }) {
                 console.log(response);
                 if (game.Type < 3)
                     changeRender("allgames");
-                else
+                else {
+                    debugger;
                     changeRender("rewards", response);
+                }
                 setLoadingState(false);
                 return;
             })
