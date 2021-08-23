@@ -9,7 +9,7 @@ function formatDate(dueDate) {
     return day + "." + arr[1] + "." + arr[0];
 }
 
-export default function ActiveGames({ changeRender }) {
+export default function ActiveGames({ changeRender, userID }) {
 
     const [state, setstate] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
@@ -25,7 +25,7 @@ export default function ActiveGames({ changeRender }) {
 
         setLoadingState(true);
         fetch(
-            'http://localhost:46824/api/game/activegames',
+            `http://localhost:46824/api/game/activegames/${userID}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -36,7 +36,7 @@ export default function ActiveGames({ changeRender }) {
             .then(res => res.json())
             .then(response => {
                 setstate({
-                    games: response
+                    games: response.games
                 })
                 setLoadingState(false)
             })
@@ -57,7 +57,8 @@ export default function ActiveGames({ changeRender }) {
                     <tr>
                         <th>Naziv igre</th>
                         <th>Broj igrača</th>
-                        {/* <th>Maks. broj poena</th> */}
+                        <th>Maks. broj poena</th>
+                        <th>Odigrao/la</th>
                         <th>Datum isteka</th>
                         <th>Igraj</th>
                     </tr>
@@ -68,7 +69,12 @@ export default function ActiveGames({ changeRender }) {
                             <tr key={index}>
                                 <td>{game.name}</td>
                                 <td>{game.numberOfPlayers}</td>
-                                {/* <td>2</td> */}
+                                <td>{game.maxPayoff}</td>
+                                <td id="center">{
+                                    game.played === true
+                                        ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                        : <i className="fas fa-times-circle" id="icon-false"></i>
+                                }</td>
                                 <td>{formatDate(game.dueDate)}</td>
                                 <td id="center"><i id={game.id} className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
                             </tr>

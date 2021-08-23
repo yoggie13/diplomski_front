@@ -77,6 +77,7 @@ export default function Game({ id, userID, changeRender }) {
     }, [])
 
     const playAGame = e => {
+        debugger;
         e.preventDefault();
 
         if (state.checkedStrategy === "" || state.checkedStrategy === null || state.checkedStrategy === undefined) {

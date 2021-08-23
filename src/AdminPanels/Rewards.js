@@ -6,15 +6,28 @@ export default function Rewards({ gameID, changeRender }) {
     const [gameState, setGameState] = useState({ gameName: "", gameText: "", gameStrategies: [] });
     const [loadingState, setLoadingState] = useState(true);
     const [rewardsState, setRewardsState] = useState({
-        firstBlockFirst: 0,
-        firstBlockSecond: 0,
-        secondBlockFirst: 0,
-        secondBlockSecond: 0,
-        thirdBlockFirst: 0,
-        thirdsBlockSecond: 0,
-        fourthBlockFirst: 0,
-        fourthBlockSecond: 0
+        blocks: [
+            [
+                { payment: 0 },
+                { payment: 0 }
+            ], [
+                { payment: 0 },
+                { payment: 0 }
+            ], [
+                { payment: 0 },
+                { payment: 0 }
+            ], [
+                { payment: 0 },
+                { payment: 0 }
+            ],
+        ]
     })
+    const handleInput = (e, i, j) => {
+
+        var newBlocks = rewardsState.blocks;
+        newBlocks[i][j].payment = e.target.value;
+        setRewardsState({ blocks: newBlocks });
+    }
 
     useEffect(() => {
         setLoadingState(true);
@@ -47,7 +60,9 @@ export default function Rewards({ gameID, changeRender }) {
     const handleClick = e => {
         var payments = [];
         var rewards = Object.values(rewardsState);
+        debugger;
 
+        var k = 0;
         for (let i = 0; i <= gameState.gameStrategies.length / 2 - 1; i++) {
             for (let j = gameState.gameStrategies.length / 2; j < gameState.gameStrategies.length; j++) {
                 payments.push({
@@ -55,9 +70,10 @@ export default function Rewards({ gameID, changeRender }) {
                     StrategyPlayerOneID: gameState.gameStrategies[i].id,
                     StrategyPlayerTwoParentGameID: gameID,
                     StrategyPlayerTwoID: gameState.gameStrategies[j].id,
-                    PaymentsPlayerOne: parseInt(rewards[i * 2]),
-                    PaymentsPlayerTwo: parseInt(rewards[i * 2 + 1])
+                    PaymentPlayerOne: parseInt(rewardsState.blocks[k][0].payment),
+                    PaymentPlayerTwo: parseInt(rewardsState.blocks[k][1].payment)
                 })
+                k++;
             }
         }
 
@@ -113,30 +129,34 @@ export default function Rewards({ gameID, changeRender }) {
                                     gameState.gameStrategies[3].text
                                 }</p>
                                 <div id="AA">
-                                    <input id="1.1.1" type="number" value={rewardsState.firstBlockFirst}
-                                        onChange={e => (setRewardsState({ ...rewardsState, firstBlockFirst: e.target.value }))} />
-                                    <input id="2.1.1" type="number" value={rewardsState.firstBlockSecond}
-                                        onChange={e => (setRewardsState({ ...rewardsState, firstBlockSecond: e.target.value }))} />
+                                    <input id="1.1.1" type="number" value={rewardsState.blocks[0][0].payment}
+                                        onChange={e => handleInput(e, 0, 0)} />
+                                    <input id="2.1.1" type="number" value={rewardsState.blocks[0][1].payment}
+                                        onChange={e => handleInput(e, 0, 1)} />
                                 </div>
                                 <div id="AB" >
-                                    <input id="1.1.2" value={rewardsState.secondBlockFirst}
-                                        onChange={e => (setRewardsState({ ...rewardsState, secondBlockFirst: e.target.value }))} type="number" />
-                                    <input id="2.2.1" type="number" value={rewardsState.secondBlockSecond}
-                                        onChange={e => (setRewardsState({ ...rewardsState, secondBlockSecond: e.target.value }))} />
+                                    <input id="1.1.2" type="number"
+                                        value={rewardsState.blocks[1][0].payment}
+                                        onChange={e => handleInput(e, 1, 0)} />
+                                    <input id="2.2.1" type="number"
+                                        value={rewardsState.blocks[1][1].payment}
+                                        onChange={e => handleInput(e, 1, 1)} />
                                 </div>
                                 <div id="BA">
                                     <input id="1.2.1" type="number"
-                                        value={rewardsState.thirdBlockFirst}
-                                        onChange={e => (setRewardsState({ ...rewardsState, thirdBlockFirst: e.target.value }))} />
-                                    <input id="2.1.1" type="number" value={rewardsState.thirdsBlockSecond}
-                                        onChange={e => (setRewardsState({ ...rewardsState, thirdsBlockSecond: e.target.value }))} />
+                                        value={rewardsState.blocks[2][0].payment}
+                                        onChange={e => handleInput(e, 2, 0)} />
+                                    <input id="2.1.1" type="number"
+                                        value={rewardsState.blocks[2][1].payment}
+                                        onChange={e => handleInput(e, 2, 1)} />
                                 </div>
                                 <div id="BB">
-                                    <input id="1.2.2" type="number" value={rewardsState.fourthBlockFirst}
-                                        onChange={e => (setRewardsState({ ...rewardsState, fourthBlockFirst: e.target.value }))} />
+                                    <input id="1.2.2" type="number"
+                                        value={rewardsState.blocks[3][0].payment}
+                                        onChange={e => handleInput(e, 3, 0)} />
                                     <input id="2.2.2" type="number"
-                                        value={rewardsState.fourthBlockSecond}
-                                        onChange={e => (setRewardsState({ ...rewardsState, fourthBlockSecond: e.target.value }))} />
+                                        value={rewardsState.blocks[3][1].payment}
+                                        onChange={e => handleInput(e, 3, 1)} />
                                 </div>
                             </div>
                             <input type="submit" value="Unesi isplate" onClick={e => handleClick(e)} />
