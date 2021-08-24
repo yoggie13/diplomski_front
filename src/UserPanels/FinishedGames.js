@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import Loading from '../Loading';
 
-export default function FinishedGames({ changeRender }) {
+export default function FinishedGames({ changeRender, userID }) {
 
     const [state, setstate] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
@@ -17,7 +17,7 @@ export default function FinishedGames({ changeRender }) {
     useEffect(() => {
         setLoadingState(true);
         fetch(
-            'http://localhost:46824/api/game/finishedgames/20170077',
+            `http://localhost:46824/api/game/finishedgames/${userID}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -52,6 +52,7 @@ export default function FinishedGames({ changeRender }) {
                             <th>Naziv igre</th>
                             <th>Broj igrača</th>
                             <th>Osvojenih poena</th>
+                            <th>Odigrao/la</th>
                             <th>Link do igre</th>
                         </tr>
                     </thead>
@@ -62,6 +63,11 @@ export default function FinishedGames({ changeRender }) {
                                     <td>{game.Name}</td>
                                     <td>{game.NumberOfPlayers}</td>
                                     <td>{game.PointsGotten}</td>
+                                    <td id="center">{
+                                        game.Played === true
+                                            ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                            : <i className="fas fa-times-circle" id="icon-false"></i>
+                                    }</td>
                                     <td id="center"><i id={game.ID} className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
                                 </tr>
                             )

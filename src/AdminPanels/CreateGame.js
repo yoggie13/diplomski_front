@@ -4,10 +4,12 @@ import Confirmation from './Confirmation';
 
 
 export default function CreateGame({ changeRender }) {
+    const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
         Type: 1, Name: "", Text: "", Strategies: [], NumberOfPlayers: 10, Chat: false, DueDate: Date.now()
     });
+    const [gameTypes, setGameTypes] = useState({ types: [] });
     const [directionState, setDirectionState] = useState({
         back: [,
             "",
@@ -48,6 +50,34 @@ export default function CreateGame({ changeRender }) {
         ]
     })
     const [oneTwoState, setOneTwoState] = useState({ minLimit: 0, maxLimit: 0, default: 0 });
+
+    useEffect(() => {
+        setLoadingState(true)
+        fetch(
+
+            `http://localhost:46824/api/admin/game/types`,
+            {
+                method: "GET",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(res => {
+                if (res.status === 200)
+                    return res.json()
+                else if (res.status === 404)
+                    return [];
+            })
+            .then(response => {
+                setGameTypes({ types: response })
+                setLoadingState(false);
+            })
+            .catch(error => {
+                console.log(error);
+                setLoadingState(false);
+            })
+    }, [])
 
     const handleNextPage = (e, number) => {
         localStorage.setItem("Game", JSON.stringify(gameState));
@@ -210,10 +240,11 @@ export default function CreateGame({ changeRender }) {
                                     ? <>
                                         <label htmlFor="typeofgame">Tip igre</label>
                                         <select id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
-                                            <option name="number" id="1" value="1">The p-Beauty contest</option>
-                                            <option name="number" id="2" value="2">All-pay aukcije</option>
-                                            <option name="number" id="3" value="3">Dilema putnika</option>
-                                            <option name="number" id="4" value="4">Dilema zatvorenika</option>
+                                            {
+                                                gameTypes.types.map((type, index) =>
+                                                    <option key={index} id={index + 1} value={index + 1}>{type}</option>
+                                                )
+                                            }
                                         </select>
                                         <label htmlFor="gamename">Naziv igre</label>
                                         <input id="gamename" type="text" value={gameState.Name} onChange={e => setGameState({ ...gameState, Name: e.target.value })} />
