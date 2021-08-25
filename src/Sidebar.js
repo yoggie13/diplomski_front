@@ -45,6 +45,10 @@ export default function Sidebar({ LogoutLogic, changePanelRender, admin, Usernam
         e.preventDefault();
         changePanelRender("alltables");
     }
+    const handleChangePass = e => {
+        e.preventDefault();
+        changePanelRender("changepassword");
+    }
 
 
     return (
@@ -81,7 +85,7 @@ export default function Sidebar({ LogoutLogic, changePanelRender, admin, Usernam
                 {
                     admin === false
                         ? <i onClick={handleReportClick} className="fas fa-exclamation-circle fa-2x" id="report"></i>
-                        : null
+                        : <i className="fas fa-unlock-alt fa-2x" onClick={handleChangePass}></i>
                 }
                 <p onClick={handleUsernameClick}>{formatUsername(Username)}</p>
                 <i className="fas fa-sign-out-alt fa-2x" id="logOut" onClick={handleLogout}></i>
