@@ -16,7 +16,7 @@ export default function CreateGame({ changeRender }) {
             "Vratite se na unos igre",
             "Vratite se na unos strategija"
         ],
-        front: [
+        forward: [
             "Pređite na unos strategija",
             "Pređite na potvrdu igre",
             ""
@@ -49,7 +49,7 @@ export default function CreateGame({ changeRender }) {
             }
         ]
     })
-    const [oneTwoState, setOneTwoState] = useState({ minLimit: 0, maxLimit: 0, default: 0 });
+    const [oneTwoState, setOneTwoState] = useState({ minLimit: 0, maxLimit: 0, default: 0, timesX: 0, minSum: 0 });
 
     useEffect(() => {
         setLoadingState(true)
@@ -87,7 +87,7 @@ export default function CreateGame({ changeRender }) {
             var newPage = state.page + number;
         }
         if (newPage === 3) {
-            if (gameState.Type < 4) {
+            if (gameState.Type < 5) {
                 handleTypesOneTwo();
                 return;
             }
@@ -117,7 +117,6 @@ export default function CreateGame({ changeRender }) {
     }
 
     const handleTypesOneTwo = () => {
-        debugger;
 
         for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
             if (i != oneTwoState.default) {
@@ -134,21 +133,24 @@ export default function CreateGame({ changeRender }) {
                 });
             }
         }
-        for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
-            if (i != oneTwoState.default) {
-                gameState.Strategies.push({
-                    "Text": i + "",
-                    "FirstOrSecondPlayer": 2
-                });
-            }
-            else {
-                gameState.Strategies.push({
-                    "Text": i + "",
-                    "FirstOrSecondPlayer": 2,
-                    "Default": true
-                });
+        if (gameState.Type === 3) {
+            for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
+                if (i != oneTwoState.default) {
+                    gameState.Strategies.push({
+                        "Text": i + "",
+                        "FirstOrSecondPlayer": 2
+                    });
+                }
+                else {
+                    gameState.Strategies.push({
+                        "Text": i + "",
+                        "FirstOrSecondPlayer": 2,
+                        "Default": true
+                    });
+                }
             }
         }
+
 
         localStorage.setItem("Game", JSON.stringify(gameState));
 
@@ -160,7 +162,7 @@ export default function CreateGame({ changeRender }) {
     const getNumberOfPlayersPossible = e => {
         return <>
             {
-                gameState.Type < 3 === false
+                gameState.Type < 5 === false
                     ? <>
                         <option name="number" id="1" value="1">1</option>
                         <option name="number" id="2" value="2">2</option>
@@ -238,37 +240,41 @@ export default function CreateGame({ changeRender }) {
                             {
                                 state.page === 1
                                     ? <>
-                                        <label htmlFor="typeofgame">Tip igre</label>
-                                        <select id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
+                                        <label htmlFor="typeofgame">Tip igre*</label>
+                                        <select required id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
                                             {
                                                 gameTypes.types.map((type, index) =>
                                                     <option key={index} id={index + 1} value={index + 1}>{type}</option>
                                                 )
                                             }
                                         </select>
-                                        <label htmlFor="gamename">Naziv igre</label>
-                                        <input id="gamename" type="text" value={gameState.Name} onChange={e => setGameState({ ...gameState, Name: e.target.value })} />
-                                        <label htmlFor="text">Opis igre</label>
-                                        <textarea id="text" value={gameState.Text} onChange={e => setGameState({ ...gameState, Text: e.target.value })}></textarea>
-                                        <label htmlFor="noofplayers">Broj igrača</label>
-                                        <select id="noofplayers" value={gameState.NumberOfPlayers} onChange={e => setGameState({ ...gameState, NumberOfPlayers: parseInt(e.target.value) })}>
+                                        <label htmlFor="gamename">Naziv igre*</label>
+                                        <input required id="gamename" type="text" value={gameState.Name} onChange={e => setGameState({ ...gameState, Name: e.target.value })} />
+                                        <label htmlFor="text">Opis igre*</label>
+                                        <textarea required id="text" value={gameState.Text} onChange={e => setGameState({ ...gameState, Text: e.target.value })}></textarea>
+                                        <label htmlFor="noofplayers">Broj igrača*</label>
+                                        <select required id="noofplayers" value={gameState.NumberOfPlayers} onChange={e => setGameState({ ...gameState, NumberOfPlayers: parseInt(e.target.value) })}>
                                             {getNumberOfPlayersPossible()}
                                         </select>
-                                        <input type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
+                                        <input required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
                                         <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
                                             <input type="checkbox" id="chatCheck" value={gameState.Chat} onChange={e => setGameState({ ...gameState, Chat: (e.target.value === "true") })} />
                                         </div>
                                     </>
                                     : state.page === 2
-                                        ? gameState.Type < 4
+                                        ? gameState.Type < 5
                                             ? <>
                                                 <label htmlFor="range1">Od</label>
                                                 <input id="range1" type="number" value={oneTwoState.minLimit} onChange={e => setOneTwoState({ ...oneTwoState, minLimit: parseInt(e.target.value) })} />
                                                 <label htmlFor="range2">Do</label>
                                                 <input id="range2" type="number" value={oneTwoState.maxLimit} onChange={e => setOneTwoState({ ...oneTwoState, maxLimit: parseInt(e.target.value) })} />
-                                                <label htmlFor="defaultNumber">Default vrednost</label>
-                                                <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
-                                                <input id="defaultNumber" type="number" value={oneTwoState.default} onChange={e => setOneTwoState({ ...oneTwoState, default: parseInt(e.target.value) })} />
+
+                                                <>
+                                                    <label htmlFor="defaultNumber">Default vrednost</label>
+                                                    <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
+                                                    <input id="defaultNumber" type="number" value={oneTwoState.default} onChange={e => setOneTwoState({ ...oneTwoState, default: parseInt(e.target.value) })} />
+                                                </>
+
 
                                             </>
                                             :
@@ -324,14 +330,14 @@ export default function CreateGame({ changeRender }) {
                     state.page > 1
                         ? <div id="back">
                             <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={(event) => handleNextPage(event, -1)}></i>
-                            <p>Vratite se nazad</p>
+                            <p>{directionState.back[state.page - 1]}</p>
                         </div>
                         : null
                 }
                 {
                     state.page < 3
                         ? <div id="forward">
-                            <p>Pređite na sledećeg igrača</p>
+                            <p>{directionState.forward[state.page - 1]}</p>
                             <i className="fas fa-chevron-right fa-lg" onClick={e => handleNextPage(e, 1)}></i>
                         </div>
                         : null

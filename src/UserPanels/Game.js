@@ -22,9 +22,8 @@ export default function Game({ id, userID, changeRender }) {
     }
 
     const getStrategyID = e => {
-        debugger;
 
-        if (gameState.game.type < 4) {
+        if (gameState.game.type < 5) {
             for (let i = 0; i < gameState.game.strategies.length; i++) {
                 if (gameState.game.strategies[i].strategyName === state.checkedStrategy) {
                     return gameState.game.strategies[i].strategyID;
@@ -142,7 +141,7 @@ export default function Game({ id, userID, changeRender }) {
                     gameState.game.active === true
                         ? <form className="PlayGameForm">
                             {
-                                gameState.game.type > 3
+                                gameState.game.type >= 4
                                     ? <div id="radioButtons">
                                         {
                                             gameState.game.strategies.map((strategy) =>

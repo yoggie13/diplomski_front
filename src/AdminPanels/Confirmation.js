@@ -44,7 +44,7 @@ export default function ({ game, changeRender }) {
             })
             .then(response => {
                 console.log(response);
-                if (game.Type < 4)
+                if (game.Type < 5)
                     changeRender("allgames");
                 else {
                     debugger;
