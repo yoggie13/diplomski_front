@@ -59,7 +59,7 @@ export default function CreateGame({ changeRender }) {
         setLoadingState(true)
         fetch(
 
-            `http://localhost:46824/api/admin/game/types`,
+            `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/game/types`,
             {
                 method: "GET",
                 mode: "cors",
@@ -95,7 +95,7 @@ export default function CreateGame({ changeRender }) {
                 handleTypesOneTwo();
                 return;
             }
-            debugger;
+            ;
             cleanEmptyStrategies()
                 .then(() => {
                     var strategies = strategiesState.firstPlayerStrategies.concat(strategiesState.secondPlayerStrategies);

@@ -20,7 +20,7 @@ export default function ({ game, changeRender }) {
         setLoadingState(true);
 
         fetch(
-            'http://localhost:46824/api/admin/game',
+            'https://diplomskiapi20210828005205.azurewebsites.net/api/admin/game',
             {
                 method: "POST",
                 mode: "cors",
@@ -47,7 +47,7 @@ export default function ({ game, changeRender }) {
                 if (game.Type < 5)
                     changeRender("allgames");
                 else {
-                    debugger;
+
                     changeRender("rewards", response);
                 }
                 setLoadingState(false);

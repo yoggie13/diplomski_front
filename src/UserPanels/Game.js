@@ -47,7 +47,7 @@ export default function Game({ id, userID, changeRender }) {
         setLoadingState(true)
         fetch(
 
-            `http://localhost:46824/api/game/${userID}/${id}`,
+            `https://diplomskiapi20210828005205.azurewebsites.net/api/game/${userID}/${id}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -89,7 +89,7 @@ export default function Game({ id, userID, changeRender }) {
         setLoadingState(true);
 
         fetch(
-            `http://localhost:46824/api/game/${id}/${userID}`,
+            `https://diplomskiapi20210828005205.azurewebsites.net/api/game/${id}/${userID}`,
             {
                 method: "POST",
                 mode: "cors",

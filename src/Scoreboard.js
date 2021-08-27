@@ -12,7 +12,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
         if (state.admin === false) {
 
             fetch(
-                `http://localhost:46824/api/students/scoreboard/${userID}`,
+                `https://diplomskiapi20210828005205.azurewebsites.net/api/students/scoreboard/${userID}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -37,7 +37,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
         else {
 
             fetch(
-                `http://localhost:46824/api/admin/scoreboard/${group}`,
+                `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/scoreboard/${group}`,
                 {
                     method: "GET",
                     mode: "cors",

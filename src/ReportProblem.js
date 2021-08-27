@@ -29,7 +29,7 @@ export default function ReportProblem({ userID }) {
 
         setLoadingState(true);
         fetch(
-            'http://localhost:46824/api/students/report',
+            'https://diplomskiapi20210828005205.azurewebsites.net/api/students/report',
             {
                 method: "POST",
                 mode: "cors",

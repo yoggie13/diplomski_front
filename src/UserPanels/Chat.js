@@ -19,7 +19,7 @@ export default function Chat({ messages, id, userID }) {
         setLoadingState(true);
 
         fetch(
-            `http://localhost:46824/api/game/message/${id}/${userID}`,
+            `https://diplomskiapi20210828005205.azurewebsites.net/api/game/message/${id}/${userID}`,
             {
                 method: "POST",
                 mode: "cors",

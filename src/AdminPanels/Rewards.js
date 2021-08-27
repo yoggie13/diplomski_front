@@ -32,7 +32,7 @@ export default function Rewards({ gameID, changeRender }) {
     useEffect(() => {
         setLoadingState(true);
         fetch(
-            `http://localhost:46824/api/admin/game/creation/${gameID}`,
+            `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/game/creation/${gameID}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -60,7 +60,7 @@ export default function Rewards({ gameID, changeRender }) {
     const handleClick = e => {
         var payments = [];
         var rewards = Object.values(rewardsState);
-        debugger;
+        ;
 
         var k = 0;
         for (let i = 0; i <= gameState.gameStrategies.length / 2 - 1; i++) {
@@ -78,7 +78,7 @@ export default function Rewards({ gameID, changeRender }) {
         }
 
         fetch(
-            `http://localhost:46824/api/admin/${gameID}/addPayments`,
+            `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/${gameID}/addPayments`,
             {
                 method: "POST",
                 mode: "cors",
