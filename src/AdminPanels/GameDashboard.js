@@ -43,7 +43,6 @@ export default function GameDashboard({ gameID, changeRender }) {
                         return false;
                 })
                 .then(response => {
-                    console.log(response)
                     setGameState({
                         ...gameState, game: response
                     });
@@ -125,7 +124,7 @@ export default function GameDashboard({ gameID, changeRender }) {
     }
 
     return (
-        <div className="GameDashboard">{console.log(gameState.game)}
+        <div className="GameDashboard">
             {
                 loadingState === true
                     ? <Loading />

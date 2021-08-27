@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import Loading from './Loading';
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 export default function ReportProblem({ userID }) {
 
@@ -65,8 +67,6 @@ export default function ReportProblem({ userID }) {
         return;
     }
     const handleCheck = e => {
-        e.preventDefault();
-
         setCheckboxState(!checkboxState);
     }
 
@@ -75,7 +75,7 @@ export default function ReportProblem({ userID }) {
             {
                 loadingState === false
                     ?
-                    <form id="reportProblemForm">
+                    <form id="reportProblemForm" action="#">
                         <label htmlFor="problemType">
                             Tip problema*
                         </label>
@@ -103,10 +103,15 @@ export default function ReportProblem({ userID }) {
                         <input type="file" accept="image/*" value={reportState.ImageUrl} onChange={handleUpload} id="problemPhoto" /> */}
                         <div className="acceptTerms">
                             <small>Saglasan/na da pošaljem svoj indeks uz opis problema</small>
-                            <input type="checkbox" value={checkboxState} onChange={handleCheck} />
+                            <Checkbox
+                                checked={checkboxState}
+                                onClick={handleCheck}
+                                color={'primary'}
+                            />
                         </div>
                         <input type="submit" value="Pošalji" onClick={reportHandler} />
                     </form>
+
                     : <Loading />
             }
         </div >

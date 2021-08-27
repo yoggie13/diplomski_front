@@ -2,14 +2,18 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import Chat from './Chat';
 import Loading from '../Loading';
+import Radio from '@material-ui/core/Radio';
+import { FormControlLabel, RadioGroup } from '@material-ui/core';
+
 
 export default function Game({ id, userID, changeRender }) {
     const [state, setstate] = useState({ checkedStrategy: "" });
     const [gameState, setGameState] = useState({ game: null });
     const [loadingState, setLoadingState] = useState(true);
 
-    const handleCheck = event => {
-        setstate({ ...state, checkedStrategy: event.target.id });
+    const handleCheck = id => {
+        console.log(id)
+        setstate({ ...state, checkedStrategy: id });
     }
     const handleInput = event => {
         var number = event.target.value;
@@ -76,7 +80,6 @@ export default function Game({ id, userID, changeRender }) {
     }, [])
 
     const playAGame = e => {
-        debugger;
         e.preventDefault();
 
         if (state.checkedStrategy === "" || state.checkedStrategy === null || state.checkedStrategy === undefined) {
@@ -146,10 +149,16 @@ export default function Game({ id, userID, changeRender }) {
                                         {
                                             gameState.game.strategies.map((strategy) =>
                                                 <>
-                                                    <label key={`${strategy.strategyID}`} htmlFor={`${strategy.strategyID}`}>
-                                                        <input type="radio" id={`${strategy.strategyID}`} name="Strategy" value={`${strategy.strategyID}`}
+                                                    <label key={`${strategy.strategyID}`} htmlFor={`${strategy.strategyID}`} onClick={e => handleCheck(`${strategy.strategyID}`)}>
+
+                                                        <Radio
+                                                            id={`${strategy.strategyID}`}
+                                                            name="Strategy"
+                                                            value={`${strategy.strategyID}`}
                                                             checked={state.checkedStrategy === `${strategy.strategyID}`}
-                                                            onChange={handleCheck}></input>
+                                                            onChange={e => handleCheck(e.target.id)}
+                                                            required={true}
+                                                        />
                                                         {`${strategy.strategyName}`}
                                                     </label>
                                                 </>

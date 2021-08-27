@@ -1,6 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import Confirmation from './Confirmation';
+import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
+
+
 
 
 export default function CreateGame({ changeRender }) {
@@ -228,6 +232,32 @@ export default function CreateGame({ changeRender }) {
             setStrategiesState({ ...strategiesState, secondPlayerStrategies: strategies });
         }
     }
+    const setDefaultStrategy = (player, index) => {
+        var strategies = [];
+
+
+        if (player === 1) {
+            strategies = strategiesState.firstPlayerStrategies;
+        } else {
+            strategies = strategiesState.secondPlayerStrategies;
+        }
+
+        if (strategies[index].Default === true)
+            return;
+        for (let i = 0; i < strategies.length; i++) {
+            if (strategies[i].Default === true) {
+                strategies[i].Default = false;
+            }
+        }
+        strategies[index].Default = true;
+
+        if (player === 1) {
+            setStrategiesState({ ...strategiesState, firstPlayerStrategies: strategies });
+        } else {
+            setStrategiesState({ ...strategiesState, secondPlayerStrategies: strategies });
+        }
+
+    }
 
 
     return (
@@ -258,7 +288,12 @@ export default function CreateGame({ changeRender }) {
                                         </select>
                                         <input required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
                                         <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
-                                            <input type="checkbox" id="chatCheck" value={gameState.Chat} onChange={e => setGameState({ ...gameState, Chat: (e.target.value === "true") })} />
+                                            <Checkbox
+                                                id="chatCheck"
+                                                checked={gameState.Chat}
+                                                onClick={e => setGameState({ ...gameState, Chat: !gameState.Chat })}
+                                                color={'secondary'}
+                                            />
                                         </div>
                                     </>
                                     : state.page === 2
@@ -290,8 +325,12 @@ export default function CreateGame({ changeRender }) {
                                                                 </div>
                                                                 <div >
                                                                     <label htmlFor={`defaultRadio${index}`}>Default:</label>
-                                                                    <input type="radio" id={`defaultRadio${index}`} name="default1" value={index} checked={strategy.Default} />
-                                                                </div>
+                                                                    <Radio
+                                                                        id={`defaultRadio${index}`}
+                                                                        name="default2" value={index}
+                                                                        checked={strategy.Default}
+                                                                        onClick={e => setDefaultStrategy(1, index)}
+                                                                    />                                                                </div>
                                                             </div>
                                                         })
                                                     }
@@ -309,7 +348,12 @@ export default function CreateGame({ changeRender }) {
                                                                 </div>
                                                                 <div >
                                                                     <label htmlFor={`defaultRadio${index}`}>Default:</label>
-                                                                    <input type="radio" id={`defaultRadio${index}`} name="default2" value={index} checked={strategy.Default} />
+                                                                    <Radio
+                                                                        id={`defaultRadio${index}`}
+                                                                        name="default2" value={index}
+                                                                        checked={strategy.Default}
+                                                                        onClick={e => setDefaultStrategy(2, index)}
+                                                                    />
                                                                 </div>
 
                                                             </div>
