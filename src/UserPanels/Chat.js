@@ -60,7 +60,7 @@ export default function Chat({ messages, id, userID }) {
                         <div id="Messages">
                             {
                                 messages.map((message, index) =>
-                                    <p key={index + 1} className={message.PlayerOrOpponent}>{message.MessageText}</p>
+                                    <p key={index + 1} className={message.PlayerOrOpponent}>{message.messageText}</p>
                                 )
                             }
                         </div>
