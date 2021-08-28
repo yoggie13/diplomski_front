@@ -25,7 +25,7 @@ export default function GameDashboard({ gameID, changeRender }) {
 
         if (refreshState === true) {
 
-            setLoadingState(true)
+            setLoadingState(true);
             fetch(
 
                 `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/${apiState}`,
