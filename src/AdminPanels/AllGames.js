@@ -17,7 +17,7 @@ export default function AllGames({ changeRender }) {
         setLoadingState(true)
 
         fetch(
-            'https://diplomskiapi20210828005205.azurewebsites.net/api/admin/games',
+            'https://diplomskiapi20210828140836.azurewebsites.net/api/admin/games',
             {
                 method: "GET",
                 mode: "cors",

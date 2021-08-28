@@ -14,7 +14,7 @@ export default function AdminLogin({ LoginLogic, backToUser }) {
         setLoadingState(true);
 
         fetch(
-            'https://diplomskiapi20210828005205.azurewebsites.net/api/admin/login',
+            'https://diplomskiapi20210828140836.azurewebsites.net/api/admin/login',
             {
                 method: "POST",
                 mode: "cors",

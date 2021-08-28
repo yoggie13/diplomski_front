@@ -59,7 +59,7 @@ export default function CreateGame({ changeRender }) {
         setLoadingState(true)
         fetch(
 
-            `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/game/types`,
+            `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/game/types`,
             {
                 method: "GET",
                 mode: "cors",

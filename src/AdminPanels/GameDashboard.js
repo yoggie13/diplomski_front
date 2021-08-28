@@ -28,7 +28,7 @@ export default function GameDashboard({ gameID, changeRender }) {
             setLoadingState(true);
             fetch(
 
-                `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/${apiState}`,
+                `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/${apiState}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -64,7 +64,7 @@ export default function GameDashboard({ gameID, changeRender }) {
         setLoadingState(true);
 
         fetch(
-            `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/game/${gameState.game.id}/finish`,
+            `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/game/${gameState.game.id}/finish`,
             {
                 method: "POST",
                 mode: "cors",
@@ -96,7 +96,7 @@ export default function GameDashboard({ gameID, changeRender }) {
         setLoadingState(true);
 
         fetch(
-            `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/game/${gameState.game.id}`,
+            `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/game/${gameState.game.id}`,
             {
                 method: "DELETE",
                 mode: "cors",

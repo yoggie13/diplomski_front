@@ -32,7 +32,7 @@ export default function Rewards({ gameID, changeRender }) {
     useEffect(() => {
         setLoadingState(true);
         fetch(
-            `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/game/creation/${gameID}`,
+            `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/game/creation/${gameID}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -78,7 +78,7 @@ export default function Rewards({ gameID, changeRender }) {
         }
 
         fetch(
-            `https://diplomskiapi20210828005205.azurewebsites.net/api/admin/${gameID}/addPayments`,
+            `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/${gameID}/addPayments`,
             {
                 method: "POST",
                 mode: "cors",
