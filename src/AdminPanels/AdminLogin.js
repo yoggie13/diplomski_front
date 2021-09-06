@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import Loading from '../Loading';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 
-export default function AdminLogin({ LoginLogic, backToUser }) {
+
+export default function AdminLogin({ LoginLogic }) {
     const [loginDetails, setLoginDetails] = useState({ email: "", password: "", status: 500 });
     const [state, setState] = useState({ error: false, loading: true });
     const [loadingState, setLoadingState] = useState(false);
@@ -74,10 +81,12 @@ export default function AdminLogin({ LoginLogic, backToUser }) {
                         ? <Loading smallerSize={true} />
                         : <input type="submit" value="Prijavi se" />
                 }
-                <div id="gobacktouserlogin" onClick={backToUser}>
-                    <i className="fas fa-chevron-right fa-sm" id="chevron-left"></i>
-                    <p>Loguj se kao korisnik</p>
-                </div>
+                <Link to="/login">
+                    <div id="gobacktouserlogin">
+                        <i className="fas fa-chevron-right fa-sm" id="chevron-left"></i>
+                        <p>Loguj se kao korisnik</p>
+                    </div>
+                </Link>
             </form>
         </div>
     );

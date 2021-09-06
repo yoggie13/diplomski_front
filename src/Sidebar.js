@@ -1,17 +1,29 @@
 import React from 'react';
 import logo from './img/laboi_logo.png';
 import { useState } from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect
+} from "react-router-dom";
+
+import ActiveGames from './UserPanels/ActiveGames';
+import FinishedGames from './UserPanels/FinishedGames';
+import Scoreboard from './Scoreboard';
 
 function formatUsername(Username) {
     return Username.split('@')[0];
 }
 
-export default function Sidebar({ LogoutLogic, changePanelRender, admin, Username }) {
+export default function Sidebar({ LogoutLogic, changePanelRender, admin, Username, userID }) {
 
     const [state, setstate] = useState({ admin: false });
     const handleLogout = e => {
         e.preventDefault();
         LogoutLogic(e);
+
     }
     const handleUsernameClick = e => {
         e.preventDefault();
@@ -54,14 +66,14 @@ export default function Sidebar({ LogoutLogic, changePanelRender, admin, Usernam
             {
                 admin === false
                     ? <ul>
-                        <li onClick={handleActiveGamesClick}>
-                            Aktivne igre
+                        <li>
+                            <Link to="/activeGames">Aktivne igre</Link>
                         </li>
-                        <li onClick={handleFinishedGamesClick}>
-                            Završene igre
+                        <li>
+                            <Link to="/finishedGames">Završene igre</Link>
                         </li>
-                        <li onClick={handleScoreboardClick}>
-                            Scoreboard
+                        <li>
+                            <Link to="/scoreboard">Scoreboard</Link>
                         </li>
                     </ul>
                     : admin === true
@@ -81,12 +93,13 @@ export default function Sidebar({ LogoutLogic, changePanelRender, admin, Usernam
             <div id='sidebarFooter'>
                 {
                     admin === false
-                        ? <i onClick={handleReportClick} className="fas fa-exclamation-circle fa-2x" id="report"></i>
+                        ? <Link to="/report"><i className="fas fa-exclamation-circle fa-2x" id="report"></i></Link>
                         : null
                 }
-                <p onClick={handleUsernameClick}>{formatUsername(Username)}</p>
+                <Link to="/profile">{formatUsername(Username)}</Link>
                 <i className="fas fa-sign-out-alt fa-2x" id="logOut" onClick={handleLogout}></i>
             </div>
+
         </div>
     );
 }

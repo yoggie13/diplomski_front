@@ -1,12 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
-export default function UserInfo({ changeRender, admin, User }) {
+export default function UserInfo({ admin, User }) {
 
-    const handleClick = e => {
-        e.preventDefault();
-        changeRender("changepassword");
-    }
     return (
         <div className="UserInfo">
             <h1>{User.name + " " + User.surname}</h1>
@@ -54,7 +51,7 @@ export default function UserInfo({ changeRender, admin, User }) {
                     </div>
             }
             <div className="ButtonsAlignRight">
-                <button onClick={handleClick}>Promeni šifru</button>
+                <Link to='changePassword'><button>Promeni šifru</button></Link>
             </div>
         </div >
     )

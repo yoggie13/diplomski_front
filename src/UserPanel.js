@@ -15,15 +15,16 @@ import GameDashboard from './AdminPanels/GameDashboard';
 import Rewards from './AdminPanels/Rewards';
 import Loading from './Loading';
 import Confirmation from './AdminPanels/Confirmation';
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 export default function UserPanel({ LogoutLogic, admin, User }) {
     const [sidebarState, setSidebarState] = useState({
         sidebarStatus: window.innerWidth >= 900 ? true : false
-    });
-    const [panelState, setPanelState] = useState({
-        whatToRender: admin === false ? "userinfo" : "gamedashboard",
-    });
-    const [IDState, setIDState] = useState({
-        id: null
     });
 
 
@@ -52,52 +53,67 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
 
     }
 
-    const changeRender = (what, id = null) => {
-        setIDState({ id: id });
-        setPanelState({ whatToRender: what });
-    }
-
-
     return (
         <div className="UserPanel" onClick={closeSidebar}>
             {
                 sidebarState.sidebarStatus
-                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender={changeRender} admin={admin} Username={User.email} />
+                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender admin={admin} Username={User.email} userID={User.id} />
                     : <i className="fas fa-bars fa-2x" onClick={openSidebar}></i>
             }
             <div id='mainPart'>
+                <Switch>
+                    <Route path="/activeGames">
+                        <ActiveGames userID={User.id} />
+                    </Route>
+                    <Route path="/finishedGames">
+                        <FinishedGames userID={User.id} />
+                    </Route>
+                    <Route path="/scoreboard">
+                        <Scoreboard userID={User.id} />
+                    </Route>
+                    <Route path="/report">
+                        <ReportProblem userID={User.id} />
+                    </Route>
+                    <Route path="/changePassword" >
+                        <ChangePassword userID={User.id} />
+                    </Route>
+                    <Route path="/profile">
+                        <UserInfo admin={admin} User={User} />
+                    </Route>
+                </Switch>
+
                 {
-                    panelState.loading === true
-                        ? <Loading />
-                        : panelState.whatToRender === "userinfo"
-                            ? <UserInfo changeRender={changeRender} admin={admin} User={User} />
-                            : panelState.whatToRender === "scoreboard"
-                                ? <Scoreboard userID={User.id} />
-                                : panelState.whatToRender === "activegames"
-                                    ? <ActiveGames changeRender={changeRender} userID={User.id} />
-                                    : panelState.whatToRender === "game"
-                                        ? <Game id={IDState.id} userID={User.id} changeRender={changeRender} />
-                                        : panelState.whatToRender === "finishedgames"
-                                            ? <FinishedGames changeRender={changeRender} userID={User.id} />
-                                            : panelState.whatToRender === "reportproblem"
-                                                ? <ReportProblem userID={User.id} />
-                                                : panelState.whatToRender === "changepassword"
-                                                    ? <ChangePassword changeRender={changeRender} userID={User.id} />
-                                                    : panelState.whatToRender === "gamedashboard"
-                                                        ? <GameDashboard gameID={IDState.id} changeRender={changeRender} />
-                                                        : panelState.whatToRender === "creategame"
-                                                            ? <CreateGame changeRender={changeRender} />
-                                                            : panelState.whatToRender === "confirmation"
-                                                                ? <Confirmation game={IDState.id} changeRender={changeRender} />
-                                                                : panelState.whatToRender === "allgames"
-                                                                    ? <AllGames changeRender={changeRender} />
-                                                                    : panelState.whatToRender === "alltables"
-                                                                        ? <AllTables />
-                                                                        : panelState.whatToRender === "rewards"
-                                                                            ? <Rewards gameID={IDState.id} changeRender={changeRender} />
-                                                                            : "GREŠKA"
+                    // panelState.loading === true
+                    //     ? <Loading />
+                    //     : panelState.whatToRender === "userinfo"
+                    //         ? <UserInfo  admin={admin} User={User} />
+                    //         : panelState.whatToRender === "scoreboard"
+                    //             ? <Scoreboard userID={User.id} />
+                    //             : panelState.whatToRender === "activegames"
+                    //                 ? <ActiveGames  userID={User.id} />
+                    //                 : panelState.whatToRender === "game"
+                    //                     ? <Game id={IDState.id} userID={User.id}  />
+                    //                     : panelState.whatToRender === "finishedgames"
+                    //                         ? <FinishedGames  userID={User.id} />
+                    //                         : panelState.whatToRender === "reportproblem"
+                    //                             ? <ReportProblem userID={User.id} />
+                    //                             : panelState.whatToRender === "changepassword"
+                    //                                 ? <ChangePassword  userID={User.id} />
+                    //                                 : panelState.whatToRender === "gamedashboard"
+                    //                                     ? <GameDashboard gameID={IDState.id}  />
+                    //                                     : panelState.whatToRender === "creategame"
+                    //                                         ? <CreateGame  />
+                    //                                         : panelState.whatToRender === "confirmation"
+                    //                                             ? <Confirmation game={IDState.id}  />
+                    //                                             : panelState.whatToRender === "allgames"
+                    //                                                 ? <AllGames  />
+                    //                                                 : panelState.whatToRender === "alltables"
+                    //                                                     ? <AllTables />
+                    //                                                     : panelState.whatToRender === "rewards"
+                    //                                                         ? <Rewards gameID={IDState.id}  />
+                    //                                                         : "GREŠKA"
                 }
             </div>
-        </div>
+        </div >
     )
 }

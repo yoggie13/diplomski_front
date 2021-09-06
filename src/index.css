@@ -57,6 +57,12 @@ i:hover {
   grid-template-rows: 7vh 93vh;
 }
 
+.UserPanel a {
+  color: white;
+  text-decoration: none;
+  font-family: "Varela";
+}
+
 .sidebar {
   grid-column: 1;
   position: fixed;
