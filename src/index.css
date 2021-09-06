@@ -62,6 +62,9 @@ i:hover {
   text-decoration: none;
   font-family: "Varela";
 }
+.UserPanel a i {
+  color: #2b0a55;
+}
 
 .sidebar {
   grid-column: 1;

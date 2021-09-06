@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+
 import Loading from '../Loading';
 
 
@@ -42,11 +44,7 @@ export default function AllGames() {
 
     }, [])
 
-    const handleClick = e => {
-        e.preventDefault();
 
-        history.push(`gameDashboard/${e.target.id}`);
-    }
     return (
         loadingState === true
             ? <Loading />
@@ -73,7 +71,11 @@ export default function AllGames() {
                                             : <i className="fas fa-times-circle" id="icon-false"></i>
                                     }
                                     </td>
-                                    <td id="center"><i id={game.id} onClick={handleClick} className="fas fa-chevron-right"></i></td>
+                                    <td id="center">
+                                        <Link to={`dashboard/${game.id}`}>
+                                            <i id={game.id} className="fas fa-chevron-right"></i>
+                                        </Link>
+                                    </td>
                                 </tr>
                             )}
                     </tbody>

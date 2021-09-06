@@ -18,11 +18,13 @@ function checkDate(dueDate) {
 export default function GameDashboard() {
     const [gameState, setGameState] = useState([{ game: [] }]);
     const [loadingState, setLoadingState] = useState(true);
-    const [apiState, setApiState] = useState(gameID != undefined ? `game/${gameID}` : "dashboard")
     const [refreshState, setRefreshState] = useState(true);
 
     let gameID = useParams();
     let history = useHistory();
+    const [apiState, setApiState] = useState(gameID != undefined ? `game/${gameID.id}` : "dashboard")
+
+
 
 
     useEffect(() => {
