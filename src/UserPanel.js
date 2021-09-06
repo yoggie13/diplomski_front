@@ -69,6 +69,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                     <Route path='/scoreboards'>
                         <AllTables />
                     </Route>
+                    <Route path='/dashboard/:id' children={<GameDashboard />} />
                     <Route path='/createGame'>
                         <CreateGame />
                     </Route>
