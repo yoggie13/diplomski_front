@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Loading from './Loading';
 import Config from './config.json';
 
-export default function ChangePassword({ changeRender, userID }) {
+export default function ChangePassword({ userID }) {
     const [state, setState] = useState({ oldPassword: "", newPassword: "", confirmPassword: "" });
     const [errorState, setErrorState] = useState({ exists: false, text: "" })
     const [loadingState, setLoadingState] = useState(false);

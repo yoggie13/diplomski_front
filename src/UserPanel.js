@@ -62,6 +62,16 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
             }
             <div id='mainPart'>
                 <Switch>
+                    <Route path="/game/:id" children={<Game userID={User.id} />} />
+                    <Route path='/allGames'>
+                        <AllGames />
+                    </Route>
+                    <Route path='/scoreboards'>
+                        <AllTables />
+                    </Route>
+                    <Route path='/createGame'>
+                        <CreateGame />
+                    </Route>
                     <Route path="/activeGames">
                         <ActiveGames userID={User.id} />
                     </Route>
@@ -80,6 +90,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                     <Route path="/profile">
                         <UserInfo admin={admin} User={User} />
                     </Route>
+
                 </Switch>
 
                 {

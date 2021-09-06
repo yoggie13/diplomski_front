@@ -8,6 +8,8 @@ export default function Login({ LoginLogic, falseEntry }) {
     const [state, setState] = useState({ error: falseEntry });
     const [loadingState, setLoadingState] = useState(false);
 
+    let history = useHistory();
+
     const loginHandler = e => {
         e.preventDefault();
 
@@ -42,6 +44,7 @@ export default function Login({ LoginLogic, falseEntry }) {
                 setState({ error: false });
                 setLoadingState(false);
                 LoginLogic(response);
+                history.push('/profile');
             })
             .catch(error => {
                 setLoadingState(false);

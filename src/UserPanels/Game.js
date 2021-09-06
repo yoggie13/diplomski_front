@@ -3,13 +3,16 @@ import { useState, useEffect } from 'react';
 import Chat from './Chat';
 import Loading from '../Loading';
 import Radio from '@material-ui/core/Radio';
-import { FormControlLabel, RadioGroup } from '@material-ui/core';
+import { useHistory, useParams } from 'react-router';
 
 
-export default function Game({ id, userID, changeRender }) {
+export default function Game({ userID }) {
     const [state, setstate] = useState({ checkedStrategy: "" });
     const [gameState, setGameState] = useState({ game: null });
     const [loadingState, setLoadingState] = useState(true);
+
+    let { id } = useParams();
+    let history = useHistory();
 
     const handleCheck = id => {
         console.log(id)
@@ -65,7 +68,7 @@ export default function Game({ id, userID, changeRender }) {
             .then(response => {
                 if (response === false) {
                     alert("Ta igra je izbrisana");
-                    changeRender("activegames");
+                    history.push('/activeGames');
                 }
                 setGameState({
                     ...gameState, game: response
@@ -114,7 +117,7 @@ export default function Game({ id, userID, changeRender }) {
                 }
                 else if (res.status === 404) {
                     alert("Ta igra je izbrisana");
-                    changeRender("activegames");
+                    history.push('/activeGames');
                 }
                 else {
                     alert("Nije uspelo")

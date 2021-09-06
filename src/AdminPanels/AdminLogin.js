@@ -81,12 +81,12 @@ export default function AdminLogin({ LoginLogic }) {
                         ? <Loading smallerSize={true} />
                         : <input type="submit" value="Prijavi se" />
                 }
-                <Link to="/login">
-                    <div id="gobacktouserlogin">
+                <div id="gobacktouserlogin">
+                    <Link to="/login">
                         <i className="fas fa-chevron-right fa-sm" id="chevron-left"></i>
-                        <p>Loguj se kao korisnik</p>
-                    </div>
-                </Link>
+                    </Link>
+                    <p>Loguj se kao korisnik</p>
+                </div>
             </form>
         </div>
     );

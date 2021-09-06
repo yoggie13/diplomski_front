@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Loading from '../Loading';
 
 
@@ -7,10 +8,12 @@ function checkDate(dueDate) {
     return Date.parse(dueDate) > Date.now();
 }
 
-export default function AllGames({ changeRender }) {
+export default function AllGames() {
 
     const [state, setstate] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
+
+    let history = useHistory();
 
 
     useEffect(() => {
@@ -42,7 +45,7 @@ export default function AllGames({ changeRender }) {
     const handleClick = e => {
         e.preventDefault();
 
-        changeRender("gamedashboard", e.target.id);
+        history.push(`gameDashboard/${e.target.id}`);
     }
     return (
         loadingState === true

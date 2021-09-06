@@ -3,7 +3,6 @@ import { useState } from 'react';
 import './App.css';
 import BasicTemplate from './BasicTemplate';
 import UserPanel from './UserPanel';
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -24,7 +23,6 @@ function App() {
 
     localStorage.removeItem("User");
     setState({ isLoggedIn: false, admin: false, User: null });
-
 
   }
   return (

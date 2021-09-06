@@ -8,57 +8,24 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
+import { useHistory } from 'react-router';
 
-import ActiveGames from './UserPanels/ActiveGames';
-import FinishedGames from './UserPanels/FinishedGames';
-import Scoreboard from './Scoreboard';
 
 function formatUsername(Username) {
     return Username.split('@')[0];
 }
 
-export default function Sidebar({ LogoutLogic, changePanelRender, admin, Username, userID }) {
+export default function Sidebar({ LogoutLogic, admin, Username }) {
 
     const [state, setstate] = useState({ admin: false });
+
+    let history = useHistory();
     const handleLogout = e => {
         e.preventDefault();
         LogoutLogic(e);
 
+        history.push('/');
     }
-    const handleUsernameClick = e => {
-        e.preventDefault();
-        changePanelRender("userinfo");
-    }
-    const handleActiveGamesClick = e => {
-        e.preventDefault();
-        changePanelRender("activegames");
-    }
-    const handleFinishedGamesClick = e => {
-        e.preventDefault();
-        changePanelRender("finishedgames");
-    }
-    const handleScoreboardClick = e => {
-        e.preventDefault();
-        changePanelRender("scoreboard");
-    }
-    const handleReportClick = e => {
-        e.preventDefault();
-        changePanelRender("reportproblem");
-    }
-    const handleAdminAllGames = e => {
-        e.preventDefault();
-        changePanelRender("allgames");
-    }
-    const handleCreateGameClick = e => {
-        e.preventDefault();
-        changePanelRender("creategame");
-    }
-    const handleTablesClick = e => {
-        e.preventDefault();
-        changePanelRender("alltables");
-    }
-
-
 
     return (
         <div className="sidebar">
@@ -78,14 +45,14 @@ export default function Sidebar({ LogoutLogic, changePanelRender, admin, Usernam
                     </ul>
                     : admin === true
                         ? <ul>
-                            <li onClick={handleCreateGameClick}>
-                                Kreiraj igru
+                            <li>
+                                <Link to="/createGame">Kreiraj igru</Link>
                             </li>
-                            <li onClick={handleAdminAllGames}>
-                                Sve igre
+                            <li>
+                                <Link to="/allGames">Sve igre</Link>
                             </li>
-                            <li onClick={handleTablesClick}>
-                                Tabele
+                            <li>
+                                <Link to="/scoreboards">Tabele</Link>
                             </li>
                         </ul>
                         : null
@@ -98,6 +65,7 @@ export default function Sidebar({ LogoutLogic, changePanelRender, admin, Usernam
                 }
                 <Link to="/profile">{formatUsername(Username)}</Link>
                 <i className="fas fa-sign-out-alt fa-2x" id="logOut" onClick={handleLogout}></i>
+
             </div>
 
         </div>

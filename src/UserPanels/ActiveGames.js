@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import Loading from '../Loading';
+import { Link } from 'react-router-dom';
 
 function formatDate(dueDate) {
     var arr = dueDate.split('-');
@@ -13,13 +14,6 @@ export default function ActiveGames({ changeRender, userID }) {
 
     const [state, setstate] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
-
-    const handleClick = e => {
-        e.preventDefault();
-
-        changeRender("game", e.target.id);
-    }
-
 
     useEffect(() => {
 
@@ -76,7 +70,11 @@ export default function ActiveGames({ changeRender, userID }) {
                                         : <i className="fas fa-times-circle" id="icon-false"></i>
                                 }</td>
                                 <td>{formatDate(game.dueDate)}</td>
-                                <td id="center"><i id={game.id} className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
+                                <td id="center">
+                                    <Link to={`/game/${game.id}`}>
+                                        <i id={game.id} className="fas fa-chevron-right fa-lg"></i>
+                                    </Link>
+                                </td>
                             </tr>
                         )
                     }

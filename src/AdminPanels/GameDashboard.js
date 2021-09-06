@@ -3,6 +3,7 @@ import { PieChart } from 'react-minimal-pie-chart'
 import { useState, useEffect } from 'react'
 import Loading from '../Loading';
 import { map } from 'async';
+import { useHistory, useParams } from 'react-router';
 
 function formatDate(dueDate) {
     var splitDate = dueDate.split('-');
@@ -14,11 +15,14 @@ function formatDate(dueDate) {
 function checkDate(dueDate) {
     return Date.parse(dueDate) > Date.now();
 }
-export default function GameDashboard({ gameID, changeRender }) {
+export default function GameDashboard() {
     const [gameState, setGameState] = useState([{ game: [] }]);
     const [loadingState, setLoadingState] = useState(true);
     const [apiState, setApiState] = useState(gameID != undefined ? `game/${gameID}` : "dashboard")
     const [refreshState, setRefreshState] = useState(true);
+
+    let gameID = useParams();
+    let history = useHistory();
 
 
     useEffect(() => {
@@ -107,7 +111,7 @@ export default function GameDashboard({ gameID, changeRender }) {
             .then(res => {
                 if (res.status === 200) {
                     alert("Igra obrisana");
-                    changeRender("allgames");
+                    history.push('allGames');
                     return;
                 }
                 else {
