@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router';
 import Loading from '../Loading';
 
-export default function Rewards({ gameID, changeRender }) {
+export default function Rewards() {
     const [gameState, setGameState] = useState({ gameName: "", gameText: "", gameStrategies: [] });
     const [loadingState, setLoadingState] = useState(true);
     const [rewardsState, setRewardsState] = useState({
@@ -28,6 +29,10 @@ export default function Rewards({ gameID, changeRender }) {
         newBlocks[i][j].payment = e.target.value;
         setRewardsState({ blocks: newBlocks });
     }
+
+    let history = useHistory();
+    let game = useParams();
+    let gameID = parseInt(game.id);
 
     useEffect(() => {
         setLoadingState(true);
@@ -60,7 +65,7 @@ export default function Rewards({ gameID, changeRender }) {
     const handleClick = e => {
         var payments = [];
         var rewards = Object.values(rewardsState);
-        ;
+
 
         var k = 0;
         for (let i = 0; i <= gameState.gameStrategies.length / 2 - 1; i++) {
@@ -76,6 +81,7 @@ export default function Rewards({ gameID, changeRender }) {
                 k++;
             }
         }
+        console.log(JSON.stringify(payments));
 
         fetch(
             `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/${gameID}/addPayments`,
@@ -90,7 +96,7 @@ export default function Rewards({ gameID, changeRender }) {
             .then(res => {
                 if (res.status === 200) {
                     alert("Sačuvano");
-                    changeRender("allgames");
+                    history.push('/allGames');
                     setLoadingState(false);
                 }
                 else {

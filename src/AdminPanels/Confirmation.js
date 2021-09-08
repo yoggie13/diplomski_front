@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Loading from '../Loading';
+import { useHistory } from 'react-router';
 
 function formatDate(dueDate) {
     var splitDate = dueDate.split('-');
@@ -10,12 +11,15 @@ function formatDate(dueDate) {
 
 }
 
-export default function ({ game, changeRender }) {
+export default function ({ game }) {
     const [loadingState, setLoadingState] = useState(false);
+
+    let history = useHistory();
 
 
     const saveGame = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        debugger;
 
         setLoadingState(true);
 
@@ -45,10 +49,9 @@ export default function ({ game, changeRender }) {
             .then(response => {
                 console.log(response);
                 if (game.Type < 5)
-                    changeRender("allgames");
+                    history.push("/allGames");
                 else {
-
-                    changeRender("rewards", response);
+                    history.push(`/payments/${response}`);
                 }
                 setLoadingState(false);
                 return;

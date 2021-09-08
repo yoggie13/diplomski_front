@@ -70,12 +70,14 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                         <AllTables />
                     </Route>
                     <Route path='/dashboard/:id' children={<GameDashboard />} />
+                    <Route path='/dashboard/' children={<GameDashboard />} />
                     <Route path='/createGame'>
                         <CreateGame />
                     </Route>
                     <Route path="/activeGames">
                         <ActiveGames userID={User.id} />
                     </Route>
+                    <Route path='/payments/:id' children={<Rewards />} />
                     <Route path="/finishedGames">
                         <FinishedGames userID={User.id} />
                     </Route>

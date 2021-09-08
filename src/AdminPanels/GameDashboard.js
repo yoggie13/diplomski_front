@@ -22,7 +22,7 @@ export default function GameDashboard() {
 
     let gameID = useParams();
     let history = useHistory();
-    const [apiState, setApiState] = useState(gameID != undefined ? `game/${gameID.id}` : "dashboard")
+    const [apiState, setApiState] = useState(gameID === {} ? `game/${gameID.id}` : "dashboard")
 
 
 
@@ -113,13 +113,15 @@ export default function GameDashboard() {
             .then(res => {
                 if (res.status === 200) {
                     alert("Igra obrisana");
-                    history.push('allGames');
+                    history.push('/dashboard');
+                    setRefreshState(true);
+                    setLoadingState(false);
                     return;
                 }
                 else {
                     alert(res.statusText)
                 }
-                setLoadingState(false);
+
 
             })
             .catch(error => {
@@ -130,9 +132,10 @@ export default function GameDashboard() {
     }
 
     return (
-        <div className="GameDashboard">
-            {
-                loadingState === true
+        <div className="GameDashboard">{
+            JSON.parse(localStorage.getItem("Admin")) === false
+                ? <p>Prijavite se sa administratorskim nalogom da biste pristupili ovim opcijama</p>
+                : loadingState === true
                     ? <Loading />
                     : gameState.game != false
                         ? <>
@@ -213,7 +216,7 @@ export default function GameDashboard() {
                             </div>
                         </>
                         : <p>Trenutno nema aktivnih igara</p>
-            }
+        }
         </div >
     )
 }

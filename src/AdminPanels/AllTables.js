@@ -44,30 +44,33 @@ export default function AllTables() {
         setState({ ...state, counter: state.counter + number });
     }
     return (
-        loadingState === true
-            ? <Loading />
-            :
-            <div className="AllTables">
-                {
-                    state.groups.length > 0
-                        ? <>
-                            <Scoreboard admin={true} group={state.groups[state.counter - 1].id} />
-                            <div className="tableMover">
-                                {
-                                    state.counter > 1
-                                        ? <i className="fas fa-chevron-right" id="chevron-left" onClick={e => handleArrowClick(e, -1)}></i>
-                                        : null
-                                }
-                                <p>{state.counter} od {state.groups.length}</p>
-                                {
-                                    state.counter < state.groups.length
-                                        ? <i className="fas fa-chevron-right" onClick={e => handleArrowClick(e, 1)}></i>
-                                        : null
-                                }
-                            </div>
-                        </>
-                        : null
-                }
-            </div>
+        JSON.parse(localStorage.getItem("Admin")) === false
+            ? <p>Prijavite se sa administratorskim nalogom da biste pristupili ovim opcijama</p>
+            : loadingState === true
+                ? <Loading />
+                :
+                <div className="AllTables">
+                    {
+
+                        state.groups.length > 0
+                            ? <>
+                                <Scoreboard admin={true} group={state.groups[state.counter - 1].id} />
+                                <div className="tableMover">
+                                    {
+                                        state.counter > 1
+                                            ? <i className="fas fa-chevron-right" id="chevron-left" onClick={e => handleArrowClick(e, -1)}></i>
+                                            : null
+                                    }
+                                    <p>{state.counter} od {state.groups.length}</p>
+                                    {
+                                        state.counter < state.groups.length
+                                            ? <i className="fas fa-chevron-right" onClick={e => handleArrowClick(e, 1)}></i>
+                                            : null
+                                    }
+                                </div>
+                            </>
+                            : null
+                    }
+                </div>
     )
 }
