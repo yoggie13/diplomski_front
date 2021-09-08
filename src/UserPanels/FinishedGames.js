@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import Loading from '../Loading';
+import { Link } from 'react-router-dom';
 
 export default function FinishedGames({ changeRender, userID }) {
 
@@ -69,7 +70,11 @@ export default function FinishedGames({ changeRender, userID }) {
                                                 ? <i className="fas fa-check-circle" id="icon-true"></i>
                                                 : <i className="fas fa-times-circle" id="icon-false"></i>
                                         }</td>
-                                        <td id="center"><i id={game.ID} className="fas fa-chevron-right fa-lg" onClick={handleClick}></i></td>
+                                        <td id="center">
+                                            <Link to={`/game/${game.ID}`}>
+                                                <i id={game.ID} className="fas fa-chevron-right fa-lg"></i>
+                                            </Link>
+                                        </td>
                                     </tr>
                                 )
                             }

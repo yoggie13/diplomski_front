@@ -327,16 +327,23 @@ export default function CreateGame() {
                                                                         return <div className="Strategy">
                                                                             <div>
                                                                                 <label htmlFor={index}>{index + 1}. strategija</label>
-                                                                                <input id={index} value={strategy.Text} onChange={e => handleInput(e, index, 1)} type="text" />
+                                                                                <input id={index}
+                                                                                    type="text"
+                                                                                    key={index}
+                                                                                    value={strategy.Text}
+                                                                                    onChange={e => handleInput(e, index, 1)} />
                                                                             </div>
                                                                             <div >
-                                                                                <label htmlFor={`defaultRadio${index}`}>Default:</label>
+                                                                                <label htmlFor={`defaultRadio${index}`}>Def:</label>
                                                                                 <Radio
                                                                                     id={`defaultRadio${index}`}
-                                                                                    name="default2" value={index}
+                                                                                    name="default2"
+                                                                                    key={index}
+                                                                                    value={index}
                                                                                     checked={strategy.Default}
                                                                                     onClick={e => setDefaultStrategy(1, index)}
-                                                                                />                                                                </div>
+                                                                                />
+                                                                            </div>
                                                                         </div>
                                                                     })
                                                                 }
@@ -350,13 +357,19 @@ export default function CreateGame() {
                                                                         return <div className="Strategy">
                                                                             <div>
                                                                                 <label htmlFor={index}>{index + 1}. strategija</label>
-                                                                                <input id={index} value={strategy.Text} onChange={e => handleInput(e, index, 2)} type="text" />
+                                                                                <input id={index}
+                                                                                    type="text"
+                                                                                    key={index}
+                                                                                    value={strategy.Text}
+                                                                                    onChange={e => handleInput(e, index, 2)} />
                                                                             </div>
                                                                             <div >
-                                                                                <label htmlFor={`defaultRadio${index}`}>Default:</label>
+                                                                                <label htmlFor={`defaultRadio${index}`}>Def:</label>
                                                                                 <Radio
                                                                                     id={`defaultRadio${index}`}
-                                                                                    name="default2" value={index}
+                                                                                    name="default2"
+                                                                                    key={index}
+                                                                                    value={index}
                                                                                     checked={strategy.Default}
                                                                                     onClick={e => setDefaultStrategy(2, index)}
                                                                                 />

@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Varela&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap");
+
+html {
+  overflow-x: hidden;
+}
 body {
   margin: 0;
   overflow-x: hidden;
@@ -72,7 +76,7 @@ i:hover {
   min-width: 225px;
   width: 20vw;
   background-color: #0d63e3;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0;
   color: #ffffff;
   display: flex;
@@ -149,6 +153,7 @@ i:hover {
   color: #020b3f;
   height: 80vh;
 }
+
 .Loading {
   display: flex;
   width: 100%;
@@ -183,7 +188,10 @@ i:hover {
   margin-left: auto;
   font-family: "Nunito";
   font-weight: 700;
+  word-wrap: break-word;
+  max-width: 150px;
 }
+
 .PieCharts {
   height: 300px;
   display: flex;
@@ -260,14 +268,18 @@ form {
   border: 1px solid #2b0a55;
   border-radius: 30px;
   box-shadow: 4px 7px #2b0a55;
-  min-height: 360px;
-  min-width: 360px;
+  min-height: 270px;
+  min-width: 270px;
   width: 40vh;
   height: 40vh;
   padding-top: 10px;
 }
 #reportProblemForm {
   height: 450px;
+  margin-right: 20px;
+}
+#changePasswordForm {
+  margin-right: 20px;
 }
 .acceptTerms {
   margin-left: 10%;
@@ -790,10 +802,10 @@ hr {
   .UserPanel {
     grid-template-columns: 5vw 90vw;
   }
-  .Scoreboard th {
-    font-size: 14px;
+  th {
+    font-size: 10px;
   }
-  .Scoreboard p,
+  table p,
   td {
     font-size: 12px;
   }
@@ -806,6 +818,13 @@ hr {
   }
   #dashboardButtons {
     margin-top: 300px;
+  }
+  .StrategyInput h2 {
+    font-size: 18px;
+  }
+  .StrategyInput .Strategy {
+    width: 100%;
+    font-size: 14px;
   }
 }
 

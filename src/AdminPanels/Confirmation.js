@@ -19,7 +19,6 @@ export default function ({ game }) {
 
     const saveGame = async (e) => {
         e.preventDefault();
-        debugger;
 
         setLoadingState(true);
 
@@ -47,7 +46,6 @@ export default function ({ game }) {
 
             })
             .then(response => {
-                console.log(response);
                 if (game.Type < 5)
                     history.push("/allGames");
                 else {

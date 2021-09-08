@@ -25,7 +25,6 @@ export default function ChangePassword({ userID }) {
         setLoadingState(true)
 
         var db = localStorage.getItem("Admin") == true ? "admin" : "students";
-        console.log(localStorage.getItem("Admin"))
 
         fetch(
             `http://${Config.BASE_URL}:46824/api/${db}/changePass`,

@@ -12,10 +12,10 @@ export default function Game({ userID }) {
     const [loadingState, setLoadingState] = useState(true);
 
     let { id } = useParams();
+
     let history = useHistory();
 
     const handleCheck = id => {
-        console.log(id)
         setstate({ ...state, checkedStrategy: id });
     }
     const handleInput = event => {
@@ -136,7 +136,6 @@ export default function Game({ userID }) {
             ? <Loading />
             :
             <div className="Game">
-                {console.log(state.checkedStrategy)}
 
                 <h1>
                     {gameState.game.name}

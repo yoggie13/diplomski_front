@@ -81,7 +81,6 @@ export default function Rewards() {
                 k++;
             }
         }
-        console.log(JSON.stringify(payments));
 
         fetch(
             `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/${gameID}/addPayments`,
