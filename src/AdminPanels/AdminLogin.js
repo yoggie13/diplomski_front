@@ -4,7 +4,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    useHistory
 } from "react-router-dom";
 
 
@@ -13,6 +14,8 @@ export default function AdminLogin({ LoginLogic }) {
     const [loginDetails, setLoginDetails] = useState({ email: "", password: "", status: 500 });
     const [state, setState] = useState({ error: false, loading: true });
     const [loadingState, setLoadingState] = useState(false);
+
+    let history = useHistory();
 
 
     const loginHandler = e => {
@@ -51,6 +54,7 @@ export default function AdminLogin({ LoginLogic }) {
                 setLoadingState(false);
                 setState({ error: false });
                 LoginLogic(response, true);
+                history.push('/dashboard');
             })
             .catch(error => {
                 setLoadingState(false);
@@ -75,7 +79,7 @@ export default function AdminLogin({ LoginLogic }) {
                         ? <p id="error">Uneli ste pogrešne podatke</p>
                         : null
                 }
-                <a>Zaboravio si/la lozinku?</a>
+                {/* <a>Zaboravio si/la lozinku?</a> */}
                 {
                     loadingState === true
                         ? <Loading smallerSize={true} />

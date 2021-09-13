@@ -68,7 +68,7 @@ export default function Login({ LoginLogic, falseEntry }) {
                         ? <p id="error">Uneli ste pogrešne podatke</p>
                         : null
                 }
-                <a>Zaboravio si/la lozinku?</a>
+                {/* <a>Zaboravio si/la lozinku?</a> */}
                 {
                     loadingState === true
                         ? <Loading smallerSize={true} />

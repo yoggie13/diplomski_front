@@ -69,6 +69,9 @@ i:hover {
 .UserPanel a i {
   color: #2b0a55;
 }
+.sidebar a i{
+  color: white;
+}
 
 .sidebar {
   grid-column: 1;
@@ -189,7 +192,6 @@ i:hover {
   font-family: "Nunito";
   font-weight: 700;
   word-wrap: break-word;
-  max-width: 150px;
 }
 
 .PieCharts {
@@ -268,10 +270,8 @@ form {
   border: 1px solid #2b0a55;
   border-radius: 30px;
   box-shadow: 4px 7px #2b0a55;
-  min-height: 270px;
-  min-width: 270px;
-  width: 40vh;
-  height: 40vh;
+  width: 330px;
+  height: 330px;
   padding-top: 10px;
 }
 #reportProblemForm {
@@ -709,6 +709,7 @@ td {
 }
 #error {
   color: #e30d38;
+  margin: 0;
 }
 #taskbar {
   display: flex;
@@ -803,11 +804,11 @@ hr {
     grid-template-columns: 5vw 90vw;
   }
   th {
-    font-size: 10px;
+    font-size: 11px;
   }
   table p,
   td {
-    font-size: 12px;
+    font-size: 13px;
   }
   .Chat {
     max-width: 90%;
@@ -825,6 +826,13 @@ hr {
   .StrategyInput .Strategy {
     width: 100%;
     font-size: 14px;
+  }
+  .statWrap .result{
+    max-width: 150px;
+  }
+  .FormClass form{
+    height: 300px;
+    width: 300px;
   }
 }
 

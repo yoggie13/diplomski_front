@@ -166,14 +166,13 @@ export default function CreateGame() {
     const getNumberOfPlayersPossible = e => {
         return <>
             {
-                gameState.Type < 5 === false
-                    ? <>
-                        <option name="number" id="1" value="1">1</option>
-                        <option name="number" id="2" value="2">2</option>
+                gameState.Type < 5 === true
+                    ? <>{/* <option name="number" id="1" value="1">1</option> */}
+                        < option name="number" id="10" value="10">10</option>
                     </>
-                    : null
+                    : <option name="number" id="2" value="2">2</option>
+
             }
-            <option name="number" id="10" value="10">10</option>
         </>
     }
     const handleInput = (e, index, player) => {

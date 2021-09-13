@@ -206,7 +206,7 @@ export default function GameDashboard() {
                                 }
 
                             </div>
-                            <div className="ButtonsAlignRight" ID="dashboardButtons">
+                            <div className="ButtonsAlignRight" id="dashboardButtons">
                                 {
                                     checkDate(gameState.game.dueDate) === true
                                         ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
