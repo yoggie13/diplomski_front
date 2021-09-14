@@ -32,7 +32,7 @@ export default function GameDashboard() {
             setLoadingState(true);
             fetch(
 
-                `http://localhost:46824/api/admin/${apiState}`,
+                `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/${apiState}`,
                 {
                     method: "GET",
                     mode: "cors",
