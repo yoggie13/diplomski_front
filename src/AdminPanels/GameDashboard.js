@@ -22,9 +22,7 @@ export default function GameDashboard() {
 
     let gameID = useParams();
     let history = useHistory();
-    const [apiState, setApiState] = useState(gameID === {} ? `game/${gameID.id}` : "dashboard")
-
-
+    const [apiState, setApiState] = useState(gameID === {} ? "dashboard" : `game/${gameID.id}`)
 
 
     useEffect(() => {
@@ -34,7 +32,7 @@ export default function GameDashboard() {
             setLoadingState(true);
             fetch(
 
-                `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/${apiState}`,
+                `http://localhost:46824/api/admin/${apiState}`,
                 {
                     method: "GET",
                     mode: "cors",
