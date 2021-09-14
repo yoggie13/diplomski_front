@@ -169,7 +169,7 @@ export default function Game({ userID }) {
                                     </div>
                                     : <>
                                         <label htmlFor="numberInput">Unesite broj</label>
-                                        <input type="number" id="numberInput" value={state.checkedStrategy} onChange={handleInput} min={gameState.game.strategies[0].strategyName} max={gameState.game.strategies[gameState.game.strategies.length - 1].strategyName} />
+                                        <input type="number" id="numberInput" value={state.checkedStrategy} onChange={handleInput} min={gameState.game.constraintValues.minValue} max={gameState.game.constraintValues.maxValue} />
                                     </>
                             }
                             <div className="ButtonsAlignRight">
