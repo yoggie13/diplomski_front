@@ -1,9 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Loading from '../Loading';
 
-export default function Chat({ messages, id, userID }) {
-    const [state, setstate] = useState({ renderChat: false, message: { MessageText: "", PlayerOrOpponent: "Player" } });
+export default function Chat({ id, userID }) {
+    const [state, setstate] = useState({ renderChat: false, messages: [] });
     const [message, setMessageState] = useState({ MessageText: "", PlayerOrOpponent: "Player" });
     const [loadingState, setLoadingState] = useState(true);
 
@@ -13,6 +13,33 @@ export default function Chat({ messages, id, userID }) {
 
         setstate({ renderChat: !state.renderChat });
     }
+
+    useEffect(() => {
+
+        if (state.renderChat === true) {
+            setLoadingState(true);
+
+            fetch(
+                `http://localhost:46824/api/game/${id}/${userID}/messages`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(res => res.json())
+                .then(response => {
+                    setstate({ ...state, messages: response.messages })
+                    setLoadingState(false);
+                })
+                .catch(error => {
+                    console.log(error);
+                    setLoadingState(false);
+                });
+        }
+
+    }, [state.renderChat])
     const sendMessage = e => {
         e.preventDefault();
 
@@ -31,10 +58,13 @@ export default function Chat({ messages, id, userID }) {
                 })
             })
             .then(res => {
-                if (res.status == 200)
-                    messages.push(message);
-                setMessageState({ ...message, MessageText: "" });
-                setLoadingState(false)
+                if (res.status == 200) {
+                    var messagesFull = state.messages;
+                    messagesFull.push(message);
+                    setstate({ ...state, messages: messagesFull })
+                    setMessageState({ ...message, MessageText: "" });
+                    setLoadingState(false)
+                }
             })
             .catch(error => {
                 console.log(error);
@@ -59,9 +89,11 @@ export default function Chat({ messages, id, userID }) {
                         <hr></hr>
                         <div id="Messages">
                             {
-                                messages.map((message, index) =>
-                                    <p key={index + 1} className={message.playerOrOpponent}>{message.messageText}</p>
-                                )
+                                loadingState === false
+                                    ? state.messages.map((message, index) =>
+                                        <p key={index + 1} className={message.playerOrOpponent}>{message.messageText}</p>
+                                    )
+                                    : <Loading />
                             }
                         </div>
                         <hr></hr>
