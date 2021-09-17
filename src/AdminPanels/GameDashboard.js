@@ -22,8 +22,7 @@ export default function GameDashboard() {
 
     let gameID = useParams();
     let history = useHistory();
-    const [apiState, setApiState] = useState(gameID === {} ? "dashboard" : `game/${gameID.id}`)
-
+    const [apiState, setApiState] = useState(gameID.id === undefined ? "dashboard" : `game/${gameID.id}`)
 
     useEffect(() => {
 

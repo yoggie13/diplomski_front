@@ -163,7 +163,15 @@ export default function CreateGame() {
     }
 
 
+    useEffect(() => {
+        gameState.Type < 5 === true
+            ? setGameState({ ...gameState, NumberOfPlayers: 10 })
+            : setGameState({ ...gameState, NumberOfPlayers: 2 })
+
+    }, [gameState.Type])
     const getNumberOfPlayersPossible = e => {
+
+
         return <>
             {
                 gameState.Type < 5 === true
@@ -258,6 +266,7 @@ export default function CreateGame() {
 
     }
 
+    console.log(gameState.NumberOfPlayers)
 
     return (
 
