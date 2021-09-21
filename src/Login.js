@@ -15,7 +15,7 @@ export default function Login({ LoginLogic, falseEntry }) {
 
         setLoadingState(true);
         fetch(
-            'https://diplomskiapi20210828140836.azurewebsites.net/api/students/login',
+            'http://localhost:46824/api/students/login',
             {
                 method: "POST",
                 mode: "cors",

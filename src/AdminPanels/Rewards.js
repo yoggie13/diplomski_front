@@ -37,7 +37,7 @@ export default function Rewards() {
     useEffect(() => {
         setLoadingState(true);
         fetch(
-            `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/game/creation/${gameID}`,
+            `http://localhost:46824/api/admin/game/creation/${gameID}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -83,7 +83,7 @@ export default function Rewards() {
         }
 
         fetch(
-            `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/${gameID}/addPayments`,
+            `http://localhost:46824/api/admin/${gameID}/addPayments`,
             {
                 method: "POST",
                 mode: "cors",

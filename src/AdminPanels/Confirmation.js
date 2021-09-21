@@ -23,7 +23,7 @@ export default function ({ game }) {
         setLoadingState(true);
 
         fetch(
-            'https://diplomskiapi20210828140836.azurewebsites.net/api/admin/game',
+            'http://localhost:46824/api/admin/game',
             {
                 method: "POST",
                 mode: "cors",

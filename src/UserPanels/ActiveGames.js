@@ -19,7 +19,7 @@ export default function ActiveGames({ changeRender, userID }) {
 
         setLoadingState(true);
         fetch(
-            `https://diplomskiapi20210828140836.azurewebsites.net/api/game/activegames/${userID}`,
+            `http://localhost:46824/api/game/activegames/${userID}`,
             {
                 method: "GET",
                 mode: "cors",

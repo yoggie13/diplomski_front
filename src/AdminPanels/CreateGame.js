@@ -59,7 +59,7 @@ export default function CreateGame() {
         setLoadingState(true)
         fetch(
 
-            `https://diplomskiapi20210828140836.azurewebsites.net/api/admin/game/types`,
+            `http://localhost:46824/api/admin/game/types`,
             {
                 method: "GET",
                 mode: "cors",
@@ -266,7 +266,6 @@ export default function CreateGame() {
 
     }
 
-    console.log(gameState.NumberOfPlayers)
 
     return (
 
