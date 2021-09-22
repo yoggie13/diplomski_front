@@ -69,7 +69,7 @@ i:hover {
 .UserPanel a i {
   color: #2b0a55;
 }
-.sidebar a i{
+.sidebar a i {
   color: white;
 }
 
@@ -429,7 +429,9 @@ form input[type="submit"]:hover {
 .GameDashboard {
   height: 100%;
 }
-
+.PlayGameForm {
+  margin-bottom: 30px;
+}
 .PlayGameForm #radioButtons {
   display: flex;
   flex-direction: row;
@@ -827,10 +829,10 @@ hr {
     width: 100%;
     font-size: 14px;
   }
-  .statWrap .result{
+  .statWrap .result {
     max-width: 150px;
   }
-  .FormClass form{
+  .FormClass form {
     height: 300px;
     width: 300px;
   }
