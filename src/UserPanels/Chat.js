@@ -1,17 +1,22 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Loading from '../Loading';
 
 export default function Chat({ id, userID }) {
     const [state, setstate] = useState({ renderChat: false, messages: [] });
-    const [message, setMessageState] = useState({ MessageText: "", PlayerOrOpponent: "Player" });
+    const [message, setMessageState] = useState({ messageText: "", playerOrOpponent: "Player" });
     const [loadingState, setLoadingState] = useState(true);
 
+    const messagesEndRef = useRef(null);
 
     const handleClick = e => {
         e.preventDefault();
 
-        setstate({ renderChat: !state.renderChat });
+        setstate({ ...state, renderChat: !state.renderChat });
+    }
+
+    const scrollToBottom = (b) => {
+        messagesEndRef.current.scrollIntoView({ behavior: b })
     }
 
     useEffect(() => {
@@ -32,6 +37,7 @@ export default function Chat({ id, userID }) {
                 .then(response => {
                     setstate({ ...state, messages: response.messages })
                     setLoadingState(false);
+                    scrollToBottom("smooth");
                 })
                 .catch(error => {
                     console.log(error);
@@ -40,6 +46,8 @@ export default function Chat({ id, userID }) {
         }
 
     }, [state.renderChat])
+
+
     const sendMessage = e => {
         e.preventDefault();
 
@@ -54,7 +62,7 @@ export default function Chat({ id, userID }) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    Message: message.MessageText
+                    Message: message.messageText
                 })
             })
             .then(res => {
@@ -62,8 +70,9 @@ export default function Chat({ id, userID }) {
                     var messagesFull = state.messages;
                     messagesFull.push(message);
                     setstate({ ...state, messages: messagesFull })
-                    setMessageState({ ...message, MessageText: "" });
-                    setLoadingState(false)
+                    setMessageState({ ...message, messageText: "" });
+                    setLoadingState(false);
+                    scrollToBottom("auto");
                 }
             })
             .catch(error => {
@@ -76,7 +85,7 @@ export default function Chat({ id, userID }) {
     const changeMessage = e => {
         e.preventDefault();
 
-        setMessageState({ ...message, MessageText: e.target.value });
+        setMessageState({ ...message, messageText: e.target.value });
     }
     return (
         <div className="Chat">
@@ -91,14 +100,15 @@ export default function Chat({ id, userID }) {
                             {
                                 loadingState === false
                                     ? state.messages.map((message, index) =>
-                                        <p key={index + 1} className={message.playerOrOpponent}>{message.messageText}</p>
+                                        <p key={index + 1} id={`message${index}`} className={message.playerOrOpponent}>{message.messageText}</p>
                                     )
                                     : <Loading />
                             }
+                            <div ref={messagesEndRef} />
                         </div>
                         <hr></hr>
                         <form id="sendMessage">
-                            <textarea name="message" value={message.MessageText} onChange={changeMessage}></textarea>
+                            <textarea name="message" value={message.messageText} onChange={changeMessage}></textarea>
                             <i className="fas fa-paper-plane" onClick={sendMessage}></i>
                         </form>
                     </div>
