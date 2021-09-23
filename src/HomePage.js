@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import homepage_photo from './img/homepage.png'
 
 export default function HomePage() {
 
+    useEffect(() => {
+        document.title = "Teorija igara"
+    }, []);
     return (
         <div className="Homepage">
             <div id="left">

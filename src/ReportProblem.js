@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Loading from './Loading';
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -9,6 +9,10 @@ export default function ReportProblem({ userID }) {
     const [checkboxState, setCheckboxState] = useState(false);
     const [reportState, setReportState] = useState({ Type: "Loše računanje bodova", Description: "", ImageUrl: "" });
     const [loadingState, setLoadingState] = useState(false);
+
+    useEffect(() => {
+        document.title = "Prijava problema | Teorija igara"
+    }, []);
 
     const reportHandler = e => {
         e.preventDefault();

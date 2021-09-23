@@ -3,17 +3,16 @@ import { useState, useEffect } from 'react';
 import Loading from '../Loading';
 import { Link } from 'react-router-dom';
 
-export default function FinishedGames({ changeRender, userID }) {
+export default function FinishedGames({ userID }) {
 
     const [state, setstate] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
 
 
-    const handleClick = e => {
-        e.preventDefault();
 
-        changeRender("game", e.target.id);
-    }
+    useEffect(() => {
+        document.title = "Završene igre | Teorija igara"
+    }, []);
 
     useEffect(() => {
         setLoadingState(true);

@@ -9,6 +9,10 @@ export default function AllTables() {
 
 
     useEffect(() => {
+        document.title = "Tabele | Teorija igara"
+    }, []);
+
+    useEffect(() => {
         setLoadingState(true);
         fetch(
             'https://teorijaigaradiplomski.azurewebsites.net/api/admin/groups',

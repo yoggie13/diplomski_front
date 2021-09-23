@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Loading from './Loading';
 import Config from './config.json';
 
@@ -8,7 +8,9 @@ export default function ChangePassword({ userID }) {
     const [errorState, setErrorState] = useState({ exists: false, text: "" })
     const [loadingState, setLoadingState] = useState(false);
 
-
+    useEffect(() => {
+        document.title = "Promena šifre | Teorija igara"
+    }, []);
     const handleSubmit = e => {
         e.preventDefault();
         if (state.newPassword != state.confirmPassword) {

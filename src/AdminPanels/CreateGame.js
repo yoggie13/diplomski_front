@@ -8,6 +8,11 @@ import Radio from '@material-ui/core/Radio';
 
 
 export default function CreateGame() {
+
+    useEffect(() => {
+        document.title = "Kreiraj igru | Teorija igara"
+    }, []);
+
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({

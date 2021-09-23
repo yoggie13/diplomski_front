@@ -17,6 +17,9 @@ export default function AllGames() {
 
     let history = useHistory();
 
+    useEffect(() => {
+        document.title = "Sve igre | Teorija igara"
+    }, []);
 
     useEffect(() => {
         setLoadingState(true)

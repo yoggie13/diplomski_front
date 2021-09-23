@@ -16,6 +16,11 @@ function checkDate(dueDate) {
     return Date.parse(dueDate) > Date.now();
 }
 export default function GameDashboard() {
+
+    useEffect(() => {
+        document.title = "Dashboard | Teorija igara"
+    }, []);
+
     const [gameState, setGameState] = useState([{ game: [] }]);
     const [loadingState, setLoadingState] = useState(true);
     const [refreshState, setRefreshState] = useState(true);

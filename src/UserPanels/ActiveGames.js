@@ -10,10 +10,14 @@ function formatDate(dueDate) {
     return day + "." + arr[1] + "." + arr[0];
 }
 
-export default function ActiveGames({ changeRender, userID }) {
+export default function ActiveGames({ userID }) {
 
     const [state, setstate] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
+
+    useEffect(() => {
+        document.title = "Aktivne igre | Teorija igara"
+    }, []);
 
     useEffect(() => {
 

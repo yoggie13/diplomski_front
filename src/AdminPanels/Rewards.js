@@ -4,6 +4,11 @@ import { useHistory, useParams } from 'react-router';
 import Loading from '../Loading';
 
 export default function Rewards() {
+
+    useEffect(() => {
+        document.title = "Unos isplata | Teorija igara"
+    }, []);
+
     const [gameState, setGameState] = useState({ gameName: "", gameText: "", gameStrategies: [] });
     const [loadingState, setLoadingState] = useState(true);
     const [rewardsState, setRewardsState] = useState({

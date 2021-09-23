@@ -8,6 +8,10 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
     const [loadingState, setLoadingState] = useState(true);
 
     useEffect(() => {
+        document.title = "Tabela | Teorija igara"
+    }, []);
+
+    useEffect(() => {
         setLoadingState(true);
         if (state.admin === false) {
 

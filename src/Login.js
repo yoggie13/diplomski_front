@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from './Loading';
 import { useHistory } from 'react-router';
@@ -9,6 +9,10 @@ export default function Login({ LoginLogic, falseEntry }) {
     const [loadingState, setLoadingState] = useState(false);
 
     let history = useHistory();
+
+    useEffect(() => {
+        document.title = "Login | Teorija igara"
+    }, []);
 
     const loginHandler = e => {
         e.preventDefault();

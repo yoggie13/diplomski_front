@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Loading from '../Loading';
 import {
     BrowserRouter as Router,
@@ -17,6 +17,9 @@ export default function AdminLogin({ LoginLogic }) {
 
     let history = useHistory();
 
+    useEffect(() => {
+        document.title = "Login | Teorija igara"
+    }, []);
 
     const loginHandler = e => {
         e.preventDefault();

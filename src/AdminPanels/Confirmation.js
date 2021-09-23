@@ -16,6 +16,9 @@ export default function ({ game }) {
 
     let history = useHistory();
 
+    useEffect(() => {
+        document.title = "Potvrda igre | Teorija igara"
+    }, []);
 
     const saveGame = async (e) => {
         e.preventDefault();

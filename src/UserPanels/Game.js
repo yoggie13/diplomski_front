@@ -15,6 +15,10 @@ export default function Game({ userID }) {
 
     let history = useHistory();
 
+    useEffect(() => {
+        document.title = "Odigraj igru | Teorija igara"
+    }, []);
+
     const handleCheck = id => {
         setstate({ ...state, checkedStrategy: id });
     }
