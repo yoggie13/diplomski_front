@@ -15,7 +15,7 @@ export default function Login({ LoginLogic, falseEntry }) {
 
         setLoadingState(true);
         fetch(
-            'http://localhost:46824/api/students/login',
+            'https://teorijaigaradiplomski.azurewebsites.net//api/students/login',
             {
                 method: "POST",
                 mode: "cors",

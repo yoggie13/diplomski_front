@@ -11,7 +11,7 @@ export default function AllTables() {
     useEffect(() => {
         setLoadingState(true);
         fetch(
-            'http://localhost:46824/api/admin/groups',
+            'https://teorijaigaradiplomski.azurewebsites.net/api/admin/groups',
             {
                 method: "GET",
                 mode: "cors",

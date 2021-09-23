@@ -23,7 +23,7 @@ export default function ({ game }) {
         setLoadingState(true);
 
         fetch(
-            'http://localhost:46824/api/admin/game',
+            'https://teorijaigaradiplomski.azurewebsites.net/api/admin/game',
             {
                 method: "POST",
                 mode: "cors",

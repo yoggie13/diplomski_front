@@ -37,7 +37,7 @@ export default function Rewards() {
     useEffect(() => {
         setLoadingState(true);
         fetch(
-            `http://localhost:46824/api/admin/game/creation/${gameID}`,
+            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/creation/${gameID}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -83,7 +83,7 @@ export default function Rewards() {
         }
 
         fetch(
-            `http://localhost:46824/api/admin/${gameID}/addPayments`,
+            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/${gameID}/addPayments`,
             {
                 method: "POST",
                 mode: "cors",

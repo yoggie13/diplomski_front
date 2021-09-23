@@ -24,7 +24,7 @@ export default function AdminLogin({ LoginLogic }) {
         setLoadingState(true);
 
         fetch(
-            'http://localhost:46824/api/admin/login',
+            'https://teorijaigaradiplomski.azurewebsites.net/api/admin/login',
             {
                 method: "POST",
                 mode: "cors",
