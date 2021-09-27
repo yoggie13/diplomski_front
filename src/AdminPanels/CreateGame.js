@@ -167,9 +167,9 @@ export default function CreateGame() {
         setstate({ page: newPage });
     }
 
-
     useEffect(() => {
-        gameState.Type < 5 === true
+
+        gameState.Type < 4 === true
             ? setGameState({ ...gameState, NumberOfPlayers: 10 })
             : setGameState({ ...gameState, NumberOfPlayers: 2 })
 
@@ -179,7 +179,7 @@ export default function CreateGame() {
 
         return <>
             {
-                gameState.Type < 5 === true
+                gameState.Type < 4 === true
                     ? <>{/* <option name="number" id="1" value="1">1</option> */}
                         < option name="number" id="10" value="10">10</option>
                     </>
