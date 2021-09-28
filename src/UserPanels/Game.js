@@ -150,7 +150,7 @@ export default function Game({ userID }) {
                     gameState.game.active === true
                         ? <form className="PlayGameForm">
                             {
-                                gameState.game.type >= 4
+                                gameState.game.type > 4
                                     ? <div id="radioButtons">
                                         {
                                             gameState.game.strategies.map((strategy) =>
