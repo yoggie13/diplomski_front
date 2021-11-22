@@ -67,7 +67,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
 
 
     return (
-        loadingState === true
+        loadingState
             ? <Loading />
             : <div className="Scoreboard">
                 <h1>Scoreboard</h1>

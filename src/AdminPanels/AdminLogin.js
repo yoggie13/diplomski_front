@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Loading from '../Loading';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
     useHistory
 } from "react-router-dom";
+import Loading from '../Loading';
 
-
-
-export default function AdminLogin({ LoginLogic }) {
-    const [loginDetails, setLoginDetails] = useState({ email: "", password: "", status: 500 });
-    const [state, setState] = useState({ error: false, loading: true });
+export default function AdminLogin({ loginLogic }) {
+    const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
+    const [errorState, setErrorState] = useState(false);
     const [loadingState, setLoadingState] = useState(false);
 
     let history = useHistory();
@@ -48,15 +43,15 @@ export default function AdminLogin({ LoginLogic }) {
                 }
                 else {
                     setLoadingState(false);
-                    setState({ error: true });
+                    setErrorState(true);
                     throw new Error();
                 }
 
             })
             .then(response => {
                 setLoadingState(false);
-                setState({ error: false });
-                LoginLogic(response, true);
+                setErrorState(false);
+                loginLogic(response, true);
                 history.push('/dashboard');
             })
             .catch(error => {
@@ -78,13 +73,13 @@ export default function AdminLogin({ LoginLogic }) {
                 </label>
                 <input id="password" type="password" onChange={e => setLoginDetails({ ...loginDetails, password: e.target.value })} value={loginDetails.password} />
                 {
-                    state.error === true
+                    errorState
                         ? <p id="error">Uneli ste pogrešne podatke</p>
                         : null
                 }
                 {/* <a>Zaboravio si/la lozinku?</a> */}
                 {
-                    loadingState === true
+                    loadingState
                         ? <Loading smallerSize={true} />
                         : <input type="submit" value="Prijavi se" />
                 }

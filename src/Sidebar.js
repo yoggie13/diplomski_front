@@ -1,28 +1,18 @@
 import React from 'react';
-import logo from './img/laboi_logo.png';
-import { useState } from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect
-} from "react-router-dom";
+import logo from './assets/laboi_logo.png';
+import { Link } from "react-router-dom";
 import { useHistory } from 'react-router';
-
 
 function formatUsername(Username) {
     return Username.split('@')[0];
 }
 
-export default function Sidebar({ LogoutLogic, admin, Username }) {
-
-    const [state, setstate] = useState({ admin: false });
+export default function Sidebar({ logoutLogic, admin, Username }) {
 
     let history = useHistory();
     const handleLogout = e => {
         e.preventDefault();
-        LogoutLogic(e);
+        logoutLogic(e);
 
         history.push('/');
     }
@@ -43,7 +33,7 @@ export default function Sidebar({ LogoutLogic, admin, Username }) {
                             <Link to="/scoreboard">Scoreboard</Link>
                         </li>
                     </ul>
-                    : admin === true
+                    : admin
                         ? <ul>
                             <li>
                                 <Link to="/createGame">Kreiraj igru</Link>

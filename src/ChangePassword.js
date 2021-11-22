@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Loading from './Loading';
 import Config from './config.json';
+import Loading from './Loading';
 
 export default function ChangePassword({ userID }) {
     const [state, setState] = useState({ oldPassword: "", newPassword: "", confirmPassword: "" });
@@ -13,7 +13,7 @@ export default function ChangePassword({ userID }) {
     }, []);
     const handleSubmit = e => {
         e.preventDefault();
-        if (state.newPassword != state.confirmPassword) {
+        if (state.newPassword !== state.confirmPassword) {
             setErrorState({ exists: true, text: "Novi passwordi se ne podudaraju" });
             return;
         }
@@ -26,7 +26,7 @@ export default function ChangePassword({ userID }) {
 
         setLoadingState(true)
 
-        var db = localStorage.getItem("Admin") == true ? "admin" : "students";
+        var db = localStorage.getItem("Admin") ? "admin" : "students";
 
         fetch(
             `http://${Config.BASE_URL}:46824/api/${db}/changePass`,
@@ -82,7 +82,7 @@ export default function ChangePassword({ userID }) {
                 </label>
                 <input id="confirmPassword" type="password" value={state.confirmPassword} onChange={e => setState({ ...state, confirmPassword: e.target.value })} />
                 {
-                    errorState.exists === true
+                    errorState.exists
                         ? <small id="error">{errorState.text}</small>
                         : null
                 }

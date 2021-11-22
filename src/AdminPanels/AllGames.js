@@ -1,10 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-
 import Loading from '../Loading';
-
 
 function checkDate(dueDate) {
     return Date.parse(dueDate) > Date.now();
@@ -12,10 +9,8 @@ function checkDate(dueDate) {
 
 export default function AllGames() {
 
-    const [state, setstate] = useState({ games: [] });
+    const [gamesState, setGamesState] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
-
-    let history = useHistory();
 
     useEffect(() => {
         document.title = "Sve igre | Teorija igara"
@@ -35,7 +30,7 @@ export default function AllGames() {
             })
             .then(res => res.json())
             .then(response => {
-                setstate({
+                setGamesState({
                     games: response
                 })
                 setLoadingState(false)
@@ -51,7 +46,7 @@ export default function AllGames() {
     return (
         JSON.parse(localStorage.getItem("Admin")) === false
             ? <p>Prijavite se sa administratorskim nalogom da biste pristupili ovim opcijama</p>
-            : loadingState === true
+            : loadingState
                 ? <Loading />
                 : <div className="AllGames">
                     <h1>Pregled igara</h1>
@@ -66,12 +61,12 @@ export default function AllGames() {
                         </thead>
                         <tbody>
                             {
-                                state.games.map((game) =>
+                                gamesState.games.map((game) =>
                                     <tr key={game.id}>
                                         <td>{game.name}</td>
                                         <td>{game.playersPlayed}</td>
                                         <td id="center">{
-                                            checkDate(game.dueDate) === true
+                                            checkDate(game.dueDate)
                                                 ? <i className="fas fa-check-circle" id="icon-true"></i>
                                                 : <i className="fas fa-times-circle" id="icon-false"></i>
                                         }

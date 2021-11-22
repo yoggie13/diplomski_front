@@ -13,20 +13,15 @@ import AllGames from './AdminPanels/AllGames';
 import AllTables from './AdminPanels/AllTables';
 import GameDashboard from './AdminPanels/GameDashboard';
 import Rewards from './AdminPanels/Rewards';
-import Loading from './Loading';
-import Confirmation from './AdminPanels/Confirmation';
-
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
-    Link
 } from "react-router-dom";
-export default function UserPanel({ LogoutLogic, admin, User }) {
+
+export default function UserPanel({ logoutLogic, admin, User }) {
     const [sidebarState, setSidebarState] = useState({
         sidebarStatus: window.innerWidth >= 900 ? true : false
     });
-
 
     const handleResize = e => {
         if (window.innerWidth < 900 && sidebarState.sidebarStatus !== false) {
@@ -48,7 +43,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
     const closeSidebar = e => {
         e.preventDefault();
 
-        if (window.innerWidth < 900 && sidebarState.sidebarStatus === true)
+        if (window.innerWidth < 900 && sidebarState.sidebarStatus)
             setSidebarState({ sidebarStatus: false });
 
     }
@@ -57,7 +52,7 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
         <div className="UserPanel" onClick={closeSidebar}>
             {
                 sidebarState.sidebarStatus
-                    ? <Sidebar LogoutLogic={LogoutLogic} changePanelRender admin={admin} Username={User.email} userID={User.id} />
+                    ? <Sidebar logoutLogic={logoutLogic} changePanelRender admin={admin} Username={User.email} userID={User.id} />
                     : <i className="fas fa-bars fa-2x" onClick={openSidebar}></i>
             }
             <div id='mainPart'>
@@ -95,38 +90,6 @@ export default function UserPanel({ LogoutLogic, admin, User }) {
                     </Route>
 
                 </Switch>
-
-                {
-                    // panelState.loading === true
-                    //     ? <Loading />
-                    //     : panelState.whatToRender === "userinfo"
-                    //         ? <UserInfo  admin={admin} User={User} />
-                    //         : panelState.whatToRender === "scoreboard"
-                    //             ? <Scoreboard userID={User.id} />
-                    //             : panelState.whatToRender === "activegames"
-                    //                 ? <ActiveGames  userID={User.id} />
-                    //                 : panelState.whatToRender === "game"
-                    //                     ? <Game id={IDState.id} userID={User.id}  />
-                    //                     : panelState.whatToRender === "finishedgames"
-                    //                         ? <FinishedGames  userID={User.id} />
-                    //                         : panelState.whatToRender === "reportproblem"
-                    //                             ? <ReportProblem userID={User.id} />
-                    //                             : panelState.whatToRender === "changepassword"
-                    //                                 ? <ChangePassword  userID={User.id} />
-                    //                                 : panelState.whatToRender === "gamedashboard"
-                    //                                     ? <GameDashboard gameID={IDState.id}  />
-                    //                                     : panelState.whatToRender === "creategame"
-                    //                                         ? <CreateGame  />
-                    //                                         : panelState.whatToRender === "confirmation"
-                    //                                             ? <Confirmation game={IDState.id}  />
-                    //                                             : panelState.whatToRender === "allgames"
-                    //                                                 ? <AllGames  />
-                    //                                                 : panelState.whatToRender === "alltables"
-                    //                                                     ? <AllTables />
-                    //                                                     : panelState.whatToRender === "rewards"
-                    //                                                         ? <Rewards gameID={IDState.id}  />
-                    //                                                         : "GREŠKA"
-                }
             </div>
         </div >
     )

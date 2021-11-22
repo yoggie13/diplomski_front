@@ -21,7 +21,7 @@ export default function Chat({ id, userID }) {
 
     useEffect(() => {
 
-        if (state.renderChat === true) {
+        if (state.renderChat) {
             setLoadingState(true);
 
             fetch(
@@ -90,7 +90,7 @@ export default function Chat({ id, userID }) {
     return (
         <div className="Chat">
             {
-                state.renderChat === true
+                state.renderChat
                     ? <div id="chatOpened">
                         <div id="taskbar">
                             <i className="fas fa-times" onClick={handleClick}></i>

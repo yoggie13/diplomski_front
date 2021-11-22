@@ -8,8 +8,6 @@ export default function FinishedGames({ userID }) {
     const [state, setstate] = useState({ games: [] });
     const [loadingState, setLoadingState] = useState(true);
 
-
-
     useEffect(() => {
         document.title = "Završene igre | Teorija igara"
     }, []);
@@ -41,9 +39,9 @@ export default function FinishedGames({ userID }) {
     }, [])
 
     return (
-        JSON.parse(localStorage.getItem("Admin")) === true
+        JSON.parse(localStorage.getItem("Admin"))
             ? <p>Prijavite se sa studentskim nalogom da biste pristupili ovim opcijama</p>
-            : loadingState === true
+            : loadingState
                 ? <Loading />
                 : <div className="FinishedGames">
                     <h1>Završene igre</h1>
@@ -65,7 +63,7 @@ export default function FinishedGames({ userID }) {
                                         <td>{game.NumberOfPlayers}</td>
                                         <td>{game.PointsGotten}</td>
                                         <td id="center">{
-                                            game.Played === true
+                                            game.Played
                                                 ? <i className="fas fa-check-circle" id="icon-true"></i>
                                                 : <i className="fas fa-times-circle" id="icon-false"></i>
                                         }</td>

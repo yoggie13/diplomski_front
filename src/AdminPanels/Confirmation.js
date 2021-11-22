@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import Loading from '../Loading';
 import { useHistory } from 'react-router';
+import Loading from '../Loading';
 
 function formatDate(dueDate) {
     var splitDate = dueDate.split('-');
     var dayAndTime = splitDate[2].split('T');
 
     return `${dayAndTime[0]}.${splitDate[1]}.${splitDate[0]} - ${dayAndTime[1]}`
-
 }
 
 export default function ({ game }) {
@@ -78,7 +77,7 @@ export default function ({ game }) {
                         <div className="statWrap">
                             <p>Chat: </p>
                             <p className="result">{
-                                game.Chat === true ?
+                                game.Chat ?
                                     <i className="fas fa-check-circle" id="icon-true"></i>
                                     : <i className="fas fa-times-circle" id="icon-false"></i>
                             }</p>
@@ -91,7 +90,7 @@ export default function ({ game }) {
                                         if (strategy.FirstOrSecondPlayer === 1) {
                                             return <>
                                                 <li>{strategy.Text} {
-                                                    strategy.Default === true
+                                                    strategy.Default
                                                         ? <i className="fas fa-check-circle" id="icon-true"></i>
                                                         : null
                                                 }</li>
@@ -109,7 +108,7 @@ export default function ({ game }) {
                                         if (strategy.FirstOrSecondPlayer === 2) {
                                             return <>
                                                 <li>{strategy.Text} {
-                                                    strategy.Default === true
+                                                    strategy.Default
                                                         ? <i className="fas fa-check-circle" id="icon-true"></i>
                                                         : null
                                                 }</li>

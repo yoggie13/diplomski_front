@@ -1,11 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Confirmation from './Confirmation';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
-
-
-
+import Confirmation from './Confirmation';
 
 export default function CreateGame() {
 
@@ -18,9 +15,9 @@ export default function CreateGame() {
     const [gameState, setGameState] = useState({
         Type: 1, Name: "", Text: "", Strategies: [], NumberOfPlayers: 10, Chat: false, DueDate: Date.now()
     });
-    const [gameTypes, setGameTypes] = useState({ types: [] });
+    const [gameTypes, setGameTypes] = useState([]);
     const [directionState, setDirectionState] = useState({
-        back: [,
+        back: [
             "",
             "Vratite se na unos igre",
             "Vratite se na unos strategija"
@@ -79,7 +76,7 @@ export default function CreateGame() {
                     return [];
             })
             .then(response => {
-                setGameTypes({ types: response })
+                setGameTypes(response);
                 setLoadingState(false);
             })
             .catch(error => {
@@ -128,7 +125,7 @@ export default function CreateGame() {
     const handleTypesOneTwo = () => {
 
         for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
-            if (i != oneTwoState.default) {
+            if (i !== oneTwoState.default) {
                 gameState.Strategies.push({
                     "Text": i + "",
                     "FirstOrSecondPlayer": 1
@@ -144,7 +141,7 @@ export default function CreateGame() {
         }
         if (gameState.Type === 3) {
             for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
-                if (i != oneTwoState.default) {
+                if (i !== oneTwoState.default) {
                     gameState.Strategies.push({
                         "Text": i + "",
                         "FirstOrSecondPlayer": 2
@@ -169,7 +166,7 @@ export default function CreateGame() {
 
     useEffect(() => {
 
-        gameState.Type < 4 === true
+        gameState.Type < 4
             ? setGameState({ ...gameState, NumberOfPlayers: 10 })
             : setGameState({ ...gameState, NumberOfPlayers: 2 })
 
@@ -179,7 +176,7 @@ export default function CreateGame() {
 
         return <>
             {
-                gameState.Type < 4 === true
+                gameState.Type < 4
                     ? <>{/* <option name="number" id="1" value="1">1</option> */}
                         < option name="number" id="10" value="10">10</option>
                     </>
@@ -254,10 +251,10 @@ export default function CreateGame() {
             strategies = strategiesState.secondPlayerStrategies;
         }
 
-        if (strategies[index].Default === true)
+        if (strategies[index].Default)
             return;
         for (let i = 0; i < strategies.length; i++) {
-            if (strategies[i].Default === true) {
+            if (strategies[i].Default) {
                 strategies[i].Default = false;
             }
         }
@@ -291,7 +288,7 @@ export default function CreateGame() {
                                                     <label htmlFor="typeofgame">Tip igre*</label>
                                                     <select required id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
                                                         {
-                                                            gameTypes.types.map((type, index) =>
+                                                            gameTypes.map((type, index) =>
                                                                 <option key={index} id={index + 1} value={index + 1}>{type}</option>
                                                             )
                                                         }

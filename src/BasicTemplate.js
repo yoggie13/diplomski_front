@@ -1,18 +1,14 @@
-import { useState } from 'react';
-import ChangePassword from './ChangePassword';
+import {
+    Switch,
+    Route,
+} from "react-router-dom";
 import Header from './Header';
 import Login from './Login';
 import HomePage from './HomePage';
 import AdminLogin from './AdminPanels/AdminLogin';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
 
 
-export default function BasicTemplate({ LoginLogic }) {
+export default function BasicTemplate({ loginLogic }) {
 
 
     return (
@@ -20,10 +16,10 @@ export default function BasicTemplate({ LoginLogic }) {
             <Header />
             <Switch>
                 <Route path="/login">
-                    <Login LoginLogic={LoginLogic} />
+                    <Login loginLogic={loginLogic} />
                 </Route>
                 <Route path="/admin">
-                    <AdminLogin LoginLogic={LoginLogic} />
+                    <AdminLogin loginLogic={loginLogic} />
                 </Route>
                 <Route path="/">
                     <HomePage />

@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react';
 import Loading from '../Loading';
 
 export default function AllTables() {
-    const [state, setState] = useState({ groups: [], counter: 1 });
+    const [groupState, setGroupState] = useState({ groups: [], counter: 1 });
     const [loadingState, setLoadingState] = useState(true);
-
 
     useEffect(() => {
         document.title = "Tabele | Teorija igara"
@@ -30,8 +29,8 @@ export default function AllTables() {
                     throw new Error();
             })
             .then(response => {
-                setState({
-                    ...state,
+                setGroupState({
+                    ...groupState,
                     groups: response
                 });
                 setLoadingState(false)
@@ -44,30 +43,29 @@ export default function AllTables() {
 
     const handleArrowClick = (e, number) => {
         e.preventDefault();
-
-        setState({ ...state, counter: state.counter + number });
+        setGroupState({ ...groupState, counter: groupState.counter + number });
     }
     return (
         JSON.parse(localStorage.getItem("Admin")) === false
             ? <p>Prijavite se sa administratorskim nalogom da biste pristupili ovim opcijama</p>
-            : loadingState === true
+            : loadingState
                 ? <Loading />
                 :
                 <div className="AllTables">
                     {
 
-                        state.groups.length > 0
+                        groupState.groups.length > 0
                             ? <>
-                                <Scoreboard admin={true} group={state.groups[state.counter - 1].id} />
+                                <Scoreboard admin={true} group={groupState.groups[groupState.counter - 1].id} />
                                 <div className="tableMover">
                                     {
-                                        state.counter > 1
+                                        groupState.counter > 1
                                             ? <i className="fas fa-chevron-right" id="chevron-left" onClick={e => handleArrowClick(e, -1)}></i>
                                             : null
                                     }
-                                    <p>{state.counter} od {state.groups.length}</p>
+                                    <p>{groupState.counter} od {groupState.groups.length}</p>
                                     {
-                                        state.counter < state.groups.length
+                                        groupState.counter < groupState.groups.length
                                             ? <i className="fas fa-chevron-right" onClick={e => handleArrowClick(e, 1)}></i>
                                             : null
                                     }

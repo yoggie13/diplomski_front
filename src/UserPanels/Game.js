@@ -1,10 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router';
+import Radio from '@material-ui/core/Radio';
 import Chat from './Chat';
 import Loading from '../Loading';
-import Radio from '@material-ui/core/Radio';
-import { useHistory, useParams } from 'react-router';
-
 
 export default function Game({ userID }) {
     const [state, setstate] = useState({ checkedStrategy: "" });
@@ -136,7 +135,7 @@ export default function Game({ userID }) {
     }
 
     return (
-        loadingState === true
+        loadingState
             ? <Loading />
             :
             <div className="Game">
@@ -147,7 +146,7 @@ export default function Game({ userID }) {
 
                 <p>{gameState.game.text}</p>
                 {
-                    gameState.game.active === true
+                    gameState.game.active
                         ? <form className="PlayGameForm">
                             {
                                 gameState.game.type > 4
@@ -183,7 +182,7 @@ export default function Game({ userID }) {
                         : null
                 }
                 {
-                    gameState.game.chat === true
+                    gameState.game.chat
                         ? < Chat id={id} userID={userID} />
                         : null
                 }

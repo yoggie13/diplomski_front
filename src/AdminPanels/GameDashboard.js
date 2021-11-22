@@ -1,16 +1,14 @@
 import React from 'react'
-import { PieChart } from 'react-minimal-pie-chart'
 import { useState, useEffect } from 'react'
-import Loading from '../Loading';
-import { map } from 'async';
 import { useHistory, useParams } from 'react-router';
+import { PieChart } from 'react-minimal-pie-chart'
+import Loading from '../Loading';
 
 function formatDate(dueDate) {
     var splitDate = dueDate.split('-');
     var dayAndTime = splitDate[2].split('T');
 
     return `${dayAndTime[0]}.${splitDate[1]}.${splitDate[0]} - ${dayAndTime[1]}`
-
 }
 function checkDate(dueDate) {
     return Date.parse(dueDate) > Date.now();
@@ -21,7 +19,7 @@ export default function GameDashboard() {
         document.title = "Dashboard | Teorija igara"
     }, []);
 
-    const [gameState, setGameState] = useState([{ game: [] }]);
+    const [gameState, setGameState] = useState({});
     const [loadingState, setLoadingState] = useState(true);
     const [refreshState, setRefreshState] = useState(true);
 
@@ -31,7 +29,7 @@ export default function GameDashboard() {
 
     useEffect(() => {
 
-        if (refreshState === true) {
+        if (refreshState) {
 
             setLoadingState(true);
             fetch(
@@ -51,9 +49,7 @@ export default function GameDashboard() {
                         return false;
                 })
                 .then(response => {
-                    setGameState({
-                        ...gameState, game: response
-                    });
+                    setGameState(response);
                     setRefreshState(false);
                     setLoadingState(false);
                 })
@@ -72,7 +68,7 @@ export default function GameDashboard() {
         setLoadingState(true);
 
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/${gameState.game.id}/finish`,
+            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/${gameState.id}/finish`,
             {
                 method: "POST",
                 mode: "cors",
@@ -104,7 +100,7 @@ export default function GameDashboard() {
         setLoadingState(true);
 
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/${gameState.game.id}`,
+            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/${gameState.id}`,
             {
                 method: "DELETE",
                 mode: "cors",
@@ -137,28 +133,28 @@ export default function GameDashboard() {
         <div className="GameDashboard">{
             JSON.parse(localStorage.getItem("Admin")) === false
                 ? <p>Prijavite se sa administratorskim nalogom da biste pristupili ovim opcijama</p>
-                : loadingState === true
+                : loadingState
                     ? <Loading />
-                    : gameState.game != false
+                    : gameState !== false
                         ? <>
                             <h1>Dashboard</h1>
-                            <h2>{gameState.game.name}</h2>
-                            <p>{gameState.game.text}</p>
+                            <h2>{gameState.name}</h2>
+                            <p>{gameState.text}</p>
                             <div id="text">
                                 <div id="stats">
                                     <div className="statWrap">
                                         <p>Broj igrača koji su odigrali:</p>
-                                        <p className="result">{gameState.game.playersPlayed}</p>
+                                        <p className="result">{gameState.playersPlayed}</p>
                                     </div>
                                     <div className="statWrap">
                                         <p>Datum isteka:</p>
-                                        <p className="result">{formatDate(gameState.game.dueDate)}</p>
+                                        <p className="result">{formatDate(gameState.dueDate)}</p>
                                     </div>
                                     {
-                                        gameState.game.finalValue != null
+                                        gameState.finalValue != null
                                             ? <div className="statWrap">
                                                 <p>Trenutna konačna vrednost:</p>
-                                                <p className="result">{gameState.game.finalValue}</p>
+                                                <p className="result">{gameState.finalValue}</p>
                                             </div>
                                             : null
                                     }
@@ -171,13 +167,13 @@ export default function GameDashboard() {
                                     <div className="PieWithInfo">
                                         <PieChart
                                             animate={true}
-                                            data={gameState.game.strategiesPlayerOne}
+                                            data={gameState.strategiesPlayerOne}
                                             label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
 
                                         />
                                         <ul>
                                             {
-                                                gameState.game.strategiesPlayerOne.map((strategy, index) =>
+                                                gameState.strategiesPlayerOne.map((strategy, index) =>
                                                     <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
                                                 )
                                             }
@@ -185,19 +181,19 @@ export default function GameDashboard() {
                                     </div>
                                 </div>
                                 {
-                                    gameState.game.hasSecondPlayer === true
+                                    gameState.hasSecondPlayer
                                         ? <div id="secondPlayer">
                                             <h2>Drugi igrač</h2>
                                             <div className="PieWithInfo">
                                                 <PieChart
                                                     animate={true}
-                                                    data={gameState.game.strategiesPlayerTwo}
+                                                    data={gameState.strategiesPlayerTwo}
                                                     label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
 
                                                 />
                                                 <ul>
                                                     {
-                                                        gameState.game.strategiesPlayerTwo.map((strategy, index) =>
+                                                        gameState.strategiesPlayerTwo.map((strategy, index) =>
                                                             <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
                                                         )
                                                     }
@@ -210,7 +206,7 @@ export default function GameDashboard() {
                             </div>
                             <div className="ButtonsAlignRight" id="dashboardButtons">
                                 {
-                                    checkDate(gameState.game.dueDate) === true
+                                    checkDate(gameState.dueDate)
                                         ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
                                         : null
                                 }

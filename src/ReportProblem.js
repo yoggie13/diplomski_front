@@ -77,7 +77,7 @@ export default function ReportProblem({ userID }) {
     return (
         <div className="FormClass" id="reportProblem">
             {
-                JSON.parse(localStorage.getItem("Admin")) === true
+                JSON.parse(localStorage.getItem("Admin"))
                     ? <p>Prijavite se sa studentskim nalogom da biste pristupili ovim opcijama</p>
                     : loadingState === false
                         ? <form id="reportProblemForm" action="#">

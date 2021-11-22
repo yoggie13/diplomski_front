@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Loading from './Loading';
 import { useHistory } from 'react-router';
 
-export default function Login({ LoginLogic, falseEntry }) {
-    const [loginDetails, setLoginDetails] = useState({ email: "", password: "", status: 500 });
+export default function Login({ loginLogic, falseEntry }) {
+    const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
     const [state, setState] = useState({ error: falseEntry });
     const [loadingState, setLoadingState] = useState(false);
 
@@ -47,7 +46,7 @@ export default function Login({ LoginLogic, falseEntry }) {
             .then(response => {
                 setState({ error: false });
                 setLoadingState(false);
-                LoginLogic(response);
+                loginLogic(response);
                 history.push('/profile');
             })
             .catch(error => {
@@ -68,13 +67,13 @@ export default function Login({ LoginLogic, falseEntry }) {
                 </label>
                 <input id="password" type="password" onChange={e => setLoginDetails({ ...loginDetails, password: e.target.value })} value={loginDetails.password} />
                 {
-                    state.error === true
+                    state.error
                         ? <p id="error">Uneli ste pogrešne podatke</p>
                         : null
                 }
                 {/* <a>Zaboravio si/la lozinku?</a> */}
                 {
-                    loadingState === true
+                    loadingState
                         ? <Loading smallerSize={true} />
                         : <input type="submit" value="Prijavi se" />
                 }

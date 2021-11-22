@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Loading from '../Loading';
 import { Link } from 'react-router-dom';
+import Loading from '../Loading';
 
 function formatDate(dueDate) {
     var arr = dueDate.split('-');
@@ -46,9 +46,9 @@ export default function ActiveGames({ userID }) {
     }, [])
 
     return (
-        JSON.parse(localStorage.getItem("Admin")) === true
+        JSON.parse(localStorage.getItem("Admin"))
             ? <p>Prijavite se sa studentskim nalogom da biste pristupili ovim opcijama</p>
-            : loadingState === true
+            : loadingState
                 ? <Loading />
                 :
                 <div className="ActiveGames">
@@ -72,7 +72,7 @@ export default function ActiveGames({ userID }) {
                                         <td>{game.numberOfPlayers}</td>
                                         <td>{game.maxPayoff}</td>
                                         <td id="center">{
-                                            game.played === true
+                                            game.played
                                                 ? <i className="fas fa-check-circle" id="icon-true"></i>
                                                 : <i className="fas fa-times-circle" id="icon-false"></i>
                                         }</td>
