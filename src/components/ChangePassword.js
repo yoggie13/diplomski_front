@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Config from './config.json';
+import Config from '../config.json';
 import Loading from './Loading';
 
 export default function ChangePassword({ userID }) {

@@ -3,9 +3,9 @@ import {
     Route,
 } from "react-router-dom";
 import Header from './Header';
-import Login from './Login';
-import HomePage from './HomePage';
-import AdminLogin from './AdminPanels/AdminLogin';
+import Login from './user/Login';
+import HomePage from '../pages/Homepage';
+import AdminLogin from './admin/AdminLogin';
 
 
 export default function BasicTemplate({ loginLogic }) {

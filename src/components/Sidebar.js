@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './assets/laboi_logo.png';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router';
+import logo from '../assets/laboi_logo.png';
 
 function formatUsername(Username) {
     return Username.split('@')[0];

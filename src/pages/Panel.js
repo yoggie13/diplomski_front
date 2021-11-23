@@ -1,18 +1,18 @@
 import React from 'react';
 import { useState } from 'react';
-import ActiveGames from './UserPanels/ActiveGames';
-import ChangePassword from './ChangePassword';
-import FinishedGames from './UserPanels/FinishedGames';
-import Game from './UserPanels/Game';
-import ReportProblem from './ReportProblem';
-import Scoreboard from './Scoreboard';
-import Sidebar from './Sidebar';
-import UserInfo from './UserInfo';
-import CreateGame from './AdminPanels/CreateGame';
-import AllGames from './AdminPanels/AllGames';
-import AllTables from './AdminPanels/AllTables';
-import GameDashboard from './AdminPanels/GameDashboard';
-import Rewards from './AdminPanels/Rewards';
+import ActiveGames from '../components/user/ActiveGames';
+import ChangePassword from '../components/ChangePassword';
+import FinishedGames from '../components/user/FinishedGames';
+import Game from '../components/user/Game';
+import ReportProblem from '../components/user/ReportProblem';
+import Scoreboard from '../components/Scoreboard';
+import Sidebar from '../components/Sidebar';
+import UserInfo from '../components/UserInfo';
+import CreateGame from '../components/admin/CreateGame';
+import AllGames from '../components/admin/AllGames';
+import AllTables from '../components/admin/AllTables';
+import GameDashboard from '../components/admin/GameDashboard';
+import Rewards from '../components/admin/Rewards';
 import {
     Switch,
     Route,

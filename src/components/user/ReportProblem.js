@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Loading from './Loading';
 import Checkbox from '@material-ui/core/Checkbox';
+import Loading from '../Loading';
 
 
 export default function ReportProblem({ userID }) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './assets/laboi_logo.png';
+import logo from '../assets/laboi_logo.png';
 
 export default function Header() {
     return (

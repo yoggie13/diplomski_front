@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import homepage_photo from './assets/homepage.png'
+import homepage_photo from '../assets/homepage.png'
 
 export default function HomePage() {
 

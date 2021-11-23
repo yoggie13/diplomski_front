@@ -1,7 +1,7 @@
 import React from 'react'
-import Scoreboard from '../Scoreboard';
 import { useState, useEffect } from 'react';
 import Loading from '../Loading';
+import Scoreboard from '../Scoreboard';
 
 export default function AllTables() {
     const [groupState, setGroupState] = useState({ groups: [], counter: 1 });

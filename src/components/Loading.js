@@ -1,5 +1,5 @@
 import React from 'react'
-import loadingGif from './assets/loading.gif'
+import loadingGif from '../assets/loading.gif'
 
 export default function Loading({ smallerSize }) {
     return (

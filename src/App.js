@@ -4,8 +4,8 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import './App.css';
-import BasicTemplate from './BasicTemplate';
-import UserPanel from './UserPanel';
+import BasicTemplate from './components/BasicTemplate';
+import Panel from './pages/Panel';
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
       <Router>
         {
           state.isLoggedIn
-            ? <UserPanel logoutLogic={logoutLogic} admin={state.admin} User={state.User} />
+            ? <Panel logoutLogic={logoutLogic} admin={state.admin} User={state.User} />
             : <BasicTemplate loginLogic={loginLogic} />
         }
       </Router>

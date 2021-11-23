@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Loading from './Loading';
 import { useHistory } from 'react-router';
+import Loading from '../Loading';
 
 export default function Login({ loginLogic, falseEntry }) {
     const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
