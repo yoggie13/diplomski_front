@@ -3,10 +3,8 @@ import {
     Route,
 } from "react-router-dom";
 import Header from './Header';
-import Login from './user/Login';
+import Login from './Login';
 import HomePage from '../pages/Homepage';
-import AdminLogin from './admin/AdminLogin';
-
 
 export default function BasicTemplate({ loginLogic }) {
 
@@ -16,10 +14,10 @@ export default function BasicTemplate({ loginLogic }) {
             <Header />
             <Switch>
                 <Route path="/login">
-                    <Login loginLogic={loginLogic} />
+                    <Login loginLogic={loginLogic} isAdmin={false} />
                 </Route>
                 <Route path="/admin">
-                    <AdminLogin loginLogic={loginLogic} />
+                    <Login loginLogic={loginLogic} isAdmin={true} />
                 </Route>
                 <Route path="/">
                     <HomePage />

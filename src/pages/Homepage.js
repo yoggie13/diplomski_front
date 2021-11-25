@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import homepage_photo from '../assets/homepage.png'
 
 export default function HomePage() {
-
     useEffect(() => {
         document.title = "Teorija igara"
     }, []);

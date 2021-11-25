@@ -21,7 +21,6 @@ function App() {
     setState({ isLoggedIn: true, isAdmin: adminStatus, User: JSON.parse(localStorage.getItem("User")) });
   }
   const logoutLogic = e => {
-
     localStorage.removeItem("User");
     setState({ isLoggedIn: false, isAdmin: false, User: null });
 

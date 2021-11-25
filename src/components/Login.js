@@ -3,12 +3,16 @@ import {
     Link,
     useHistory
 } from "react-router-dom";
-import Loading from '../Loading';
+import Loading from './Loading';
 
-export default function AdminLogin({ loginLogic }) {
+export default function AdminLogin({ loginLogic, isAdmin }) {
     const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
     const [errorState, setErrorState] = useState(false);
     const [loadingState, setLoadingState] = useState(false);
+    const [apiState, setApiState] = useState({
+        domain: isAdmin ? "admin" : "students",
+        redirect: isAdmin ? "dashboard" : "profile"
+    });
 
     let history = useHistory();
 
@@ -22,7 +26,7 @@ export default function AdminLogin({ loginLogic }) {
         setLoadingState(true);
 
         fetch(
-            'https://teorijaigaradiplomski.azurewebsites.net/api/admin/login',
+            `https://teorijaigaradiplomski.azurewebsites.net/api/${apiState.domain}/login`,
             {
                 method: "POST",
                 mode: "cors",
@@ -32,8 +36,7 @@ export default function AdminLogin({ loginLogic }) {
                 body: JSON.stringify({
                     Email: loginDetails.email,
                     Password: loginDetails.password
-                }
-                )
+                })
             })
             .then(res => {
                 if (res.status === 200) {
@@ -52,7 +55,7 @@ export default function AdminLogin({ loginLogic }) {
                 setLoadingState(false);
                 setErrorState(false);
                 loginLogic(response, true);
-                history.push('/dashboard');
+                history.push(`/${apiState.redirect}`);
             })
             .catch(error => {
                 setLoadingState(false);
@@ -83,12 +86,16 @@ export default function AdminLogin({ loginLogic }) {
                         ? <Loading smallerSize={true} />
                         : <input type="submit" value="Prijavi se" />
                 }
-                <div id="gobacktouserlogin">
-                    <Link to="/login">
-                        <i className="fas fa-chevron-right fa-sm" id="chevron-left"></i>
-                    </Link>
-                    <p>Loguj se kao korisnik</p>
-                </div>
+                {
+                    isAdmin
+                        ? <div id="gobacktouserlogin">
+                            <Link to="/login">
+                                <i className="fas fa-chevron-right fa-sm" id="chevron-left"></i>
+                            </Link>
+                            <p>Loguj se kao korisnik</p>
+                        </div>
+                        : null
+                }
             </form>
         </div>
     );
