@@ -51,7 +51,7 @@ button:hover {
 i:hover {
   cursor: pointer;
 }
-.UserPanel {
+.Panel {
   display: grid;
   grid-template-columns: 25vw 75vw;
   height: 100vh;
@@ -61,12 +61,12 @@ i:hover {
   grid-template-rows: 7vh 93vh;
 }
 
-.UserPanel a {
+.Panel a {
   color: white;
   text-decoration: none;
   font-family: "Varela";
 }
-.UserPanel a i {
+.Panel a i {
   color: #2b0a55;
 }
 .sidebar a i {
@@ -802,7 +802,7 @@ hr {
     font-size: 22px;
     margin-left: 0px;
   }
-  .UserPanel {
+  .Panel {
     grid-template-columns: 5vw 90vw;
   }
   th {

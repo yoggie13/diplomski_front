@@ -7,7 +7,7 @@ function formatUsername(Username) {
     return Username.split('@')[0];
 }
 
-export default function Sidebar({ logoutLogic, admin, Username }) {
+export default function Sidebar({ logoutLogic, isAdmin, Username }) {
 
     let history = useHistory();
     const handleLogout = e => {
@@ -21,7 +21,7 @@ export default function Sidebar({ logoutLogic, admin, Username }) {
         <div className="sidebar">
             <img src={logo} />
             {
-                admin === false
+                isAdmin === false
                     ? <ul>
                         <li>
                             <Link to="/activeGames">Aktivne igre</Link>
@@ -33,7 +33,7 @@ export default function Sidebar({ logoutLogic, admin, Username }) {
                             <Link to="/scoreboard">Scoreboard</Link>
                         </li>
                     </ul>
-                    : admin
+                    : isAdmin
                         ? <ul>
                             <li>
                                 <Link to="/createGame">Kreiraj igru</Link>
@@ -49,7 +49,7 @@ export default function Sidebar({ logoutLogic, admin, Username }) {
             }
             <div id='sidebarFooter'>
                 {
-                    admin === false
+                    isAdmin === false
                         ? <Link to="/report"><i className="fas fa-exclamation-circle fa-2x" id="report"></i></Link>
                         : null
                 }

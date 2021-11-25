@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import Loading from '../Loading';
 
-export default function Rewards() {
+export default function Payments() {
 
     useEffect(() => {
         document.title = "Unos isplata | Teorija igara"
