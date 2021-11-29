@@ -13,10 +13,10 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
 
     useEffect(() => {
         setLoadingState(true);
-        if (state.admin === false) {
+        if (state.admin) {
 
             fetch(
-                `https://teorijaigaradiplomski.azurewebsites.net/api/students/scoreboard/${userID}`,
+                `https://teorijaigaradiplomski.azurewebsites.net/api/admin/scoreboard/${group}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -41,7 +41,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
         else {
 
             fetch(
-                `https://teorijaigaradiplomski.azurewebsites.net/api/admin/scoreboard/${group}`,
+                `https://teorijaigaradiplomski.azurewebsites.net/api/students/scoreboard/${userID}`,
                 {
                     method: "GET",
                     mode: "cors",

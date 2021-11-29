@@ -220,8 +220,6 @@ export default function CreateGame() {
         return true;
     }
 
-
-
     const addNew = (e, player) => {
         e.preventDefault();
 
@@ -242,8 +240,8 @@ export default function CreateGame() {
         }
     }
     const setDefaultStrategy = (player, index) => {
-        var strategies = [];
 
+        var strategies = [];
 
         if (player === 1) {
             strategies = strategiesState.firstPlayerStrategies;
@@ -270,153 +268,145 @@ export default function CreateGame() {
 
 
     return (
-
         <div className="CreateGame">
             {
-                JSON.parse(localStorage.getItem("Admin")) === false
-                    ? <p>Prijavite se sa administratorskim nalogom da biste pristupili ovim opcijama</p>
-                    : <>
+                state.page < 3
+                    ? <>
+                        <h1>Kreiraj igru</h1>
+                        <form className="CreateGameForm">
+                            {
+                                state.page === 1
+                                    ? <>
+                                        <label htmlFor="typeofgame">Tip igre*</label>
+                                        <select required id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
+                                            {
+                                                gameTypes.map((type, index) =>
+                                                    <option key={index} id={index + 1} value={index + 1}>{type}</option>
+                                                )
+                                            }
+                                        </select>
+                                        <label htmlFor="gamename">Naziv igre*</label>
+                                        <input required id="gamename" type="text" value={gameState.Name} onChange={e => setGameState({ ...gameState, Name: e.target.value })} />
+                                        <label htmlFor="text">Opis igre*</label>
+                                        <textarea required id="text" value={gameState.Text} onChange={e => setGameState({ ...gameState, Text: e.target.value })}></textarea>
+                                        <label htmlFor="noofplayers">Broj igrača*</label>
+                                        <select required id="noofplayers" value={gameState.NumberOfPlayers} onChange={e => setGameState({ ...gameState, NumberOfPlayers: parseInt(e.target.value) })}>
+                                            {getNumberOfPlayersPossible()}
+                                        </select>
+                                        <input required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
+                                        <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
+                                            <Checkbox
+                                                id="chatCheck"
+                                                checked={gameState.Chat}
+                                                onClick={e => setGameState({ ...gameState, Chat: !gameState.Chat })}
+                                                color={'secondary'}
+                                            />
+                                        </div>
+                                    </>
+                                    : state.page === 2
+                                        ? gameState.Type < 5
+                                            ? <>
+                                                <label htmlFor="range1">Od</label>
+                                                <input id="range1" type="number" value={oneTwoState.minLimit} onChange={e => setOneTwoState({ ...oneTwoState, minLimit: parseInt(e.target.value) })} />
+                                                <label htmlFor="range2">Do</label>
+                                                <input id="range2" type="number" value={oneTwoState.maxLimit} onChange={e => setOneTwoState({ ...oneTwoState, maxLimit: parseInt(e.target.value) })} />
 
-                        {
-                            state.page < 3
-                                ? <>
-                                    <h1>Kreiraj igru</h1>
-                                    <form className="CreateGameForm">
-                                        {
-                                            state.page === 1
-                                                ? <>
-                                                    <label htmlFor="typeofgame">Tip igre*</label>
-                                                    <select required id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
-                                                        {
-                                                            gameTypes.map((type, index) =>
-                                                                <option key={index} id={index + 1} value={index + 1}>{type}</option>
-                                                            )
-                                                        }
-                                                    </select>
-                                                    <label htmlFor="gamename">Naziv igre*</label>
-                                                    <input required id="gamename" type="text" value={gameState.Name} onChange={e => setGameState({ ...gameState, Name: e.target.value })} />
-                                                    <label htmlFor="text">Opis igre*</label>
-                                                    <textarea required id="text" value={gameState.Text} onChange={e => setGameState({ ...gameState, Text: e.target.value })}></textarea>
-                                                    <label htmlFor="noofplayers">Broj igrača*</label>
-                                                    <select required id="noofplayers" value={gameState.NumberOfPlayers} onChange={e => setGameState({ ...gameState, NumberOfPlayers: parseInt(e.target.value) })}>
-                                                        {getNumberOfPlayersPossible()}
-                                                    </select>
-                                                    <input required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
-                                                    <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
-                                                        <Checkbox
-                                                            id="chatCheck"
-                                                            checked={gameState.Chat}
-                                                            onClick={e => setGameState({ ...gameState, Chat: !gameState.Chat })}
-                                                            color={'secondary'}
-                                                        />
-                                                    </div>
+                                                <>
+                                                    <label htmlFor="defaultNumber">Default vrednost</label>
+                                                    <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
+                                                    <input id="defaultNumber" type="number" value={oneTwoState.default} onChange={e => setOneTwoState({ ...oneTwoState, default: parseInt(e.target.value) })} />
                                                 </>
-                                                : state.page === 2
-                                                    ? gameState.Type < 5
-                                                        ? <>
-                                                            <label htmlFor="range1">Od</label>
-                                                            <input id="range1" type="number" value={oneTwoState.minLimit} onChange={e => setOneTwoState({ ...oneTwoState, minLimit: parseInt(e.target.value) })} />
-                                                            <label htmlFor="range2">Do</label>
-                                                            <input id="range2" type="number" value={oneTwoState.maxLimit} onChange={e => setOneTwoState({ ...oneTwoState, maxLimit: parseInt(e.target.value) })} />
-
-                                                            <>
-                                                                <label htmlFor="defaultNumber">Default vrednost</label>
-                                                                <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
-                                                                <input id="defaultNumber" type="number" value={oneTwoState.default} onChange={e => setOneTwoState({ ...oneTwoState, default: parseInt(e.target.value) })} />
-                                                            </>
 
 
-                                                        </>
-                                                        :
-                                                        <div id="strategyInputWrapper">
-                                                            <div className="StrategyInput" id="firstPlayerStrategies">
-                                                                <h2>Strategije prvog igrača</h2>
-                                                                {
-                                                                    strategiesState.firstPlayerStrategies.map((strategy, index) => {
-                                                                        return <div className="Strategy">
-                                                                            <div>
-                                                                                <label htmlFor={index}>{index + 1}. strategija</label>
-                                                                                <input id={index}
-                                                                                    type="text"
-                                                                                    key={index}
-                                                                                    value={strategy.Text}
-                                                                                    onChange={e => handleInput(e, index, 1)} />
-                                                                            </div>
-                                                                            <div >
-                                                                                <label htmlFor={`defaultRadio${index}`}>Def:</label>
-                                                                                <Radio
-                                                                                    id={`defaultRadio${index}`}
-                                                                                    name="default2"
-                                                                                    key={index}
-                                                                                    value={index}
-                                                                                    checked={strategy.Default}
-                                                                                    onClick={e => setDefaultStrategy(1, index)}
-                                                                                />
-                                                                            </div>
-                                                                        </div>
-                                                                    })
-                                                                }
-                                                                < i className="fas fa-plus" onClick={e => addNew(e, 1)} ></i>
+                                            </>
+                                            :
+                                            <div id="strategyInputWrapper">
+                                                <div className="StrategyInput" id="firstPlayerStrategies">
+                                                    <h2>Strategije prvog igrača</h2>
+                                                    {
+                                                        strategiesState.firstPlayerStrategies.map((strategy, index) => {
+                                                            return <div className="Strategy">
+                                                                <div>
+                                                                    <label htmlFor={index}>{index + 1}. strategija</label>
+                                                                    <input id={index}
+                                                                        type="text"
+                                                                        key={index}
+                                                                        value={strategy.Text}
+                                                                        onChange={e => handleInput(e, index, 1)} />
+                                                                </div>
+                                                                <div >
+                                                                    <label htmlFor={`defaultRadio${index}`}>Def:</label>
+                                                                    <Radio
+                                                                        id={`defaultRadio${index}`}
+                                                                        name="default2"
+                                                                        key={index}
+                                                                        value={index}
+                                                                        checked={strategy.Default}
+                                                                        onClick={e => setDefaultStrategy(1, index)}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        })
+                                                    }
+                                                    < i className="fas fa-plus" onClick={e => addNew(e, 1)} ></i>
 
-                                                            </div >
-                                                            <div className="StrategyInput" id="secondPlayerStrategies">
-                                                                <h2>Strategije drugog igrača</h2>
-                                                                {
-                                                                    strategiesState.secondPlayerStrategies.map((strategy, index) => {
-                                                                        return <div className="Strategy">
-                                                                            <div>
-                                                                                <label htmlFor={index}>{index + 1}. strategija</label>
-                                                                                <input id={index}
-                                                                                    type="text"
-                                                                                    key={index}
-                                                                                    value={strategy.Text}
-                                                                                    onChange={e => handleInput(e, index, 2)} />
-                                                                            </div>
-                                                                            <div >
-                                                                                <label htmlFor={`defaultRadio${index}`}>Def:</label>
-                                                                                <Radio
-                                                                                    id={`defaultRadio${index}`}
-                                                                                    name="default2"
-                                                                                    key={index}
-                                                                                    value={index}
-                                                                                    checked={strategy.Default}
-                                                                                    onClick={e => setDefaultStrategy(2, index)}
-                                                                                />
-                                                                            </div>
+                                                </div >
+                                                <div className="StrategyInput" id="secondPlayerStrategies">
+                                                    <h2>Strategije drugog igrača</h2>
+                                                    {
+                                                        strategiesState.secondPlayerStrategies.map((strategy, index) => {
+                                                            return <div className="Strategy">
+                                                                <div>
+                                                                    <label htmlFor={index}>{index + 1}. strategija</label>
+                                                                    <input id={index}
+                                                                        type="text"
+                                                                        key={index}
+                                                                        value={strategy.Text}
+                                                                        onChange={e => handleInput(e, index, 2)} />
+                                                                </div>
+                                                                <div >
+                                                                    <label htmlFor={`defaultRadio${index}`}>Def:</label>
+                                                                    <Radio
+                                                                        id={`defaultRadio${index}`}
+                                                                        name="default2"
+                                                                        key={index}
+                                                                        value={index}
+                                                                        checked={strategy.Default}
+                                                                        onClick={e => setDefaultStrategy(2, index)}
+                                                                    />
+                                                                </div>
 
-                                                                        </div>
-                                                                    })
-                                                                }
-                                                                < i className="fas fa-plus" onClick={e => addNew(e, 2)}  ></i>
+                                                            </div>
+                                                        })
+                                                    }
+                                                    < i className="fas fa-plus" onClick={e => addNew(e, 2)}  ></i>
 
-                                                            </div >
-                                                        </div>
-                                                    : null
-                                        }
-                                    </form>
-                                </>
-                                : <Confirmation game={gameState} />
-                        }
-                        <div className="pageMover">
-                            {
-                                state.page > 1
-                                    ? <div id="back">
-                                        <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={(event) => handleNextPage(event, -1)}></i>
-                                        <p>{directionState.back[state.page - 1]}</p>
-                                    </div>
-                                    : null
+                                                </div >
+                                            </div>
+                                        : null
                             }
-                            {
-                                state.page < 3
-                                    ? <div id="forward">
-                                        <p>{directionState.forward[state.page - 1]}</p>
-                                        <i className="fas fa-chevron-right fa-lg" onClick={e => handleNextPage(e, 1)}></i>
-                                    </div>
-                                    : null
-                            }
-                        </div>
+                        </form>
                     </>
+                    : <Confirmation game={gameState} />
             }
+            < div className="pageMover">
+                {
+                    state.page > 1
+                        ? <div id="back">
+                            <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={(event) => handleNextPage(event, -1)}></i>
+                            <p>{directionState.back[state.page - 1]}</p>
+                        </div>
+                        : null
+                }
+                {
+                    state.page < 3
+                        ? <div id="forward">
+                            <p>{directionState.forward[state.page - 1]}</p>
+                            <i className="fas fa-chevron-right fa-lg" onClick={e => handleNextPage(e, 1)}></i>
+                        </div>
+                        : null
+                }
+            </div>
         </div >
     )
 }

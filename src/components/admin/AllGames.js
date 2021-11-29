@@ -44,42 +44,40 @@ export default function AllGames() {
 
 
     return (
-        JSON.parse(localStorage.getItem("Admin")) === false
-            ? <p>Prijavite se sa administratorskim nalogom da biste pristupili ovim opcijama</p>
-            : loadingState
-                ? <Loading />
-                : <div className="AllGames">
-                    <h1>Pregled igara</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Naziv igre</th>
-                                <th>Broj igrača koji su odigrali</th>
-                                <th>Aktivna</th>
-                                <th>Više info</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                gamesState.games.map((game) =>
-                                    <tr key={game.id}>
-                                        <td>{game.name}</td>
-                                        <td>{game.playersPlayed}</td>
-                                        <td id="center">{
-                                            checkDate(game.dueDate)
-                                                ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                                : <i className="fas fa-times-circle" id="icon-false"></i>
-                                        }
-                                        </td>
-                                        <td id="center">
-                                            <Link to={`dashboard/${game.id}`}>
-                                                <i id={game.id} className="fas fa-chevron-right"></i>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                )}
-                        </tbody>
-                    </table>
-                </div>
+        loadingState
+            ? <Loading />
+            : <div className="AllGames">
+                <h1>Pregled igara</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Naziv igre</th>
+                            <th>Broj igrača koji su odigrali</th>
+                            <th>Aktivna</th>
+                            <th>Više info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            gamesState.games.map((game) =>
+                                <tr key={game.id}>
+                                    <td>{game.name}</td>
+                                    <td>{game.playersPlayed}</td>
+                                    <td id="center">{
+                                        checkDate(game.dueDate)
+                                            ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                            : <i className="fas fa-times-circle" id="icon-false"></i>
+                                    }
+                                    </td>
+                                    <td id="center">
+                                        <Link to={`dashboard/${game.id}`}>
+                                            <i id={game.id} className="fas fa-chevron-right"></i>
+                                        </Link>
+                                    </td>
+                                </tr>
+                            )}
+                    </tbody>
+                </table>
+            </div>
     )
 }

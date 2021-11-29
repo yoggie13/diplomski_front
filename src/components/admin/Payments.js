@@ -118,9 +118,9 @@ export default function Payments() {
     return (
         <div className="Rewards">
             {
-                loadingState === false
-
-                    ? <>
+                loadingState
+                    ? <Loading />
+                    : <>
                         <h1>{gameState.gameName}</h1>
                         <p>{gameState.gameText}</p>
                         <h2>Isplate</h2>
@@ -172,7 +172,6 @@ export default function Payments() {
                             <input type="submit" value="Unesi isplate" onClick={e => handleClick(e)} />
                         </form>
                     </>
-                    : <Loading />
             }
         </div>
     )

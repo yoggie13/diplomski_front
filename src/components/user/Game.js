@@ -69,7 +69,7 @@ export default function Game({ userID }) {
                 }
             })
             .then(response => {
-                if (response === false) {
+                if (!response) {
                     alert("Ta igra je izbrisana");
                     history.push('/activeGames');
                 }

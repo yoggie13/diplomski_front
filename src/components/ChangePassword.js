@@ -87,10 +87,10 @@ export default function ChangePassword({ userID }) {
                         : null
                 }
                 {
-                    loadingState === false
-                        ?
-                        <input type="submit" value="Promeni" onClick={handleSubmit} />
-                        : <Loading smallerSize={true} />}
+                    loadingState
+                        ? <Loading smallerSize={true} />
+                        : <input type="submit" value="Promeni" onClick={handleSubmit} />
+                }
             </form>
 
         </div>

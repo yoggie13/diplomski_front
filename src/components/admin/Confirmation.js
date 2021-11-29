@@ -65,8 +65,9 @@ export default function ({ game }) {
     return (
         <div className="Confirmation">
             {
-                loadingState === false
-                    ? <>
+                loadingState
+                    ? <Loading />
+                    : <>
                         <h1>Potvrda igre</h1>
                         <h2>{game.Name}</h2>
                         <p>{game.Text}</p>
@@ -123,7 +124,6 @@ export default function ({ game }) {
                             <button id="confirmGame" onClick={e => saveGame(e)}>Unos igre</button>
                         </div>
                     </>
-                    : <Loading />
             }
         </div>
     )

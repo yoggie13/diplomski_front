@@ -21,8 +21,19 @@ export default function Sidebar({ logoutLogic, isAdmin, Username }) {
         <div className="sidebar">
             <img src={logo} />
             {
-                isAdmin === false
+                isAdmin
                     ? <ul>
+                        <li>
+                            <Link to="/createGame">Kreiraj igru</Link>
+                        </li>
+                        <li>
+                            <Link to="/allGames">Sve igre</Link>
+                        </li>
+                        <li>
+                            <Link to="/scoreboards">Tabele</Link>
+                        </li>
+                    </ul>
+                    : <ul>
                         <li>
                             <Link to="/activeGames">Aktivne igre</Link>
                         </li>
@@ -33,25 +44,12 @@ export default function Sidebar({ logoutLogic, isAdmin, Username }) {
                             <Link to="/scoreboard">Scoreboard</Link>
                         </li>
                     </ul>
-                    : isAdmin
-                        ? <ul>
-                            <li>
-                                <Link to="/createGame">Kreiraj igru</Link>
-                            </li>
-                            <li>
-                                <Link to="/allGames">Sve igre</Link>
-                            </li>
-                            <li>
-                                <Link to="/scoreboards">Tabele</Link>
-                            </li>
-                        </ul>
-                        : null
             }
             <div id='sidebarFooter'>
                 {
-                    isAdmin === false
-                        ? <Link to="/report"><i className="fas fa-exclamation-circle fa-2x" id="report"></i></Link>
-                        : null
+                    isAdmin
+                        ? null
+                        : <Link to="/report"><i className="fas fa-exclamation-circle fa-2x" id="report"></i></Link>
                 }
                 <Link to="/profile">{formatUsername(Username)}</Link>
                 <i className="fas fa-sign-out-alt fa-2x" id="logOut" onClick={handleLogout}></i>

@@ -98,11 +98,11 @@ export default function Chat({ id, userID }) {
                         <hr></hr>
                         <div id="Messages">
                             {
-                                loadingState === false
-                                    ? state.messages.map((message, index) =>
+                                loadingState
+                                    ? <Loading />
+                                    : state.messages.map((message, index) =>
                                         <p key={index + 1} id={`message${index}`} className={message.playerOrOpponent}>{message.messageText}</p>
                                     )
-                                    : <Loading />
                             }
                             <div ref={messagesEndRef} />
                         </div>

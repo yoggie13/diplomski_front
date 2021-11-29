@@ -131,89 +131,87 @@ export default function GameDashboard() {
 
     return (
         <div className="GameDashboard">{
-            JSON.parse(localStorage.getItem("Admin")) === false
-                ? <p>Prijavite se sa administratorskim nalogom da biste pristupili ovim opcijama</p>
-                : loadingState
-                    ? <Loading />
-                    : gameState !== false
-                        ? <>
-                            <h1>Dashboard</h1>
-                            <h2>{gameState.name}</h2>
-                            <p>{gameState.text}</p>
-                            <div id="text">
-                                <div id="stats">
-                                    <div className="statWrap">
-                                        <p>Broj igrača koji su odigrali:</p>
-                                        <p className="result">{gameState.playersPlayed}</p>
-                                    </div>
-                                    <div className="statWrap">
-                                        <p>Datum isteka:</p>
-                                        <p className="result">{formatDate(gameState.dueDate)}</p>
-                                    </div>
-                                    {
-                                        gameState.finalValue != null
-                                            ? <div className="statWrap">
-                                                <p>Trenutna konačna vrednost:</p>
-                                                <p className="result">{gameState.finalValue}</p>
-                                            </div>
-                                            : null
-                                    }
+            loadingState
+                ? <Loading />
+                : gameState !== false
+                    ? <>
+                        <h1>Dashboard</h1>
+                        <h2>{gameState.name}</h2>
+                        <p>{gameState.text}</p>
+                        <div id="text">
+                            <div id="stats">
+                                <div className="statWrap">
+                                    <p>Broj igrača koji su odigrali:</p>
+                                    <p className="result">{gameState.playersPlayed}</p>
                                 </div>
-                                <hr></hr>
-                            </div>
-                            <div className="PieCharts">
-                                <div id="firstPlayer">
-                                    <h2>Prvi igrač</h2>
-                                    <div className="PieWithInfo">
-                                        <PieChart
-                                            animate={true}
-                                            data={gameState.strategiesPlayerOne}
-                                            label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-
-                                        />
-                                        <ul>
-                                            {
-                                                gameState.strategiesPlayerOne.map((strategy, index) =>
-                                                    <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
-                                                )
-                                            }
-                                        </ul>
-                                    </div>
+                                <div className="statWrap">
+                                    <p>Datum isteka:</p>
+                                    <p className="result">{formatDate(gameState.dueDate)}</p>
                                 </div>
                                 {
-                                    gameState.hasSecondPlayer
-                                        ? <div id="secondPlayer">
-                                            <h2>Drugi igrač</h2>
-                                            <div className="PieWithInfo">
-                                                <PieChart
-                                                    animate={true}
-                                                    data={gameState.strategiesPlayerTwo}
-                                                    label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-
-                                                />
-                                                <ul>
-                                                    {
-                                                        gameState.strategiesPlayerTwo.map((strategy, index) =>
-                                                            <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
-                                                        )
-                                                    }
-                                                </ul>
-                                            </div>
+                                    gameState.finalValue != null
+                                        ? <div className="statWrap">
+                                            <p>Trenutna konačna vrednost:</p>
+                                            <p className="result">{gameState.finalValue}</p>
                                         </div>
                                         : null
                                 }
+                            </div>
+                            <hr></hr>
+                        </div>
+                        <div className="PieCharts">
+                            <div id="firstPlayer">
+                                <h2>Prvi igrač</h2>
+                                <div className="PieWithInfo">
+                                    <PieChart
+                                        animate={true}
+                                        data={gameState.strategiesPlayerOne}
+                                        label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
 
+                                    />
+                                    <ul>
+                                        {
+                                            gameState.strategiesPlayerOne.map((strategy, index) =>
+                                                <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
+                                            )
+                                        }
+                                    </ul>
+                                </div>
                             </div>
-                            <div className="ButtonsAlignRight" id="dashboardButtons">
-                                {
-                                    checkDate(gameState.dueDate)
-                                        ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
-                                        : null
-                                }
-                                <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
-                            </div>
-                        </>
-                        : <p>Trenutno nema aktivnih igara</p>
+                            {
+                                gameState.hasSecondPlayer
+                                    ? <div id="secondPlayer">
+                                        <h2>Drugi igrač</h2>
+                                        <div className="PieWithInfo">
+                                            <PieChart
+                                                animate={true}
+                                                data={gameState.strategiesPlayerTwo}
+                                                label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
+
+                                            />
+                                            <ul>
+                                                {
+                                                    gameState.strategiesPlayerTwo.map((strategy, index) =>
+                                                        <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
+                                                    )
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    : null
+                            }
+
+                        </div>
+                        <div className="ButtonsAlignRight" id="dashboardButtons">
+                            {
+                                checkDate(gameState.dueDate)
+                                    ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
+                                    : null
+                            }
+                            <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
+                        </div>
+                    </>
+                    : <p>Trenutno nema aktivnih igara</p>
         }
         </div >
     )
