@@ -10,7 +10,7 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
     const [errorState, setErrorState] = useState(false);
     const [loadingState, setLoadingState] = useState(false);
     const [apiState, setApiState] = useState({
-        domain: isAdmin ? "admin" : "students",
+        role: isAdmin ? 1 : 0,
         redirect: isAdmin ? "dashboard" : "profile"
     });
 
@@ -26,7 +26,7 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
         setLoadingState(true);
 
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/${apiState.domain}/login`,
+            `http://localhost:46824/api/user/login`,
             {
                 method: "POST",
                 mode: "cors",
@@ -35,7 +35,8 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
                 },
                 body: JSON.stringify({
                     Email: loginDetails.email,
-                    Password: loginDetails.password
+                    Password: loginDetails.password,
+                    Role: apiState.role
                 })
             })
             .then(res => {

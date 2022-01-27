@@ -29,7 +29,7 @@ export default function ChangePassword({ userID }) {
         var db = localStorage.getItem("Admin") ? "admin" : "students";
 
         fetch(
-            `http://${Config.BASE_URL}:46824/api/${db}/changePass`,
+            `http://${Config.BASE_URL}:46824/api/user/changePass`,
             {
                 method: "POST",
                 mode: "cors",

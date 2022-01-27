@@ -23,7 +23,7 @@ export default function ActiveGames({ userID }) {
 
         setLoadingState(true);
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/game/activegames/${userID}`,
+            `http://localhost:46824/api/game/activegames/${userID}`,
             {
                 method: "GET",
                 mode: "cors",

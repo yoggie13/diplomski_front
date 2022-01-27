@@ -33,7 +33,7 @@ export default function ReportProblem({ userID }) {
 
         setLoadingState(true);
         fetch(
-            'https://teorijaigaradiplomski.azurewebsites.net/api/students/report',
+            'http://localhost:46824/api/students/report',
             {
                 method: "POST",
                 mode: "cors",

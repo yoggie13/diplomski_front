@@ -34,7 +34,7 @@ export default function GameDashboard() {
             setLoadingState(true);
             fetch(
 
-                `https://teorijaigaradiplomski.azurewebsites.net/api/admin/${apiState}`,
+                `http://localhost:46824/api/admin/${apiState}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -68,7 +68,7 @@ export default function GameDashboard() {
         setLoadingState(true);
 
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/${gameState.id}/finish`,
+            `http://localhost:46824/api/game/${gameState.id}/finish`,
             {
                 method: "POST",
                 mode: "cors",
@@ -100,7 +100,7 @@ export default function GameDashboard() {
         setLoadingState(true);
 
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/${gameState.id}`,
+            `http://localhost:46824/api/admin/game/${gameState.id}`,
             {
                 method: "DELETE",
                 mode: "cors",

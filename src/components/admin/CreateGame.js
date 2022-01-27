@@ -61,7 +61,7 @@ export default function CreateGame() {
         setLoadingState(true)
         fetch(
 
-            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/types`,
+            `http://localhost:46824/api/game/types`,
             {
                 method: "GET",
                 mode: "cors",

@@ -15,7 +15,7 @@ export default function FinishedGames({ userID }) {
     useEffect(() => {
         setLoadingState(true);
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/game/finishedgames/${userID}`,
+            `http://localhost:46824/api/game/finishedgames/${userID}`,
             {
                 method: "GET",
                 mode: "cors",

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import Loading from '../Loading';
 
-export default function Payments() {
+export default function Payoffs() {
 
     useEffect(() => {
         document.title = "Unos isplata | Teorija igara"
@@ -42,7 +42,7 @@ export default function Payments() {
     useEffect(() => {
         setLoadingState(true);
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/game/creation/${gameID}`,
+            `http://localhost:46824/api/game/creation/${gameID}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -68,14 +68,12 @@ export default function Payments() {
     }, [])
 
     const handleClick = e => {
-        var payments = [];
-        var rewards = Object.values(rewardsState);
-
+        var Payoffs = [];
 
         var k = 0;
         for (let i = 0; i <= gameState.gameStrategies.length / 2 - 1; i++) {
             for (let j = gameState.gameStrategies.length / 2; j < gameState.gameStrategies.length; j++) {
-                payments.push({
+                Payoffs.push({
                     StrategyPlayerOneParentGameID: gameID,
                     StrategyPlayerOneID: gameState.gameStrategies[i].id,
                     StrategyPlayerTwoParentGameID: gameID,
@@ -88,14 +86,14 @@ export default function Payments() {
         }
 
         fetch(
-            `https://teorijaigaradiplomski.azurewebsites.net/api/admin/${gameID}/addPayments`,
+            `http://localhost:46824/api/${gameID}/addPayoffs`,
             {
                 method: "POST",
                 mode: "cors",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payments)
+                body: JSON.stringify(Payoffs)
             })
             .then(res => {
                 if (res.status === 200) {

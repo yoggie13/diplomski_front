@@ -8,7 +8,7 @@ import AllTables from './AllTables.js';
 import Confirmation from './Confirmation.js';
 import CreateGame from './CreateGame.js';
 import GameDashboard from './GameDashboard.js';
-import Payments from './Payments.js';
+import Payoffs from './Payoffs.js';
 import UserInfo from '../UserInfo.js';
 import Error from '../Error.js';
 
@@ -25,7 +25,7 @@ export default function AdminPanel({ isAdmin, user }) {
             <Route path='/createGame'>
                 <CreateGame />
             </Route>
-            <Route path='/payments/:id' children={<Payments />} />
+            <Route path='/Payoffs/:id' children={<Payoffs />} />
             <Route path="/profile">
                 <UserInfo isAdmin={isAdmin} user={user} />
             </Route>

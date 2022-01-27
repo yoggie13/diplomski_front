@@ -25,7 +25,7 @@ export default function ({ game }) {
         setLoadingState(true);
 
         fetch(
-            'https://teorijaigaradiplomski.azurewebsites.net/api/admin/game',
+            'http://localhost:46824/api/admin/game',
             {
                 method: "POST",
                 mode: "cors",
@@ -51,7 +51,7 @@ export default function ({ game }) {
                 if (game.Type < 5)
                     history.push("/allGames");
                 else {
-                    history.push(`/payments/${response}`);
+                    history.push(`/Payoffs/${response}`);
                 }
                 setLoadingState(false);
                 return;

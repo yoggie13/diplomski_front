@@ -20,7 +20,7 @@ export default function AllGames() {
         setLoadingState(true)
 
         fetch(
-            'https://teorijaigaradiplomski.azurewebsites.net/api/admin/games',
+            'http://localhost:46824/api/admin/games',
             {
                 method: "GET",
                 mode: "cors",

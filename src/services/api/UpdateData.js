@@ -6,7 +6,7 @@ export default function UpdateData(data) {
 
     const [loadingState, setLoadingState] = useState(true);
     const [dataState, setDataState] = useState({ status: 0, data: [], error: "" });
-    const API_URL = "https://teorijaigaradiplomski.azurewebsites.net/api";
+    const API_URL = "http://localhost:46824/api";
 
     useEffect(() => {
         setLoadingState(true)

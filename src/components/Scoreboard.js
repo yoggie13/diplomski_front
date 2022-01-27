@@ -16,7 +16,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
         if (state.admin) {
 
             fetch(
-                `https://teorijaigaradiplomski.azurewebsites.net/api/admin/scoreboard/${group}`,
+                `http://localhost:46824/api/user/scoreboard/${group}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -41,7 +41,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
         else {
 
             fetch(
-                `https://teorijaigaradiplomski.azurewebsites.net/api/students/scoreboard/${userID}`,
+                `http://localhost:46824/api/user/scoreboard/${userID}`,
                 {
                     method: "GET",
                     mode: "cors",
