@@ -18,6 +18,7 @@ function App() {
   const loginLogic = (details, adminStatus = false) => {
     localStorage.setItem("User", JSON.stringify(details));
     localStorage.setItem("Admin", adminStatus);
+    console.log(adminStatus)
     setState({ isLoggedIn: true, isAdmin: adminStatus, User: JSON.parse(localStorage.getItem("User")) });
   }
   const logoutLogic = e => {

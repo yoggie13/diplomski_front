@@ -43,7 +43,10 @@ export default function AllTables() {
 
     const handleArrowClick = (e, number) => {
         e.preventDefault();
-        setGroupState({ ...groupState, counter: groupState.counter + number });
+
+        var log = groupState.counter + number;
+
+        setGroupState({ ...groupState, counter: log });
     }
     return (
         loadingState

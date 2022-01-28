@@ -6,13 +6,9 @@ import {
 import Loading from './Loading';
 
 export default function AdminLogin({ loginLogic, isAdmin }) {
-    const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
+    const [loginDetails, setLoginDetails] = useState({ email: "on20213655@student.fon.bg.ac.rs", password: "123" });
     const [errorState, setErrorState] = useState(false);
     const [loadingState, setLoadingState] = useState(false);
-    const [apiState, setApiState] = useState({
-        role: isAdmin ? 1 : 0,
-        redirect: isAdmin ? "dashboard" : "profile"
-    });
 
     let history = useHistory();
 
@@ -36,13 +32,11 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
                 body: JSON.stringify({
                     Email: loginDetails.email,
                     Password: loginDetails.password,
-                    Role: apiState.role
                 })
             })
             .then(res => {
                 if (res.status === 200) {
                     setLoadingState(false);
-
                     return res.json();
                 }
                 else {
@@ -50,13 +44,12 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
                     setErrorState(true);
                     throw new Error();
                 }
-
             })
             .then(response => {
                 setLoadingState(false);
                 setErrorState(false);
-                loginLogic(response, true);
-                history.push(`/${apiState.redirect}`);
+                loginLogic(response, response.role === "Admin" ? true : false);
+                history.push(response.role === "Admin" ? "/dashboard" : "/profile");
             })
             .catch(error => {
                 setLoadingState(false);
@@ -86,16 +79,6 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
                     loadingState
                         ? <Loading smallerSize={true} />
                         : <input type="submit" value="Prijavi se" />
-                }
-                {
-                    isAdmin
-                        ? <div id="gobacktouserlogin">
-                            <Link to="/login">
-                                <i className="fas fa-chevron-right fa-sm" id="chevron-left"></i>
-                            </Link>
-                            <p>Loguj se kao korisnik</p>
-                        </div>
-                        : null
                 }
             </form>
         </div>

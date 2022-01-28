@@ -4,7 +4,7 @@ import Loading from './Loading';
 
 export default function Scoreboard({ admin = false, userID = null, group, handleLoading }) {
 
-    const [state, setState] = useState({ students: [], admin: admin })
+    const [studentsState, setStudentsState] = useState([])
     const [loadingState, setLoadingState] = useState(true);
 
     useEffect(() => {
@@ -13,10 +13,10 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
 
     useEffect(() => {
         setLoadingState(true);
-        if (state.admin) {
+        if (admin) {
 
             fetch(
-                `http://localhost:46824/api/user/scoreboard/${group}`,
+                `http://localhost:46824/api/admin/scoreboard/${group}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -26,22 +26,18 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
                 })
                 .then(res => res.json())
                 .then(response => {
-                    setState({
-                        students: response
-                    });
+                    setStudentsState(response);
                     setLoadingState(false);
-
                 })
                 .catch(error => {
                     console.log(error)
                     setLoadingState(false);
-
                 })
         }
         else {
 
             fetch(
-                `http://localhost:46824/api/user/scoreboard/${userID}`,
+                `http://localhost:46824/api/students/scoreboard/${userID}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -51,16 +47,12 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
                 })
                 .then(res => res.json())
                 .then(response => {
-                    setState({
-                        students: response
-                    });
+                    setStudentsState(response);
                     setLoadingState(false);
-
                 })
                 .catch(error => {
                     console.log(error)
                     setLoadingState(false);
-
                 })
         }
     }, [group])
@@ -82,7 +74,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
                     </thead>
                     <tbody>
                         {
-                            state.students.map((student, index) =>
+                            studentsState.map((student, index) =>
                                 <tr key={index + 1}>
                                     <td>{index + 1}.</td>
                                     <td>{student.studentName}</td>

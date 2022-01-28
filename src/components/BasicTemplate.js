@@ -16,9 +16,6 @@ export default function BasicTemplate({ loginLogic }) {
                 <Route path="/login">
                     <Login loginLogic={loginLogic} isAdmin={false} />
                 </Route>
-                <Route path="/admin">
-                    <Login loginLogic={loginLogic} isAdmin={true} />
-                </Route>
                 <Route path="/">
                     <HomePage />
                 </Route>
