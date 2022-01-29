@@ -25,7 +25,7 @@ export default function ({ game }) {
         setLoadingState(true);
 
         fetch(
-            'http://localhost:46824/api/admin/game',
+            'http://localhost:46824/api/game/create',
             {
                 method: "POST",
                 mode: "cors",

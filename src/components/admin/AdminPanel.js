@@ -11,6 +11,7 @@ import GameDashboard from './GameDashboard.js';
 import Payoffs from './Payoffs.js';
 import UserInfo from '../UserInfo.js';
 import Error from '../Error.js';
+import ChangePassword from '../ChangePassword.js';
 
 export default function AdminPanel({ isAdmin, user }) {
     return (
@@ -28,6 +29,9 @@ export default function AdminPanel({ isAdmin, user }) {
             <Route path='/Payoffs/:id' children={<Payoffs />} />
             <Route path="/profile">
                 <UserInfo isAdmin={isAdmin} user={user} />
+            </Route>
+            <Route path="/changePassword" >
+                <ChangePassword userID={user.id} />
             </Route>
             <Route path="*">
                 <Error />
