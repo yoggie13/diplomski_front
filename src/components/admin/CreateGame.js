@@ -13,7 +13,7 @@ export default function CreateGame() {
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Type: 1, Name: "", Text: "", Strategies: [], NumberOfPlayers: 10, Chat: false, DueDate: Date.now()
+        Type: 1, Name: "", Text: "", NumberOfPlayers: 10, Chat: false, DueDate: Date.now()
     });
     const [gameTypes, setGameTypes] = useState([]);
     const [directionState, setDirectionState] = useState({
@@ -39,8 +39,6 @@ export default function CreateGame() {
                 Text: "",
                 FirstOrSecondPlayer: 1,
                 Default: false
-
-
             }
         ], secondPlayerStrategies: [
             {
@@ -55,12 +53,11 @@ export default function CreateGame() {
             }
         ]
     })
-    const [oneTwoState, setOneTwoState] = useState({ minLimit: 0, maxLimit: 0, default: 0, timesX: 0, minSum: 0 });
+    const [oneTwoState, setOneTwoState] = useState({ MinValue: 0, MaxValue: 0, DefaultValue: 0, timesX: 0, minSum: 0 });
 
     useEffect(() => {
         setLoadingState(true)
         fetch(
-
             `http://localhost:46824/api/game/types`,
             {
                 method: "GET",
@@ -93,11 +90,10 @@ export default function CreateGame() {
             var newPage = state.page + number;
         }
         if (newPage === 3) {
-            if (gameState.Type < 5) {
-                handleTypesOneTwo();
+            if (gameState.Type > 1 && gameState.Type < 5) {
+                handleRange();
                 return;
             }
-            ;
             cleanEmptyStrategies()
                 .then(() => {
                     var strategies = strategiesState.firstPlayerStrategies.concat(strategiesState.secondPlayerStrategies);
@@ -118,46 +114,10 @@ export default function CreateGame() {
                 })
 
         }
-
         setstate({ page: newPage });
     }
 
-    const handleTypesOneTwo = () => {
-
-        for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
-            if (i !== oneTwoState.default) {
-                gameState.Strategies.push({
-                    "Text": i + "",
-                    "FirstOrSecondPlayer": 1
-                });
-            }
-            else {
-                gameState.Strategies.push({
-                    "Text": i + "",
-                    "FirstOrSecondPlayer": 1,
-                    "Default": true
-                });
-            }
-        }
-        if (gameState.Type === 3) {
-            for (let i = oneTwoState.minLimit; i <= oneTwoState.maxLimit; i++) {
-                if (i !== oneTwoState.default) {
-                    gameState.Strategies.push({
-                        "Text": i + "",
-                        "FirstOrSecondPlayer": 2
-                    });
-                }
-                else {
-                    gameState.Strategies.push({
-                        "Text": i + "",
-                        "FirstOrSecondPlayer": 2,
-                        "Default": true
-                    });
-                }
-            }
-        }
-
-
+    const handleRange = () => {
         localStorage.setItem("Game", JSON.stringify(gameState));
 
         var newPage = state.page + 1;
@@ -165,23 +125,22 @@ export default function CreateGame() {
     }
 
     useEffect(() => {
-
         gameState.Type < 4
             ? setGameState({ ...gameState, NumberOfPlayers: 10 })
             : setGameState({ ...gameState, NumberOfPlayers: 2 })
 
     }, [gameState.Type])
+
     const getNumberOfPlayersPossible = e => {
-
-
         return <>
             {
-                gameState.Type < 4
+                gameState.Type > 0 && gameState.Type < 4
                     ? <>{/* <option name="number" id="1" value="1">1</option> */}
                         < option name="number" id="10" value="10">10</option>
                     </>
-                    : <option name="number" id="2" value="2">2</option>
-
+                    : gameState.Type > 8
+                        ? <option name="number" id="1" value="1">1</option>
+                        : <option name="number" id="2" value="2">2</option>
             }
         </>
     }
@@ -195,7 +154,6 @@ export default function CreateGame() {
             strategies[index].Text = e.target.value;
             setStrategiesState({ ...strategiesState, secondPlayerStrategies: strategies });
         }
-
     }
     const cleanEmptyStrategies = async () => {
         const firstStrategies = strategiesState.firstPlayerStrategies;
@@ -263,9 +221,7 @@ export default function CreateGame() {
         } else {
             setStrategiesState({ ...strategiesState, secondPlayerStrategies: strategies });
         }
-
     }
-
 
     return (
         <div className="CreateGame">
@@ -294,30 +250,31 @@ export default function CreateGame() {
                                             {getNumberOfPlayersPossible()}
                                         </select>
                                         <input required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
-                                        <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
-                                            <Checkbox
-                                                id="chatCheck"
-                                                checked={gameState.Chat}
-                                                onClick={e => setGameState({ ...gameState, Chat: !gameState.Chat })}
-                                                color={'secondary'}
-                                            />
-                                        </div>
+                                        {
+                                            gameState.NumberOfPlayers === 2
+                                                ? <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
+                                                    <Checkbox
+                                                        id="chatCheck"
+                                                        checked={gameState.Chat}
+                                                        onClick={e => setGameState({ ...gameState, Chat: !gameState.Chat })}
+                                                        color={'secondary'}
+                                                    />
+                                                </div>
+                                                : null
+                                        }
                                     </>
                                     : state.page === 2
-                                        ? gameState.Type < 5
+                                        ? gameState.Type > 1 && gameState.Type < 5
                                             ? <>
                                                 <label htmlFor="range1">Od</label>
-                                                <input id="range1" type="number" value={oneTwoState.minLimit} onChange={e => setOneTwoState({ ...oneTwoState, minLimit: parseInt(e.target.value) })} />
+                                                <input id="range1" type="number" value={oneTwoState.MinValue} onChange={e => setOneTwoState({ ...oneTwoState, MinValue: parseInt(e.target.value) })} />
                                                 <label htmlFor="range2">Do</label>
-                                                <input id="range2" type="number" value={oneTwoState.maxLimit} onChange={e => setOneTwoState({ ...oneTwoState, maxLimit: parseInt(e.target.value) })} />
-
+                                                <input id="range2" type="number" value={oneTwoState.MaxValue} onChange={e => setOneTwoState({ ...oneTwoState, MaxValue: parseInt(e.target.value) })} />
                                                 <>
                                                     <label htmlFor="defaultNumber">Default vrednost</label>
                                                     <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
-                                                    <input id="defaultNumber" type="number" value={oneTwoState.default} onChange={e => setOneTwoState({ ...oneTwoState, default: parseInt(e.target.value) })} />
+                                                    <input id="defaultNumber" type="number" value={oneTwoState.DefaultValue} onChange={e => setOneTwoState({ ...oneTwoState, DefaultValue: parseInt(e.target.value) })} />
                                                 </>
-
-
                                             </>
                                             :
                                             <div id="strategyInputWrapper">
@@ -349,7 +306,6 @@ export default function CreateGame() {
                                                         })
                                                     }
                                                     < i className="fas fa-plus" onClick={e => addNew(e, 1)} ></i>
-
                                                 </div >
                                                 <div className="StrategyInput" id="secondPlayerStrategies">
                                                     <h2>Strategije drugog igrača</h2>
@@ -375,19 +331,17 @@ export default function CreateGame() {
                                                                         onClick={e => setDefaultStrategy(2, index)}
                                                                     />
                                                                 </div>
-
                                                             </div>
                                                         })
                                                     }
                                                     < i className="fas fa-plus" onClick={e => addNew(e, 2)}  ></i>
-
                                                 </div >
                                             </div>
                                         : null
                             }
                         </form>
                     </>
-                    : <Confirmation game={gameState} />
+                    : <Confirmation game={gameState} strategies={strategiesState} range={oneTwoState} />
             }
             < div className="pageMover">
                 {

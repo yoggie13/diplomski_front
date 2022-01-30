@@ -26,10 +26,8 @@ export default function ChangePassword({ userID }) {
 
         setLoadingState(true)
 
-        var db = localStorage.getItem("Admin") ? "admin" : "students";
-
         fetch(
-            `http://${Config.BASE_URL}:46824/api/user/changePass`,
+            `http://localhost:46824/api/user/changePass`,
             {
                 method: "POST",
                 mode: "cors",

@@ -10,8 +10,14 @@ function formatDate(dueDate) {
     return `${dayAndTime[0]}.${splitDate[1]}.${splitDate[0]} - ${dayAndTime[1]}`
 }
 
-export default function ({ game }) {
+export default function Confirmation({ game, strategies, range }) {
+
     const [loadingState, setLoadingState] = useState(false);
+    const data = {
+        "game": game,
+        "strategies": strategies,
+        "range": range
+    }
 
     let history = useHistory();
 
@@ -33,8 +39,7 @@ export default function ({ game }) {
                     'Content-Type': 'application/json',
                 },
                 body:
-                    localStorage.getItem("Game")
-
+                    JSON.stringify(data)
             })
             .then(res => {
                 if (res.status === 200) {
@@ -45,7 +50,6 @@ export default function ({ game }) {
                 else {
                     throw new Error();
                 }
-
             })
             .then(response => {
                 if (game.Type < 5)
@@ -63,7 +67,7 @@ export default function ({ game }) {
             });
     }
     return (
-        <div className="Confirmation">
+        < div className="Confirmation" >
             {
                 loadingState
                     ? <Loading />
@@ -83,48 +87,65 @@ export default function ({ game }) {
                                     : <i className="fas fa-times-circle" id="icon-false"></i>
                             }</p>
                         </div>
-                        <div id="strategyInputWrapper">
-                            <div className="StrategyShow" id="firstPlayerStrategies">
-                                <h3>Strategije prvog igrača</h3>
-                                <ul>{
-                                    game.Strategies.map((strategy) => {
-                                        if (strategy.FirstOrSecondPlayer === 1) {
-                                            return <>
-                                                <li>{strategy.Text} {
-                                                    strategy.Default
-                                                        ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                                        : null
-                                                }</li>
+                        {
+                            game.Type > 1 && game.Type < 4
+                                ? <>
+                                    <div className="statWrap" >
+                                        <p>Minimalna vrednost:</p>
+                                        <p className="result">{range.MinValue}</p>
+                                    </div>
+                                    <div className="statWrap" >
+                                        <p>Maksimalna vrednost:</p>
+                                        <p className="result">{range.MaxValue}</p>
+                                    </div>
+                                    <div className="statWrap" >
+                                        <p>Default vrednost:</p>
+                                        <p className="result">{range.DefaultValue}</p>
+                                    </div>
+                                </>
+                                : <div id="strategyInputWrapper">
+                                    <div className="StrategyShow" id="firstPlayerStrategies">
+                                        <h3>Strategije prvog igrača</h3>
+                                        <ul>{
+                                            strategies.firstPlayerStrategies.map((strategy) => {
+                                                if (strategy.FirstOrSecondPlayer === 1) {
+                                                    return <>
+                                                        <li>{strategy.Text} {
+                                                            strategy.Default
+                                                                ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                                : null
+                                                        }</li>
 
-                                            </>
+                                                    </>
+                                                }
+                                            })
                                         }
-                                    })
-                                }
-                                </ul>
-                            </div>
-                            <div className="StrategyShow" id="secondPlayerStrategies">
-                                <h3>Strategije drugog igrača</h3>
-                                <ul>{
-                                    game.Strategies.map((strategy) => {
-                                        if (strategy.FirstOrSecondPlayer === 2) {
-                                            return <>
-                                                <li>{strategy.Text} {
-                                                    strategy.Default
-                                                        ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                                        : null
-                                                }</li>
-                                            </>
+                                        </ul>
+                                    </div>
+                                    <div className="StrategyShow" id="secondPlayerStrategies">
+                                        <h3>Strategije drugog igrača</h3>
+                                        <ul>{
+                                            strategies.secondPlayerStrategies.map((strategy) => {
+                                                if (strategy.FirstOrSecondPlayer === 2) {
+                                                    return <>
+                                                        <li>{strategy.Text} {
+                                                            strategy.Default
+                                                                ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                                : null
+                                                        }</li>
+                                                    </>
+                                                }
+                                            })
                                         }
-                                    })
-                                }
-                                </ul>
-                            </div>
-                        </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                        }
                         <div className="ButtonsAlignRight">
                             <button id="confirmGame" onClick={e => saveGame(e)}>Unos igre</button>
                         </div>
                     </>
             }
-        </div>
+        </div >
     )
 }
