@@ -13,9 +13,9 @@ export default function CreateGame() {
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Type: 1, Name: "", Text: "", NumberOfPlayers: 10, Chat: false, DueDate: Date.now()
+        Model: 1, Name: "123", Text: "123", NumberOfPlayers: 10, ChatEnabled: false, DueDate: "2022-02-02T14:02"
     });
-    const [gameTypes, setGameTypes] = useState([]);
+    const [gameModels, setGameModels] = useState([]);
     const [directionState, setDirectionState] = useState({
         back: [
             "",
@@ -31,23 +31,23 @@ export default function CreateGame() {
     const [strategiesState, setStrategiesState] = useState({
         firstPlayerStrategies: [
             {
-                Text: "",
+                Text: "a",
                 FirstOrSecondPlayer: 1,
                 Default: true
             },
             {
-                Text: "",
+                Text: "b",
                 FirstOrSecondPlayer: 1,
                 Default: false
             }
         ], secondPlayerStrategies: [
             {
-                Text: "",
+                Text: "a",
                 FirstOrSecondPlayer: 2,
                 Default: true
             },
             {
-                Text: "",
+                Text: "b",
                 FirstOrSecondPlayer: 2,
                 Default: false
             }
@@ -58,7 +58,7 @@ export default function CreateGame() {
     useEffect(() => {
         setLoadingState(true)
         fetch(
-            `http://localhost:46824/api/game/types`,
+            `http://localhost:46824/api/game/models`,
             {
                 method: "GET",
                 mode: "cors",
@@ -73,7 +73,7 @@ export default function CreateGame() {
                     return [];
             })
             .then(response => {
-                setGameTypes(response);
+                setGameModels(response);
                 setLoadingState(false);
             })
             .catch(error => {
@@ -90,7 +90,7 @@ export default function CreateGame() {
             var newPage = state.page + number;
         }
         if (newPage === 3) {
-            if (gameState.Type > 1 && gameState.Type < 5) {
+            if (gameState.Model > 1 && gameState.Model < 5) {
                 handleRange();
                 return;
             }
@@ -125,20 +125,20 @@ export default function CreateGame() {
     }
 
     useEffect(() => {
-        gameState.Type < 4
+        gameState.Model < 4
             ? setGameState({ ...gameState, NumberOfPlayers: 10 })
             : setGameState({ ...gameState, NumberOfPlayers: 2 })
 
-    }, [gameState.Type])
+    }, [gameState.Model])
 
     const getNumberOfPlayersPossible = e => {
         return <>
             {
-                gameState.Type > 0 && gameState.Type < 4
+                gameState.Model > 0 && gameState.Model < 4
                     ? <>{/* <option name="number" id="1" value="1">1</option> */}
                         < option name="number" id="10" value="10">10</option>
                     </>
-                    : gameState.Type > 8
+                    : gameState.Model > 8
                         ? <option name="number" id="1" value="1">1</option>
                         : <option name="number" id="2" value="2">2</option>
             }
@@ -234,10 +234,10 @@ export default function CreateGame() {
                                 state.page === 1
                                     ? <>
                                         <label htmlFor="typeofgame">Tip igre*</label>
-                                        <select required id="typeofgame" value={gameState.Type} onChange={e => setGameState({ ...gameState, Type: parseInt(e.target.value) })}>
+                                        <select required id="typeofgame" value={gameState.Model} onChange={e => setGameState({ ...gameState, Model: parseInt(e.target.value) })}>
                                             {
-                                                gameTypes.map((type, index) =>
-                                                    <option key={index} id={index + 1} value={index + 1}>{type}</option>
+                                                gameModels.map((model, index) =>
+                                                    <option key={index} id={index + 1} value={index + 1}>{model}</option>
                                                 )
                                             }
                                         </select>
@@ -255,8 +255,8 @@ export default function CreateGame() {
                                                 ? <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
                                                     <Checkbox
                                                         id="chatCheck"
-                                                        checked={gameState.Chat}
-                                                        onClick={e => setGameState({ ...gameState, Chat: !gameState.Chat })}
+                                                        checked={gameState.ChatEnabled}
+                                                        onClick={e => setGameState({ ...gameState, ChatEnabled: !gameState.ChatEnabled })}
                                                         color={'secondary'}
                                                     />
                                                 </div>
@@ -264,7 +264,7 @@ export default function CreateGame() {
                                         }
                                     </>
                                     : state.page === 2
-                                        ? gameState.Type > 1 && gameState.Type < 5
+                                        ? gameState.Model > 1 && gameState.Model < 5
                                             ? <>
                                                 <label htmlFor="range1">Od</label>
                                                 <input id="range1" type="number" value={oneTwoState.MinValue} onChange={e => setOneTwoState({ ...oneTwoState, MinValue: parseInt(e.target.value) })} />

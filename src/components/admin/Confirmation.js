@@ -52,7 +52,7 @@ export default function Confirmation({ game, strategies, range }) {
                 }
             })
             .then(response => {
-                if (game.Type < 5)
+                if (game.Model < 5)
                     history.push("/allGames");
                 else {
                     history.push(`/Payoffs/${response}`);
@@ -88,7 +88,7 @@ export default function Confirmation({ game, strategies, range }) {
                             }</p>
                         </div>
                         {
-                            game.Type > 1 && game.Type < 4
+                            game.Model > 1 && game.Model < 4
                                 ? <>
                                     <div className="statWrap" >
                                         <p>Minimalna vrednost:</p>

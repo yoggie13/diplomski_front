@@ -20,7 +20,7 @@ export default function AllGames() {
         setLoadingState(true)
 
         fetch(
-            'http://localhost:46824/api/admin/games',
+            'http://localhost:46824/api/game/all',
             {
                 method: "GET",
                 mode: "cors",
