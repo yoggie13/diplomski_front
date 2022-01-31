@@ -86,7 +86,7 @@ export default function Payoffs() {
         }
 
         fetch(
-            `http://localhost:46824/api/${gameID}/addPayoffs`,
+            `http://localhost:46824/api/game/${gameID}/addPayoffs`,
             {
                 method: "POST",
                 mode: "cors",

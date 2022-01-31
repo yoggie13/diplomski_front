@@ -308,7 +308,11 @@ export default function CreateGame() {
                                                     < i className="fas fa-plus" onClick={e => addNew(e, 1)} ></i>
                                                 </div >
                                                 <div className="StrategyInput" id="secondPlayerStrategies">
-                                                    <h2>Strategije drugog igrača</h2>
+                                                    {
+                                                        gameState.Model === 1
+                                                            ? <h2>Strategije grupe</h2>
+                                                            : <h2>Strategije drugog igrača</h2>
+                                                    }
                                                     {
                                                         strategiesState.secondPlayerStrategies.map((strategy, index) => {
                                                             return <div className="Strategy">

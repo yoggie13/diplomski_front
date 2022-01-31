@@ -52,7 +52,7 @@ export default function Confirmation({ game, strategies, range }) {
                 }
             })
             .then(response => {
-                if (game.Model < 5)
+                if (game.Model > 1 && game.Model < 5)
                     history.push("/allGames");
                 else {
                     history.push(`/Payoffs/${response}`);
@@ -123,7 +123,11 @@ export default function Confirmation({ game, strategies, range }) {
                                         </ul>
                                     </div>
                                     <div className="StrategyShow" id="secondPlayerStrategies">
-                                        <h3>Strategije drugog igrača</h3>
+                                        {
+                                            game.Model === 1
+                                                ? <h3>Strategije grupe</h3>
+                                                : <h3>Strategije drugog igrača</h3>
+                                        }
                                         <ul>{
                                             strategies.secondPlayerStrategies.map((strategy) => {
                                                 if (strategy.FirstOrSecondPlayer === 2) {

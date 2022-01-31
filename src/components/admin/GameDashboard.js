@@ -100,7 +100,7 @@ export default function GameDashboard() {
         setLoadingState(true);
 
         fetch(
-            `http://localhost:46824/api/admin/game/${gameState.id}`,
+            `http://localhost:46824/api/game/${gameState.id}`,
             {
                 method: "DELETE",
                 mode: "cors",
@@ -165,13 +165,12 @@ export default function GameDashboard() {
                                 <div className="PieWithInfo">
                                     <PieChart
                                         animate={true}
-                                        data={gameState.strategiesPlayerOne}
+                                        data={gameState.firstPlayerStrategies}
                                         label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-
                                     />
                                     <ul>
                                         {
-                                            gameState.strategiesPlayerOne.map((strategy, index) =>
+                                            gameState.firstPlayerStrategies.map((strategy, index) =>
                                                 <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
                                             )
                                         }
@@ -185,13 +184,12 @@ export default function GameDashboard() {
                                         <div className="PieWithInfo">
                                             <PieChart
                                                 animate={true}
-                                                data={gameState.strategiesPlayerTwo}
+                                                data={gameState.secondPlayerStrategies}
                                                 label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-
                                             />
                                             <ul>
                                                 {
-                                                    gameState.strategiesPlayerTwo.map((strategy, index) =>
+                                                    gameState.secondPlayerStrategies.map((strategy, index) =>
                                                         <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
                                                     )
                                                 }
