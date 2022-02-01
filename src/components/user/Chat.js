@@ -47,9 +47,13 @@ export default function Chat({ id, userID }) {
 
     }, [state.renderChat])
 
-
     const sendMessage = e => {
         e.preventDefault();
+
+        if (message.messageText === null || message.messageText.match(/^ *$/) !== null) {
+            alert("Morate uneti tekst");
+            return;
+        }
 
         setLoadingState(true);
 
@@ -81,18 +85,22 @@ export default function Chat({ id, userID }) {
             });
     }
 
-
     const changeMessage = e => {
         e.preventDefault();
 
-        setMessageState({ ...message, messageText: e.target.value });
+        if (e.target.value.endsWith('\n'))
+            sendMessage(e);
+        else
+            setMessageState({ ...message, messageText: e.target.value });
     }
+
     return (
         <div className="Chat">
             {
                 state.renderChat
                     ? <div id="chatOpened">
-                        <div id="taskbar">
+                        <div id="taskbar" onClick={handleClick}>
+                            <small>Anonimni chat</small>
                             <i className="fas fa-times" onClick={handleClick}></i>
                         </div>
                         <hr></hr>

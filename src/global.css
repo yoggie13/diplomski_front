@@ -716,9 +716,15 @@ td {
 #taskbar {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 5px;
   margin-right: 10px;
+}
+#taskbar:hover {
+  cursor: pointer;
+}
+#taskbar small {
+  margin-left: 20px;
 }
 hr {
   margin: 5px 0px 5px 0px;
@@ -735,23 +741,27 @@ hr {
 }
 #Messages p {
   word-wrap: break-word;
+  width: fit-content;
   max-width: 45%;
   height: fit-content;
   background-color: #0d63e3;
   border-radius: 5px;
   color: white;
-  padding: 5px;
+  padding: 5px 7px 5px 7px;
   text-align: left;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
-
 #Messages .Opponent {
-  justify-content: flex-start;
+  justify-self: start;
   margin-left: 10px;
+  padding-right: 9px;
 }
 #Messages .Player {
-  justify-content: flex-end;
+  justify-self: end;
   margin-right: 10px;
-  margin-left: 55%;
+  margin-left: auto;
+  padding-left: 9px;
 }
 #sendMessage {
   display: flex;
