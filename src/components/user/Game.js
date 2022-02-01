@@ -6,7 +6,7 @@ import Chat from './Chat';
 import Loading from '../Loading';
 
 export default function Game({ userID }) {
-    const [state, setstate] = useState({ checkedStrategy: "" });
+    const [checkedStrategyState, setCheckedStrategyState] = useState();
     const [gameState, setGameState] = useState({ game: null });
     const [loadingState, setLoadingState] = useState(true);
 
@@ -19,37 +19,34 @@ export default function Game({ userID }) {
     }, []);
 
     const handleCheck = id => {
-        setstate({ ...state, checkedStrategy: id });
+        setCheckedStrategyState(id);
     }
+
     const handleInput = event => {
         var number = event.target.value;
-        if (event.target.value < parseInt(gameState.game.strategies[0].strategyName))
-            number = parseInt(gameState.game.strategies[0].strategyName);
-        if (event.target.value > parseInt(gameState.game.strategies[gameState.game.strategies.length - 1].strategyName))
-            number = parseInt(gameState.game.strategies[gameState.game.strategies.length - 1].strategyName);
-
-        setstate({ checkedStrategy: number })
+        if (event.target.value < parseInt(gameState.game.minValue))
+            number = parseInt(gameState.game.minValue);
+        if (event.target.value > parseInt(gameState.game.maxValue))
+            number = parseInt(gameState.game.maxValue);
+        setCheckedStrategyState(number)
     }
 
-    const getStrategyID = e => {
-
-        if (gameState.game.type < 5) {
-            for (let i = 0; i < gameState.game.strategies.length; i++) {
-                if (gameState.game.strategies[i].strategyName === state.checkedStrategy) {
-                    return gameState.game.strategies[i].strategyID;
-                }
-            }
-
+    const getStrategy = e => {
+        if (gameState.game.type == 2 || gameState.game.type == 4) {
+            return JSON.stringify({
+                "number": parseInt(checkedStrategyState)
+            })
         }
         else {
-
-            return parseInt(state.checkedStrategy);
+            return JSON.stringify({
+                "Strategy": {
+                    "ID": parseInt(checkedStrategyState)
+                }
+            })
         }
     }
 
-
     useEffect(() => {
-
         setLoadingState(true)
         fetch(
 
@@ -88,7 +85,7 @@ export default function Game({ userID }) {
     const playAGame = e => {
         e.preventDefault();
 
-        if (state.checkedStrategy === "" || state.checkedStrategy === null || state.checkedStrategy === undefined) {
+        if (checkedStrategyState === "" || checkedStrategyState === null || checkedStrategyState === undefined) {
             alert("Morate uneti ispravnu strategiju");
             return;
         }
@@ -102,9 +99,7 @@ export default function Game({ userID }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    ID: getStrategyID()
-                })
+                body: getStrategy()
             })
             .then(res => {
                 if (res.status === 200) {
@@ -156,7 +151,7 @@ export default function Game({ userID }) {
                                                             id={`${strategy.strategyID}`}
                                                             name="Strategy"
                                                             value={`${strategy.strategyID}`}
-                                                            checked={state.checkedStrategy === `${strategy.strategyID}`}
+                                                            checked={checkedStrategyState === `${strategy.strategyID}`}
                                                             onChange={e => handleCheck(e.target.id)}
                                                             required={true}
                                                         />
@@ -168,7 +163,7 @@ export default function Game({ userID }) {
                                     </div>
                                     : <>
                                         <label htmlFor="numberInput">Unesite broj</label>
-                                        <input type="number" id="numberInput" value={state.checkedStrategy} onChange={handleInput} min={gameState.game.constraintValues.minValue} max={gameState.game.constraintValues.maxValue} />
+                                        <input type="number" id="numberInput" value={checkedStrategyState} onChange={handleInput} min={gameState.game.minValue} max={gameState.game.maxValue} />
                                     </>
                             }
                             <div className="ButtonsAlignRight">

@@ -88,7 +88,7 @@ export default function Confirmation({ game, strategies, range }) {
                             }</p>
                         </div>
                         {
-                            game.Model > 1 && game.Model < 4
+                            game.Model > 1 && game.Model < 5
                                 ? <>
                                     <div className="statWrap" >
                                         <p>Minimalna vrednost:</p>
