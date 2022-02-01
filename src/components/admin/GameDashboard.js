@@ -119,8 +119,6 @@ export default function GameDashboard() {
                 else {
                     alert(res.statusText)
                 }
-
-
             })
             .catch(error => {
                 alert("Nije uspelo");

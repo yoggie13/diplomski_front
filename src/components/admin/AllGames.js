@@ -3,10 +3,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
 
-function checkDate(dueDate) {
-    return Date.parse(dueDate) > Date.now();
-}
-
 export default function AllGames() {
 
     const [gamesState, setGamesState] = useState({ games: [] });
@@ -42,7 +38,6 @@ export default function AllGames() {
 
     }, [])
 
-
     return (
         loadingState
             ? <Loading />
@@ -64,7 +59,7 @@ export default function AllGames() {
                                     <td>{game.name}</td>
                                     <td>{game.playersPlayed}</td>
                                     <td id="center">{
-                                        checkDate(game.dueDate)
+                                        game.active
                                             ? <i className="fas fa-check-circle" id="icon-true"></i>
                                             : <i className="fas fa-times-circle" id="icon-false"></i>
                                     }
