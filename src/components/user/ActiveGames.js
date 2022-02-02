@@ -42,7 +42,6 @@ export default function ActiveGames({ userID }) {
                 console.log(error);
                 setLoadingState(false);
             })
-
     }, [])
 
     return (

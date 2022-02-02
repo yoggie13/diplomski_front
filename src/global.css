@@ -194,54 +194,20 @@ i:hover {
   word-wrap: break-word;
 }
 
-.PieCharts {
-  height: 300px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+.Charts {
   margin-top: 22px;
+  display: grid;
+  grid-template-columns: auto;
+  margin-bottom: 20px;
 }
-.PieWithInfo {
-  height: 200px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.PieWithInfo ul {
-  padding-left: 0px;
-  margin-left: 20px;
-  list-style-type: none;
+.Charts #firstPlayer {
+  grid-column: 1;
   margin-right: 10px;
-  margin-top: 30px;
-  font-size: 20px;
 }
-
-.PieWithInfo ul li::before {
-  content: "■";
-  width: 20px;
-  margin-left: -5px;
-  margin-right: 5px;
+.Charts #secondPlayer {
+  grid-column: 2;
+  margin-left: 10px;
 }
-
-#color0d63e3::before {
-  color: #0d63e3;
-}
-#colore30d63::before {
-  color: #e30d63;
-}
-#colorc2b0a55::before {
-  color: #2b0a55;
-}
-#colore38e0d::before {
-  color: #e38e0d;
-}
-#color0dcee3::before {
-  color: #0dcee3;
-}
-#colorcee30d::before {
-  color: #cee30d;
-}
-
 svg text {
   font-size: 10px;
   color: white !important;
@@ -826,7 +792,7 @@ hr {
     max-width: 90%;
     right: 5%;
   }
-  .PieCharts {
+  .Charts {
     display: block;
   }
   #dashboardButtons {

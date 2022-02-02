@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router';
-import { PieChart } from 'react-minimal-pie-chart'
+// import { PieChart } from 'react-minimal-pie-chart';
+import CanvasJSReact from '../../assets/canvasjs.react';
 import Loading from '../Loading';
 
 function formatDate(dueDate) {
@@ -13,6 +14,10 @@ function formatDate(dueDate) {
 function checkDate(dueDate) {
     return Date.parse(dueDate) > Date.now();
 }
+
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
 export default function GameDashboard() {
 
     useEffect(() => {
@@ -20,6 +25,7 @@ export default function GameDashboard() {
     }, []);
 
     const [gameState, setGameState] = useState({});
+    const [dataState, setDataState] = useState({ optionsFirst: {}, optionsSecond: false });
     const [loadingState, setLoadingState] = useState(true);
     const [refreshState, setRefreshState] = useState(true);
 
@@ -28,9 +34,7 @@ export default function GameDashboard() {
     const [apiState, setApiState] = useState(gameID.id === undefined ? "dashboard" : `game/${gameID.id}`)
 
     useEffect(() => {
-
         if (refreshState) {
-
             setLoadingState(true);
             fetch(
 
@@ -50,6 +54,7 @@ export default function GameDashboard() {
                 })
                 .then(response => {
                     setGameState(response);
+                    createOptions(response);
                     setRefreshState(false);
                     setLoadingState(false);
                 })
@@ -59,8 +64,35 @@ export default function GameDashboard() {
                     setLoadingState(false);
                 })
         }
-
     }, [refreshState])
+
+    const createOptions = response => {
+        const optionsOne = {
+            title: {
+                text: "Odigrane strategije"
+            },
+            data: [
+                {
+                    type: response.firstPlayerStrategies.length > 5 ? "column" : "pie",
+                    dataPoints: response.firstPlayerStrategies
+                }
+            ]
+        }
+        var optionsTwo = false;
+        if (response.hasOwnProperty('secondPlayerStrategies'))
+            optionsTwo = {
+                title: {
+                    text: "Odigrane strategije"
+                },
+                data: [
+                    {
+                        type: response.firstPlayerStrategies.length > 5 ? "column" : "pie",
+                        dataPoints: response.secondPlayerStrategies
+                    }
+                ]
+            }
+        setDataState({ ...dataState, optionsFirst: optionsOne, optionsSecond: optionsTwo });
+    }
 
     const finishGame = e => {
         e.preventDefault();
@@ -111,7 +143,9 @@ export default function GameDashboard() {
             .then(res => {
                 if (res.status === 200) {
                     alert("Igra obrisana");
-                    history.push('/dashboard');
+                    gameID.id = undefined;
+                    setApiState("dashboard");
+                    history.push('/allGames');
                     setRefreshState(true);
                     setLoadingState(false);
                     return;
@@ -124,7 +158,6 @@ export default function GameDashboard() {
                 alert("Nije uspelo");
                 setLoadingState(false);
             })
-
     }
 
     return (
@@ -157,46 +190,23 @@ export default function GameDashboard() {
                             </div>
                             <hr></hr>
                         </div>
-                        <div className="PieCharts">
-                            <div id="firstPlayer">
+                        <div className='Charts'>
+                            <div id='firstPlayer'>
                                 <h2>Prvi igrač</h2>
-                                <div className="PieWithInfo">
-                                    <PieChart
-                                        animate={true}
-                                        data={gameState.firstPlayerStrategies}
-                                        label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-                                    />
-                                    <ul>
-                                        {
-                                            gameState.firstPlayerStrategies.map((strategy, index) =>
-                                                <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
-                                            )
-                                        }
-                                    </ul>
+                                <div className="Chart">
+                                    <CanvasJSChart options={dataState.optionsFirst} />
                                 </div>
                             </div>
                             {
-                                gameState.hasSecondPlayer
-                                    ? <div id="secondPlayer">
+                                dataState.optionsSecond !== false
+                                    ? <div id='secondPlayer'>
                                         <h2>Drugi igrač</h2>
-                                        <div className="PieWithInfo">
-                                            <PieChart
-                                                animate={true}
-                                                data={gameState.secondPlayerStrategies}
-                                                label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-                                            />
-                                            <ul>
-                                                {
-                                                    gameState.secondPlayerStrategies.map((strategy, index) =>
-                                                        <li id={`color${strategy.color.split('#')[1]}`} key={index}>{strategy.title}</li>
-                                                    )
-                                                }
-                                            </ul>
+                                        <div className="Chart">
+                                            <CanvasJSChart options={dataState.optionsSecond} />
                                         </div>
                                     </div>
                                     : null
                             }
-
                         </div>
                         <div className="ButtonsAlignRight" id="dashboardButtons">
                             {
