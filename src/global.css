@@ -764,7 +764,29 @@ hr {
 .ButtonsAlignRight button {
   width: 150px;
 }
+.notificationDiv {
+  color: #2b0a55;
+  right: 80px;
+  top: 45px;
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+}
 
+.notificationCount {
+  width: 10px;
+  height: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  color: white;
+  background-color: #e30d38;
+  border-radius: 50%;
+  right: 10px;
+  top: 5px;
+  position: relative;
+}
 @media screen and (max-width: 900px) {
   .Homepage {
     margin-top: 60px;
@@ -778,6 +800,11 @@ hr {
     font-size: 22px;
     margin-left: 0px;
   }
+  .notificationDiv {
+    right: 17.5px;
+    top: 22.5px;
+  }
+
   .Panel {
     grid-template-columns: 5vw 90vw;
   }
