@@ -70,6 +70,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
                             <th>Ime i prezime</th>
                             <th>Indeks</th>
                             <th>Broj poena</th>
+                            <th>Odigranih igara</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,6 +81,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
                                     <td>{student.studentName}</td>
                                     <td>{student.studentID}</td>
                                     <td>{student.pointsTotal}</td>
+                                    <td>{student.countTotal}</td>
                                 </tr>
                             )
                         }
