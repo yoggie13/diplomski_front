@@ -60,7 +60,6 @@ i:hover {
   display: grid;
   grid-template-rows: 7vh 93vh;
 }
-
 .Panel a {
   color: white;
   text-decoration: none;
@@ -217,7 +216,6 @@ svg text {
   flex-direction: column;
   align-items: flex-end;
 }
-
 .FormClass {
   display: flex;
   flex-direction: column;
@@ -762,7 +760,8 @@ hr {
   align-items: flex-end;
 }
 .ButtonsAlignRight button {
-  width: 150px;
+  max-width: 160px;
+  width: fit-content;
 }
 .notificationDiv {
   color: #2b0a55;
@@ -787,6 +786,120 @@ hr {
   top: 5px;
   position: relative;
 }
+.CreateQuiz {
+  padding-bottom: 70px;
+}
+#CreateQuizIcon {
+  margin-left: 50%;
+}
+.Question {
+  margin-bottom: 20px;
+  border: solid 1px lightgray;
+  border-radius: 10px;
+  padding: 20px;
+}
+.QuestionBody {
+  padding-left: 40px;
+}
+.QuestionIconsArray {
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.QuestionIconsArray select {
+  font-family: "FontAwesome", "Varela";
+}
+.QuestionIconsArray i {
+  margin: 10px 15px 10px 15px;
+}
+.css-1s2u09g-control {
+  width: 250px;
+}
+.css-1pahdxg-control {
+  width: 250px;
+}
+.AnswersTable {
+  max-width: 100%;
+}
+/* .QuestionIconsArray label {
+  margin-left:
+} */
+.QuestionIconsArray i:hover {
+  color: #e30d63;
+}
+.ClosedQuestion {
+  border: lightgray 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.ClosedQuestion h2 {
+  margin: 0px;
+  align-self: center;
+}
+.ClosedQuestion i {
+  border-radius: 50%;
+  border: #2b0a55 solid 1px;
+  padding: 3px 7px 3px 8px;
+  margin-right: 10px;
+}
+.QuestionHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.QuestionHeader h2 {
+  margin: 0px;
+  align-self: center;
+}
+#chevron-down {
+  border-radius: 50%;
+  border: #2b0a55 solid 1px;
+  padding: 3px 7px 3px 8px;
+  margin-right: 10px;
+  transform: rotate(90deg);
+}
+.QuestionHeader:hover {
+  cursor: pointer;
+}
+.QuestionHeader:hover #chevron-down {
+  transform: rotate(0deg);
+}
+.ClosedQuestion:hover {
+  cursor: pointer;
+}
+.ClosedQuestion:hover .fas.fa-chevron-right {
+  transform: rotate(90deg);
+}
+.AnswersTable {
+  margin-top: 30px;
+  width: 600px;
+}
+.AnswersTable td {
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+.AnswersTable th {
+  text-align: left;
+}
+#question-positive-points {
+  display: flex;
+  flex-direction: row;
+}
+#question-positive-points input {
+  max-width: 40px;
+  margin-left: 20px;
+  text-align: right;
+  padding: 0px;
+}
 @media screen and (max-width: 900px) {
   .Homepage {
     margin-top: 60px;
@@ -804,7 +917,12 @@ hr {
     right: 17.5px;
     top: 22.5px;
   }
-
+  .css-1s2u09g-control {
+    width: 100%;
+  }
+  .css-1pahdxg-control {
+    width: 100%;
+  }
   .Panel {
     grid-template-columns: 5vw 90vw;
   }
@@ -838,6 +956,9 @@ hr {
   .FormClass form {
     height: 300px;
     width: 300px;
+  }
+  .AnswersTable {
+    width: 100%;
   }
 }
 

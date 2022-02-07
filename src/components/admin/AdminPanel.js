@@ -12,6 +12,7 @@ import Payoffs from './Payoffs.js';
 import UserInfo from '../UserInfo.js';
 import Error from '../Error.js';
 import ChangePassword from '../ChangePassword.js';
+import CreateQuiz from './CreateQuiz.js';
 
 export default function AdminPanel({ isAdmin, user }) {
     return (
@@ -23,7 +24,7 @@ export default function AdminPanel({ isAdmin, user }) {
                 <AllTables />
             </Route><Route path='/dashboard/:id' children={<GameDashboard />} />
             <Route path='/dashboard/' children={<GameDashboard />} />
-            <Route path='/createGame'>
+            <Route path='/create/game'>
                 <CreateGame />
             </Route>
             <Route path='/Payoffs/:id' children={<Payoffs />} />
@@ -32,6 +33,9 @@ export default function AdminPanel({ isAdmin, user }) {
             </Route>
             <Route path="/changePassword" >
                 <ChangePassword userID={user.id} />
+            </Route>
+            <Route path="/create/quiz" >
+                <CreateQuiz userID={user.id} />
             </Route>
             <Route path="*">
                 <Error />
