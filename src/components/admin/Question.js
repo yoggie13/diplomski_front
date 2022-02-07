@@ -3,8 +3,8 @@ import Answers from './Answers';
 import { Checkbox } from '@material-ui/core';
 import { useEffect } from 'react';
 
-export default function Question({ question, index, handleText, closeQuestion, setPoints, updateAnswers, updateNegative }) {
-    const [answersState, setAnswersState] = useState(question.answers);
+export default function Question({ question, index, handleText, closeQuestion, setPoints, updateAnswers, updateNegative, updateType }) {
+    const [answersState, setAnswersState] = useState(question.Answers);
 
     const getAnswerState = () => {
         return answersState;
@@ -19,6 +19,13 @@ export default function Question({ question, index, handleText, closeQuestion, s
         updateNegative(index, negativePoints)
     }, [negativePoints])
 
+    const getType = () => {
+        return question.Type;
+    }
+    const updateQuestionType = e => {
+        updateType(e, index);
+    }
+
     return (
         <div className='Question'>
             <div className='QuestionHeader' onClick={e => {
@@ -31,15 +38,19 @@ export default function Question({ question, index, handleText, closeQuestion, s
             <div className='QuestionBody'>
                 {/* <i class="far fa-image fa-lg" id='image'></i> */}
                 <label htmlFor='question-text'>Unesite tekst</label>
-                <textarea id='question-text' value={question.text} onChange={e => handleText(e, index)} />
-                <Answers getAnswerState={getAnswerState} setAnswersState={setAnswersState} />
+                <textarea id='question-text' value={question.Text} onChange={e => handleText(e, index)} />
+                <Answers
+                    getAnswerState={getAnswerState}
+                    setAnswersState={setAnswersState}
+                    getType={getType}
+                    updateType={updateQuestionType} />
                 <div id='question-positive-points'>
                     {
                         answersState === 'multi-choice'
                             ? <p>Koliko poena nose tačni odgovori</p>
                             : <p>Koliko poena nosi tačan odgovor</p>
                     }
-                    <input type='number' value={question.points} onChange={e => setPoints(e, index)} id='positive-points'></input>
+                    <input type='number' value={question.Points} onChange={e => setPoints(e, index)} id='positive-points'></input>
                 </div>
                 <div id='question-negative-points'>
                     Da li pitanje ima negativne poene?

@@ -7,6 +7,7 @@ import AllGames from './AllGames.js';
 import AllTables from './AllTables.js';
 import Confirmation from './Confirmation.js';
 import CreateGame from './CreateGame.js';
+import Create from './Create.js';
 import GameDashboard from './GameDashboard.js';
 import Payoffs from './Payoffs.js';
 import UserInfo from '../UserInfo.js';
@@ -35,7 +36,16 @@ export default function AdminPanel({ isAdmin, user }) {
                 <ChangePassword userID={user.id} />
             </Route>
             <Route path="/create/quiz" >
-                <CreateQuiz userID={user.id} />
+                <CreateQuiz />
+            </Route>
+            <Route path="/create/game" >
+                <CreateGame />
+            </Route>
+            <Route path="/confirmation" >
+                <Confirmation />
+            </Route>
+            <Route path="/create" >
+                <Create />
             </Route>
             <Route path="*">
                 <Error />

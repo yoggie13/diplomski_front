@@ -1,47 +1,85 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Question from './Question';
 import { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function CreateQuiz() {
+
+    let history = useHistory();
+    var gameMainInfo = useLocation().state.gameMainInfo;
+
     const [questionsState, setQuestionsState] = useState({
         arr: [
             {
+                ID: 1,
                 show: true,
-                text: "",
-                answers: {
-                    type: null,
-                    arr: [
-                        {
-                            id: 1,
-                            text: "",
-                            right: false
-                        }
-                    ]
-                },
-                points: 0,
-                negativePoints: false
+                Text: "",
+                Type: null,
+                Answers: [
+                    {
+                        ID: 1,
+                        Text: "",
+                        Right: false
+                    }
+                ],
+                Points: 0,
+                NegativePoints: false
             }
         ]
     })
+
+    const saveQuiz = () => {
+        console.log(questionsState);
+        gameMainInfo.Questions = questionsState.arr;
+
+        fetch(
+            'http://localhost:46824/api/game/create',
+            {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:
+                    JSON.stringify({
+                        "game": gameMainInfo,
+                    })
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    alert("Sačuvano");
+                    localStorage.removeItem("Game");
+                    return res.json();
+                }
+                else {
+                    throw new Error();
+                }
+            })
+            .then(response => {
+                history.push('/allGames');
+            }).catch(error => {
+
+            })
+
+    }
     const addNew = e => {
         e.preventDefault();
         var questions = questionsState.arr;
 
         questions.push({
             show: true,
-            text: "",
-            answers: {
-                type: null,
-                arr: [
-                    {
-                        id: 1,
-                        text: "",
-                        right: false
-                    }
-                ]
-            },
-            points: 0,
-            negativePoints: false
+            ID: questions.length + 1,
+            Text: "",
+            Type: null,
+            Answers: [
+                {
+                    ID: 1,
+                    Text: "",
+                    Right: false
+                }
+            ],
+            Points: 0,
+            NegativePoints: false
         });
 
         changeShow(null, questions.length - 1)
@@ -53,7 +91,7 @@ export default function CreateQuiz() {
         e.preventDefault();
 
         var questions = questionsState.arr;
-        questions[index].points = e.target.value;
+        questions[index].Points = e.target.value;
 
         setQuestionsState({ ...questionsState, arr: questions });
     }
@@ -62,7 +100,7 @@ export default function CreateQuiz() {
         e.preventDefault();
 
         var questions = questionsState.arr;
-        questions[index].text = e.target.value;
+        questions[index].Text = e.target.value;
 
         setQuestionsState({ ...questionsState, arr: questions });
     }
@@ -86,15 +124,21 @@ export default function CreateQuiz() {
 
         questions[index].show = false;
 
-        setQuestionsState({ ...questionsState, questions });
+        setQuestionsState({ ...questionsState, arr: questions });
     }
     const updateNegative = (index, value) => {
-        questionsState.arr[index].negativePoints = value;
+        questionsState.arr[index].NegativePoints = value;
     }
 
     const updateAnswers = (index, answers) => {
         var questions = questionsState.arr;
-        questions[index].answers = answers;
+        questions[index].Answers = answers;
+        setQuestionsState({ ...questionsState, arr: questions });
+    }
+    const updateType = (e, index) => {
+        var questions = questionsState.arr;
+        questions[index].Type = e;
+
         setQuestionsState({ ...questionsState, arr: questions });
     }
     return (
@@ -112,6 +156,7 @@ export default function CreateQuiz() {
                                 setPoints={setPoints}
                                 updateAnswers={updateAnswers}
                                 updateNegative={updateNegative}
+                                updateType={updateType}
                             />
                             : <div className='ClosedQuestion' onClick={e => changeShow(e, index)}>
                                 <i className="fas fa-chevron-right"></i>
@@ -124,7 +169,7 @@ export default function CreateQuiz() {
             <div className="ButtonsAlignRight">
                 <button id="createQuizButton" onClick={e => {
                     e.preventDefault();
-                    console.log(questionsState)
+                    saveQuiz();
                 }
                 }>Unesite kviz</button>
             </div>

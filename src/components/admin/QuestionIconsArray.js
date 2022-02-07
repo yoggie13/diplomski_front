@@ -6,9 +6,9 @@ import Select from 'react-select';
 export default function QuestionIconsArray({ value, handleChoiceCheck }) {
 
   const options = [
-    { value: "text", label: <>Tekst <FontAwesomeIcon icon={faKeyboard} id='text' /></> },
-    { value: "single-choice", label: <>Jedan odgovor <FontAwesomeIcon icon={faCheckCircle} /></> },
-    { value: "multi-choice", label: <>Više odgovora <FontAwesomeIcon icon={faCheckSquare} /></> },
+    { value: 0, label: <>Tekst <FontAwesomeIcon icon={faKeyboard} id='text' /></> },
+    { value: 1, label: <>Jedan odgovor <FontAwesomeIcon icon={faCheckCircle} /></> },
+    { value: 2, label: <>Više odgovora <FontAwesomeIcon icon={faCheckSquare} /></> },
   ]
   const getValue = () => {
     if (value === null)

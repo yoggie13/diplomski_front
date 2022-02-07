@@ -1,50 +1,52 @@
 import { Checkbox, Radio } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
 import QuestionIconsArray from './QuestionIconsArray';
 
-export default function Answers({ getAnswerState, setAnswersState }) {
+export default function Answers({ getAnswerState, setAnswersState, getType, updateType }) {
+
+    console.log(getAnswerState())
 
     const handleChoiceCheck = (e) => {
-        var answers = getAnswerState().arr;
-        answers.forEach(a => a.right = false);
+        var answers = [...getAnswerState()];
+        answers.forEach(a => a.Right = false);
 
-        setAnswersState({ ...getAnswerState(), type: e, arr: answers })
+        setAnswersState(answers)
+        updateType(e);
     }
 
     const changeCheck = (e, index) => {
         e.preventDefault();
-        var answers = getAnswerState().arr;
+        var answers = [...getAnswerState()];
 
-        if (getAnswerState().type === 'single-choice') {
-            answers.forEach(a => a.right = false);
-            answers[index].right = true;
+        if (getType() === 1) {
+            answers.forEach(a => a.Right = false);
+            answers[index].Right = true;
         }
-        else if (getAnswerState().type === 'multi-choice') {
-            answers[index].right = !answers[index].right
+        else if (getType() === 2) {
+            answers[index].Right = !answers[index].Right
         }
 
-        setAnswersState({ ...getAnswerState(), arr: answers })
+        setAnswersState(answers)
     }
 
     const changeText = (e, index) => {
         e.preventDefault();
 
-        var answers = getAnswerState().arr;
-        answers[index].text = e.target.value;
+        var answers = [...getAnswerState()];
+        answers[index].Text = e.target.value;
 
-        setAnswersState({ ...getAnswerState(), arr: answers });
+        setAnswersState(answers)
     }
     const deleteAnswer = (e, index) => {
         e.preventDefault();
 
-        var answers = getAnswerState().arr;
+        var answers = [...getAnswerState()];
 
-        var removed = false
+        var removed = false;
         for (let i = 0; i < answers.length; i++) {
             if (i < index)
                 continue;
             else if (removed)
-                answers[i].id--;
+                answers[i].ID--;
             else if (i === index && !removed) {
                 answers.splice(i, 1);
                 i--;
@@ -52,26 +54,24 @@ export default function Answers({ getAnswerState, setAnswersState }) {
             }
         }
 
-        setAnswersState({ ...getAnswerState(), arr: answers });
+        setAnswersState(answers)
     }
     const addNew = (e) => {
         e.preventDefault();
 
-        var answers = getAnswerState().arr;
-
+        var answers = [...getAnswerState()];
         answers.push(
             {
-                id: answers.length + 1,
-                text: "",
-                right: false
+                ID: answers.length + 1,
+                Text: "",
+                Right: false
             })
-        setAnswersState({ ...getAnswerState(), arr: answers });
-
+        setAnswersState(answers)
     }
 
     return (
         <div className='Answers'>
-            <QuestionIconsArray value={getAnswerState().type} handleChoiceCheck={e => handleChoiceCheck(e)} />
+            <QuestionIconsArray value={getType()} handleChoiceCheck={e => handleChoiceCheck(e)} />
             <table className='AnswersTable'>
                 <thead>
                     <th id='center'>
@@ -81,7 +81,7 @@ export default function Answers({ getAnswerState, setAnswersState }) {
                         Odgovor
                     </th>
                     {
-                        getAnswerState().type === 'single-choice' || getAnswerState().type === 'multi-choice'
+                        getType() === 1 || getType() === 2
                             ? <th id='center'>
                                 Tačan?
                             </th>
@@ -90,28 +90,28 @@ export default function Answers({ getAnswerState, setAnswersState }) {
                 </thead>
                 <tbody>
                     {
-                        getAnswerState().arr.map((answer, index) =>
+                        getAnswerState().map((answer, index) =>
                             <tr>
                                 <td id='center'>
-                                    {answer.id}.
+                                    {answer.ID}.
                                 </td>
                                 <td>
-                                    <input type='text' value={getAnswerState().arr[index].text} onChange={e => changeText(e, index)} />
+                                    <input type='text' value={getAnswerState()[index].text} onChange={e => changeText(e, index)} />
                                 </td>
                                 <td id='center'>
                                     {
-                                        getAnswerState().type === 'single-choice'
+                                        getType() === 1
                                             ? < Radio
                                                 id={answer.id}
                                                 key={index}
-                                                checked={answer.right}
+                                                checked={answer.Right}
                                                 onClick={e => changeCheck(e, index)}
                                             />
-                                            : getAnswerState().type === 'multi-choice'
+                                            : getType() === 2
                                                 ? <Checkbox
                                                     id={answer.id}
                                                     key={index}
-                                                    checked={answer.right}
+                                                    checked={answer.Right}
                                                     onClick={e => changeCheck(e, index)}
                                                 />
                                                 : null

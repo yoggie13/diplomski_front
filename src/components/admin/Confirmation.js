@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Loading from '../Loading';
 
 function formatDate(dueDate) {
@@ -10,7 +11,11 @@ function formatDate(dueDate) {
     return `${dayAndTime[0]}.${splitDate[1]}.${splitDate[0]} - ${dayAndTime[1]}`
 }
 
-export default function Confirmation({ game, strategies, range }) {
+export default function Confirmation() {
+
+    var game = useLocation().state.game;
+    var strategies = useLocation().state.strategies;
+    var range = useLocation().state.range;
 
     const [loadingState, setLoadingState] = useState(false);
     const data = {
