@@ -17,6 +17,7 @@ import Notifications from './Notifications.js';
 import NotificationBell from './NotificationBell.js';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Notification from './Notifications.js';
+import GameHolder from './GameHolder.js';
 
 export default function UserPanel({ user }) {
 
@@ -51,7 +52,7 @@ export default function UserPanel({ user }) {
                 <Route path="/activeGames">
                     <ActiveGames userID={user.id} />
                 </Route>
-                <Route path="/game/:id" children={<Game userID={user.id} />} />
+                <Route path="/game/:id" children={<GameHolder userID={user.id} />} />
                 <Route path="/profile">
                     <UserInfo user={user} />
                 </Route>

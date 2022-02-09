@@ -192,10 +192,36 @@ export default function GameDashboard() {
                         </div>
                         <div className='Charts'>
                             <div id='firstPlayer'>
-                                <h2>Prvi igrač</h2>
-                                <div className="Chart">
-                                    <CanvasJSChart options={dataState.optionsFirst} />
-                                </div>
+                                {
+                                    gameState.questions === undefined
+                                        ? <><h2>Prvi igrač</h2>
+                                            <div className="Chart">
+                                                <CanvasJSChart options={dataState.optionsFirst} />
+                                            </div>
+                                        </>
+                                        : <>
+                                            <h2>Odgovori</h2>
+                                            {
+                                                gameState.questions.map(question =>
+                                                    <div className='DashboardQuestion'>
+                                                        <h3>{question.id + ". pitanje: " + question.text}</h3>
+                                                        <div className='Chart'>
+                                                            <CanvasJSChart options={{
+                                                                title: {
+                                                                    text: ""
+                                                                },
+                                                                data: [
+                                                                    {
+                                                                        type: "column",
+                                                                        dataPoints: question.answers
+                                                                    }
+                                                                ]
+                                                            }} />
+                                                        </div>
+                                                    </div>
+                                                )}
+                                        </>
+                                }
                             </div>
                             {
                                 dataState.optionsSecond !== false
@@ -206,6 +232,42 @@ export default function GameDashboard() {
                                         </div>
                                     </div>
                                     : null
+                            }
+                        </div>
+                        <div className='Results'>
+                            <h2>Rezultati po igraču</h2>
+                            {
+                                gameState.results.length > 0
+                                    ? <table className='ResultsTable'>
+                                        <thead>
+                                            <tr>
+                                                <th>Indeks</th>
+                                                <th>Ime</th>
+                                                <th>Broj poena</th>
+                                                {
+                                                    gameState.questions === undefined ?
+                                                        <th>Odigrana strategija</th>
+                                                        : null
+                                                }
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                gameState.results.map(result =>
+                                                    <tr>
+                                                        <td>{result.id}</td>
+                                                        <td>{result.name}</td>
+                                                        <td>{result.points}</td>
+                                                        {
+                                                            gameState.questions === undefined
+                                                                ? <td> {result.strategy}</td>
+                                                                : null
+                                                        }
+                                                    </tr>
+                                                )}
+                                        </tbody>
+                                    </table>
+                                    : <p>Niko još nije odigrao</p>
                             }
                         </div>
                         <div className="ButtonsAlignRight" id="dashboardButtons">

@@ -8,6 +8,7 @@ export default function Notification({ user }) {
     const [notificationState, setNotificationState] = useState(false);
 
     useEffect(() => {
+        setLoadingState(true);
         fetch(
             `http://localhost:46824/api/user/notifications/${user.id}`,
             {
@@ -26,9 +27,11 @@ export default function Notification({ user }) {
             })
             .then(response => {
                 setNotificationState(response);
+                setLoadingState(false);
             })
             .catch(error => {
                 console.log(error);
+                setLoadingState(false);
             });
     }, []);
 

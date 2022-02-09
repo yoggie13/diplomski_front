@@ -3,11 +3,13 @@ import QuestionIconsArray from './QuestionIconsArray';
 
 export default function Answers({ getAnswerState, setAnswersState, getType, updateType }) {
 
-    console.log(getAnswerState())
-
     const handleChoiceCheck = (e) => {
         var answers = [...getAnswerState()];
-        answers.forEach(a => a.Right = false);
+
+        if (getType() === 0)
+            answers.forEach(a => a.Right = true);
+        else
+            answers.forEach(a => a.Right = false);
 
         setAnswersState(answers)
         updateType(e);

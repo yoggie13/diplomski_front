@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Question from './Question';
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import Loading from '../Loading';
 
 export default function CreateQuiz() {
 
     let history = useHistory();
     var gameMainInfo = useLocation().state.gameMainInfo;
+    const [loadingState, setLoadingState] = useState(false);
 
     const [questionsState, setQuestionsState] = useState({
         arr: [
@@ -29,8 +31,9 @@ export default function CreateQuiz() {
     })
 
     const saveQuiz = () => {
-        console.log(questionsState);
         gameMainInfo.Questions = questionsState.arr;
+
+        setLoadingState(true);
 
         fetch(
             'http://localhost:46824/api/game/create',
@@ -57,8 +60,10 @@ export default function CreateQuiz() {
             })
             .then(response => {
                 history.push('/allGames');
+                setLoadingState(false);
             }).catch(error => {
-
+                console.log(error);
+                setLoadingState(false);
             })
 
     }
@@ -144,35 +149,41 @@ export default function CreateQuiz() {
     return (
         <div className='CreateQuiz'>
             <h1>Kreiranje kviza</h1>
-            <form className='CreateQuizForm'>
-                {
-                    questionsState.arr.map((question, index) =>
-                        question.show
-                            ? <Question
-                                question={question}
-                                index={index}
-                                handleText={handleText}
-                                closeQuestion={closeQuestion}
-                                setPoints={setPoints}
-                                updateAnswers={updateAnswers}
-                                updateNegative={updateNegative}
-                                updateType={updateType}
-                            />
-                            : <div className='ClosedQuestion' onClick={e => changeShow(e, index)}>
-                                <i className="fas fa-chevron-right"></i>
-                                <h2>{index + 1}. pitanje</h2>
-                            </div>
-                    )
-                }
-            </form>
-            < i className="fas fa-plus fa-2x" id="CreateQuizIcon" onClick={e => addNew(e)} ></i>
-            <div className="ButtonsAlignRight">
-                <button id="createQuizButton" onClick={e => {
-                    e.preventDefault();
-                    saveQuiz();
-                }
-                }>Unesite kviz</button>
-            </div>
+            {
+                loadingState
+                    ? <Loading />
+                    : <>
+                        <form className='CreateQuizForm'>
+                            {
+                                questionsState.arr.map((question, index) =>
+                                    question.show
+                                        ? <Question
+                                            question={question}
+                                            index={index}
+                                            handleText={handleText}
+                                            closeQuestion={closeQuestion}
+                                            setPoints={setPoints}
+                                            updateAnswers={updateAnswers}
+                                            updateNegative={updateNegative}
+                                            updateType={updateType}
+                                        />
+                                        : <div className='ClosedQuestion' onClick={e => changeShow(e, index)}>
+                                            <i className="fas fa-chevron-right"></i>
+                                            <h2>{index + 1}. pitanje</h2>
+                                        </div>
+                                )
+                            }
+                        </form>
+                        < i className="fas fa-plus fa-2x" id="CreateQuizIcon" onClick={e => addNew(e)} ></i>
+                        <div className="ButtonsAlignRight">
+                            <button id="createQuizButton" onClick={e => {
+                                e.preventDefault();
+                                saveQuiz();
+                            }
+                            }>Unesite kviz</button>
+                        </div>
+                    </>
+            }
         </div>
     )
 }
