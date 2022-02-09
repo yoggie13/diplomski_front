@@ -196,22 +196,25 @@ export default function CreateGame() {
     }
     return (
         <div>
+            <h1>Unos strategija</h1>
             <form>{
                 gameState.Model > 1 && gameState.Model < 5
-                    ? <>
-                        <label htmlFor="range1">Od</label>
-                        <input id="range1" type="number" value={oneTwoState.MinValue} onChange={e => setOneTwoState({ ...oneTwoState, MinValue: parseInt(e.target.value) })} />
-                        <label htmlFor="range2">Do</label>
-                        <input id="range2" type="number" value={oneTwoState.MaxValue} onChange={e => setOneTwoState({ ...oneTwoState, MaxValue: parseInt(e.target.value) })} />
+                    ? <div className='RangeGameInput'>
+                        <label htmlFor="range1">Od
+                            <input id="range1" type="number" value={oneTwoState.MinValue} onChange={e => setOneTwoState({ ...oneTwoState, MinValue: parseInt(e.target.value) })} />
+                        </label>
+                        <label htmlFor="range2">Do
+                            <input id="range2" type="number" value={oneTwoState.MaxValue} onChange={e => setOneTwoState({ ...oneTwoState, MaxValue: parseInt(e.target.value) })} />
+                        </label>
                         <>
-                            <label htmlFor="defaultNumber">Default vrednost</label>
+                            <label htmlFor="defaultNumber">Default vrednost
+                                <input id="defaultNumber" type="number" id='full-width' value={oneTwoState.DefaultValue} onChange={e => setOneTwoState({ ...oneTwoState, DefaultValue: parseInt(e.target.value) })} />
+                            </label>
                             <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
-                            <input id="defaultNumber" type="number" value={oneTwoState.DefaultValue} onChange={e => setOneTwoState({ ...oneTwoState, DefaultValue: parseInt(e.target.value) })} />
                         </>
-                    </>
+                    </div>
                     :
                     <div>
-                        <h1>Unos strategija</h1>
                         <div id="strategyInputWrapper">
                             <div className="StrategyInput" id="firstPlayerStrategies">
                                 <h2>Strategije prvog igrača</h2>

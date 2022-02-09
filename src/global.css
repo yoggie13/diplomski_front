@@ -394,6 +394,10 @@ form input[type="submit"]:hover {
 #radioButtons label:hover {
   background-color: #e30d63; 
 }*/
+.RangeGameInput {
+  display: flex;
+  flex-direction: column;
+}
 .GameDashboard {
   height: 100%;
 }

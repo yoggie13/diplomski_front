@@ -40,7 +40,7 @@ export default function Notification({ user }) {
             ? <Loading />
             : notificationState !== false
                 ? <div>
-                    <h1>Notifikacije</h1>
+                    <h1>Obaveštenja</h1>
                     <table>
                         <thead>
                             <tr>
