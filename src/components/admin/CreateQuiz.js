@@ -29,43 +29,73 @@ export default function CreateQuiz() {
             }
         ]
     })
+    const fieldInvalid = (field) => {
+        return field === "" || field === null || field === undefined
+    }
+    const arrayInvalid = (arr) => {
+        return arr === undefined || arr === null || arr.length <= 0
+    }
+    console.log(questionsState.arr)
+    const fieldsValid = () => {
+        var Exception = {}
+        try {
+            questionsState.arr.forEach(question => {
+                if (fieldInvalid(question.ID) || fieldInvalid(question.Text) || fieldInvalid(question.Type)
+                    || fieldInvalid(question.Points) || fieldInvalid(question.NegativePoints) || arrayInvalid(question.Answers))
+                    throw Exception;
+                question.Answers.forEach(answer => {
+                    if (fieldInvalid(answer.ID) || fieldInvalid(answer.Text) || fieldInvalid(answer.Right))
+                        throw Exception;
+                })
+            })
+        }
+        catch {
+            return false;
+        }
+
+        return true;
+    }
 
     const saveQuiz = () => {
-        gameMainInfo.Questions = questionsState.arr;
-
         setLoadingState(true);
 
-        fetch(
-            'http://localhost:46824/api/game/create',
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body:
-                    JSON.stringify({
-                        "game": gameMainInfo,
-                    })
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Sačuvano");
-                    localStorage.removeItem("Game");
-                    return res.json();
-                }
-                else {
-                    throw new Error();
-                }
-            })
-            .then(response => {
-                history.push('/allGames');
-                setLoadingState(false);
-            }).catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            })
-
+        if (fieldsValid()) {
+            gameMainInfo.Questions = questionsState.arr;
+            fetch(
+                'http://localhost:46824/api/game/create',
+                {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body:
+                        JSON.stringify({
+                            "game": gameMainInfo,
+                        })
+                })
+                .then(res => {
+                    if (res.status === 200) {
+                        alert("Sačuvano");
+                        localStorage.removeItem("Game");
+                        return res.json();
+                    }
+                    else {
+                        throw new Error();
+                    }
+                })
+                .then(response => {
+                    history.push('/allGames');
+                    setLoadingState(false);
+                }).catch(error => {
+                    console.log(error);
+                    setLoadingState(false);
+                })
+        }
+        else {
+            alert("Niste popunili sve što treba");
+            setLoadingState(false);
+        }
     }
     const addNew = e => {
         e.preventDefault();
@@ -131,7 +161,7 @@ export default function CreateQuiz() {
 
         setQuestionsState({ ...questionsState, arr: questions });
     }
-    const updateNegative = (index, value) => {
+    const updateNegative = (index, value = false) => {
         questionsState.arr[index].NegativePoints = value;
     }
 

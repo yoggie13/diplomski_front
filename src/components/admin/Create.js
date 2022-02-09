@@ -19,10 +19,33 @@ export default function Create() {
     });
     const [gameModels, setGameModels] = useState([]);
 
+    const fieldsValid = () => {
+        if (fieldInvalid(gameState.Model))
+            return false
+        if (fieldInvalid(gameState.Name))
+            return false
+        if (fieldInvalid(gameState.Text))
+            return false
+        if (fieldInvalid(gameState.DueDate))
+            return false
+        try {
+            Date.parse(gameState.DueDate)
+        }
+        catch {
+            return false;
+        }
+
+        return true;
+
+    }
+    const fieldInvalid = (field) => {
+        return field === "" || field === null || field === undefined
+    }
+
     let history = useHistory();
 
     useEffect(() => {
-        setLoadingState(true)
+        setLoadingState(true);
         fetch(
             `http://localhost:46824/api/game/models`,
             {
@@ -51,13 +74,18 @@ export default function Create() {
     const handleNextPage = (e) => {
         e.preventDefault();
 
-        localStorage.setItem('game-main-info', gameState);
+        if (fieldsValid()) {
+            localStorage.setItem('game-main-info', gameState);
 
-        if (gameState.Model !== 9) {
-            history.push('/create/game', { gameMainInfo: gameState });
+            if (gameState.Model !== 9) {
+                history.push('/create/game', { gameMainInfo: gameState });
+            }
+            else
+                history.push('/create/quiz', { gameMainInfo: gameState });
         }
-        else
-            history.push('/create/quiz', { gameMainInfo: gameState });
+        else {
+            alert("Niste popunili sve što je potrebno");
+        }
     }
     return (
         <div className="CreateGame">

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Radio from '@material-ui/core/Radio';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
-export default function CreateGame(gameMainInfo) {
+export default function CreateGame() {
     var gameMainInfo = useLocation().state.gameMainInfo;
     const [gameState, setGameState] = useState(gameMainInfo);
     const [strategiesState, setStrategiesState] = useState({
@@ -70,11 +70,39 @@ export default function CreateGame(gameMainInfo) {
     //     setstate({ page: newPage });
     // }
 
-    const handleRange = () => {
-        localStorage.setItem("Game", JSON.stringify(gameState));
+    const fieldInvalid = (field) => {
+        return field === "" || field === null || field === undefined
+    }
+    const arrayInvalid = (arr) => {
+        return arr === undefined || arr === null || arr.length <= 0
+    }
+    const fieldsValid = () => {
 
-        // var newPage = state.page + 1;
-        // setstate({ page: newPage });
+        var Exception = {};
+
+        if (arrayInvalid(strategiesState.firstPlayerStrategies))
+            return false
+
+        if (arrayInvalid(strategiesState.secondPlayerStrategies))
+            return false
+
+        try {
+            strategiesState.firstPlayerStrategies.forEach(strategy => {
+                if (fieldInvalid(strategy.Text) || fieldInvalid(strategy.FirstOrSecondPlayer) || fieldInvalid(strategy.Default)) {
+                    throw Exception;
+                }
+            })
+
+            strategiesState.firstPlayerStrategies.forEach(strategy => {
+                if (fieldInvalid(strategy.Text) || fieldInvalid(strategy.FirstOrSecondPlayer) || fieldInvalid(strategy.Default))
+                    throw Exception;
+            })
+        }
+        catch {
+            return false;
+        }
+
+        return true
     }
     const handleInput = (e, index, player) => {
         if (player === 1) {
@@ -156,7 +184,11 @@ export default function CreateGame(gameMainInfo) {
     }
     const handleNextPage = e => {
         e.preventDefault();
-        history.push('/confirmation', { game: gameMainInfo, strategies: strategiesState, range: oneTwoState });
+
+        if (fieldsValid())
+            history.push('/confirmation', { game: gameMainInfo, strategies: strategiesState, range: oneTwoState });
+        else
+            alert("Niste sve popunili kako treba");
     }
     const handlePreviousPage = e => {
         e.preventDefault();
@@ -208,7 +240,7 @@ export default function CreateGame(gameMainInfo) {
                                         </div>
                                     })
                                 }
-                                < i className="fas fa-plus" onClick={e => addNew(e, 1)} ></i>
+                                {/* < i className="fas fa-plus" onClick={e => addNew(e, 1)} ></i> */}
                             </div >
                             <div className="StrategyInput" id="secondPlayerStrategies">
                                 {
@@ -241,7 +273,7 @@ export default function CreateGame(gameMainInfo) {
                                         </div>
                                     })
                                 }
-                                < i className="fas fa-plus" onClick={e => addNew(e, 2)}  ></i>
+                                {/* < i className="fas fa-plus" onClick={e => addNew(e, 2)}  ></i> */}
                             </div >
                         </div>
                     </div>

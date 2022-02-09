@@ -70,6 +70,7 @@ export default function Answers({ getAnswerState, setAnswersState, getType, upda
             })
         setAnswersState(answers)
     }
+    console.log()
 
     return (
         <div className='Answers'>
@@ -98,7 +99,7 @@ export default function Answers({ getAnswerState, setAnswersState, getType, upda
                                     {answer.ID}.
                                 </td>
                                 <td>
-                                    <input type='text' value={getAnswerState()[index].text} onChange={e => changeText(e, index)} />
+                                    <input type='text' value={getAnswerState()[index].Text} onChange={e => changeText(e, index)} />
                                 </td>
                                 <td id='center'>
                                     {
