@@ -52,7 +52,56 @@ export default function GameHolder({ userID }) {
             })
         }
     }
+    const fieldInvalid = (field) => {
+        return field === "" || field === null || field === undefined
+    }
+    const arrayInvalid = (arr) => {
+        return arr === undefined || arr === null || arr.length <= 0
+    }
+    const fieldsValid = () => {
+        var Exception = {};
+        console.log(gameState.game)
+        try {
+            if (gameState.game.type === 0) {
+                answersState.forEach(answer => {
+                    if (answer.question_type === 0) {
+                        if (fieldInvalid(answer.answer_data.text))
+                            throw Exception;
+                    }
+                    else if (answer.question_type === 1) {
+                        if (fieldInvalid(answer.answer_data.answer_id))
+                            throw Exception;
+                    }
+                    else if (answer.question_type === 2) {
+                        if (arrayInvalid(answer.answer_data.answers))
+                            throw Exception;
+                        answer.answer_data.answers.forEach(ans => {
+                            if (fieldInvalid(ans.answer_id))
+                                throw Exception
+                        })
+                    }
+                })
+            }
+            else if (gameState.game.type === 1 || gameState.game.type === 3) {
+                if (fieldInvalid(checkedStrategyState))
+                    return false;
+            } else if (gameState.game.type === 2 || gameState.game.type === 4) {
 
+                if (fieldInvalid(checkedStrategyState))
+                    return false;
+
+                if (parseInt(checkedStrategyState) < parseInt(gameState.game.minValue))
+                    return false;
+
+                if (parseInt(checkedStrategyState) > parseInt(gameState.game.maxValue))
+                    return false;
+            }
+        }
+        catch {
+            return false;
+        }
+        return true;
+    }
     useEffect(() => {
         setLoadingState(true)
         fetch(
@@ -89,7 +138,6 @@ export default function GameHolder({ userID }) {
                 console.log(error);
                 setLoadingState(false);
             })
-
     }, [])
 
     const setDefaultAnswers = (response) => {
@@ -141,54 +189,52 @@ export default function GameHolder({ userID }) {
         setAnswersState(newAnswers);
     }
 
-    const checkAnswerState = () => {
-        return true;
-    }
     const playAGame = e => {
         e.preventDefault();
-
-        if (!checkAnswerState && (checkedStrategyState === "" || checkedStrategyState === null || checkedStrategyState === undefined)) {
-            alert("Morate uneti ispravne odgovore");
-            return;
-        }
         setLoadingState(true);
 
-        fetch(
-            `http://localhost:46824/api/game/${id}/${userID}`,
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: getStrategy()
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Sačuvano");
-                    setGameState(gameState => ({
-                        game: {
-                            ...gameState.game,
-                            active: false
-                        }
-                    }))
-                } else if (res.status === 409) {
-                    alert("Već ste uneli odgovor na ovu igru");
-                }
-                else if (res.status === 404) {
-                    alert("Ta igra je izbrisana");
-                    history.push('/activeGames');
-                }
-                else {
-                    alert("Nije uspelo")
-                }
-                setLoadingState(false);
+        if (fieldsValid()) {
+            fetch(
+                `http://localhost:46824/api/game/${id}/${userID}`,
+                {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: getStrategy()
+                })
+                .then(res => {
+                    if (res.status === 200) {
+                        alert("Sačuvano");
+                        setGameState(gameState => ({
+                            game: {
+                                ...gameState.game,
+                                active: false
+                            }
+                        }))
+                    } else if (res.status === 409) {
+                        alert("Već ste uneli odgovor na ovu igru");
+                    }
+                    else if (res.status === 404) {
+                        alert("Ta igra je izbrisana");
+                        history.push('/activeGames');
+                    }
+                    else {
+                        alert("Nije uspelo")
+                    }
+                    setLoadingState(false);
 
-            })
-            .catch(error => {
-                alert("Nije uspelo");
-                setLoadingState(false);
-            })
+                })
+                .catch(error => {
+                    alert("Nije uspelo");
+                    setLoadingState(false);
+                })
+        }
+        else {
+            alert("Niste uneli sve što je potrebno")
+            setLoadingState(false)
+        }
     }
 
     return (

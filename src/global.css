@@ -266,6 +266,11 @@ form input[type="datetime-local"] {
   font-size: 18px;
   padding-left: 5px;
 }
+form input[type="number"] {
+  max-width: 50px;
+  text-align: right;
+  margin-left: 15px;
+}
 form select,
 form textarea {
   width: 90%;

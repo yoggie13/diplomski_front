@@ -4,7 +4,6 @@ import React from 'react';
 export default function Quiz({ quizState, getAnswersState, handleAnswersChange }) {
 
     const getInput = (type, id, answers, answer_id) => {
-
         if (type === 0)
             return <input type='text'
                 value={getAnswersState()[id].answer_data.text}
