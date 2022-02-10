@@ -42,12 +42,21 @@ export default function Quiz({ quizState, getAnswersState, handleAnswersChange }
         <div>
             {
                 quizState.map((question, index) =>
-                    <div>
-                        <h3>{question.id}</h3>
-                        <p>{question.text}</p>
+                    <div className='QuizQuestion'>
+                        <h3>{question.id + ". " + question.text}</h3>
                         <div className='QuizInput'>
                             {getInput(question.type, index, question.answers)}
                         </div>
+                        <small>Pitanje vredi: <b>{question.points} poena</b></small>
+                        {
+                            question.negativePoints
+                                ? <>
+                                    <br>
+                                    </br>
+                                    <small>*Pitanje ima negativne poene</small>
+                                </>
+                                : null
+                        }
                     </div>
                 )
             }

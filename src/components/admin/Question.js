@@ -9,14 +9,14 @@ export default function Question({ question, index, handleText, closeQuestion, s
     const getAnswerState = () => {
         return answersState;
     }
-    const [negativePoints, setNegativePoints] = useState(false);
+    const [negativePoints, setNegativePoints] = useState(question.NegativePoints);
 
     useEffect(() => {
         updateAnswers(index, answersState);
     }, [answersState])
 
     useEffect(() => {
-        updateNegative(index, negativePoints)
+        updateNegative(index, negativePoints);
     }, [negativePoints])
 
     const getType = () => {

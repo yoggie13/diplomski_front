@@ -35,7 +35,6 @@ export default function CreateQuiz() {
     const arrayInvalid = (arr) => {
         return arr === undefined || arr === null || arr.length <= 0
     }
-    console.log(questionsState.arr)
     const fieldsValid = () => {
         var Exception = {}
         try {
