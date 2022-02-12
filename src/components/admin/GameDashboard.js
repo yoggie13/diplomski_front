@@ -162,25 +162,33 @@ export default function GameDashboard() {
     const handleRepeatGame = (e, samePairs) => {
         e.preventDefault();
 
+        setLoadingState(true);
+
         fetch(
-            `http://localhost:46824/api/game/getRepeatInfo/${gameState.id}`,
+            `http://localhost:46824/api/game/repeat/${gameState.id}`,
             {
-                method: "GET",
+                method: "POST",
                 mode: "cors",
                 headers: {
                     'Content-Type': 'application/json',
-                }
+                },
+                body: JSON.stringify({
+                    repeat: samePairs,
+                    date: "2022-02-20T14:02"
+                })
             })
             .then(res => {
                 if (res.status === 200) {
-                    return res.json()
+                    alert("Uspešno ponovljena igra")
+                    history.push('/allGames');
+                    setLoadingState(false);
+                } else {
+                    throw new Error();
                 }
-            }).then(response => {
-                console.log(response)
-                // useHistory.push('/create', { gameInfo: response });
             })
             .catch(error => {
-                alert("Greška, trenutno nije moguće to uraditi");
+                alert(error);
+                setLoadingState(false);
             })
     }
     return (
@@ -299,7 +307,7 @@ export default function GameDashboard() {
                                     gameState.type === 1 || gameState.type === 2
                                         ? <>
                                             <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru sa istim parovima</button>
-                                            <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru sa različitim parovima</button>
+                                            <button onClick={e => handleRepeatGame(e, false)}>Ponovite igru sa različitim parovima</button>
                                         </>
                                         : <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru</button>
                                 }
