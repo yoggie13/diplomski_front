@@ -15,7 +15,7 @@ export default function Create() {
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Model: 1, Name: "123", Text: "123", ChatEnabled: false, DueDate: "2022-02-10T14:02"
+        Model: 1, Name: "123", Text: "123", ChatEnabled: false, DueDate: "2022-02-20T14:02"
     });
     const [gameModels, setGameModels] = useState([]);
 

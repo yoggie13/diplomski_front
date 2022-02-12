@@ -596,6 +596,14 @@ td {
   border-left: 0px;
   border-right: 0px;
 }
+td,
+th {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#left {
+  text-align: left;
+}
 #center {
   text-align: center;
 }
@@ -760,17 +768,6 @@ hr {
 #sendMessage i:hover {
   color: #e30d63;
 }
-.ButtonsAlignRight {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-}
-.ButtonsAlignRight button {
-  max-width: 160px;
-  width: fit-content;
-}
 .notificationDiv {
   color: #2b0a55;
   right: 80px;
@@ -928,6 +925,42 @@ hr {
   padding-left: 35px;
   margin-bottom: 30px;
 }
+.Buttons {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+}
+.ButtonsAlignRight {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.ButtonsAlignRight button {
+  max-width: 160px;
+  width: fit-content;
+}
+.ButtonsAlignLeft {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+.Buttons div {
+  display: flex;
+  flex-direction: column;
+}
+#LeftColumn {
+  grid-column: 1;
+}
+
+#RightColumn {
+  grid-column: 3;
+}
+#RightColumn button {
+  background-color: #ff3349;
+}
+/* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
+#58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
 @media screen and (max-width: 900px) {
   .Homepage {
     margin-top: 60px;
@@ -967,9 +1000,6 @@ hr {
   }
   .Charts {
     display: block;
-  }
-  #dashboardButtons {
-    margin-top: 300px;
   }
   .StrategyInput h2 {
     font-size: 18px;

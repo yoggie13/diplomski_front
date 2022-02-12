@@ -159,7 +159,30 @@ export default function GameDashboard() {
                 setLoadingState(false);
             })
     }
+    const handleRepeatGame = (e, samePairs) => {
+        e.preventDefault();
 
+        fetch(
+            `http://localhost:46824/api/game/getRepeatInfo/${gameState.id}`,
+            {
+                method: "GET",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    return res.json()
+                }
+            }).then(response => {
+                console.log(response)
+                // useHistory.push('/create', { gameInfo: response });
+            })
+            .catch(error => {
+                alert("Greška, trenutno nije moguće to uraditi");
+            })
+    }
     return (
         <div className="GameDashboard">{
             loadingState
@@ -270,13 +293,26 @@ export default function GameDashboard() {
                                     : <p>Niko još nije odigrao</p>
                             }
                         </div>
-                        <div className="ButtonsAlignRight" id="dashboardButtons">
-                            {
-                                checkDate(gameState.dueDate)
-                                    ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
-                                    : null
-                            }
-                            <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
+                        <div className='Buttons'>
+                            <div id='LeftColumn'>
+                                {
+                                    gameState.type === 1 || gameState.type === 2
+                                        ? <>
+                                            <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru sa istim parovima</button>
+                                            <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru sa različitim parovima</button>
+                                        </>
+                                        : <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru</button>
+                                }
+                            </div>
+                            <div id="RightColumn">
+
+                                {
+                                    checkDate(gameState.dueDate)
+                                        ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
+                                        : null
+                                }
+                                <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
+                            </div>
                         </div>
                     </>
                     : <p>Trenutno nema aktivnih igara</p>
