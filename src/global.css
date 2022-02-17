@@ -986,6 +986,9 @@ hr {
 .modal-header h3 {
   margin-bottom: 0px;
 }
+/* #file-input {
+  display: none;
+} */
 /* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
 #58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
 @media screen and (max-width: 900px) {

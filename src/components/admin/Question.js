@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Answers from './Answers';
 import { Checkbox } from '@material-ui/core';
 import { useEffect } from 'react';
@@ -26,6 +26,14 @@ export default function Question({ question, index, handleText, closeQuestion, s
         updateType(e, index);
     }
 
+    const hiddenFileInput = useRef(null);
+    const handleUploadClick = (e) => {
+        hiddenFileInput.current.click();
+    }
+    const handleUpload = (e) => {
+        console.log(e.target.files[0]);
+    }
+
     return (
         <div className='Question'>
             <div className='QuestionHeader' onClick={e => {
@@ -39,6 +47,14 @@ export default function Question({ question, index, handleText, closeQuestion, s
                 {/* <i class="far fa-image fa-lg" id='image'></i> */}
                 <label htmlFor='question-text'>Unesite tekst</label>
                 <textarea id='question-text' value={question.Text} onChange={e => handleText(e, index)} />
+                {/* <i class="fas fa-image" onClick={e => handleUploadClick(e)}></i> */}
+                <input
+                    // id='file-input'
+                    type='file'
+                // accept='image/*'
+                // ref={hiddenFileInput}
+                // onChange={handleUpload}
+                />
                 <Answers
                     getAnswerState={getAnswerState}
                     setAnswersState={setAnswersState}
