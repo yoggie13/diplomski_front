@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router';
@@ -28,6 +29,9 @@ export default function GameDashboard() {
     const [dataState, setDataState] = useState({ optionsFirst: {}, optionsSecond: false });
     const [loadingState, setLoadingState] = useState(true);
     const [refreshState, setRefreshState] = useState(true);
+    const [showModalState, setShowModalState] = useState(false);
+    const [samePairsState, setSamePairsState] = useState(false);
+    const [repeatDateState, setRepeatDateState] = useState("");
 
     let gameID = useParams();
     let history = useHistory();
@@ -162,34 +166,48 @@ export default function GameDashboard() {
     const handleRepeatGame = (e, samePairs) => {
         e.preventDefault();
 
-        setLoadingState(true);
+        setSamePairsState(samePairs);
 
-        fetch(
-            `http://localhost:46824/api/game/repeat/${gameState.id}`,
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    repeat: samePairs,
-                    date: "2022-02-20T14:02"
+        setShowModalState(true);
+    }
+
+    const callApiForRepeat = (e) => {
+        e.preventDefault();
+
+        if (repeatDateState !== undefined && repeatDateState !== null && repeatDateState !== "") {
+            setShowModalState(false);
+            setLoadingState(true);
+
+            fetch(
+                `http://localhost:46824/api/game/repeat/${gameState.id}`,
+                {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        samePairs: samePairsState,
+                        date: repeatDateState
+                    })
                 })
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Uspešno ponovljena igra")
-                    history.push('/allGames');
+                .then(res => {
+                    if (res.status === 200) {
+                        alert("Uspešno ponovljena igra")
+                        history.push('/allGames');
+                        setLoadingState(false);
+                    } else {
+                        throw new Error();
+                    }
+                })
+                .catch(error => {
+                    alert(error);
                     setLoadingState(false);
-                } else {
-                    throw new Error();
-                }
-            })
-            .catch(error => {
-                alert(error);
-                setLoadingState(false);
-            })
+                })
+        } else {
+            alert("Datum nije ispravno unesen");
+            setShowModalState(true);
+        }
     }
     return (
         <div className="GameDashboard">{
@@ -322,6 +340,26 @@ export default function GameDashboard() {
                                 <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
                             </div>
                         </div>
+                        {
+                            showModalState
+                                ? <div className='Modal'>
+                                    <div className="modal-header" >
+                                        <h3>Unesite datum</h3>
+                                        <i className="fas fa-times" onClick={(e) => { e.preventDefault(); setShowModalState(false) }}></i>
+                                    </div>
+                                    <form>
+                                        <input type='datetime-local'
+                                            value={repeatDateState}
+                                            onChange={(e) => {
+                                                e.preventDefault();
+                                                setRepeatDateState(e.target.value);
+                                            }
+                                            } />
+                                        <button onClick={e => callApiForRepeat(e)}>Sačuvaj</button>
+                                    </form>
+                                </div>
+                                : null
+                        }
                     </>
                     : <p>Trenutno nema aktivnih igara</p>
         }
