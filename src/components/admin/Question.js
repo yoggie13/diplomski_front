@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
-import Answers from './Answers';
 import { Checkbox } from '@material-ui/core';
 import { useEffect } from 'react';
+import Answers from './Answers';
+import Dropzone from './Dropzone';
 
-export default function Question({ question, index, handleText, closeQuestion, setPoints, updateAnswers, updateNegative, updateType }) {
+export default function Question({ question, index, handleText, closeQuestion, setPoints, updateAnswers, updateNegative, updateType, updateImage }) {
     const [answersState, setAnswersState] = useState(question.Answers);
+    const [showUploadImage, setShowUploadImage] = useState(question.ImageUrl === null ? false : true);
 
     const getAnswerState = () => {
         return answersState;
@@ -26,14 +28,6 @@ export default function Question({ question, index, handleText, closeQuestion, s
         updateType(e, index);
     }
 
-    const hiddenFileInput = useRef(null);
-    const handleUploadClick = (e) => {
-        hiddenFileInput.current.click();
-    }
-    const handleUpload = (e) => {
-        console.log(e.target.files[0]);
-    }
-
     return (
         <div className='Question'>
             <div className='QuestionHeader' onClick={e => {
@@ -44,17 +38,24 @@ export default function Question({ question, index, handleText, closeQuestion, s
                 <h2>{index + 1}. pitanje</h2>
             </div>
             <div className='QuestionBody'>
-                {/* <i class="far fa-image fa-lg" id='image'></i> */}
                 <label htmlFor='question-text'>Unesite tekst</label>
                 <textarea id='question-text' value={question.Text} onChange={e => handleText(e, index)} />
-                {/* <i class="fas fa-image" onClick={e => handleUploadClick(e)}></i> */}
-                <input
-                    // id='file-input'
-                    type='file'
-                // accept='image/*'
-                // ref={hiddenFileInput}
-                // onChange={handleUpload}
-                />
+                {
+                    showUploadImage
+                        ? <Dropzone
+                            index={index}
+                            setImage={updateImage}
+                            setShowUploadImageState={setShowUploadImage}
+                            ImageName={question.ImageName}
+                        />
+                        : <div className='ImageButton' onClick={e => {
+                            e.preventDefault();
+                            setShowUploadImage(true);
+                        }}>
+                            <p>Dodaj sliku</p>
+                            <i class="fas fa-image fa-lg" ></i>
+                        </div>
+                }
                 <Answers
                     getAnswerState={getAnswerState}
                     setAnswersState={setAnswersState}

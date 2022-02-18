@@ -44,6 +44,9 @@ export default function Quiz({ quizState, getAnswersState, handleAnswersChange }
                 quizState.map((question, index) =>
                     <div className='QuizQuestion'>
                         <h3>{question.id + ". " + question.text}</h3>
+                        <div className='ImageHolder'>
+                            <img src={question.imageUrl} />
+                        </div>
                         <div className='QuizInput'>
                             {getInput(question.type, index, question.answers)}
                         </div>
