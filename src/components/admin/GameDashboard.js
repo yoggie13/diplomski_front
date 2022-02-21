@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router';
 // import { PieChart } from 'react-minimal-pie-chart';
 import CanvasJSReact from '../../assets/canvasjs.react';
+import AdminServices from '../../services/AdminServices';
 import Loading from '../Loading';
+import GameServices from '../../services/GameServices'
 
 function formatDate(dueDate) {
     var splitDate = dueDate.split('-');
@@ -40,36 +42,29 @@ export default function GameDashboard() {
     useEffect(() => {
         if (refreshState) {
             setLoadingState(true);
-            fetch(
+            GetData();
+        }
+    }, [refreshState])
+    const GetData = async () => {
+        const res = await AdminServices.GetGameDashboard(apiState);
 
-                `http://localhost:46824/api/admin/${apiState}`,
-                {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(res => {
-                    if (res.status === 200)
-                        return res.json()
-                    else if (res.status === 404)
-                        return false;
-                })
+        if (res.status === 200) {
+            res.json()
                 .then(response => {
+                    console.log(response)
                     setGameState(response);
-                    createOptions(response);
-                    setRefreshState(false);
-                    setLoadingState(false);
-                })
-                .catch(error => {
-                    console.log(error);
+                    if (response.questions === undefined)
+                        createOptions(response);
                     setRefreshState(false);
                     setLoadingState(false);
                 })
         }
-    }, [refreshState])
-
+        else {
+            console.log("error");
+            setRefreshState(false);
+            setLoadingState(false);
+        }
+    }
     const createOptions = response => {
         const optionsOne = {
             title: {
@@ -98,70 +93,41 @@ export default function GameDashboard() {
         setDataState({ ...dataState, optionsFirst: optionsOne, optionsSecond: optionsTwo });
     }
 
-    const finishGame = e => {
+    const finishGame = async (e) => {
         e.preventDefault();
 
         setLoadingState(true);
 
-        fetch(
-            `http://localhost:46824/api/game/${gameState.id}/finish`,
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Igra završena");
-                    setRefreshState(true);
-                    setLoadingState(false);
+        var res = await GameServices.FinishGame(gameState.id);
 
-                    return;
-                }
-                else {
-                    alert(res.statusText)
-                }
-                setLoadingState(false);
-
-            })
-            .catch(error => {
-                alert("Nije uspelo");
-                setLoadingState(false);
-            })
-
+        if (res.status === 200) {
+            alert("Igra završena");
+            setRefreshState(true);
+            setLoadingState(false);
+        }
+        else {
+            alert("Nije uspelo");
+            setLoadingState(false);
+        }
     }
-    const deleteGame = e => {
+    const deleteGame = async (e) => {
         setLoadingState(true);
 
-        fetch(
-            `http://localhost:46824/api/game/${gameState.id}`,
-            {
-                method: "DELETE",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Igra obrisana");
-                    gameID.id = undefined;
-                    setApiState("dashboard");
-                    history.push('/allGames');
-                    setRefreshState(true);
-                    setLoadingState(false);
-                    return;
-                }
-                else {
-                    alert(res.statusText)
-                }
-            })
-            .catch(error => {
-                alert("Nije uspelo");
-                setLoadingState(false);
-            })
+        var res = await GameServices.DeleteGame(gameState.id);
+
+        if (res.status === 200) {
+            alert("Igra obrisana");
+            gameID.id = undefined;
+            setApiState("dashboard");
+            history.push('/allGames');
+            setRefreshState(true);
+            setLoadingState(false);
+        }
+        else {
+            alert("Nije uspelo");
+            setLoadingState(false);
+        }
+
     }
     const handleRepeatGame = (e, samePairs) => {
         e.preventDefault();
@@ -171,39 +137,26 @@ export default function GameDashboard() {
         setShowModalState(true);
     }
 
-    const callApiForRepeat = (e) => {
+    const callApiForRepeat = async (e) => {
         e.preventDefault();
 
         if (repeatDateState !== undefined && repeatDateState !== null && repeatDateState !== "") {
             setShowModalState(false);
             setLoadingState(true);
 
-            fetch(
-                `http://localhost:46824/api/game/repeat/${gameState.id}`,
-                {
-                    method: "POST",
-                    mode: "cors",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        samePairs: samePairsState,
-                        date: repeatDateState
-                    })
-                })
-                .then(res => {
-                    if (res.status === 200) {
-                        alert("Uspešno ponovljena igra")
-                        history.push('/allGames');
-                        setLoadingState(false);
-                    } else {
-                        throw new Error();
-                    }
-                })
-                .catch(error => {
-                    alert(error);
-                    setLoadingState(false);
-                })
+            var res = await GameServices.RepeatGame(gameState.id, {
+                samePairs: samePairsState,
+                date: repeatDateState
+            });
+
+            if (res.status === 200) {
+                alert("Uspešno ponovljena igra")
+                history.push('/allGames');
+                setLoadingState(false);
+            } else {
+                alert("Nije uspelo");
+                setLoadingState(false);
+            }
         } else {
             alert("Datum nije ispravno unesen");
             setShowModalState(true);

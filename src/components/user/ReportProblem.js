@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import Loading from '../Loading';
+import UserServices from '../../services/UserServices';
 
 
 export default function ReportProblem({ userID }) {
@@ -14,7 +15,11 @@ export default function ReportProblem({ userID }) {
         document.title = "Prijava problema | Teorija igara"
     }, []);
 
-    const reportHandler = e => {
+    const fieldInvalid = (field) => {
+        return field === "" || field === null || field === undefined
+    }
+
+    const reportHandler = async (e) => {
         e.preventDefault();
 
         if (!checkboxState) {
@@ -22,49 +27,33 @@ export default function ReportProblem({ userID }) {
             return;
         }
 
-        if (reportState.Type === "" || reportState.Type === null) {
+        if (fieldInvalid(reportState.Type)) {
             alert("Morate izabrati tip problema");
             return;
         }
-        if (reportState.Description === "" || reportState.Description === null) {
+        if (fieldInvalid(reportState.Description)) {
             alert("Morate uneti opis problema");
             return;
         }
 
         setLoadingState(true);
-        fetch(
-            'http://localhost:46824/api/students/report',
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    Type: reportState.Type,
-                    Description: reportState.Description,
-                    ImageUrl: null,
-                    SubmittedByID: userID,
-                }
-                )
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    setLoadingState(false);
-                    alert("Vaš feedback je zabeležen");
-                }
-                else {
-                    setLoadingState(false);
-                    alert("Nije uspelo, pokušajte ponovo");
-                }
-            })
-            .catch(error => {
-                setLoadingState(false);
-                alert("Nije uspelo, pokušajte ponovo");
-                return;
-            });
 
-        return;
+        var res = await UserServices.ReportAProblem({
+            Type: reportState.Type,
+            Description: reportState.Description,
+            ImageUrl: null,
+            SubmittedByID: userID,
+        });
+
+        if (res.status === 200) {
+            setLoadingState(false);
+            alert("Vaš feedback je zabeležen");
+        }
+        else {
+            setLoadingState(false);
+            alert("Nije uspelo, pokušajte ponovo");
+        }
+
     }
     const handleUpload = e => {
         e.preventDefault();

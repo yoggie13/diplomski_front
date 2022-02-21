@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
+import GameServices from '../../services/GameServices'
 
 export default function FinishedGames({ userID }) {
 
@@ -14,29 +15,25 @@ export default function FinishedGames({ userID }) {
 
     useEffect(() => {
         setLoadingState(true);
-        fetch(
-            `http://localhost:46824/api/game/finishedgames/${userID}`,
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => res.json())
-            .then(response => {
+        GetGames();
+    }, [])
+
+    const GetGames = async () => {
+        var res = await GameServices.GetFinishedGames(userID);
+
+        if (res.status === 200) {
+            res.json().then(response => {
                 setstate({
                     games: response.Games
                 })
                 setLoadingState(false)
             })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            })
-
-
-    }, [])
+        }
+        else {
+            console.log("error");
+            setLoadingState(false);
+        }
+    }
 
     return (
         JSON.parse(localStorage.getItem("Admin"))

@@ -5,6 +5,7 @@ import {
     useHistory
 } from "react-router-dom";
 import Checkbox from '@material-ui/core/Checkbox';
+import GameServices from '../../services/GameServices.js'
 
 export default function Create() {
 
@@ -15,7 +16,7 @@ export default function Create() {
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Model: 1, Name: "123", Text: "123", ChatEnabled: false, DueDate: "2022-02-20T14:02"
+        Model: 1, Name: "123", Text: "123", ChatEnabled: false, DueDate: "2022-02-25T14:02"
     });
     const [gameModels, setGameModels] = useState([]);
 
@@ -46,30 +47,24 @@ export default function Create() {
 
     useEffect(() => {
         setLoadingState(true);
-        fetch(
-            `http://localhost:46824/api/game/models`,
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 200)
-                    return res.json()
-                else if (res.status === 404)
-                    return [];
-            })
-            .then(response => {
-                setGameModels(response);
-                setLoadingState(false);
-            })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            })
+        GetModels();
     }, [])
+
+    const GetModels = async () => {
+        var res = await GameServices.GetModels();
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    setGameModels(response);
+                    setLoadingState(false);
+                })
+        }
+        else {
+            console.log(res.error);
+            setLoadingState(false);
+        }
+    }
 
     const handleNextPage = (e) => {
         e.preventDefault();

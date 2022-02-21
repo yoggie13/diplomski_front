@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
+import GameServices from '../../services/GameServices.js'
 
 export default function AllGames() {
 
@@ -13,35 +14,25 @@ export default function AllGames() {
     }, []);
 
     useEffect(() => {
-        setLoadingState(true)
-
-        fetch(
-            'http://localhost:46824/api/game/all',
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 404) {
-                    setGamesState(false);
-                    throw Error();
-                }
-                else
-                    return res.json();
-            })
-            .then(response => {
-                setGamesState(response)
-                setLoadingState(false)
-            })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            })
-
+        setLoadingState(true);
+        GetGames();
     }, [])
+
+    const GetGames = async () => {
+        const res = await GameServices.GetAllGames();
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    setGamesState(response)
+                    setLoadingState(false);
+                })
+        }
+        else {
+            setGamesState(false);
+            setLoadingState(false);
+        }
+    }
 
     return (
         loadingState

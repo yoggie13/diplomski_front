@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 import Loading from '../Loading';
+import GameServices from '../../services/GameServices';
 
 export default function Chat({ id, userID }) {
     const [state, setstate] = useState({ renderChat: false, messages: [] });
@@ -23,31 +24,30 @@ export default function Chat({ id, userID }) {
 
         if (state.renderChat) {
             setLoadingState(true);
-
-            fetch(
-                `http://localhost:46824/api/game/${id}/${userID}/messages`,
-                {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(res => res.json())
-                .then(response => {
-                    setstate({ ...state, messages: response.messages })
-                    setLoadingState(false);
-                    scrollToBottom("smooth");
-                })
-                .catch(error => {
-                    console.log(error);
-                    setLoadingState(false);
-                });
+            GetMessages();
         }
 
     }, [state.renderChat])
 
-    const sendMessage = e => {
+    const GetMessages = async () => {
+        var res = await GameServices.GetMessages(id, userID);
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    console.log(response)
+                    setstate({ ...state, messages: response.messages })
+                    setLoadingState(false);
+                    scrollToBottom("smooth");
+                })
+        }
+        else {
+            console.log("error");
+            setLoadingState(false);
+        }
+    }
+
+    const sendMessage = async (e) => {
         e.preventDefault();
 
         if (message.messageText === null || message.messageText.match(/^ *$/) !== null) {
@@ -57,32 +57,22 @@ export default function Chat({ id, userID }) {
 
         setLoadingState(true);
 
-        fetch(
-            `http://localhost:46824/api/game/message/${id}/${userID}`,
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    Message: message.messageText
-                })
-            })
-            .then(res => {
-                if (res.status == 200) {
-                    var messagesFull = state.messages;
-                    messagesFull.push(message);
-                    setstate({ ...state, messages: messagesFull })
-                    setMessageState({ ...message, messageText: "" });
-                    setLoadingState(false);
-                    scrollToBottom("auto");
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            });
+        var res = await GameServices.SendMessage(id, userID, {
+            Message: message.messageText
+        });
+
+        if (res.status === 200) {
+            var messagesFull = state.messages;
+            messagesFull.push(message);
+            setstate({ ...state, messages: messagesFull })
+            setMessageState({ ...message, messageText: "" });
+            setLoadingState(false);
+            scrollToBottom("auto");
+        }
+        else {
+            console.log('error');
+            setLoadingState(false);
+        }
     }
 
     const changeMessage = e => {

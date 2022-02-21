@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import UserServices from '../../services/UserServices';
 import Loading from '../Loading';
 
 export default function Notification({ user }) {
@@ -9,31 +10,24 @@ export default function Notification({ user }) {
 
     useEffect(() => {
         setLoadingState(true);
-        fetch(
-            `http://localhost:46824/api/user/notifications/${user.id}`,
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    return res.json();
-                }
-                else
-                    throw new Error();
-            })
-            .then(response => {
-                setNotificationState(response);
-                setLoadingState(false);
-            })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            });
+        GetNotifications();
     }, []);
+
+    var GetNotifications = async () => {
+        var res = await UserServices.GetNotifications(user.id);
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    setNotificationState(response);
+                    setLoadingState(false);
+                })
+        }
+        else {
+            console.log("error");
+            setLoadingState(false);
+        }
+    }
 
     return (
         loadingState

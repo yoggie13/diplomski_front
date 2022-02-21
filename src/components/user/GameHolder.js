@@ -5,6 +5,7 @@ import Chat from './Chat';
 import Loading from '../Loading';
 import Game from './Game';
 import Quiz from './Quiz';
+import GameServices from '../../services/GameServices'
 
 export default function GameHolder({ userID }) {
 
@@ -35,21 +36,21 @@ export default function GameHolder({ userID }) {
     }
     const getStrategy = e => {
         if (gameState.game.type === 2 || gameState.game.type === 4) {
-            return JSON.stringify({
+            return {
                 "number": parseInt(checkedStrategyState)
-            })
+            }
         }
         else if (gameState.game.type === 0) {
-            return JSON.stringify({
+            return {
                 "answers": answersState
-            })
+            }
         }
         else {
-            return JSON.stringify({
+            return {
                 "Strategy": {
                     "ID": parseInt(checkedStrategyState)
                 }
-            })
+            }
         }
     }
     const fieldInvalid = (field) => {
@@ -60,7 +61,6 @@ export default function GameHolder({ userID }) {
     }
     const fieldsValid = () => {
         var Exception = {};
-        console.log(gameState.game)
         try {
             if (gameState.game.type === 0) {
                 answersState.forEach(answer => {
@@ -104,41 +104,34 @@ export default function GameHolder({ userID }) {
     }
     useEffect(() => {
         setLoadingState(true)
-        fetch(
-            `http://localhost:46824/api/game/${userID}/${id}`,
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 200)
-                    return res.json();
-                else if (res.status === 404) {
-                    return false;
-                }
-            })
-            .then(response => {
-                if (!response) {
-                    alert("Ta igra je izbrisana");
-                    history.push('/activeGames');
-                }
-                setGameState({
-                    ...gameState, game: response
-                });
-
-                if (response.type === 0)
-                    setDefaultAnswers(response);
-
-                setLoadingState(false);
-            })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            })
+        GetGame();
     }, [])
+
+    const GetGame = async () => {
+        var res = await GameServices.GetGame(id, userID);
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    if (!response) {
+                        alert("Ta igra je izbrisana");
+                        history.push('/activeGames');
+                    }
+                    setGameState({
+                        ...gameState, game: response
+                    });
+
+                    if (response.type === 0)
+                        setDefaultAnswers(response);
+
+                    setLoadingState(false);
+                })
+        }
+        else {
+            console.log("error")
+            setLoadingState(false);
+        }
+    }
 
     const setDefaultAnswers = (response) => {
         var arr = [];
@@ -189,47 +182,35 @@ export default function GameHolder({ userID }) {
         setAnswersState(newAnswers);
     }
 
-    const playAGame = e => {
+    const playAGame = async (e) => {
         e.preventDefault();
         setLoadingState(true);
 
         if (fieldsValid()) {
-            fetch(
-                `http://localhost:46824/api/game/${id}/${userID}`,
-                {
-                    method: "POST",
-                    mode: "cors",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: getStrategy()
-                })
-                .then(res => {
-                    if (res.status === 200) {
-                        alert("Sačuvano");
-                        setGameState(gameState => ({
-                            game: {
-                                ...gameState.game,
-                                active: false
-                            }
-                        }))
-                    } else if (res.status === 409) {
-                        alert("Već ste uneli odgovor na ovu igru");
-                    }
-                    else if (res.status === 404) {
-                        alert("Ta igra je izbrisana");
-                        history.push('/activeGames');
-                    }
-                    else {
-                        alert("Nije uspelo")
-                    }
-                    setLoadingState(false);
+            var res = await GameServices.PlayGame(id, userID, getStrategy())
 
-                })
-                .catch(error => {
-                    alert("Nije uspelo");
-                    setLoadingState(false);
-                })
+            if (res.status === 200) {
+                alert("Sačuvano");
+                setGameState(gameState => ({
+                    game: {
+                        ...gameState.game,
+                        active: false
+                    }
+                }))
+                setLoadingState(false);
+            } else if (res.status === 409) {
+                alert("Već ste uneli odgovor na ovu igru");
+                setLoadingState(false);
+            }
+            else if (res.status === 404) {
+                alert("Ta igra je izbrisana");
+                setLoadingState(false);
+                history.push('/activeGames');
+            }
+            else {
+                alert("Nije uspelo");
+                setLoadingState(false);
+            }
         }
         else {
             alert("Niste uneli sve što je potrebno")

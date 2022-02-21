@@ -7,7 +7,6 @@ import './App.css';
 import BasicTemplate from './components/BasicTemplate';
 import Panel from './pages/Panel';
 
-
 function App() {
   const [state, setState] = useState({
     isLoggedIn: localStorage.getItem("User") !== null ? true : false,

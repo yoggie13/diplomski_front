@@ -3,6 +3,7 @@ import Question from './Question';
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Loading from '../Loading';
+import GameServices from '../../services/GameServices.js'
 
 export default function CreateQuiz() {
 
@@ -58,46 +59,30 @@ export default function CreateQuiz() {
         return true;
     }
 
-    const saveQuiz = () => {
+    const saveQuiz = async () => {
         setLoadingState(true);
 
         if (fieldsValid()) {
             gameMainInfo.Questions = questionsState.arr;
-            fetch(
-                'http://localhost:46824/api/game/create',
-                {
-                    method: "POST",
-                    mode: "cors",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body:
-                        JSON.stringify({
-                            "game": gameMainInfo,
-                        })
-                })
-                .then(res => {
-                    if (res.status === 200) {
-                        alert("Sačuvano");
-                        localStorage.removeItem("Game");
-                        return res.json();
-                    }
-                    else {
-                        throw new Error();
-                    }
-                })
-                .then(response => {
-                    history.push('/allGames');
-                    setLoadingState(false);
-                }).catch(error => {
-                    console.log(error);
-                    setLoadingState(false);
-                })
+
+            var res = await GameServices.InsertAGame({
+                "game": gameMainInfo,
+            })
+
+            if (res.status === 200) {
+                alert("Sačuvano");
+
+                history.push('/allGames');
+                setLoadingState(false);
+            }
+            else {
+                throw new Error();
+            }
         }
         else {
             alert("Niste popunili sve što treba");
-            setLoadingState(false);
         }
+        setLoadingState(false);
     }
     const addNew = e => {
         e.preventDefault();

@@ -4,6 +4,7 @@ import {
     useHistory
 } from "react-router-dom";
 import Loading from './Loading';
+import UserServices from '../services/UserServices.js';
 
 export default function AdminLogin({ loginLogic, isAdmin }) {
     const [loginDetails, setLoginDetails] = useState({ email: "on20213655@student.fon.bg.ac.rs", password: "123" });
@@ -16,45 +17,31 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
         document.title = "Login | Teorija igara"
     }, []);
 
-    const loginHandler = e => {
-        e.preventDefault();
+    const loginHandler = async (e) => {
+        e.preventDefault()
 
         setLoadingState(true);
 
-        fetch(
-            `http://localhost:46824/api/user/login`,
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    Email: loginDetails.email,
-                    Password: loginDetails.password,
+        const res = await UserServices.Login(loginDetails.email, loginDetails.password);
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    console.log(response)
+                    setLoadingState(false);
+                    setErrorState(false);
+                    loginLogic(response, response.role === "Admin" ? true : false);
+                    history.push(response.role === "Admin" ? "/dashboard" : "/profile");
                 })
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    setLoadingState(false);
-                    return res.json();
-                }
-                else {
-                    setLoadingState(false);
-                    setErrorState(true);
-                    throw new Error();
-                }
-            })
-            .then(response => {
-                setLoadingState(false);
-                setErrorState(false);
-                loginLogic(response, response.role === "Admin" ? true : false);
-                history.push(response.role === "Admin" ? "/dashboard" : "/profile");
-            })
-            .catch(error => {
-                setLoadingState(false);
-                return;
-            });
+        }
+        else if (res.status === 400) {
+            alert("Pogrešan unos");
+        }
+        else if (res.status === 404) {
+            alert("Taj korisnik ne postoji");
+        }
+        setLoadingState(false)
+
     }
 
     return (

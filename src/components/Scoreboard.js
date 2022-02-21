@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import AdminServices from '../services/AdminServices';
+import UserServices from '../services/UserServices';
 import Loading from './Loading';
 
 export default function Scoreboard({ admin = false, userID = null, group, handleLoading }) {
@@ -13,80 +15,65 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
 
     useEffect(() => {
         setLoadingState(true);
-        if (admin) {
-
-            fetch(
-                `http://localhost:46824/api/admin/scoreboard/${group}`,
-                {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(res => res.json())
-                .then(response => {
-                    setStudentsState(response);
-                    setLoadingState(false);
-                })
-                .catch(error => {
-                    console.log(error)
-                    setLoadingState(false);
-                })
-        }
-        else {
-
-            fetch(
-                `http://localhost:46824/api/students/scoreboard/${userID}`,
-                {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(res => res.json())
-                .then(response => {
-                    setStudentsState(response);
-                    setLoadingState(false);
-                })
-                .catch(error => {
-                    console.log(error)
-                    setLoadingState(false);
-                })
-        }
+        GetScoreboard();
     }, [group])
 
+    const GetScoreboard = async () => {
+        var res;
 
+        if (admin)
+            res = await AdminServices.GetScoreboard(group);
+        else
+            res = await UserServices.GetScoreboard(userID);
+
+        console.log(res)
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    setStudentsState(response);
+                    setLoadingState(false);
+                })
+        }
+
+        else {
+            console.log("error")
+            setLoadingState(false);
+        }
+    }
     return (
-        loadingState
-            ? <Loading />
-            : <div className="Scoreboard">
-                <h1>Scoreboard</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Mesto</th>
-                            <th id='left'>Indeks</th>
-                            <th id='left'>Ime i prezime</th>
-                            <th>Broj poena</th>
-                            <th>Odigranih igara</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            studentsState.map((student, index) =>
-                                <tr key={index + 1}>
-                                    <td>{index + 1}.</td>
-                                    <td id='left'>{student.studentID}</td>
-                                    <td id='left'>{student.studentName}</td>
-                                    <td>{student.pointsTotal}</td>
-                                    <td>{student.countTotal}</td>
+        <div className="Scoreboard">
+            {
+                loadingState
+                    ? <Loading />
+                    : <>
+                        <h1>Scoreboard</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mesto</th>
+                                    <th id='left'>Indeks</th>
+                                    <th id='left'>Ime i prezime</th>
+                                    <th>Broj poena</th>
+                                    <th>Odigranih igara</th>
                                 </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-            </div>
+                            </thead>
+                            <tbody>
+                                {
+                                    studentsState.map((student, index) =>
+                                        <tr key={index + 1}>
+                                            <td>{index + 1}.</td>
+                                            <td id='left'>{student.studentID}</td>
+                                            <td id='left'>{student.studentName}</td>
+                                            <td>{student.pointsTotal}</td>
+                                            <td>{student.countTotal}</td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </table>
+                    </>
+            }
+        </div>
     )
 }

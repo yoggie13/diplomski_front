@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import Loading from '../Loading';
+import GameServices from '../../services/GameServices';
 
 export default function Payoffs() {
 
@@ -41,33 +42,33 @@ export default function Payoffs() {
 
     useEffect(() => {
         setLoadingState(true);
-        fetch(
-            `http://localhost:46824/api/game/creation/${gameID}`,
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => res.json())
-            .then(response => {
-                setGameState({
-                    ...gameState,
-                    gameName: response.name,
-                    gameText: response.text,
-                    gameStrategies: response.strategies
-                })
-                setLoadingState(false)
-            })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            })
-
+        GetGameInfo();
     }, [])
 
-    const handleClick = e => {
+    const GetGameInfo = async () => {
+        const res = await GameServices.GetGameForPayoffs(gameID);
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    setGameState({
+                        ...gameState,
+                        gameName: response.name,
+                        gameText: response.text,
+                        gameStrategies: response.strategies
+                    })
+                    setLoadingState(false);
+                });
+        }
+        else {
+            console.log("error");
+            setLoadingState(false);
+
+        }
+
+    }
+
+    const handleClick = async (e) => {
         var Payoffs = [];
 
         var k = 0;
@@ -85,32 +86,19 @@ export default function Payoffs() {
             }
         }
 
-        fetch(
-            `http://localhost:46824/api/game/${gameID}/addPayoffs`,
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(Payoffs)
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Sačuvano");
-                    history.push('/allGames');
-                    setLoadingState(false);
-                }
-                else {
-                    throw new Error();
-                }
+        var res = await GameServices.InsertPayoffs(gameID, Payoffs);
 
-            })
-            .catch(error => {
-                alert("Čuvanje nije uspelo, pokušajte ponovo");
-                setLoadingState(false)
-                return "error";
-            });
+        if (res.status === 200) {
+            alert("Sačuvano");
+            history.push('/allGames');
+            setLoadingState(false);
+        }
+
+        else {
+            alert("Čuvanje nije uspelo, pokušajte ponovo");
+            setLoadingState(false)
+            return "error";
+        }
     }
 
     return (

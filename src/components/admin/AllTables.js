@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import Loading from '../Loading';
 import Scoreboard from '../Scoreboard';
+import AdminServices from '../../services/AdminServices';
 
 export default function AllTables() {
     const [groupState, setGroupState] = useState({ groups: [], counter: 1 });
@@ -13,33 +14,22 @@ export default function AllTables() {
 
     useEffect(() => {
         setLoadingState(true);
-        fetch(
-            'http://localhost:46824/api/admin/groups',
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 200)
-                    return res.json();
-                else
-                    throw new Error();
-            })
-            .then(response => {
-                setGroupState({
-                    ...groupState,
-                    groups: response
-                });
-                setLoadingState(false)
-            })
-            .catch(error => {
-                console.log(error);
-                setLoadingState(false);
-            })
+        GetGroups();
     }, [])
+
+    const GetGroups = async () => {
+        const res = await AdminServices.GetGroups();
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    setGroupState({
+                        ...groupState,
+                        groups: response
+                    });
+                    setLoadingState(false);
+                })
+        }
+    }
 
     const handleArrowClick = (e, number) => {
         e.preventDefault();
@@ -48,13 +38,13 @@ export default function AllTables() {
 
         setGroupState({ ...groupState, counter: log });
     }
+    console.log(groupState)
     return (
         loadingState
             ? <Loading />
             :
             <div className="AllTables">
                 {
-
                     groupState.groups.length > 0
                         ? <>
                             <Scoreboard admin={true} group={groupState.groups[groupState.counter - 1].id} />

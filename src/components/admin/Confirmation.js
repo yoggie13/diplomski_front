@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Loading from '../Loading';
+import GameServices from '../../services/GameServices.js'
 
 function formatDate(dueDate) {
     var splitDate = dueDate.split('-');
@@ -35,41 +36,24 @@ export default function Confirmation() {
 
         setLoadingState(true);
 
-        fetch(
-            'http://localhost:46824/api/game/create',
-            {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body:
-                    JSON.stringify(data)
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Sačuvano");
-                    localStorage.removeItem("Game");
-                    return res.json();
-                }
-                else {
-                    throw new Error();
-                }
-            })
-            .then(response => {
-                if (game.Model > 1 && game.Model < 5)
-                    history.push("/allGames");
-                else {
-                    history.push(`/Payoffs/${response}`);
-                }
-                setLoadingState(false);
-                return;
-            })
-            .catch(error => {
-                alert("Čuvanje nije uspelo, pokušajte ponovo");
-                setLoadingState(false)
-                return "error";
-            });
+        const res = await GameServices.InsertGame(data);
+
+        if (res.status === 200) {
+            alert("Sačuvano");
+            res.json()
+                .then(response => {
+                    if (game.Model > 1 && game.Model < 5)
+                        history.push("/allGames");
+                    else {
+                        history.push(`/Payoffs/${response}`);
+                    }
+                })
+        }
+        else {
+            alert("Čuvanje nije uspelo, pokušajte ponovo");
+        }
+
+        setLoadingState(false)
     }
     return (
         < div className="Confirmation" >

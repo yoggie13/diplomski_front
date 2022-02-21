@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import UserServices from '../../services/UserServices';
 
 export default function NotificationBell({ user }) {
 
@@ -8,40 +9,29 @@ export default function NotificationBell({ user }) {
     const [updateCounterState, setUpdateCounterState] = useState(false);
 
     useEffect(() => {
-        callApi();
+        GetNotificationsCount();
     });
 
     useEffect(() => {
-        callApi()
+        GetNotificationsCount()
     }, [updateCounterState]);
 
     (async function () {
         setInterval(() => { setUpdateCounterState(!updateCounterState) }, 120000);
     })();
 
-    const callApi = () => {
-        fetch(
-            `http://localhost:46824/api/user/countnotif/${user.id}`,
-            {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    return res.json();
-                }
-                else
-                    throw new Error();
-            })
-            .then(response => {
-                setNotifCounterState(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+    console.log(notifCounterState)
+    const GetNotificationsCount = async () => {
+        var res = await UserServices.GetNotificationsCount(user.id);
+
+        if (res.status === 200) {
+            res.json()
+                .then(response => {
+                    setNotifCounterState(response);
+                })
+        }
+        else
+            console.log("error");
     }
 
     return (
