@@ -65,7 +65,7 @@ export default function CreateQuiz() {
         if (fieldsValid()) {
             gameMainInfo.Questions = questionsState.arr;
 
-            var res = await GameServices.InsertAGame({
+            var res = await GameServices.InsertGame({
                 "game": gameMainInfo,
             })
 
