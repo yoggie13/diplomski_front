@@ -26,4 +26,10 @@ export default class UserServices {
     static ChangePassword = async (data) => {
         return await API.POST('user/changePass', data)
     }
+    static CheckCookie = async (data) => {
+        return await API.GET('user/check-cookie')
+    }
+    static Logout = async (data) => {
+        return await API.POST('user/logout')
+    }
 }

@@ -1,38 +1,66 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import './App.css';
 import BasicTemplate from './components/BasicTemplate';
 import Panel from './pages/Panel';
+import Loading from './components/Loading';
+import UserServices from './services/UserServices';
 
 function App() {
   const [state, setState] = useState({
-    isLoggedIn: localStorage.getItem("User") !== null ? true : false,
-    isAdmin: localStorage.getItem("Admin") === null ? false : JSON.parse(localStorage.getItem("Admin")),
-    User: JSON.parse(localStorage.getItem("User"))
+    isAdmin: false,
+    User: null
   });
+  const [loadingState, setLoadingState] = useState(false);
 
-  const loginLogic = (details, adminStatus = false) => {
-    localStorage.setItem("User", JSON.stringify(details));
-    localStorage.setItem("Admin", adminStatus);
-    setState({ isLoggedIn: true, isAdmin: adminStatus, User: JSON.parse(localStorage.getItem("User")) });
+  useEffect(() => {
+    setLoadingState(true)
+    checkCookie();
+  }, [])
+
+  const checkCookie = async () => {
+    var res = await UserServices.CheckCookie();
+
+    if (res.status === 200) {
+      res.json()
+        .then(user => {
+          console.log(user)
+          setState({ ...state, User: user, isAdmin: user.role === "Admin" ? true : false })
+          setLoadingState(false);
+        })
+    }
+    else {
+      setLoadingState(false)
+    }
   }
-  const logoutLogic = e => {
-    localStorage.removeItem("User");
-    setState({ isLoggedIn: false, isAdmin: false, User: null });
+  const loginLogic = async () => {
+    await checkCookie();
+  }
+  const logoutLogic = async (e) => {
 
+    var res = await UserServices.Logout();
+
+    if (res.status === 200) {
+      setState({ isAdmin: false, User: null });
+    }
   }
   return (
     <div className="App">
-      <Router>
-        {
-          state.isLoggedIn
-            ? <Panel logoutLogic={logoutLogic} isAdmin={state.isAdmin} user={state.User} />
-            : <BasicTemplate loginLogic={loginLogic} />
-        }
-      </Router>
+      {
+        loadingState ?
+          <Loading />
+          :
+          <Router>
+            {
+              state.User !== null
+                ? <Panel logoutLogic={logoutLogic} isAdmin={state.isAdmin} user={state.User} />
+                : <BasicTemplate loginLogic={loginLogic} />
+            }
+          </Router>
+      }
     </div>
   );
 }

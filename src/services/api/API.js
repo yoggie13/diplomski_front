@@ -1,6 +1,13 @@
 import React from 'react';
 
 const url_main = "http://localhost:46824/api/";
+const headers_main = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': true,
+    'Access-Control-Allow-Headers': 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
+    "withCredentials": "include"
+}
+
 
 export default class API {
 
@@ -10,8 +17,10 @@ export default class API {
             {
                 method: "GET",
                 mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
+                headers: headers_main,
+                credentials: 'include',
+                xhrFields: {
+                    "withCredentials": 'true',
                 }
             })
             .catch(error => {
@@ -24,8 +33,10 @@ export default class API {
             {
                 method: "POST",
                 mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
+                headers: headers_main,
+                credentials: 'include',
+                xhrFields: {
+                    "withCredentials": true,
                 },
                 body: JSON.stringify(data)
             })
@@ -40,8 +51,10 @@ export default class API {
             {
                 method: "PUT",
                 mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
+                headers: headers_main,
+                credentials: 'include',
+                xhrFields: {
+                    "withCredentials": true,
                 },
                 body: JSON.stringify(data)
             })
@@ -55,8 +68,10 @@ export default class API {
             {
                 method: "DELETE",
                 mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
+                headers: headers_main,
+                credentials: 'include',
+                xhrFields: {
+                    "withCredentials": true,
                 },
             })
             .catch(error => {

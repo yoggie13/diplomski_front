@@ -6,7 +6,7 @@ import {
 import Loading from './Loading';
 import UserServices from '../services/UserServices.js';
 
-export default function AdminLogin({ loginLogic, isAdmin }) {
+export default function Login({ loginLogic, isAdmin }) {
     const [loginDetails, setLoginDetails] = useState({ email: "on20213655@student.fon.bg.ac.rs", password: "123" });
     const [errorState, setErrorState] = useState(false);
     const [loadingState, setLoadingState] = useState(false);
@@ -25,14 +25,10 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
         const res = await UserServices.Login(loginDetails.email, loginDetails.password);
 
         if (res.status === 200) {
-            res.json()
-                .then(response => {
-                    console.log(response)
-                    setLoadingState(false);
-                    setErrorState(false);
-                    loginLogic(response, response.role === "Admin" ? true : false);
-                    history.push(response.role === "Admin" ? "/dashboard" : "/profile");
-                })
+            setLoadingState(false);
+            setErrorState(false);
+            await loginLogic();
+            history.push("/profile");
         }
         else if (res.status === 400) {
             alert("Pogrešan unos");
@@ -41,11 +37,9 @@ export default function AdminLogin({ loginLogic, isAdmin }) {
             alert("Taj korisnik ne postoji");
         }
         setLoadingState(false)
-
     }
 
     return (
-
         <div className="FormClass">
             <form id="loginForm" onSubmit={loginHandler}>
                 <label htmlFor="email">

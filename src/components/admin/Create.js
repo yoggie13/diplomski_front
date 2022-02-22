@@ -70,8 +70,6 @@ export default function Create() {
         e.preventDefault();
 
         if (fieldsValid()) {
-            localStorage.setItem('game-main-info', gameState);
-
             if (gameState.Model !== 9) {
                 history.push('/create/game', { gameMainInfo: gameState });
             }
