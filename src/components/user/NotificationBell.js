@@ -6,21 +6,16 @@ import UserServices from '../../services/UserServices';
 export default function NotificationBell({ user }) {
 
     const [notifCounterState, setNotifCounterState] = useState(0);
-    const [updateCounterState, setUpdateCounterState] = useState(false);
-
-    useEffect(() => {
-        GetNotificationsCount();
-    });
+    const [updateCounterState, setUpdateCounterState] = useState(true);
 
     useEffect(() => {
         GetNotificationsCount()
     }, [updateCounterState]);
 
     (async function () {
-        setInterval(() => { setUpdateCounterState(!updateCounterState) }, 120000);
+        setInterval(() => { setUpdateCounterState(!updateCounterState) }, 300000);
     })();
 
-    console.log(notifCounterState)
     const GetNotificationsCount = async () => {
         var res = await UserServices.GetNotificationsCount(user.id);
 

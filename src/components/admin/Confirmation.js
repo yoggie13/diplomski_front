@@ -6,17 +6,15 @@ import Loading from '../Loading';
 import GameServices from '../../services/GameServices.js'
 
 function formatDate(dueDate) {
-    var splitDate = dueDate.split('-');
-    var dayAndTime = splitDate[2].split('T');
-
-    return `${dayAndTime[0]}.${splitDate[1]}.${splitDate[0]} - ${dayAndTime[1]}`
+    var d = new Date(dueDate);
+    return d.toLocaleDateString('sr') + " " + d.toLocaleTimeString('sr')
 }
-
 export default function Confirmation() {
 
     var game = useLocation().state.game;
     var strategies = useLocation().state.strategies;
     var range = useLocation().state.range;
+    var gameModels = useLocation().state.gameModels;
 
     const [loadingState, setLoadingState] = useState(false);
     const data = {
@@ -36,13 +34,18 @@ export default function Confirmation() {
 
         setLoadingState(true);
 
+        var localDate = data.game.DueDate
+        data.game.DueDate = new Date(localDate).toUTCString();
+
         const res = await GameServices.InsertGame(data);
+
+        data.game.DueDate = localDate;
 
         if (res.status === 200) {
             alert("Sačuvano");
             res.json()
                 .then(response => {
-                    if (game.Model > 1 && game.Model < 5)
+                    if (game.Model >= gameModels.indexOf("The P Beauty Contest") && game.Model <= gameModels.indexOf("Travellers Dillema"))
                         history.push("/allGames");
                     else {
                         history.push(`/Payoffs/${response}`);
@@ -77,7 +80,7 @@ export default function Confirmation() {
                             }</p>
                         </div>
                         {
-                            game.Model > 1 && game.Model < 5
+                            game.Model >= gameModels.indexOf("The P Beauty Contest") && game.Model <= gameModels.indexOf("Travellers Dillema")
                                 ? <>
                                     <div className="statWrap" >
                                         <p>Minimalna vrednost:</p>
@@ -113,7 +116,7 @@ export default function Confirmation() {
                                     </div>
                                     <div className="StrategyShow" id="secondPlayerStrategies">
                                         {
-                                            game.Model === 1
+                                            game.Model === gameModels.indexOf("Common Good")
                                                 ? <h3>Strategije grupe</h3>
                                                 : <h3>Strategije drugog igrača</h3>
                                         }

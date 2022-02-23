@@ -5,6 +5,8 @@ import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.m
 
 export default function CreateGame() {
     var gameMainInfo = useLocation().state.gameMainInfo;
+    var gameModels = useLocation().state.gameModels;
+
     const [gameState, setGameState] = useState(gameMainInfo);
     const [strategiesState, setStrategiesState] = useState({
         firstPlayerStrategies: [
@@ -186,7 +188,7 @@ export default function CreateGame() {
         e.preventDefault();
 
         if (fieldsValid())
-            history.push('/confirmation', { game: gameMainInfo, strategies: strategiesState, range: oneTwoState });
+            history.push('/confirmation', { game: gameMainInfo, strategies: strategiesState, range: oneTwoState, gameModels: gameModels });
         else
             alert("Niste sve popunili kako treba");
     }
@@ -194,11 +196,12 @@ export default function CreateGame() {
         e.preventDefault();
         history.goBack();
     }
+
     return (
         <div>
             <h1>Unos strategija</h1>
             <form>{
-                gameState.Model > 1 && gameState.Model < 5
+                gameState.Model >= gameModels.indexOf("The P Beauty Contest") && gameState.Model <= gameModels.indexOf("Travellers Dillema")
                     ? <div className='RangeGameInput'>
                         <label htmlFor="range1">Od
                             <input id="range1" type="number" value={oneTwoState.MinValue} onChange={e => setOneTwoState({ ...oneTwoState, MinValue: parseInt(e.target.value) })} />
@@ -247,7 +250,7 @@ export default function CreateGame() {
                             </div >
                             <div className="StrategyInput" id="secondPlayerStrategies">
                                 {
-                                    gameState.Model === 1
+                                    gameState.Model === gameModels.indexOf("Common Good")
                                         ? <h2>Strategije grupe</h2>
                                         : <h2>Strategije drugog igrača</h2>
                                 }

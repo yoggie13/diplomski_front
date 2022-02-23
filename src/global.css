@@ -16,6 +16,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0px;
+  padding: 0px;
 }
 #root {
   width: 100vw;
@@ -78,6 +80,7 @@ i:hover {
 .sidebar {
   grid-column: 1;
   position: fixed;
+  left: 0;
   min-width: 225px;
   width: 20vw;
   background-color: #0d63e3;

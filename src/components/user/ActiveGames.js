@@ -5,10 +5,8 @@ import Loading from '../Loading';
 import GameServices from '../../services/GameServices';
 
 function formatDate(dueDate) {
-    var arr = dueDate.split('-');
-    var day = arr[2].split('T')[0];
-
-    return day + "." + arr[1] + "." + arr[0];
+    var d = new Date(dueDate);
+    return d.toLocaleDateString('sr');
 }
 
 export default function ActiveGames({ userID }) {

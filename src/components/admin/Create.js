@@ -5,8 +5,6 @@ import {
     useHistory
 } from "react-router-dom";
 import Checkbox from '@material-ui/core/Checkbox';
-import moment from 'moment';
-import Datetime from 'react-datetime';
 import GameServices from '../../services/GameServices.js'
 
 export default function Create() {
@@ -18,7 +16,7 @@ export default function Create() {
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Model: 1, Name: "123", Text: "123", ChatEnabled: false, DueDate: "2022-02-25T14:02"
+        Model: 0, Name: "123", Text: "123", ChatEnabled: false, DueDate: "2022-02-25T14:02"
     });
     const [gameModels, setGameModels] = useState([]);
 
@@ -67,13 +65,12 @@ export default function Create() {
             setLoadingState(false);
         }
     }
-
     const handleNextPage = (e) => {
         e.preventDefault();
 
         if (fieldsValid()) {
-            if (gameState.Model !== 9) {
-                history.push('/create/game', { gameMainInfo: gameState });
+            if (gameState.Model !== gameModels.indexOf("Quiz")) {
+                history.push('/create/game', { gameMainInfo: gameState, gameModels: gameModels });
             }
             else
                 history.push('/create/quiz', { gameMainInfo: gameState });
@@ -91,7 +88,7 @@ export default function Create() {
                     <select required id="typeofgame" value={gameState.Model} onChange={e => setGameState({ ...gameState, Model: parseInt(e.target.value) })}>
                         {
                             gameModels.map((model, index) =>
-                                <option key={index} id={index + 1} value={index + 1}>{model}</option>
+                                <option key={index} id={index} value={index}>{model}</option>
                             )
                         }
                     </select>
@@ -101,7 +98,7 @@ export default function Create() {
                     <textarea required id="text" value={gameState.Text} onChange={e => setGameState({ ...gameState, Text: e.target.value })}></textarea>
                     <input required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
                     {
-                        gameState.Model > 3 && gameState.Model < 9
+                        gameState.Model >= gameModels.indexOf("Prisonners Dilemma") && gameState.Model <= gameModels.indexOf("Split Steal")
                             ? <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
                                 <Checkbox
                                     id="chatCheck"

@@ -48,6 +48,9 @@ export default function ReportProblem({ userID }) {
         if (res.status === 200) {
             setLoadingState(false);
             alert("Vaš feedback je zabeležen");
+
+            setReportState({ ...reportState, Type: "Loše računanje bodova", Description: "", ImageUrl: "" });
+            setCheckboxState(false);
         }
         else {
             setLoadingState(false);

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const url_main = "http://localhost:46824/api/";
 const headers_main = {
     'Content-Type': 'application/json',
@@ -8,11 +6,10 @@ const headers_main = {
     "withCredentials": "include"
 }
 
-
 export default class API {
 
-    static GET = (url) => {
-        return fetch(
+    static GET = async (url) => {
+        return await fetch(
             url_main + url,
             {
                 method: "GET",
@@ -28,7 +25,7 @@ export default class API {
             })
     }
     static POST = async (url, data) => {
-        return fetch(
+        return await fetch(
             url_main + url,
             {
                 method: "POST",
@@ -43,10 +40,9 @@ export default class API {
             .catch(error => {
                 console.log(error);
             })
-
     }
-    static PUT = (url, data) => {
-        return fetch(
+    static PUT = async (url, data) => {
+        return await fetch(
             url_main + url,
             {
                 method: "PUT",
@@ -62,8 +58,8 @@ export default class API {
                 console.log(error);
             })
     }
-    static DELETE = (url) => {
-        return fetch(
+    static DELETE = async (url) => {
+        return await fetch(
             url_main + url,
             {
                 method: "DELETE",

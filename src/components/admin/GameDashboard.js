@@ -9,10 +9,8 @@ import Loading from '../Loading';
 import GameServices from '../../services/GameServices'
 
 function formatDate(dueDate) {
-    var splitDate = dueDate.split('-');
-    var dayAndTime = splitDate[2].split('T');
-
-    return `${dayAndTime[0]}.${splitDate[1]}.${splitDate[0]} - ${dayAndTime[1]}`
+    var d = new Date(dueDate);
+    return d.toLocaleDateString('sr') + " " + d.toLocaleTimeString('sr')
 }
 function checkDate(dueDate) {
     return Date.parse(dueDate) > Date.now();
@@ -146,7 +144,7 @@ export default function GameDashboard() {
 
             var res = await GameServices.RepeatGame(gameState.id, {
                 samePairs: samePairsState,
-                date: repeatDateState
+                date: new Date(repeatDateState).toUTCString()
             });
 
             if (res.status === 200) {

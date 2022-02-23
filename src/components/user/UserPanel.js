@@ -16,7 +16,6 @@ import Error from '../Error.js';
 import Notifications from './Notifications.js';
 import NotificationBell from './NotificationBell.js';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
-import Notification from './Notifications.js';
 import GameHolder from './GameHolder.js';
 
 export default function UserPanel({ user }) {
