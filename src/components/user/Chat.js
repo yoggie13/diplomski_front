@@ -35,7 +35,6 @@ export default function Chat({ id, userID }) {
         if (res.status === 200) {
             res.json()
                 .then(response => {
-                    console.log(response)
                     setstate({ ...state, messages: response.messages })
                     setLoadingState(false);
                     scrollToBottom("smooth");

@@ -26,8 +26,6 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
         else
             res = await UserServices.GetScoreboard(userID);
 
-        console.log(res)
-
         if (res.status === 200) {
             res.json()
                 .then(response => {

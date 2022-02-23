@@ -79,6 +79,7 @@ export default function Create() {
             alert("Niste popunili sve što je potrebno");
         }
     }
+
     return (
         <div className="CreateGame">
             <>
@@ -98,7 +99,7 @@ export default function Create() {
                     <textarea required id="text" value={gameState.Text} onChange={e => setGameState({ ...gameState, Text: e.target.value })}></textarea>
                     <input required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
                     {
-                        gameState.Model >= gameModels.indexOf("Prisonners Dilemma") && gameState.Model <= gameModels.indexOf("Split Steal")
+                        gameState.Model >= gameModels.indexOf("Travellers Dilemma") && gameState.Model <= gameModels.indexOf("Split Steal")
                             ? <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>
                                 <Checkbox
                                     id="chatCheck"

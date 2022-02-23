@@ -45,7 +45,7 @@ export default function Confirmation() {
             alert("Sačuvano");
             res.json()
                 .then(response => {
-                    if (game.Model >= gameModels.indexOf("The P Beauty Contest") && game.Model <= gameModels.indexOf("Travellers Dillema"))
+                    if (game.Model >= gameModels.indexOf("The P Beauty Contest") && game.Model <= gameModels.indexOf("Travellers Dilemma"))
                         history.push("/allGames");
                     else {
                         history.push(`/Payoffs/${response}`);
@@ -74,13 +74,13 @@ export default function Confirmation() {
                         <div className="statWrap">
                             <p>Chat: </p>
                             <p className="result">{
-                                game.Chat ?
+                                game.ChatEnabled ?
                                     <i className="fas fa-check-circle" id="icon-true"></i>
                                     : <i className="fas fa-times-circle" id="icon-false"></i>
                             }</p>
                         </div>
                         {
-                            game.Model >= gameModels.indexOf("The P Beauty Contest") && game.Model <= gameModels.indexOf("Travellers Dillema")
+                            game.Model >= gameModels.indexOf("The P Beauty Contest") && game.Model <= gameModels.indexOf("Travellers Dilemma")
                                 ? <>
                                     <div className="statWrap" >
                                         <p>Minimalna vrednost:</p>

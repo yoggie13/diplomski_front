@@ -201,7 +201,7 @@ export default function CreateGame() {
         <div>
             <h1>Unos strategija</h1>
             <form>{
-                gameState.Model >= gameModels.indexOf("The P Beauty Contest") && gameState.Model <= gameModels.indexOf("Travellers Dillema")
+                gameState.Model >= gameModels.indexOf("The P Beauty Contest") && gameState.Model <= gameModels.indexOf("Travellers Dilemma")
                     ? <div className='RangeGameInput'>
                         <label htmlFor="range1">Od
                             <input id="range1" type="number" value={oneTwoState.MinValue} onChange={e => setOneTwoState({ ...oneTwoState, MinValue: parseInt(e.target.value) })} />

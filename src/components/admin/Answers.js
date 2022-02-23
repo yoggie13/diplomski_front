@@ -70,7 +70,6 @@ export default function Answers({ getAnswerState, setAnswersState, getType, upda
             })
         setAnswersState(answers)
     }
-    console.log()
 
     return (
         <div className='Answers'>

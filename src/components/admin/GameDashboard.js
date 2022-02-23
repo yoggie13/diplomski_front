@@ -49,7 +49,6 @@ export default function GameDashboard() {
         if (res.status === 200) {
             res.json()
                 .then(response => {
-                    console.log(response)
                     setGameState(response);
                     if (response.questions === undefined)
                         createOptions(response);
