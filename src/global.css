@@ -245,15 +245,18 @@ form {
   padding-top: 10px;
 }
 #reportProblemForm {
-  height: 450px;
+  height: 570px;
   margin-right: 20px;
+  width: 330px;
 }
 #changePasswordForm {
   margin-right: 20px;
 }
 .acceptTerms {
-  margin-left: 10%;
+  margin-left: 30px;
   margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
 }
 #changePasswordForm {
   min-height: 400px;
@@ -355,7 +358,7 @@ form input[type="submit"]:hover {
 .FormClass form input[type="password"],
 .FormClass form select,
 .FormClass form textarea {
-  width: 80% !important;
+  width: 80%;
 }
 
 .FormClass form label {
@@ -998,7 +1001,8 @@ hr {
   border-radius: 10px;
   padding: 15px 20px 30px 20px;
   margin-bottom: 20px;
-  width: 400px;
+  width: 220px;
+  height: 50px;
 }
 .dropzone-header {
   display: flex;
@@ -1031,11 +1035,13 @@ hr {
   max-height: 500px;
 }
 #problemDescription {
-  max-width: 230px;
+  width: 248px;
   padding-left: 10px;
   padding-top: 5px;
 }
-
+#problemType {
+  width: 262px;
+}
 /* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
 #58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
 @media screen and (max-width: 900px) {

@@ -27,7 +27,6 @@ function App() {
     if (res.status === 200) {
       res.json()
         .then(user => {
-          console.log(user)
           setState({ ...state, User: user, isAdmin: user.role === "Admin" ? true : false })
           setLoadingState(false);
         })

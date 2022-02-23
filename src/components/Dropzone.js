@@ -20,13 +20,54 @@ export default function Dropzone({ setImage, index, setShowUploadImageState, Ima
     };
 
     var prevAcceptedFile = null;
+    const imgbbUploader = require('imgbb-uploader');
+
+    const getBase64 = file => {
+        return new Promise(resolve => {
+            let fileInfo;
+            let baseURL = "";
+            // Make new FileReader
+            let reader = new FileReader();
+
+            // Convert the file to base64 text
+            reader.readAsDataURL(file);
+
+            // on reader load somthing...
+            reader.onload = () => {
+                // Make a fileInfo Object
+                baseURL = reader.result;
+                resolve(baseURL);
+            };
+        });
+    };
+
+    const getImage = async () => {
+        var image = acceptedFiles[0];
+
+        var result = await getBase64(image);
+        result = result.replace("data:image/png;base64,", "");
+
+        var response = await imgbbUploader({
+            apiKey: "e92672031318b81cecc7d830e6fc3b12",
+            base64string: result
+        })
+        return {
+            url: response.url,
+            name: image.name
+        }
+    }
 
     useEffect(() => {
         if (acceptedFiles.length > 0 && acceptedFiles[0] !== prevAcceptedFile) {
-            setImage(index, acceptedFiles[0]);
-            prevAcceptedFile = acceptedFiles[0];
+            handleImage();
         }
     }, [acceptedFiles])
+
+    const handleImage = async () => {
+        var image = await getImage();
+        setImage(index, image);
+        prevAcceptedFile = acceptedFiles[0];
+    }
 
     const handleClose = (e) => {
         e.preventDefault();

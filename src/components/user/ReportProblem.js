@@ -1,15 +1,16 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import Dropzone from '../Dropzone';
 import Loading from '../Loading';
 import UserServices from '../../services/UserServices';
-
 
 export default function ReportProblem({ userID }) {
 
     const [checkboxState, setCheckboxState] = useState(false);
-    const [reportState, setReportState] = useState({ Type: "Loše računanje bodova", Description: "", ImageUrl: "" });
+    const [reportState, setReportState] = useState({ Type: "Loše računanje bodova", Description: "", ImageUrl: null, ImageName: null });
     const [loadingState, setLoadingState] = useState(false);
+    const [showUploadImage, setShowUploadImage] = useState(reportState.ImageUrl === null ? false : true);
 
     useEffect(() => {
         document.title = "Prijava problema | Teorija igara"
@@ -41,7 +42,7 @@ export default function ReportProblem({ userID }) {
         var res = await UserServices.ReportAProblem({
             Type: reportState.Type,
             Description: reportState.Description,
-            ImageUrl: null,
+            ImageUrl: reportState.ImageUrl,
             SubmittedByID: userID,
         });
 
@@ -49,7 +50,7 @@ export default function ReportProblem({ userID }) {
             setLoadingState(false);
             alert("Vaš feedback je zabeležen");
 
-            setReportState({ ...reportState, Type: "Loše računanje bodova", Description: "", ImageUrl: "" });
+            setReportState({ ...reportState, Type: "Loše računanje bodova", Description: "", ImageUrl: null, ImageName: null });
             setCheckboxState(false);
         }
         else {
@@ -58,10 +59,16 @@ export default function ReportProblem({ userID }) {
         }
 
     }
-    const handleUpload = e => {
-        e.preventDefault();
-        return;
+    const updateImage = (index, image) => {
+
+        if (image === null) {
+            setReportState({ ...reportState, ImageUrl: null, ImageName: null });
+        }
+        else {
+            setReportState({ ...reportState, ImageUrl: image.url, ImageName: image.name });
+        }
     }
+
     const handleCheck = e => {
         setCheckboxState(!checkboxState);
     }
@@ -93,10 +100,21 @@ export default function ReportProblem({ userID }) {
                             Kratak opis problema*
                         </label>
                         <textarea required id="problemDescription" value={reportState.Description} onChange={e => setReportState({ ...reportState, Description: e.target.value })}></textarea>
-                        {/* <label htmlFor="problemPhoto">
-                            Prilog skrinšota
-                        </label>
-                        <input type="file" accept="image/*" value={reportState.ImageUrl} onChange={handleUpload} id="problemPhoto" /> */}
+                        {
+                            showUploadImage
+                                ? <Dropzone
+                                    setImage={updateImage}
+                                    setShowUploadImageState={setShowUploadImage}
+                                    ImageName={reportState.ImageName}
+                                />
+                                : <div className='ImageButton' onClick={e => {
+                                    e.preventDefault();
+                                    setShowUploadImage(true);
+                                }}>
+                                    <p>Dodaj sliku</p>
+                                    <i class="fas fa-image fa-lg" ></i>
+                                </div>
+                        }
                         <div className="acceptTerms">
                             <small>Saglasan/na da pošaljem svoj indeks uz opis problema</small>
                             <Checkbox

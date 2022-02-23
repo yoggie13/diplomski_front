@@ -8,7 +8,6 @@ import GameServices from '../../services/GameServices.js'
 export default function CreateQuiz() {
 
     let history = useHistory();
-    const imgbbUploader = require('imgbb-uploader');
     var gameMainInfo = useLocation().state.gameMainInfo;
     const [loadingState, setLoadingState] = useState(false);
 
@@ -55,7 +54,6 @@ export default function CreateQuiz() {
         catch {
             return false;
         }
-
         return true;
     }
 
@@ -154,24 +152,7 @@ export default function CreateQuiz() {
         questionsState.arr[index].NegativePoints = value;
     }
 
-    const getBase64 = file => {
-        return new Promise(resolve => {
-            let fileInfo;
-            let baseURL = "";
-            // Make new FileReader
-            let reader = new FileReader();
 
-            // Convert the file to base64 text
-            reader.readAsDataURL(file);
-
-            // on reader load somthing...
-            reader.onload = () => {
-                // Make a fileInfo Object
-                baseURL = reader.result;
-                resolve(baseURL);
-            };
-        });
-    };
     const updateImage = (index, image) => {
 
         var questions = questionsState.arr;
@@ -180,26 +161,11 @@ export default function CreateQuiz() {
             questions[index].ImageUrl = null;
         }
         else {
-            getBase64(image)
-                .then(result => {
-                    result = result.replace("data:image/png;base64,", "");
-                    imgbbUploader({
-                        apiKey: "e92672031318b81cecc7d830e6fc3b12",
-                        base64string: result
-                    })
-                        .then((response) => {
-                            questions[index].ImageUrl = response.url;
-                            questions[index].ImageName = image.name;
-                            setQuestionsState({ ...questionsState, arr: questions });
-                        })
-                        .catch((error) => {
-                            alert("Nije uspelo cuvanje slike")
-                            console.error(error)
-                        });
-                })
+            questions[index].ImageUrl = image.url;
+            questions[index].ImageName = image.name;
         }
+        setQuestionsState({ ...questionsState, arr: questions });
     }
-
     const updateAnswers = (index, answers) => {
         var questions = questionsState.arr;
         questions[index].Answers = answers;
