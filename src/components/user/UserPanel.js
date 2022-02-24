@@ -13,26 +13,16 @@ import UserInfo from '../UserInfo.js';
 import ActiveGames from './ActiveGames.js';
 import Game from './Game.js';
 import Error from '../Error.js';
-import Notifications from './Notifications.js';
 import NotificationBell from './NotificationBell.js';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import GameHolder from './GameHolder.js';
 
-export default function UserPanel({ user }) {
-
-    let loc = useLocation();
+export default function UserPanel({ user, openNotifications }) {
 
     return (
         <>
-            {
-                !loc.pathname.includes('notifications')
-                    ? <NotificationBell user={user} />
-                    : null
-            }
+            <NotificationBell user={user} openNotifications={openNotifications} />
             <Switch>
-                <Route path="/notifications">
-                    <Notifications user={user} />
-                </Route>
                 <Route path="/finishedGames">
                     <FinishedGames userID={user.id} />
                 </Route>

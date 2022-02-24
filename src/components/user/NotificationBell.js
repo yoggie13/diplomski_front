@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserServices from '../../services/UserServices';
+import Notifications from './Notifications';
 
-export default function NotificationBell({ user }) {
+export default function NotificationBell({ user, openNotifications }) {
 
     const [notifCounterState, setNotifCounterState] = useState(0);
     const [updateCounterState, setUpdateCounterState] = useState(true);
@@ -30,7 +31,12 @@ export default function NotificationBell({ user }) {
     }
 
     return (
-        <Link to="/notifications">
+        <>
+            {
+                openNotifications
+                    ? <Notifications user={user} />
+                    : null
+            }
             <div className="notificationDiv">
                 <i className="fas fa-bell fa-lg"></i>
                 {
@@ -39,6 +45,7 @@ export default function NotificationBell({ user }) {
                         : null
                 }
             </div>
-        </Link>
+
+        </>
     )
 }

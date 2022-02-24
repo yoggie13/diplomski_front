@@ -8,6 +8,7 @@ export default function Panel({ logoutLogic, isAdmin, user }) {
     const [sidebarState, setSidebarState] = useState({
         sidebarStatus: window.innerWidth >= 900 ? true : false
     });
+    const [openNotifications, setOpenNotifications] = useState(false);
 
     const handleResize = e => {
         if (window.innerWidth < 900 && sidebarState.sidebarStatus !== false) {
@@ -34,8 +35,19 @@ export default function Panel({ logoutLogic, isAdmin, user }) {
 
     }
 
+    const handleNotifications = (e) => {
+        e.preventDefault();
+
+        console.log(e.target.className)
+
+        if (e.target.className === "fas fa-bell fa-lg")
+            setOpenNotifications(!openNotifications);
+        else
+            setOpenNotifications(false);
+    }
+
     return (
-        <div className="Panel" onClick={closeSidebar}>
+        <div className="Panel" onClick={(e) => { handleNotifications(e); closeSidebar(e); }}>
             {
                 sidebarState.sidebarStatus
                     ? <Sidebar logoutLogic={logoutLogic} changePanelRender isAdmin={isAdmin} Username={user.email} userID={user.id} />
@@ -45,7 +57,7 @@ export default function Panel({ logoutLogic, isAdmin, user }) {
                 {
                     isAdmin
                         ? <AdminPanel isAdmin={isAdmin} user={user} />
-                        : <UserPanel user={user} />
+                        : <UserPanel user={user} openNotifications={openNotifications} />
                 }
             </div>
         </div >

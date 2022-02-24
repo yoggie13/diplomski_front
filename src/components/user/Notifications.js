@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import UserServices from '../../services/UserServices';
 import Loading from '../Loading';
 
-export default function Notification({ user }) {
+export default function Notifications({ user }) {
     const [loadingState, setLoadingState] = useState(false);
     const [notificationState, setNotificationState] = useState(false);
 
@@ -28,38 +28,22 @@ export default function Notification({ user }) {
             setLoadingState(false);
         }
     }
-
     return (
-        loadingState
-            ? <Loading />
-            : notificationState !== false
-                ? <div>
-                    <h1>Obaveštenja</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Naslov</th>
-                                <th>Tekst</th>
-                                <th>Link do igre</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                notificationState.map((notification, index) =>
-                                    <tr key={index}>
-                                        <td>{notification.subject}</td>
-                                        <td>{notification.text}</td>
-                                        <td id="center">
-                                            <Link to={`game/${notification.gameID}`}>
-                                                <i id={notification.gameID} className="fas fa-chevron-right"></i>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                : <p>Trenutno nemate nikakvih notifikacija</p>
+        <div className='Notifications'>
+            {
+                loadingState
+                    ? <Loading />
+                    : notificationState !== false
+                        ? notificationState.map((notification, index) =>
+                            <Link to={`game/${notification.gameID}`} replace>
+                                <div key={index}>
+                                    <h4>{notification.subject}</h4>
+                                    <p>{notification.text}</p>
+                                </div>
+                            </Link>
+                        )
+                        : <p>Trenutno nemate nikakvih notifikacija</p>
+            }
+        </div>
     )
 }
