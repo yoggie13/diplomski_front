@@ -15,7 +15,7 @@ export default function GameHolder({ userID }) {
     const [answersState, setAnswersState] = useState([]);
 
     let { id } = useParams();
-
+    console.log(id)
     let history = useHistory();
 
     useEffect(() => {
@@ -105,7 +105,7 @@ export default function GameHolder({ userID }) {
     useEffect(() => {
         setLoadingState(true)
         GetGame();
-    }, [])
+    }, [id])
 
     const GetGame = async () => {
         var res = await GameServices.GetGame(id, userID);

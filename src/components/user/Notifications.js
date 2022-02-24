@@ -35,7 +35,7 @@ export default function Notifications({ user }) {
                     ? <Loading />
                     : notificationState !== false
                         ? notificationState.map((notification, index) =>
-                            <Link to={`game/${notification.gameID}`} replace>
+                            <Link to={`/game/${notification.gameID}`}>
                                 <div key={index}>
                                     <h4>{notification.subject}</h4>
                                     <p>{notification.text}</p>
