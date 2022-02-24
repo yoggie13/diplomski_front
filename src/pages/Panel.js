@@ -38,8 +38,6 @@ export default function Panel({ logoutLogic, isAdmin, user }) {
     const handleNotifications = (e) => {
         e.preventDefault();
 
-        console.log(e.target.className)
-
         if (e.target.className === "fas fa-bell fa-lg")
             setOpenNotifications(!openNotifications);
         else

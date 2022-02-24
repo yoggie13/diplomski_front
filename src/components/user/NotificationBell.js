@@ -13,6 +13,11 @@ export default function NotificationBell({ user, openNotifications }) {
         GetNotificationsCount()
     }, [updateCounterState]);
 
+    useEffect(() => {
+        if (openNotifications)
+            setNotifCounterState(0);
+    }, [openNotifications]);
+
     (async function () {
         setInterval(() => { setUpdateCounterState(!updateCounterState) }, 300000);
     })();

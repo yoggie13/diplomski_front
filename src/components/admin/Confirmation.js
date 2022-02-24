@@ -34,12 +34,16 @@ export default function Confirmation() {
 
         setLoadingState(true);
 
-        var localDate = data.game.DueDate
+        var localDate = data.game.DueDate;
+        var localStartDate = data.game.StartDate;
+
         data.game.DueDate = new Date(localDate).toUTCString();
+        data.game.StartDate = new Date(localStartDate).toUTCString();
 
         const res = await GameServices.InsertGame(data);
 
         data.game.DueDate = localDate;
+        data.game.StartDate = localStartDate;
 
         if (res.status === 200) {
             alert("Sačuvano");
@@ -68,6 +72,10 @@ export default function Confirmation() {
                         <h2>{game.Name}</h2>
                         <p>{game.Text}</p>
                         <div className="statWrap">
+                            <p>Datum početka:</p>
+                            <p className="result">{formatDate(game.StartDate)}</p>
+                        </div>
+                        <div className="statWrap">
                             <p>Datum isteka:</p>
                             <p className="result">{formatDate(game.DueDate)}</p>
                         </div>
@@ -79,6 +87,28 @@ export default function Confirmation() {
                                     : <i className="fas fa-times-circle" id="icon-false"></i>
                             }</p>
                         </div>
+                        <div className="statWrap">
+                            <p>Višeetapna: </p>
+                            <p className="result">{
+                                game.MultiStage ?
+                                    <i className="fas fa-check-circle" id="icon-true"></i>
+                                    : <i className="fas fa-times-circle" id="icon-false"></i>
+                            }</p>
+                        </div>
+                        {
+                            game.MultiStage ?
+                                <>
+                                    <div className="statWrap">
+                                        <p>Broj iteracija:</p>
+                                        <p className="result">{game.MultiStageNumber}</p>
+                                    </div>
+                                    <div className="statWrap">
+                                        <p>Iteracije se dešavaju na svakih:</p>
+                                        <p className="result">{game.MultiStageInterval}</p>
+                                    </div>
+                                </>
+                                : null
+                        }
                         {
                             game.Model >= gameModels.indexOf("The P Beauty Contest") && game.Model <= gameModels.indexOf("Travellers Dilemma")
                                 ? <>

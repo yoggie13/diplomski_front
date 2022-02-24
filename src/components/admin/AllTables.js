@@ -38,7 +38,6 @@ export default function AllTables() {
 
         setGroupState({ ...groupState, counter: log });
     }
-    console.log(groupState)
     return (
         loadingState
             ? <Loading />

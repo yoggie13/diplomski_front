@@ -293,7 +293,10 @@ form textarea {
 
 form textarea {
   height: 100px;
+  width: 89%;
   overflow-y: auto;
+  padding-top: 6px;
+  padding-left: 8px;
 }
 form select {
   height: 30px;
@@ -799,6 +802,7 @@ hr {
   overflow-y: scroll;
   height: 600px;
   margin-bottom: 50px;
+  background-color: white;
 }
 .Notifications div {
   background-color: white;

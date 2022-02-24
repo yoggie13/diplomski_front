@@ -16,7 +16,7 @@ export default function Create() {
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Model: 0, Name: "123", Text: "123", ChatEnabled: false, DueDate: "2022-02-25T14:02"
+        Model: 0, Name: "123", Text: "123", ChatEnabled: false, StartDate: "2022-02-25T14:02", DueDate: "2022-02-25T14:02", MultiStage: false, MultiStageInterval: 0, MultiStageNumber: 0
     });
     const [gameModels, setGameModels] = useState([]);
 
@@ -97,7 +97,29 @@ export default function Create() {
                     <input required id="gamename" type="text" value={gameState.Name} onChange={e => setGameState({ ...gameState, Name: e.target.value })} />
                     <label htmlFor="text">Opis igre*</label>
                     <textarea required id="text" value={gameState.Text} onChange={e => setGameState({ ...gameState, Text: e.target.value })}></textarea>
-                    <input required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
+                    <label htmlFor='startDate'>Datum početka igre</label>
+                    <input id='startDate' required type="datetime-local" value={gameState.StartDate} onChange={e => setGameState({ ...gameState, StartDate: e.target.value })} />
+                    <label htmlFor='dueDate'>Datum kraja igre</label>
+                    <input id='dueDate' required type="datetime-local" value={gameState.DueDate} onChange={e => setGameState({ ...gameState, DueDate: e.target.value })} />
+                    <div>
+                        <label htmlFor='multiStageCheck'>Da li želite da igra bude višeetapna?</label>
+                        <Checkbox
+                            id='multiStageCheck'
+                            checked={gameState.MultiStage}
+                            onClick={e => setGameState({ ...gameState, MultiStage: !gameState.MultiStage })}
+                            color='secondary'
+                        />
+                    </div>
+                    {
+                        gameState.MultiStage
+                            ? <>
+                                <label htmlFor='msnumber'>Koliko iteracije želite da bude</label>
+                                <input id='msnumber' type='number' value={gameState.MultiStageNumber} onChange={e => setGameState({ ...gameState, MultiStageNumber: e.target.value })} />
+                                <label htmlFor='msinterval'>Na koliko dana želite da se igra ponovi?</label>
+                                <input id='msinterval' type='number' value={gameState.MultiStageInterval} onChange={e => setGameState({ ...gameState, MultiStageInterval: e.target.value })} />
+                            </>
+                            : null
+                    }
                     {
                         gameState.Model >= gameModels.indexOf("Travellers Dilemma") && gameState.Model <= gameModels.indexOf("Split Steal")
                             ? <div><label htmlFor="chatCheck">Da li je potrebna mogućnost komunikacije</label>

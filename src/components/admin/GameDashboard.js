@@ -12,8 +12,8 @@ function formatDate(dueDate) {
     var d = new Date(dueDate);
     return d.toLocaleDateString('sr') + " " + d.toLocaleTimeString('sr')
 }
-function checkDate(dueDate) {
-    return Date.parse(dueDate) > Date.now();
+function checkDate(startDate, dueDate) {
+    return Date.parse(startDate) <= Date.now() && Date.parse(dueDate) > Date.now();
 }
 
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -175,6 +175,10 @@ export default function GameDashboard() {
                                     <p className="result">{gameState.playersPlayed}</p>
                                 </div>
                                 <div className="statWrap">
+                                    <p>Datum početka:</p>
+                                    <p className="result">{formatDate(gameState.startDate)}</p>
+                                </div>
+                                <div className="statWrap">
                                     <p>Datum isteka:</p>
                                     <p className="result">{formatDate(gameState.dueDate)}</p>
                                 </div>
@@ -283,7 +287,7 @@ export default function GameDashboard() {
                             <div id="RightColumn">
 
                                 {
-                                    checkDate(gameState.dueDate)
+                                    checkDate(gameState.startDate, gameState.dueDate)
                                         ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
                                         : null
                                 }
