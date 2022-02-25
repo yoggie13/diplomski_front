@@ -1022,8 +1022,8 @@ hr {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 160px;
+  width: 500px;
+  height: 300px;
   margin-left: 50%;
   background-color: white;
   border: 1px solid lightgray;
@@ -1042,6 +1042,9 @@ hr {
 }
 .modal-header h3 {
   margin-bottom: 0px;
+}
+.Modal form {
+  width: 80%;
 }
 .Dropzone {
   text-align: center;

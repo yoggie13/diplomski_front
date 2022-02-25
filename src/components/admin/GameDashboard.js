@@ -30,8 +30,7 @@ export default function GameDashboard() {
     const [loadingState, setLoadingState] = useState(true);
     const [refreshState, setRefreshState] = useState(true);
     const [showModalState, setShowModalState] = useState(false);
-    const [samePairsState, setSamePairsState] = useState(false);
-    const [repeatDateState, setRepeatDateState] = useState("");
+    const [repeatDateState, setRepeatDateState] = useState({ startDate: "", dueDate: "" });
 
     let gameID = useParams();
     let history = useHistory();
@@ -126,10 +125,9 @@ export default function GameDashboard() {
         }
 
     }
-    const handleRepeatGame = (e, samePairs) => {
+    const handleRepeatGame = (e) => {
         e.preventDefault();
 
-        setSamePairsState(samePairs);
 
         setShowModalState(true);
     }
@@ -141,9 +139,12 @@ export default function GameDashboard() {
             setShowModalState(false);
             setLoadingState(true);
 
+            var startDate = new Date(repeatDateState.startDate).toUTCString();
+            var dueDate = new Date(repeatDateState.dueDate).toUTCString();
+
             var res = await GameServices.RepeatGame(gameState.id, {
-                samePairs: samePairsState,
-                date: new Date(repeatDateState).toUTCString()
+                startDate: startDate,
+                dueDate: dueDate
             });
 
             if (res.status === 200) {
@@ -279,7 +280,6 @@ export default function GameDashboard() {
                                     gameState.type === 1 || gameState.type === 2
                                         ? <>
                                             <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru sa istim parovima</button>
-                                            <button onClick={e => handleRepeatGame(e, false)}>Ponovite igru sa različitim parovima</button>
                                         </>
                                         : <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru</button>
                                 }
@@ -298,15 +298,24 @@ export default function GameDashboard() {
                             showModalState
                                 ? <div className='Modal'>
                                     <div className="modal-header" >
-                                        <h3>Unesite datum</h3>
+                                        <h3>Unos datuma</h3>
                                         <i className="fas fa-times" onClick={(e) => { e.preventDefault(); setShowModalState(false) }}></i>
                                     </div>
                                     <form>
+                                        <label>Datum početka</label>
                                         <input type='datetime-local'
-                                            value={repeatDateState}
+                                            value={repeatDateState.startDate}
                                             onChange={(e) => {
                                                 e.preventDefault();
-                                                setRepeatDateState(e.target.value);
+                                                setRepeatDateState({ ...repeatDateState, startDate: e.target.value });
+                                            }
+                                            } />
+                                        <label>Datum završetka</label>
+                                        <input type='datetime-local'
+                                            value={repeatDateState.dueDate}
+                                            onChange={(e) => {
+                                                e.preventDefault();
+                                                setRepeatDateState({ ...repeatDateState, dueDate: e.target.value });
                                             }
                                             } />
                                         <button onClick={e => callApiForRepeat(e)}>Sačuvaj</button>
