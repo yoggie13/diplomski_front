@@ -373,6 +373,10 @@ form input[type="submit"]:hover {
   color: #0d63e3;
   font-size: 14px;
 }
+#prevInteraction {
+  font-size: 16px;
+  color: #e30d63;
+}
 
 .PlayGameForm input[type="submit"] {
   border: none;
@@ -1086,6 +1090,7 @@ hr {
 #problemType {
   width: 262px;
 }
+
 /* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
 #58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
 @media screen and (max-width: 900px) {

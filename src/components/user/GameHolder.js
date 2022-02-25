@@ -227,6 +227,11 @@ export default function GameHolder({ userID }) {
                 </h1>
                 <p>{gameState.game.text}</p>
                 {
+                    gameState.game.prevInteraction !== undefined
+                        ? <p id='prevInteraction'>{gameState.game.prevInteraction}</p>
+                        : null
+                }
+                {
                     gameState.game.active
                         ? <form className="PlayGameForm">
                             {
