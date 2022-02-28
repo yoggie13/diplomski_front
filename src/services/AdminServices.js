@@ -7,7 +7,7 @@ export default class AdminServices {
         return await API.GET('admin/groups');
     }
     static GetGameDashboard = async (id) => {
-        return await API.GET('admin/' + id);
+        return await API.GET('admin/game/' + id);
     }
     static GetScoreboard = async (group) => {
         return await API.GET('admin/scoreboard/' + group);

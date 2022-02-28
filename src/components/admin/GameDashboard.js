@@ -34,7 +34,6 @@ export default function GameDashboard() {
 
     let gameID = useParams();
     let history = useHistory();
-    const [apiState, setApiState] = useState(gameID.id === undefined ? "dashboard" : `game/${gameID.id}`)
 
     useEffect(() => {
         if (refreshState) {
@@ -43,7 +42,7 @@ export default function GameDashboard() {
         }
     }, [refreshState])
     const GetData = async () => {
-        const res = await AdminServices.GetGameDashboard(apiState);
+        const res = await AdminServices.GetGameDashboard(gameID.id);
 
         if (res.status === 200) {
             res.json()
@@ -114,7 +113,6 @@ export default function GameDashboard() {
         if (res.status === 200) {
             alert("Igra obrisana");
             gameID.id = undefined;
-            setApiState("dashboard");
             history.push('/allGames');
             setRefreshState(true);
             setLoadingState(false);
