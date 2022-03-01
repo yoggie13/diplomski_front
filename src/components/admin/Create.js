@@ -16,7 +16,7 @@ export default function Create() {
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Model: 0, Name: "123", Text: "123", ChatEnabled: false, StartDate: "2022-02-25T14:02", DueDate: "2022-02-27T14:02", MultiStage: false, MultiStageNumber: 2
+        Model: 0, Name: "123", Text: "123", ChatEnabled: false, StartDate: "2022-03-01T13:17", DueDate: "2022-03-01T13:18", MultiStage: false, MultiStageNumber: 2
     });
     const [gameModels, setGameModels] = useState([]);
 

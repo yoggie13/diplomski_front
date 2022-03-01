@@ -211,7 +211,7 @@ export default function CreateGame() {
                         </label>
                         <>
                             <label htmlFor="defaultNumber">Default vrednost
-                                <input id="defaultNumber" type="number" id='full-width' value={oneTwoState.DefaultValue} onChange={e => setOneTwoState({ ...oneTwoState, DefaultValue: parseInt(e.target.value) })} />
+                                <input id="defaultNumber" type="number" value={oneTwoState.DefaultValue} onChange={e => setOneTwoState({ ...oneTwoState, DefaultValue: parseInt(e.target.value) })} />
                             </label>
                             <small>Vrednost koja će se odigrati automatski, nakon isteka vremena, ako student ne odigra</small>
                         </>
@@ -248,39 +248,43 @@ export default function CreateGame() {
                                 }
                                 {/* < i className="fas fa-plus" onClick={e => addNew(e, 1)} ></i> */}
                             </div >
-                            <div className="StrategyInput" id="secondPlayerStrategies">
-                                {
-                                    gameState.Model === gameModels.indexOf("Common Good")
-                                        ? <h2>Strategije grupe</h2>
-                                        : <h2>Strategije drugog igrača</h2>
-                                }
-                                {
-                                    strategiesState.secondPlayerStrategies.map((strategy, index) => {
-                                        return <div className="Strategy">
-                                            <div>
-                                                <label htmlFor={index}>{index + 1}. strategija</label>
-                                                <input id={index}
-                                                    type="text"
-                                                    key={index}
-                                                    value={strategy.Text}
-                                                    onChange={e => handleInput(e, index, 2)} />
-                                            </div>
-                                            <div >
-                                                <label htmlFor={`defaultRadio${index}`}>Def:</label>
-                                                <Radio
-                                                    id={`defaultRadio${index}`}
-                                                    name="default2"
-                                                    key={index}
-                                                    value={index}
-                                                    checked={strategy.Default}
-                                                    onClick={e => setDefaultStrategy(2, index)}
-                                                />
-                                            </div>
-                                        </div>
-                                    })
-                                }
-                                {/* < i className="fas fa-plus" onClick={e => addNew(e, 2)}  ></i> */}
-                            </div >
+                            {
+                                gameState.Model !== gameModels.indexOf("Students Dilemma")
+                                    ? <div className="StrategyInput" id="secondPlayerStrategies">
+                                        {
+                                            gameState.Model === gameModels.indexOf("Common Good")
+                                                ? <h2>Strategije grupe</h2>
+                                                : <h2>Strategije drugog igrača</h2>
+                                        }
+                                        {
+                                            strategiesState.secondPlayerStrategies.map((strategy, index) => {
+                                                return <div className="Strategy">
+                                                    <div>
+                                                        <label htmlFor={index}>{index + 1}. strategija</label>
+                                                        <input id={index}
+                                                            type="text"
+                                                            key={index}
+                                                            value={strategy.Text}
+                                                            onChange={e => handleInput(e, index, 2)} />
+                                                    </div>
+                                                    <div >
+                                                        <label htmlFor={`defaultRadio${index}`}>Def:</label>
+                                                        <Radio
+                                                            id={`defaultRadio${index}`}
+                                                            name="default2"
+                                                            key={index}
+                                                            value={index}
+                                                            checked={strategy.Default}
+                                                            onClick={e => setDefaultStrategy(2, index)}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            })
+                                        }
+                                        {/* < i className="fas fa-plus" onClick={e => addNew(e, 2)}  ></i> */}
+                                    </div >
+                                    : null
+                            }
                         </div>
                     </div>
             }

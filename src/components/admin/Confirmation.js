@@ -40,6 +40,10 @@ export default function Confirmation() {
         data.game.DueDate = new Date(localDate).toUTCString();
         data.game.StartDate = new Date(localStartDate).toUTCString();
 
+        if (data.game.Model === gameModels.indexOf("Students Dilemma")) {
+            strategies.secondPlayerStrategies = [];
+        }
+
         const res = await GameServices.InsertGame(data);
 
         data.game.DueDate = localDate;
@@ -49,7 +53,7 @@ export default function Confirmation() {
             alert("Sačuvano");
             res.json()
                 .then(response => {
-                    if (game.Model >= gameModels.indexOf("The P Beauty Contest") && game.Model <= gameModels.indexOf("Travellers Dilemma"))
+                    if (game.Model >= gameModels.indexOf("Students Dilemma") && game.Model <= gameModels.indexOf("Travellers Dilemma"))
                         history.push("/allGames");
                     else {
                         history.push(`/Payoffs/${response}`);
@@ -144,27 +148,31 @@ export default function Confirmation() {
                                         }
                                         </ul>
                                     </div>
-                                    <div className="StrategyShow" id="secondPlayerStrategies">
-                                        {
-                                            game.Model === gameModels.indexOf("Common Good")
-                                                ? <h3>Strategije grupe</h3>
-                                                : <h3>Strategije drugog igrača</h3>
-                                        }
-                                        <ul>{
-                                            strategies.secondPlayerStrategies.map((strategy) => {
-                                                if (strategy.FirstOrSecondPlayer === 2) {
-                                                    return <>
-                                                        <li>{strategy.Text} {
-                                                            strategy.Default
-                                                                ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                                                : null
-                                                        }</li>
-                                                    </>
+                                    {
+                                        game.Model !== gameModels.indexOf("Students Dilemma")
+                                            ? <div className="StrategyShow" id="secondPlayerStrategies">
+                                                {
+                                                    game.Model === gameModels.indexOf("Common Good")
+                                                        ? <h3>Strategije grupe</h3>
+                                                        : <h3>Strategije drugog igrača</h3>
                                                 }
-                                            })
-                                        }
-                                        </ul>
-                                    </div>
+                                                <ul>{
+                                                    strategies.secondPlayerStrategies.map((strategy) => {
+                                                        if (strategy.FirstOrSecondPlayer === 2) {
+                                                            return <>
+                                                                <li>{strategy.Text} {
+                                                                    strategy.Default
+                                                                        ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                                        : null
+                                                                }</li>
+                                                            </>
+                                                        }
+                                                    })
+                                                }
+                                                </ul>
+                                            </div>
+                                            : null
+                                    }
                                 </div>
                         }
                         <div className="ButtonsAlignRight">
