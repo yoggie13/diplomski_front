@@ -46,7 +46,7 @@ function App() {
     if (res.status === 200) {
       setState({ isAdmin: false, User: null });
     }
-    setLoadingState(false)
+    setLoadingState(false);
   }
   return (
     <div className="App">

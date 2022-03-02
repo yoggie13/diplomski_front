@@ -974,6 +974,7 @@ hr {
 }
 .ResultsTable {
   width: 100%;
+  margin-bottom: 30px;
 }
 .QuizQuestion {
   border: lightgray 1px solid;
