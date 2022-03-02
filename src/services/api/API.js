@@ -1,4 +1,4 @@
-const url_main = "https://teorijaigara.azurewebsites.net";
+const url_main = "https://teorijaigara.azurewebsites.net/";
 const headers_main = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Credentials': true,
