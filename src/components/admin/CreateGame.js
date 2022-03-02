@@ -53,21 +53,22 @@ export default function CreateGame() {
         if (arrayInvalid(strategiesState.secondPlayerStrategies))
             return false
 
-        try {
-            strategiesState.firstPlayerStrategies.forEach(strategy => {
-                if (fieldInvalid(strategy.Text) || fieldInvalid(strategy.FirstOrSecondPlayer) || fieldInvalid(strategy.Default)) {
-                    throw Exception;
-                }
-            })
+        if (gameState.Model < gameModels.indexOf("The P Beauty Contest") || gameState.Model > gameModels.indexOf("Travellers Dilemma"))
+            try {
+                strategiesState.firstPlayerStrategies.forEach(strategy => {
+                    if (fieldInvalid(strategy.Text) || fieldInvalid(strategy.FirstOrSecondPlayer) || fieldInvalid(strategy.Default)) {
+                        throw Exception;
+                    }
+                })
 
-            strategiesState.firstPlayerStrategies.forEach(strategy => {
-                if (fieldInvalid(strategy.Text) || fieldInvalid(strategy.FirstOrSecondPlayer) || fieldInvalid(strategy.Default))
-                    throw Exception;
-            })
-        }
-        catch {
-            return false;
-        }
+                strategiesState.firstPlayerStrategies.forEach(strategy => {
+                    if (fieldInvalid(strategy.Text) || fieldInvalid(strategy.FirstOrSecondPlayer) || fieldInvalid(strategy.Default))
+                        throw Exception;
+                })
+            }
+            catch {
+                return false;
+            }
 
         return true
     }
