@@ -3,6 +3,7 @@ const headers_main = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Credentials': true,
     'Access-Control-Allow-Headers': 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
+    'Access-Control-Allow-Origin': '*',
     "withCredentials": "include"
 }
 
