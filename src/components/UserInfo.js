@@ -15,10 +15,6 @@ export default function UserInfo({ isAdmin, user }) {
                     ? <div id="text">
                         <div id="profileInfo">
                             <div className="statWrap">
-                                <p>Zvanje:</p>
-                                <p className="result">{user.title}</p>
-                            </div>
-                            <div className="statWrap">
                                 <p>Email:</p>
                                 <p className="result">{user.email}</p>
                             </div>

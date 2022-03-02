@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Checkbox from '@material-ui/core/Checkbox';
 import GameServices from '../../services/GameServices.js'
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Create() {
 
@@ -16,7 +17,13 @@ export default function Create() {
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
     const [gameState, setGameState] = useState({
-        Model: 0, Name: "123", Text: "123", ChatEnabled: false, StartDate: "2022-03-01T13:17", DueDate: "2022-03-01T13:18", MultiStage: false, MultiStageNumber: 2
+        Model: 0,
+        Name: "", Text: "",
+        ChatEnabled: false,
+        StartDate: "",
+        DueDate: "",
+        MultiStage: false,
+        MultiStageNumber: 2
     });
     const [gameModels, setGameModels] = useState([]);
 

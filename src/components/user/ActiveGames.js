@@ -49,40 +49,45 @@ export default function ActiveGames({ userID }) {
             :
             <div className="ActiveGames">
                 <h1>Aktivne igre</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Naziv igre</th>
-                            <th>Broj igrača</th>
-                            <th>Maks. broj poena</th>
-                            <th>Odigrao/la</th>
-                            <th>Datum isteka</th>
-                            <th>Igraj</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            state.games.map((game, index) =>
-                                <tr key={index}>
-                                    <td>{game.name}</td>
-                                    <td>{game.numberOfPlayers}</td>
-                                    <td>{game.maxPayoff}</td>
-                                    <td id="center">{
-                                        game.played
-                                            ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                            : <i className="fas fa-times-circle" id="icon-false"></i>
-                                    }</td>
-                                    <td>{formatDate(game.dueDate)}</td>
-                                    <td id="center">
-                                        <Link to={`/game/${game.id}`}>
-                                            <i id={game.id} className="fas fa-chevron-right fa-lg"></i>
-                                        </Link>
-                                    </td>
+
+                {
+                    state.games.length > 0
+                        ? <table>
+                            <thead>
+                                <tr>
+                                    <th>Naziv igre</th>
+                                    <th>Broj igrača</th>
+                                    <th>Maks. broj poena</th>
+                                    <th>Odigrao/la</th>
+                                    <th>Datum isteka</th>
+                                    <th>Igraj</th>
                                 </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody>
+                                {
+                                    state.games.map((game, index) =>
+                                        <tr key={index}>
+                                            <td>{game.name}</td>
+                                            <td>{game.numberOfPlayers}</td>
+                                            <td>{game.maxPayoff}</td>
+                                            <td id="center">{
+                                                game.played
+                                                    ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                    : <i className="fas fa-times-circle" id="icon-false"></i>
+                                            }</td>
+                                            <td>{formatDate(game.dueDate)}</td>
+                                            <td id="center">
+                                                <Link to={`/game/${game.id}`}>
+                                                    <i id={game.id} className="fas fa-chevron-right fa-lg"></i>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </table>
+                        : <p>Trenutno nema aktivnih igara</p>
+                }
             </div>
     )
 }

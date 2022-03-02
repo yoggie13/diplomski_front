@@ -6,8 +6,8 @@ import {
 import Loading from './Loading';
 import UserServices from '../services/UserServices.js';
 
-export default function Login({ loginLogic, isAdmin }) {
-    const [loginDetails, setLoginDetails] = useState({ email: "on20213655@student.fon.bg.ac.rs", password: "123" });
+export default function Login({ loginLogic }) {
+    const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
     const [errorState, setErrorState] = useState(false);
     const [loadingState, setLoadingState] = useState(false);
 

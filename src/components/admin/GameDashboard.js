@@ -2,7 +2,6 @@ import { Button } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router';
-// import { PieChart } from 'react-minimal-pie-chart';
 import CanvasJSReact from '../../assets/canvasjs.react';
 import AdminServices from '../../services/AdminServices';
 import Loading from '../Loading';

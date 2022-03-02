@@ -12,6 +12,9 @@ export default class AdminServices {
     static GetScoreboard = async (group) => {
         return await API.GET('admin/scoreboard/' + group);
     }
+    static GetDashboard = async () => {
+        return await API.GET('admin/dashboard');
+    }
 
     //POST
 

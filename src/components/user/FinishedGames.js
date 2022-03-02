@@ -40,38 +40,42 @@ export default function FinishedGames({ userID }) {
             ? <Loading />
             : <div className="FinishedGames">
                 <h1>Završene igre</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Naziv igre</th>
-                            <th>Broj igrača</th>
-                            <th>Osvojenih poena</th>
-                            <th>Odigrao/la</th>
-                            <th>Link do igre</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            state.games.map((game) =>
-                                <tr key={game.ID}>
-                                    <td>{game.Name}</td>
-                                    <td>{game.NumberOfPlayers}</td>
-                                    <td>{game.PointsGotten}</td>
-                                    <td id="center">{
-                                        game.Played
-                                            ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                            : <i className="fas fa-times-circle" id="icon-false"></i>
-                                    }</td>
-                                    <td id="center">
-                                        <Link to={`/game/${game.ID}`}>
-                                            <i id={game.ID} className="fas fa-chevron-right fa-lg"></i>
-                                        </Link>
-                                    </td>
+                {
+                    state.games.length > 0
+                        ? <table>
+                            <thead>
+                                <tr>
+                                    <th>Naziv igre</th>
+                                    <th>Broj igrača</th>
+                                    <th>Osvojenih poena</th>
+                                    <th>Odigrao/la</th>
+                                    <th>Link do igre</th>
                                 </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody>
+                                {
+                                    state.games.map((game) =>
+                                        <tr key={game.ID}>
+                                            <td>{game.Name}</td>
+                                            <td>{game.NumberOfPlayers}</td>
+                                            <td>{game.PointsGotten}</td>
+                                            <td id="center">{
+                                                game.Played
+                                                    ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                    : <i className="fas fa-times-circle" id="icon-false"></i>
+                                            }</td>
+                                            <td id="center">
+                                                <Link to={`/game/${game.ID}`}>
+                                                    <i id={game.ID} className="fas fa-chevron-right fa-lg"></i>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </table>
+                        : <p>Trenutno nema završenih igara</p>
+                }
             </div>
     )
 }

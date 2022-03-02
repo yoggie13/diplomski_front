@@ -27,6 +27,9 @@ export default function Sidebar({ logoutLogic, isAdmin, Username }) {
                             <Link to="/create">Kreiraj igru</Link>
                         </li>
                         <li>
+                            <Link to="/dashboard">Dashboard</Link>
+                        </li>
+                        <li>
                             <Link to="/allGames">Sve igre</Link>
                         </li>
                         <li>

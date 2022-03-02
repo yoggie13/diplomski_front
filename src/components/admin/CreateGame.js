@@ -11,23 +11,23 @@ export default function CreateGame() {
     const [strategiesState, setStrategiesState] = useState({
         firstPlayerStrategies: [
             {
-                Text: "a",
+                Text: "",
                 FirstOrSecondPlayer: 1,
                 Default: true
             },
             {
-                Text: "b",
+                Text: "",
                 FirstOrSecondPlayer: 1,
                 Default: false
             }
         ], secondPlayerStrategies: [
             {
-                Text: "a",
+                Text: "",
                 FirstOrSecondPlayer: 2,
                 Default: true
             },
             {
-                Text: "b",
+                Text: "",
                 FirstOrSecondPlayer: 2,
                 Default: false
             }
@@ -36,41 +36,6 @@ export default function CreateGame() {
     const [oneTwoState, setOneTwoState] = useState({ MinValue: 0, MaxValue: 0, DefaultValue: 0, timesX: 0, minSum: 0 });
 
     let history = useHistory();
-
-    // const handleNextPage = (e, number) => {
-    //     localStorage.setItem("Game", JSON.stringify(gameState));
-
-    //     if (typeof (e) != "number" && typeof (e) != "string") {
-    //         e.preventDefault();
-    //         var newPage = state.page + number;
-    //     }
-    //     if (newPage === 3) {
-    //         if (gameState.Model > 1 && gameState.Model < 5) {
-    //             handleRange();
-    //             return;
-    //         }
-    //         cleanEmptyStrategies()
-    //             .then(() => {
-    //                 var strategies = strategiesState.firstPlayerStrategies.concat(strategiesState.secondPlayerStrategies);
-    //                 setGameState({
-    //                     ...gameState,
-    //                     Strategies: strategies
-    //                 })
-    //                 return strategies;
-    //             })
-    //             .then((response) => {
-    //                 var game = gameState;
-    //                 game.Strategies = response;
-    //                 localStorage.setItem("Game", JSON.stringify(game));
-    //                 return game;
-    //             })
-    //             .then((res) => {
-    //                 var newPage = state.page + number;
-    //             })
-
-    //     }
-    //     setstate({ page: newPage });
-    // }
 
     const fieldInvalid = (field) => {
         return field === "" || field === null || field === undefined
@@ -194,7 +159,7 @@ export default function CreateGame() {
     }
     const handlePreviousPage = e => {
         e.preventDefault();
-        history.goBack();
+        history.goBack({ gameMainInfo: gameMainInfo });
     }
 
     return (
