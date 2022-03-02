@@ -40,11 +40,13 @@ function App() {
   }
   const logoutLogic = async (e) => {
 
+    setLoadingState(true);
     var res = await UserServices.Logout();
 
     if (res.status === 200) {
       setState({ isAdmin: false, User: null });
     }
+    setLoadingState(false)
   }
   return (
     <div className="App">
