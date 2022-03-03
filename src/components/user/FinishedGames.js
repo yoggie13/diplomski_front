@@ -47,7 +47,6 @@ export default function FinishedGames({ userID }) {
                                 <tr>
                                     <th>Naziv igre</th>
                                     <th>Broj igrača</th>
-                                    <th>Osvojenih poena</th>
                                     <th>Odigrao/la</th>
                                     <th>Link do igre</th>
                                 </tr>
@@ -57,7 +56,6 @@ export default function FinishedGames({ userID }) {
                                     state.games.map((game) =>
                                         <tr key={game.ID}>
                                             <td>{game.Name}</td>
-                                            <td>{game.NumberOfPlayers}</td>
                                             <td>{game.PointsGotten}</td>
                                             <td id="center">{
                                                 game.Played
