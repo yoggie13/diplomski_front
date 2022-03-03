@@ -1,0 +1,1191 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap");
+
+html {
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+}
+#root {
+  width: 100vw;
+  min-height: 100vh;
+}
+h1,
+h2,
+h3,
+th {
+  font-family: "Nunito";
+  font-weight: 800;
+  color: #2b0a55;
+  margin-top: 0px;
+  font-size: 50px;
+}
+h2 {
+  font-size: 36px;
+}
+h3 {
+  font-size: 26px;
+}
+button {
+  font-family: "Varela";
+  border-radius: 8px;
+  border: none;
+  padding: 14px 16px 14px 16px;
+  background-color: #0d63e3;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #e30d63;
+}
+i:hover {
+  cursor: pointer;
+}
+.Panel {
+  display: grid;
+  grid-template-columns: 25vw 75vw;
+  height: 100vh;
+}
+.BasicTemplate {
+  display: grid;
+  grid-template-rows: 7vh 93vh;
+}
+.Panel a {
+  color: white;
+  text-decoration: none;
+  font-family: "Varela";
+}
+.Panel a i {
+  color: #2b0a55;
+}
+.sidebar a i {
+  color: white;
+}
+.Success {
+  z-index: 100;
+  position: absolute;
+  width: fit-content;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+.Success img {
+  width: 100px;
+  height: 100px;
+}
+.sidebar {
+  grid-column: 1;
+  position: fixed;
+  left: 0;
+  min-width: 225px;
+  width: 20vw;
+  background-color: #0d63e3;
+  height: 100vh;
+  margin: 0;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+.sidebar ul {
+  padding: 0;
+  list-style-type: none;
+  margin-top: 10vh;
+  align-self: flex-start;
+  margin-left: 50px;
+}
+.sidebar ul li,
+#sidebarFooter p {
+  font-family: "Varela";
+  margin-bottom: 15px;
+  text-align: left;
+}
+.sidebar ul li {
+  font-size: 20px;
+}
+#sidebarFooter p {
+  font-size: 16px;
+}
+.sidebar img {
+  max-width: 80px;
+  height: auto;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+#sidebarFooter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  position: absolute;
+  left: 30px;
+  right: 0;
+  margin-right: 30px;
+  bottom: 20px;
+}
+#sidebarFooter p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#sidebarFooter p:hover {
+  cursor: pointer;
+}
+.fa-sign-out-alt {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.sidebar ul li {
+  cursor: pointer;
+}
+#mainPart {
+  grid-column: 2;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-left: 50px;
+  margin-right: 40px;
+  margin-top: 60px;
+  text-align: left;
+  font-family: "Varela";
+  font-size: 22px;
+  color: #020b3f;
+  height: 80vh;
+}
+
+.Loading {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+#LoadingSmaller {
+  height: 50px;
+  width: 50px;
+  margin-top: 10px;
+}
+.Loading img {
+  width: 75px;
+  height: 75px;
+}
+#loginLoadSmaller {
+  width: 40px;
+  height: 40px;
+}
+.statWrap {
+  display: flex;
+  flex-direction: row;
+  margin-top: 26px;
+  margin-bottom: 26px;
+  justify-content: flex-start;
+}
+.statWrap p {
+  margin: 0px;
+}
+.statWrap .result {
+  margin-left: auto;
+  font-family: "Nunito";
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.Charts {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: auto;
+  margin-bottom: 20px;
+}
+.Charts #firstPlayer {
+  grid-column: 1;
+  margin-right: 10px;
+}
+.Charts #secondPlayer {
+  grid-column: 2;
+  margin-left: 10px;
+}
+svg text {
+  font-size: 10px;
+  color: white !important;
+}
+#buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.FormClass {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Varela";
+  height: 100%;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.FormClass form {
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #2b0a55;
+  border-radius: 30px;
+  box-shadow: 4px 7px #2b0a55;
+  width: 330px;
+  height: 330px;
+  padding-top: 10px;
+}
+#reportProblemForm {
+  height: 570px;
+  margin-right: 20px;
+  width: 330px;
+}
+#changePasswordForm {
+  margin-right: 20px;
+}
+.acceptTerms {
+  margin-left: 30px;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+#changePasswordForm {
+  min-height: 400px;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="number"],
+form input[type="datetime-local"] {
+  width: 90%;
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: solid 1px lightgray;
+  font-size: 18px;
+  padding-left: 5px;
+}
+form input[type="number"] {
+  max-width: 50px;
+  text-align: right;
+  margin-left: 15px;
+}
+form select,
+form textarea {
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: solid 1px lightgray;
+  font-size: 16px;
+  border-radius: 5px;
+  resize: none;
+}
+
+form textarea {
+  height: 100px;
+  width: 89%;
+  overflow-y: auto;
+  padding-top: 6px;
+  padding-left: 8px;
+}
+form select {
+  height: 30px;
+  padding-left: 5px;
+}
+form input[type="file"] {
+  width: 80%;
+  font-size: 12px;
+}
+small {
+  font-size: 14px;
+  color: gray;
+}
+/* #file-upload-button {
+  background-color: #0d63e3;
+} */
+#gobacktouserlogin {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  align-self: flex-start;
+  margin-bottom: 0px;
+  margin-left: 10%;
+  margin-top: 10px;
+}
+#gobacktouserlogin:hover {
+  cursor: pointer;
+}
+#gobacktouserlogin p {
+  font-size: 14px;
+  margin-left: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+form input[type="text"],
+form input[type="password"],
+form input[type="number"],
+:focus {
+  outline: none;
+}
+form input[type="submit"] {
+  border: none;
+  margin-top: 10px;
+  border-radius: 8px;
+  padding: 12px 14px 12px 14px;
+  width: fit-content;
+  font-size: 16px;
+  background-color: #2b0a55;
+  color: white;
+}
+form input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #e30d63;
+}
+.FormClass form input[type="text"],
+.FormClass form input[type="password"] {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.FormClass form input[type="text"],
+.FormClass form input[type="password"],
+.FormClass form select,
+.FormClass form textarea {
+  width: 80%;
+}
+
+.FormClass form label {
+  align-self: flex-start;
+  margin-left: 10%;
+  font-size: 24px;
+}
+.FormClass form a {
+  color: #0d63e3;
+  font-size: 14px;
+}
+#prevInteraction {
+  font-size: 16px;
+  color: #e30d63;
+}
+
+.PlayGameForm input[type="submit"] {
+  border: none;
+  margin-top: 10px;
+  padding: 12px 14px 12px 14px;
+  width: fit-content;
+  font-size: 16px;
+  background-color: #0d63e3;
+  color: white;
+}
+.PlayGameForm input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #e30d63;
+}
+/* .PlayGameForm .MuiButtonBase-root {
+  display: none;
+} */
+/* #radioButtons label {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2b0a55;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  margin-right: 15px;
+  font-size: 16px;
+}
+#radioButtons label:hover {
+  background-color: #e30d63; 
+}*/
+.RangeGameInput {
+  display: flex;
+  flex-direction: column;
+}
+.GameDashboard {
+  height: 100%;
+}
+.PlayGameForm {
+  margin-bottom: 30px;
+}
+.PlayGameForm #radioButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#strategyInputWrapper {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-bottom: 50px;
+}
+.StrategyInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+}
+#firstPlayerStrategies {
+  border-right: 1px solid lightgray;
+}
+.StrategyInput h2 {
+  align-self: flex-start;
+}
+.StrategyShow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 30px;
+}
+.StrategyShow ul {
+  margin-top: 0px;
+}
+
+.Strategy {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+#RewardMatrix {
+  display: grid;
+  grid-template-columns: 20% 40% 40%;
+  grid-template-rows: 20% 40% 40%;
+}
+#RewardMatrix input[type="number"] {
+  width: 25%;
+}
+#RewardMatrix input[type="number"]:nth-child(2) {
+  border-left: 1px solid lightgray;
+}
+#RewardMatrix div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid lightgray;
+}
+#AA {
+  grid-row: 2;
+  grid-column: 2;
+}
+#AB {
+  grid-row: 2;
+  grid-column: 3;
+}
+#BB {
+  grid-row: 3;
+  grid-column: 3;
+}
+#BA {
+  grid-row: 3;
+  grid-column: 2;
+}
+#A1 {
+  grid-row: 2;
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+  margin: 0px;
+  margin-right: 20px;
+}
+#B1 {
+  grid-row: 3;
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+  margin: 0px;
+  margin-right: 20px;
+}
+#A2 {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+#B2 {
+  grid-row: 1;
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+.Rewards input[type="submit"] {
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+.Header {
+  grid-row: 1;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  background-color: #0d63e3;
+}
+.Header img {
+  margin-left: 30px;
+  max-height: 65%;
+}
+
+.Homepage {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.Homepage #left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-column: 1;
+  text-align: left;
+  margin-left: 10vw;
+  font-family: "Varela";
+  font-size: 28px;
+  color: #444444;
+}
+.Homepage #left h1 {
+  font-size: 60px;
+  margin-top: 0px;
+}
+.Homepage #left p {
+  margin-top: 0px;
+}
+.Homepage #right {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-right: 10vw;
+}
+.Homepage #right img {
+  width: 80%;
+  height: auto;
+}
+.Homepage #left button {
+  width: 150px;
+  font-size: 18px;
+}
+
+.fas.fa-bars.fa-2x {
+  margin-top: 15px;
+  margin-left: 15px;
+  color: #2b0a55;
+}
+
+table {
+  width: 90%;
+  border-collapse: collapse;
+}
+
+th {
+  font-size: 22px;
+  text-align: right;
+}
+td {
+  font-family: "Varela";
+  font-size: 18px;
+  text-align: right;
+  border: 1px solid lightgray;
+  border-left: 0px;
+  border-right: 0px;
+}
+td,
+th {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#left {
+  text-align: left;
+}
+#center {
+  text-align: center;
+}
+#icon-true {
+  color: #0de38e;
+}
+#icon-false {
+  color: #e30d63;
+}
+.pageMover {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 90%;
+  margin-top: 50px;
+}
+#back,
+#forward {
+  display: flex;
+  align-items: center;
+}
+#back {
+  grid-column: 1;
+  justify-content: flex-start;
+}
+#forward {
+  grid-column: 2;
+  justify-content: flex-end;
+}
+.pageMover i {
+  margin-left: 30px;
+}
+
+#chevron-left {
+  margin-left: 0px;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  margin-right: 30px;
+}
+.tableMover {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.tableMover i {
+  margin-left: 30px;
+}
+.next {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.Strategy .fas.fa-plus {
+  align-self: center;
+}
+.Chat {
+  width: 350px;
+  margin: 20px 0px 20px 0px;
+  z-index: 1;
+  position: fixed;
+  right: 80px;
+  bottom: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+.Chat #chatIcon {
+  color: #2b0a55;
+  border: 2px solid #2b0a55;
+  border-radius: 50%;
+  padding: 8px;
+}
+.Chat #chatIcon:hover {
+  color: #e30d63;
+  border-color: #e30d63;
+}
+.Chat #chatOpened {
+  border: 1px solid #0d63e3;
+  width: 100%;
+  border-radius: 5px;
+  background: white;
+}
+#error {
+  color: #e30d38;
+  margin: 0;
+}
+#taskbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+#taskbar:hover {
+  cursor: pointer;
+}
+#taskbar small {
+  margin-left: 20px;
+}
+hr {
+  margin: 5px 0px 5px 0px;
+  color: lightgray;
+}
+#Messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 14px;
+  width: 100%;
+  height: 300px;
+}
+#Messages p {
+  word-wrap: break-word;
+  width: fit-content;
+  max-width: 45%;
+  height: fit-content;
+  background-color: #0d63e3;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 7px 5px 7px;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+#Messages .Opponent {
+  justify-self: start;
+  margin-left: 10px;
+  padding-right: 9px;
+}
+#Messages .Player {
+  justify-self: end;
+  margin-right: 10px;
+  margin-left: auto;
+  padding-left: 9px;
+}
+#sendMessage {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 10px 0px 10px;
+  align-items: center;
+  height: 40px;
+}
+#sendMessage textarea {
+  font-size: 14px;
+  word-wrap: break-word;
+  height: 20px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  margin: 0px;
+}
+#sendMessage i {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #2b0a55;
+}
+#sendMessage i:hover {
+  color: #e30d63;
+}
+.notificationDiv {
+  color: #2b0a55;
+  right: 80px;
+  top: 45px;
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+}
+.Notifications {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  border: 1px solid #2b0a55;
+  border-radius: 10px;
+  position: fixed;
+  top: 60px;
+  right: 90px;
+  z-index: 50;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  height: 600px;
+  margin-bottom: 50px;
+  background-color: white;
+}
+.Notifications div {
+  background-color: white;
+  color: #2b0a55;
+  padding: 14px 20px 12px 24px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: 1px solid lightgray;
+}
+.Notifications div h4 {
+  margin-top: 0px;
+}
+.Notifications div p {
+  margin-bottom: 0px;
+}
+::-webkit-scrollbar {
+  border-radius: 10px;
+}
+::-webkit-scrollbar {
+  border-radius: 10px;
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.notificationCount {
+  width: 10px;
+  height: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  color: white;
+  background-color: #e30d38;
+  border-radius: 50%;
+  right: 10px;
+  top: 5px;
+  position: relative;
+}
+.CreateQuiz {
+  padding-bottom: 70px;
+}
+#CreateQuizIcon {
+  margin-left: 50%;
+}
+.Question {
+  margin-bottom: 20px;
+  border: solid 1px lightgray;
+  border-radius: 10px;
+  padding: 20px;
+}
+.QuestionBody {
+  padding-left: 40px;
+}
+.QuestionIconsArray {
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.QuestionIconsArray select {
+  font-family: "FontAwesome", "Varela";
+}
+.QuestionIconsArray i {
+  margin: 10px 15px 10px 15px;
+}
+.css-1s2u09g-control {
+  width: 250px;
+}
+.css-1pahdxg-control {
+  width: 250px;
+}
+.AnswersTable {
+  max-width: 100%;
+}
+/* .QuestionIconsArray label {
+  margin-left:
+} */
+.QuestionIconsArray i:hover {
+  color: #e30d63;
+}
+.ClosedQuestion {
+  border: lightgray 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.ClosedQuestion h2 {
+  margin: 0px;
+  align-self: center;
+}
+.ClosedQuestion i {
+  border-radius: 50%;
+  border: #2b0a55 solid 1px;
+  padding: 3px 7px 3px 8px;
+  margin-right: 10px;
+}
+.QuestionHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.QuestionHeader h2 {
+  margin: 0px;
+  align-self: center;
+}
+#chevron-down {
+  border-radius: 50%;
+  border: #2b0a55 solid 1px;
+  padding: 3px 7px 3px 8px;
+  margin-right: 10px;
+  transform: rotate(90deg);
+}
+.QuestionHeader:hover {
+  cursor: pointer;
+}
+.QuestionHeader:hover #chevron-down {
+  transform: rotate(0deg);
+}
+.ClosedQuestion:hover {
+  cursor: pointer;
+}
+.ClosedQuestion:hover .fas.fa-chevron-right {
+  transform: rotate(90deg);
+}
+.AnswersTable {
+  margin-top: 30px;
+  width: 600px;
+}
+.AnswersTable td {
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+.AnswersTable th {
+  text-align: left;
+}
+#question-positive-points {
+  display: flex;
+  flex-direction: row;
+}
+#question-positive-points input {
+  max-width: 40px;
+  margin-left: 20px;
+  text-align: right;
+  padding: 0px;
+}
+.QuizInput {
+  display: block;
+}
+.DashboardQuestion {
+  margin-bottom: 30px;
+}
+.Results {
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+.ResultsTable {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.QuizQuestion {
+  border: lightgray 1px solid;
+  border-radius: 10px;
+  padding: 25px;
+  padding-left: 35px;
+  margin-bottom: 30px;
+}
+.Buttons {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+}
+.ButtonsAlignRight {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.ButtonsAlignRight button {
+  max-width: 160px;
+  width: fit-content;
+}
+.ButtonsAlignLeft {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+.Buttons div {
+  display: flex;
+  flex-direction: column;
+}
+#LeftColumn {
+  grid-column: 1;
+}
+
+#RightColumn {
+  grid-column: 3;
+}
+#RightColumn button {
+  background-color: #ff3349;
+}
+.Modal {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 300px;
+  margin-left: 50%;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  position: fixed;
+  top: 25%;
+  right: 30%;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.modal-header h3 {
+  margin-bottom: 0px;
+}
+.Modal form {
+  width: 80%;
+}
+.Dropzone {
+  text-align: center;
+  border: dashed 1px lightgray;
+  border-radius: 10px;
+  padding: 15px 20px 30px 20px;
+  margin-bottom: 20px;
+  width: 220px;
+  height: 50px;
+}
+.dropzone-header {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+.Dropzone p {
+  margin: 0;
+}
+.ImageButton {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ImageButton:hover {
+  cursor: pointer;
+}
+.ImageButton p {
+  margin-right: 10px;
+}
+.ImageHolder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.ImageHolder img {
+  max-width: 80%;
+  max-height: 500px;
+}
+#problemDescription {
+  width: 248px;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+#problemType {
+  width: 262px;
+}
+
+/* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
+#58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
+@media screen and (max-width: 900px) {
+  .Homepage {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  .Homepage #left {
+    font-size: 22px;
+    margin-left: 0px;
+  }
+  .notificationDiv {
+    right: 17.5px;
+    top: 22.5px;
+  }
+  .css-1s2u09g-control {
+    width: 100%;
+  }
+  .css-1pahdxg-control {
+    width: 100%;
+  }
+  .Panel {
+    grid-template-columns: 5vw 90vw;
+  }
+  th {
+    font-size: 11px;
+  }
+  table p,
+  td {
+    font-size: 13px;
+  }
+  .Chat {
+    max-width: 90%;
+    right: 5%;
+  }
+  .Charts {
+    display: block;
+  }
+  .StrategyInput h2 {
+    font-size: 18px;
+  }
+  .StrategyInput .Strategy {
+    width: 100%;
+    font-size: 14px;
+  }
+  .statWrap .result {
+    max-width: 150px;
+  }
+  .FormClass form {
+    height: 300px;
+    width: 300px;
+  }
+  .AnswersTable {
+    width: 100%;
+  }
+  .Notifications {
+    right: 30px;
+    top: 40px;
+  }
+}
+
+@media screen and (min-width: 1441px) {
+  .sidebar ul li,
+  .sidebar p {
+    font-size: 26px;
+  }
+  #sidebarFooter p {
+    font-size: 20px;
+  }
+  .sidebar ul {
+    margin-left: 60px;
+  }
+
+  .UserInfo .statWrap {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
