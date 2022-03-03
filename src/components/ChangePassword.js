@@ -3,15 +3,18 @@ import { useState, useEffect } from 'react';
 import Config from '../config.json';
 import UserServices from '../services/UserServices';
 import Loading from './Loading';
+import SuccessAnimation from './SuccessAnimation';
 
 export default function ChangePassword({ userID }) {
     const [state, setState] = useState({ oldPassword: "", newPassword: "", confirmPassword: "" });
     const [errorState, setErrorState] = useState({ exists: false, text: "" })
     const [loadingState, setLoadingState] = useState(false);
+    const [successState, setSuccessState] = useState(false);
 
     useEffect(() => {
         document.title = "Promena šifre | Teorija igara"
     }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (state.newPassword !== state.confirmPassword) {
@@ -36,7 +39,7 @@ export default function ChangePassword({ userID }) {
 
         if (res.status === 200) {
             setLoadingState(false);
-            alert("Izmenjeno");
+            setSuccessState(true);
             setState({ oldPassword: "", newPassword: "", confirmPassword: "" })
             return;
         }
@@ -82,7 +85,11 @@ export default function ChangePassword({ userID }) {
                         : <input type="submit" value="Promeni" onClick={handleSubmit} />
                 }
             </form>
-
+            {
+                successState
+                    ? <SuccessAnimation setSuccessState={setSuccessState} />
+                    : null
+            }
         </div>
     )
 }

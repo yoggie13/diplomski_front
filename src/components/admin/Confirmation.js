@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Loading from '../Loading';
 import GameServices from '../../services/GameServices.js'
+import SuccessAnimation from '../SuccessAnimation';
 
 function formatDate(dueDate) {
     var d = new Date(dueDate);
@@ -17,6 +18,8 @@ export default function Confirmation() {
     var gameModels = useLocation().state.gameModels;
 
     const [loadingState, setLoadingState] = useState(false);
+    const [successState, setSuccessState] = useState(false);
+
     const data = {
         "game": game,
         "strategies": strategies,
@@ -50,7 +53,7 @@ export default function Confirmation() {
         data.game.StartDate = localStartDate;
 
         if (res.status === 200) {
-            alert("Sačuvano");
+            setSuccessState(true);
             res.json()
                 .then(response => {
                     if (game.Model >= gameModels.indexOf("Students Dilemma") && game.Model <= gameModels.indexOf("Travellers Dilemma"))
@@ -179,6 +182,11 @@ export default function Confirmation() {
                             <button id="confirmGame" onClick={e => saveGame(e)}>Unos igre</button>
                         </div>
                     </>
+            }
+            {
+                successState
+                    ? <SuccessAnimation setSuccessState={setSuccessState} />
+                    : null
             }
         </div >
     )

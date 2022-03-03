@@ -4,13 +4,14 @@ import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Loading from '../Loading';
 import GameServices from '../../services/GameServices.js'
+import SuccessAnimation from '../SuccessAnimation';
 
 export default function CreateQuiz() {
 
     let history = useHistory();
     var gameMainInfo = useLocation().state.gameMainInfo;
     const [loadingState, setLoadingState] = useState(false);
-
+    const [successState, setSuccessState] = useState(false);
     const [questionsState, setQuestionsState] = useState({
         arr: [
             {
@@ -68,8 +69,7 @@ export default function CreateQuiz() {
             })
 
             if (res.status === 200) {
-                alert("Sačuvano");
-
+                setSuccessState(true);
                 history.push('/allGames');
                 setLoadingState(false);
             }
@@ -215,6 +215,11 @@ export default function CreateQuiz() {
                             }>Unesite kviz</button>
                         </div>
                     </>
+            }
+            {
+                successState
+                    ? <SuccessAnimation setSuccessState={setSuccessState} />
+                    : null
             }
         </div>
     )

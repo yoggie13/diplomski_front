@@ -4,6 +4,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Dropzone from '../Dropzone';
 import Loading from '../Loading';
 import UserServices from '../../services/UserServices';
+import SuccessAnimation from '../SuccessAnimation';
 
 export default function ReportProblem({ userID }) {
 
@@ -11,6 +12,7 @@ export default function ReportProblem({ userID }) {
     const [reportState, setReportState] = useState({ Type: "Loše računanje bodova", Description: "", ImageUrl: null, ImageName: null });
     const [loadingState, setLoadingState] = useState(false);
     const [showUploadImage, setShowUploadImage] = useState(reportState.ImageUrl === null ? false : true);
+    const [successState, setSuccessState] = useState(false);
 
     useEffect(() => {
         document.title = "Prijava problema | Teorija igara"
@@ -48,7 +50,7 @@ export default function ReportProblem({ userID }) {
 
         if (res.status === 200) {
             setLoadingState(false);
-            alert("Vaš feedback je zabeležen");
+            setSuccessState(true);
 
             setReportState({ ...reportState, Type: "Loše računanje bodova", Description: "", ImageUrl: null, ImageName: null });
             setCheckboxState(false);
@@ -125,6 +127,11 @@ export default function ReportProblem({ userID }) {
                         </div>
                         <input type="submit" value="Pošalji" onClick={reportHandler} />
                     </form>
+            }
+            {
+                successState
+                    ? <SuccessAnimation setSuccessState={setSuccessState} />
+                    : null
             }
         </div >
 

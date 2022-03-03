@@ -76,7 +76,19 @@ i:hover {
 .sidebar a i {
   color: white;
 }
-
+.Success {
+  z-index: 100;
+  position: absolute;
+  width: fit-content;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+.Success img {
+  width: 100px;
+  height: 100px;
+}
 .sidebar {
   grid-column: 1;
   position: fixed;

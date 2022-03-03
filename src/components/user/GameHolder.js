@@ -6,6 +6,7 @@ import Loading from '../Loading';
 import Game from './Game';
 import Quiz from './Quiz';
 import GameServices from '../../services/GameServices'
+import SuccessAnimation from '../SuccessAnimation';
 
 export default function GameHolder({ userID }) {
 
@@ -13,6 +14,7 @@ export default function GameHolder({ userID }) {
     const [gameState, setGameState] = useState({ game: null });
     const [loadingState, setLoadingState] = useState(true);
     const [answersState, setAnswersState] = useState([]);
+    const [successState, setSuccessState] = useState(false);
 
     let { id } = useParams();
     console.log(id)
@@ -190,7 +192,7 @@ export default function GameHolder({ userID }) {
             var res = await GameServices.PlayGame(id, userID, getStrategy())
 
             if (res.status === 200) {
-                alert("Sačuvano");
+                setSuccessState(true);
                 setGameState(gameState => ({
                     game: {
                         ...gameState.game,
@@ -257,6 +259,11 @@ export default function GameHolder({ userID }) {
                 {
                     gameState.game.chat
                         ? < Chat id={id} userID={userID} />
+                        : null
+                }
+                {
+                    successState
+                        ? <SuccessAnimation setSuccessState={setSuccessState} />
                         : null
                 }
             </div >

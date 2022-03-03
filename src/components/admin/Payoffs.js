@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import Loading from '../Loading';
 import GameServices from '../../services/GameServices';
+import SuccessAnimation from '../SuccessAnimation';
 
 export default function Payoffs() {
 
@@ -12,6 +13,7 @@ export default function Payoffs() {
 
     const [gameState, setGameState] = useState({ gameName: "", gameText: "", gameStrategies: [] });
     const [loadingState, setLoadingState] = useState(true);
+    const [successState, setSuccessState] = useState(false);
     const [rewardsState, setRewardsState] = useState({
         blocks: [
             [
@@ -89,7 +91,7 @@ export default function Payoffs() {
         var res = await GameServices.InsertPayoffs(gameID, Payoffs);
 
         if (res.status === 200) {
-            alert("Sačuvano");
+            setSuccessState(true);
             history.push('/allGames');
             setLoadingState(false);
         }
@@ -158,6 +160,11 @@ export default function Payoffs() {
                             <input type="submit" value="Unesi isplate" onClick={e => handleClick(e)} />
                         </form>
                     </>
+            }
+            {
+                successState
+                    ? <SuccessAnimation setSuccessState={setSuccessState} />
+                    : null
             }
         </div>
     )
