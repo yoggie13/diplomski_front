@@ -1,4 +1,4 @@
-const url_main = "https://teorijaigara.azurewebsites.net/api/";
+const url_main = process.env.REACT_APP_API_ENDPOINT;
 const headers_main = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Credentials': true,
