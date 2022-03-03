@@ -39,8 +39,8 @@ export default function ChangePassword({ userID }) {
 
         if (res.status === 200) {
             setLoadingState(false);
-            setSuccessState(true);
             setState({ oldPassword: "", newPassword: "", confirmPassword: "" })
+            setSuccessState(true);
             return;
         }
         else if (res.status === 415) {

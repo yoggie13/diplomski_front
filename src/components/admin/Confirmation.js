@@ -57,7 +57,7 @@ export default function Confirmation() {
             res.json()
                 .then(response => {
                     if (game.Model >= gameModels.indexOf("Students Dilemma") && game.Model <= gameModels.indexOf("Travellers Dilemma"))
-                        history.push("/allGames");
+                        setTimeout(() => history.push("/allGames"), 2000);
                     else {
                         history.push(`/Payoffs/${response}`);
                     }

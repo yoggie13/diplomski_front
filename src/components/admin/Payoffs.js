@@ -92,8 +92,10 @@ export default function Payoffs() {
 
         if (res.status === 200) {
             setSuccessState(true);
-            history.push('/allGames');
-            setLoadingState(false);
+            setTimeout(() => {
+                history.push('/allGames');
+                setLoadingState(false);
+            }, 2000)
         }
 
         else {

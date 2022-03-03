@@ -193,13 +193,15 @@ export default function GameHolder({ userID }) {
 
             if (res.status === 200) {
                 setSuccessState(true);
-                setGameState(gameState => ({
-                    game: {
-                        ...gameState.game,
-                        active: false
-                    }
-                }))
-                setLoadingState(false);
+                setTimeout(() => {
+                    setGameState(gameState => ({
+                        game: {
+                            ...gameState.game,
+                            active: false
+                        }
+                    }))
+                    setLoadingState(false);
+                }, 2000);
             } else if (res.status === 409) {
                 alert("Već ste uneli odgovor na ovu igru");
                 setLoadingState(false);

@@ -69,8 +69,8 @@ export default function CreateQuiz() {
             })
 
             if (res.status === 200) {
-                setSuccessState(true);
-                history.push('/allGames');
+                setSuccessState(true)
+                setTimeout(() => history.push('/allGames'), 2000)
                 setLoadingState(false);
             }
             else {

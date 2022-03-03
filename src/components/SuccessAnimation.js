@@ -6,7 +6,6 @@ export default function SuccessAnimation({ setSuccessState }) {
 
     useEffect(() => {
         setTimeout(() => {
-            debugger;
             setSuccessState(false)
         }, 2000);
     }, [])

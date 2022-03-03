@@ -51,7 +51,6 @@ export default function ReportProblem({ userID }) {
         if (res.status === 200) {
             setLoadingState(false);
             setSuccessState(true);
-
             setReportState({ ...reportState, Type: "Loše računanje bodova", Description: "", ImageUrl: null, ImageName: null });
             setCheckboxState(false);
         }

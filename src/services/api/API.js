@@ -1,4 +1,4 @@
-const url_main = "http://localhost:46824/api/";
+const url_main = "https://teorijaigara.azurewebsites.net/api/";
 const headers_main = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Credentials': true,

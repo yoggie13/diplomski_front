@@ -97,8 +97,10 @@ export default function GameDashboard() {
 
         if (res.status === 200) {
             setSuccessState(true);
-            setRefreshState(true);
-            setLoadingState(false);
+            setTimeout(() => {
+                setRefreshState(true);
+                setLoadingState(false);
+            }, 2000);
         }
         else {
             alert("Nije uspelo");
@@ -112,10 +114,13 @@ export default function GameDashboard() {
 
         if (res.status === 200) {
             setSuccessState(true);
-            gameID.id = undefined;
-            history.push('/allGames');
-            setRefreshState(true);
-            setLoadingState(false);
+
+            setTimeout(() => {
+                gameID.id = undefined;
+                history.push('/allGames');
+                setRefreshState(true);
+                setLoadingState(false);
+            }, 2000);
         }
         else {
             alert("Nije uspelo");
@@ -147,9 +152,10 @@ export default function GameDashboard() {
 
             if (res.status === 200) {
                 setSuccessState(true);
-
-                history.push('/allGames');
-                setLoadingState(false);
+                setTimeout(() => {
+                    history.push('/allGames');
+                    setLoadingState(false);
+                }, 2000)
             } else {
                 alert("Nije uspelo");
                 setLoadingState(false);
