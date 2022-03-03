@@ -5,7 +5,8 @@ import { useHistory, useParams } from 'react-router';
 import CanvasJSReact from '../../assets/canvasjs.react';
 import AdminServices from '../../services/AdminServices';
 import Loading from '../Loading';
-import GameServices from '../../services/GameServices'
+import GameServices from '../../services/GameServices';
+import SuccessAnimation from '../SuccessAnimation';
 
 function formatDate(dueDate) {
     var d = new Date(dueDate);
@@ -30,7 +31,7 @@ export default function GameDashboard() {
     const [refreshState, setRefreshState] = useState(true);
     const [showModalState, setShowModalState] = useState(false);
     const [repeatDateState, setRepeatDateState] = useState({ startDate: "", dueDate: "" });
-
+    const [successState, setSuccessState] = useState(false);
     let gameID = useParams();
     let history = useHistory();
 
@@ -95,7 +96,7 @@ export default function GameDashboard() {
         var res = await GameServices.FinishGame(gameState.id);
 
         if (res.status === 200) {
-            alert("Igra završena");
+            setSuccessState(true);
             setRefreshState(true);
             setLoadingState(false);
         }
@@ -110,7 +111,7 @@ export default function GameDashboard() {
         var res = await GameServices.DeleteGame(gameState.id);
 
         if (res.status === 200) {
-            alert("Igra obrisana");
+            setSuccessState(true);
             gameID.id = undefined;
             history.push('/allGames');
             setRefreshState(true);
@@ -145,7 +146,8 @@ export default function GameDashboard() {
             });
 
             if (res.status === 200) {
-                alert("Uspešno ponovljena igra")
+                setSuccessState(true);
+
                 history.push('/allGames');
                 setLoadingState(false);
             } else {
@@ -323,6 +325,11 @@ export default function GameDashboard() {
                     </>
                     : <p>Trenutno nema aktivnih igara</p>
         }
+            {
+                successState
+                    ? <SuccessAnimation setSuccessState={setSuccessState} />
+                    : null
+            }
         </div >
     )
 }
