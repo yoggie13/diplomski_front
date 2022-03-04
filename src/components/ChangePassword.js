@@ -41,6 +41,7 @@ export default function ChangePassword({ userID }) {
             setLoadingState(false);
             setState({ oldPassword: "", newPassword: "", confirmPassword: "" })
             setSuccessState(true);
+
             return;
         }
         else if (res.status === 415) {
@@ -60,36 +61,37 @@ export default function ChangePassword({ userID }) {
     }
 
     return (
-        <div className="FormClass" id="changePasswordDiv">
-            <form id="changePasswordForm">
-                <label htmlFor="oldPassword">
-                    Stari password
-                </label>
-                <input id="oldPassword" type="password" value={state.oldPassword} onChange={e => setState({ ...state, oldPassword: e.target.value })} />
-                <label htmlFor="newPassword">
-                    Novi password
-                </label>
-                <input id="newPassword" type="password" value={state.newPassword} onChange={e => setState({ ...state, newPassword: e.target.value })} />
-                <label htmlFor="confirmPassword">
-                    Potvrdi novi password
-                </label>
-                <input id="confirmPassword" type="password" value={state.confirmPassword} onChange={e => setState({ ...state, confirmPassword: e.target.value })} />
-                {
-                    errorState.exists
-                        ? <small id="error">{errorState.text}</small>
-                        : null
-                }
-                {
-                    loadingState
-                        ? <Loading smallerSize={true} />
-                        : <input type="submit" value="Promeni" onClick={handleSubmit} />
-                }
-            </form>
+        <>
             {
                 successState
                     ? <SuccessAnimation setSuccessState={setSuccessState} />
-                    : null
+                    : <div className="FormClass" id="changePasswordDiv">
+                        <form id="changePasswordForm">
+                            <label htmlFor="oldPassword">
+                                Stari password
+                            </label>
+                            <input id="oldPassword" type="password" value={state.oldPassword} onChange={e => setState({ ...state, oldPassword: e.target.value })} />
+                            <label htmlFor="newPassword">
+                                Novi password
+                            </label>
+                            <input id="newPassword" type="password" value={state.newPassword} onChange={e => setState({ ...state, newPassword: e.target.value })} />
+                            <label htmlFor="confirmPassword">
+                                Potvrdi novi password
+                            </label>
+                            <input id="confirmPassword" type="password" value={state.confirmPassword} onChange={e => setState({ ...state, confirmPassword: e.target.value })} />
+                            {
+                                errorState.exists
+                                    ? <small id="error">{errorState.text}</small>
+                                    : null
+                            }
+                            {
+                                loadingState
+                                    ? <Loading smallerSize={true} />
+                                    : <input type="submit" value="Promeni" onClick={handleSubmit} />
+                            }
+                        </form>
+                    </div>
             }
-        </div>
+        </>
     )
 }

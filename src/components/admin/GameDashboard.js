@@ -115,6 +115,7 @@ export default function GameDashboard() {
         if (res.status === 200) {
             setSuccessState(true);
 
+
             setTimeout(() => {
                 gameID.id = undefined;
                 history.push('/allGames');
@@ -166,176 +167,178 @@ export default function GameDashboard() {
         }
     }
     return (
-        <div className="GameDashboard">{
-            loadingState
-                ? <Loading />
-                : gameState !== false
-                    ? <>
-                        <h1>Dashboard</h1>
-                        <h2>{gameState.name}</h2>
-                        <p>{gameState.text}</p>
-                        <div id="text">
-                            <div id="stats">
-                                <div className="statWrap">
-                                    <p>Broj igrača koji su odigrali:</p>
-                                    <p className="result">{gameState.playersPlayed}</p>
-                                </div>
-                                <div className="statWrap">
-                                    <p>Datum početka:</p>
-                                    <p className="result">{formatDate(gameState.startDate)}</p>
-                                </div>
-                                <div className="statWrap">
-                                    <p>Datum isteka:</p>
-                                    <p className="result">{formatDate(gameState.dueDate)}</p>
-                                </div>
-                                {
-                                    gameState.finalValue != null
-                                        ? <div className="statWrap">
-                                            <p>Trenutna konačna vrednost:</p>
-                                            <p className="result">{gameState.finalValue}</p>
-                                        </div>
-                                        : null
-                                }
-                            </div>
-                            <hr></hr>
-                        </div>
-                        <div className='Charts'>
-                            <div id='firstPlayer'>
-                                {
-                                    gameState.questions === undefined
-                                        ? <><h2>Prvi igrač</h2>
-                                            <div className="Chart">
-                                                <CanvasJSChart options={dataState.optionsFirst} />
-                                            </div>
-                                        </>
-                                        : <>
-                                            <h2>Odgovori</h2>
-                                            {
-                                                gameState.questions.map(question =>
-                                                    <div className='DashboardQuestion'>
-                                                        <h3>{question.id + ". pitanje: " + question.text}</h3>
-                                                        <div className='Chart'>
-                                                            <CanvasJSChart options={{
-                                                                title: {
-                                                                    text: ""
-                                                                },
-                                                                data: [
-                                                                    {
-                                                                        type: "column",
-                                                                        dataPoints: question.answers
-                                                                    }
-                                                                ]
-                                                            }} />
-                                                        </div>
-                                                    </div>
-                                                )}
-                                        </>
-                                }
-                            </div>
-                            {
-                                dataState.optionsSecond !== false
-                                    ? <div id='secondPlayer'>
-                                        <h2>Drugi igrač</h2>
-                                        <div className="Chart">
-                                            <CanvasJSChart options={dataState.optionsSecond} />
-                                        </div>
-                                    </div>
-                                    : null
-                            }
-                        </div>
-                        <div className='Results'>
-                            <h2>Rezultati po igraču</h2>
-                            {
-                                gameState.results.length > 0
-                                    ? <table className='ResultsTable'>
-                                        <thead>
-                                            <tr>
-                                                <th>Indeks</th>
-                                                <th>Ime</th>
-                                                <th>Broj poena</th>
-                                                {
-                                                    gameState.questions === undefined ?
-                                                        <th>Odigrana strategija</th>
-                                                        : null
-                                                }
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                gameState.results.map(result =>
-                                                    <tr>
-                                                        <td>{result.id}</td>
-                                                        <td>{result.name}</td>
-                                                        <td>{result.points}</td>
-                                                        {
-                                                            gameState.questions === undefined
-                                                                ? <td> {result.strategy}</td>
-                                                                : null
-                                                        }
-                                                    </tr>
-                                                )}
-                                        </tbody>
-                                    </table>
-                                    : <p>Niko još nije odigrao</p>
-                            }
-                        </div>
-                        <div className='Buttons'>
-                            <div id='LeftColumn'>
-                                {
-                                    gameState.type === 1 || gameState.type === 2
-                                        ? <>
-                                            <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru sa istim parovima</button>
-                                        </>
-                                        : <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru</button>
-                                }
-                            </div>
-                            <div id="RightColumn">
-
-                                {
-                                    checkDate(gameState.startDate, gameState.dueDate)
-                                        ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
-                                        : null
-                                }
-                                <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
-                            </div>
-                        </div>
-                        {
-                            showModalState
-                                ? <div className='Modal'>
-                                    <div className="modal-header" >
-                                        <h3>Unos datuma</h3>
-                                        <i className="fas fa-times" onClick={(e) => { e.preventDefault(); setShowModalState(false) }}></i>
-                                    </div>
-                                    <form>
-                                        <label>Datum početka</label>
-                                        <input type='datetime-local'
-                                            value={repeatDateState.startDate}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                setRepeatDateState({ ...repeatDateState, startDate: e.target.value });
-                                            }
-                                            } />
-                                        <label>Datum završetka</label>
-                                        <input type='datetime-local'
-                                            value={repeatDateState.dueDate}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                setRepeatDateState({ ...repeatDateState, dueDate: e.target.value });
-                                            }
-                                            } />
-                                        <button onClick={e => callApiForRepeat(e)}>Sačuvaj</button>
-                                    </form>
-                                </div>
-                                : null
-                        }
-                    </>
-                    : <p>Trenutno nema aktivnih igara</p>
-        }
+        <>
             {
                 successState
                     ? <SuccessAnimation setSuccessState={setSuccessState} />
-                    : null
+                    : loadingState
+                        ? <Loading />
+                        : <div className="GameDashboard">
+                            {
+                                gameState !== false
+                                    ? <>
+                                        <h1>Dashboard</h1>
+                                        <h2>{gameState.name}</h2>
+                                        <p>{gameState.text}</p>
+                                        <div id="text">
+                                            <div id="stats">
+                                                <div className="statWrap">
+                                                    <p>Broj igrača koji su odigrali:</p>
+                                                    <p className="result">{gameState.playersPlayed}</p>
+                                                </div>
+                                                <div className="statWrap">
+                                                    <p>Datum početka:</p>
+                                                    <p className="result">{formatDate(gameState.startDate)}</p>
+                                                </div>
+                                                <div className="statWrap">
+                                                    <p>Datum isteka:</p>
+                                                    <p className="result">{formatDate(gameState.dueDate)}</p>
+                                                </div>
+                                                {
+                                                    gameState.finalValue != null
+                                                        ? <div className="statWrap">
+                                                            <p>Trenutna konačna vrednost:</p>
+                                                            <p className="result">{gameState.finalValue}</p>
+                                                        </div>
+                                                        : null
+                                                }
+                                            </div>
+                                            <hr></hr>
+                                        </div>
+                                        <div className='Charts'>
+                                            <div id='firstPlayer'>
+                                                {
+                                                    gameState.questions === undefined
+                                                        ? <><h2>Prvi igrač</h2>
+                                                            <div className="Chart">
+                                                                <CanvasJSChart options={dataState.optionsFirst} />
+                                                            </div>
+                                                        </>
+                                                        : <>
+                                                            <h2>Odgovori</h2>
+                                                            {
+                                                                gameState.questions.map(question =>
+                                                                    <div className='DashboardQuestion'>
+                                                                        <h3>{question.id + ". pitanje: " + question.text}</h3>
+                                                                        <div className='Chart'>
+                                                                            <CanvasJSChart options={{
+                                                                                title: {
+                                                                                    text: ""
+                                                                                },
+                                                                                data: [
+                                                                                    {
+                                                                                        type: "column",
+                                                                                        dataPoints: question.answers
+                                                                                    }
+                                                                                ]
+                                                                            }} />
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                        </>
+                                                }
+                                            </div>
+                                            {
+                                                dataState.optionsSecond !== false
+                                                    ? <div id='secondPlayer'>
+                                                        <h2>Drugi igrač</h2>
+                                                        <div className="Chart">
+                                                            <CanvasJSChart options={dataState.optionsSecond} />
+                                                        </div>
+                                                    </div>
+                                                    : null
+                                            }
+                                        </div>
+                                        <div className='Results'>
+                                            <h2>Rezultati po igraču</h2>
+                                            {
+                                                gameState.results.length > 0
+                                                    ? <table className='ResultsTable'>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Indeks</th>
+                                                                <th>Ime</th>
+                                                                <th>Broj poena</th>
+                                                                {
+                                                                    gameState.questions === undefined ?
+                                                                        <th>Odigrana strategija</th>
+                                                                        : null
+                                                                }
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {
+                                                                gameState.results.map(result =>
+                                                                    <tr>
+                                                                        <td>{result.id}</td>
+                                                                        <td>{result.name}</td>
+                                                                        <td>{result.points}</td>
+                                                                        {
+                                                                            gameState.questions === undefined
+                                                                                ? <td> {result.strategy}</td>
+                                                                                : null
+                                                                        }
+                                                                    </tr>
+                                                                )}
+                                                        </tbody>
+                                                    </table>
+                                                    : <p>Niko još nije odigrao</p>
+                                            }
+                                        </div>
+                                        <div className='Buttons'>
+                                            <div id='LeftColumn'>
+                                                {
+                                                    gameState.type === 1 || gameState.type === 2
+                                                        ? <>
+                                                            <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru sa istim parovima</button>
+                                                        </>
+                                                        : <button onClick={e => handleRepeatGame(e, true)}>Ponovite igru</button>
+                                                }
+                                            </div>
+                                            <div id="RightColumn">
+
+                                                {
+                                                    checkDate(gameState.startDate, gameState.dueDate)
+                                                        ? <button id="finishGame" onClick={e => finishGame(e)}>Završite igru</button>
+                                                        : null
+                                                }
+                                                <button id="deleteGame" onClick={e => deleteGame(e)}>Obrišite igru</button>
+                                            </div>
+                                        </div>
+                                        {
+                                            showModalState
+                                                ? <div className='Modal'>
+                                                    <div className="modal-header" >
+                                                        <h3>Unos datuma</h3>
+                                                        <i className="fas fa-times" onClick={(e) => { e.preventDefault(); setShowModalState(false) }}></i>
+                                                    </div>
+                                                    <form>
+                                                        <label>Datum početka</label>
+                                                        <input type='datetime-local'
+                                                            value={repeatDateState.startDate}
+                                                            onChange={(e) => {
+                                                                e.preventDefault();
+                                                                setRepeatDateState({ ...repeatDateState, startDate: e.target.value });
+                                                            }
+                                                            } />
+                                                        <label>Datum završetka</label>
+                                                        <input type='datetime-local'
+                                                            value={repeatDateState.dueDate}
+                                                            onChange={(e) => {
+                                                                e.preventDefault();
+                                                                setRepeatDateState({ ...repeatDateState, dueDate: e.target.value });
+                                                            }
+                                                            } />
+                                                        <button onClick={e => callApiForRepeat(e)}>Sačuvaj</button>
+                                                    </form>
+                                                </div>
+                                                : null
+                                        }
+                                    </>
+                                    : <p>Trenutno nema aktivnih igara</p>
+                            }
+                        </div >
             }
-        </div >
+        </>
     )
 }

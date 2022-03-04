@@ -77,13 +77,11 @@ i:hover {
   color: white;
 }
 .Success {
-  z-index: 100;
-  position: absolute;
-  width: fit-content;
-  right: 0;
-  left: 0;
-  margin-right: auto;
-  margin-left: auto;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 .Success img {
   width: 100px;
@@ -1169,6 +1167,9 @@ hr {
   .Notifications {
     right: 30px;
     top: 40px;
+  }
+  .Success {
+    width: 75%;
   }
 }
 

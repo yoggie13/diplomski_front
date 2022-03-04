@@ -41,8 +41,7 @@ export default function AllTables() {
     return (
         loadingState
             ? <Loading />
-            :
-            <div className="AllTables">
+            : <div className="AllTables">
                 {
                     groupState.groups.length > 0
                         ? <>
