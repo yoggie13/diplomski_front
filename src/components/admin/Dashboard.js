@@ -36,7 +36,7 @@ export default function Dashboard() {
     var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
     return (
-        <div>
+        <>
             {
                 loadingState
                     ? <Loading />
@@ -114,6 +114,6 @@ export default function Dashboard() {
                         </div>
                     </div>
             }
-        </div>
+        </>
     )
 }

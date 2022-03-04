@@ -106,68 +106,65 @@ export default function Payoffs() {
     }
 
     return (
-        <div className="Rewards">
-            {
-                loadingState
-                    ? <Loading />
-                    : <>
-                        <h1>{gameState.gameName}</h1>
-                        <p>{gameState.gameText}</p>
-                        <h2>Isplate</h2>
-                        <form>
-                            <div id="RewardMatrix">
-                                <p id="A1">{
-                                    gameState.gameStrategies[0].text
-                                }</p>
-                                <p id="B1">{
-                                    gameState.gameStrategies[1].text
-                                }</p>
-                                <p id="A2">{
-                                    gameState.gameStrategies[2].text
-                                }</p>
-                                <p id="B2">{
-                                    gameState.gameStrategies[3].text
-                                }</p>
-                                <div id="AA">
-                                    <input id="1.1.1" type="number" value={rewardsState.blocks[0][0].payment}
-                                        onChange={e => handleInput(e, 0, 0)} />
-                                    <input id="2.1.1" type="number" value={rewardsState.blocks[0][1].payment}
-                                        onChange={e => handleInput(e, 0, 1)} />
-                                </div>
-                                <div id="AB" >
-                                    <input id="1.1.2" type="number"
-                                        value={rewardsState.blocks[1][0].payment}
-                                        onChange={e => handleInput(e, 1, 0)} />
-                                    <input id="2.2.1" type="number"
-                                        value={rewardsState.blocks[1][1].payment}
-                                        onChange={e => handleInput(e, 1, 1)} />
-                                </div>
-                                <div id="BA">
-                                    <input id="1.2.1" type="number"
-                                        value={rewardsState.blocks[2][0].payment}
-                                        onChange={e => handleInput(e, 2, 0)} />
-                                    <input id="2.1.1" type="number"
-                                        value={rewardsState.blocks[2][1].payment}
-                                        onChange={e => handleInput(e, 2, 1)} />
-                                </div>
-                                <div id="BB">
-                                    <input id="1.2.2" type="number"
-                                        value={rewardsState.blocks[3][0].payment}
-                                        onChange={e => handleInput(e, 3, 0)} />
-                                    <input id="2.2.2" type="number"
-                                        value={rewardsState.blocks[3][1].payment}
-                                        onChange={e => handleInput(e, 3, 1)} />
-                                </div>
-                            </div>
-                            <input type="submit" value="Unesi isplate" onClick={e => handleClick(e)} />
-                        </form>
-                    </>
-            }
+        <>
             {
                 successState
                     ? <SuccessAnimation setSuccessState={setSuccessState} />
-                    : null
+                    : loadingState
+                        ? <Loading />
+                        : <div className="Rewards">
+                            <h1>{gameState.gameName}</h1>
+                            <p>{gameState.gameText}</p>
+                            <h2>Isplate</h2>
+                            <form>
+                                <div id="RewardMatrix">
+                                    <p id="A1">{
+                                        gameState.gameStrategies[0].text
+                                    }</p>
+                                    <p id="B1">{
+                                        gameState.gameStrategies[1].text
+                                    }</p>
+                                    <p id="A2">{
+                                        gameState.gameStrategies[2].text
+                                    }</p>
+                                    <p id="B2">{
+                                        gameState.gameStrategies[3].text
+                                    }</p>
+                                    <div id="AA">
+                                        <input id="1.1.1" type="number" value={rewardsState.blocks[0][0].payment}
+                                            onChange={e => handleInput(e, 0, 0)} />
+                                        <input id="2.1.1" type="number" value={rewardsState.blocks[0][1].payment}
+                                            onChange={e => handleInput(e, 0, 1)} />
+                                    </div>
+                                    <div id="AB" >
+                                        <input id="1.1.2" type="number"
+                                            value={rewardsState.blocks[1][0].payment}
+                                            onChange={e => handleInput(e, 1, 0)} />
+                                        <input id="2.2.1" type="number"
+                                            value={rewardsState.blocks[1][1].payment}
+                                            onChange={e => handleInput(e, 1, 1)} />
+                                    </div>
+                                    <div id="BA">
+                                        <input id="1.2.1" type="number"
+                                            value={rewardsState.blocks[2][0].payment}
+                                            onChange={e => handleInput(e, 2, 0)} />
+                                        <input id="2.1.1" type="number"
+                                            value={rewardsState.blocks[2][1].payment}
+                                            onChange={e => handleInput(e, 2, 1)} />
+                                    </div>
+                                    <div id="BB">
+                                        <input id="1.2.2" type="number"
+                                            value={rewardsState.blocks[3][0].payment}
+                                            onChange={e => handleInput(e, 3, 0)} />
+                                        <input id="2.2.2" type="number"
+                                            value={rewardsState.blocks[3][1].payment}
+                                            onChange={e => handleInput(e, 3, 1)} />
+                                    </div>
+                                </div>
+                                <input type="submit" value="Unesi isplate" onClick={e => handleClick(e)} />
+                            </form>
+                        </div>
             }
-        </div>
+        </>
     )
 }

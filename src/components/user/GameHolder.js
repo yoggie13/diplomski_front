@@ -223,51 +223,52 @@ export default function GameHolder({ userID }) {
     }
 
     return (
-        loadingState
-            ? <Loading />
-            : <div className="Game">
-                <h1>
-                    {gameState.game.name}
-                </h1>
-                <p>{gameState.game.text}</p>
-                {
-                    gameState.game.prevInteraction !== undefined
-                        ? <p id='prevInteraction'>{gameState.game.prevInteraction}</p>
-                        : null
-                }
-                {
-                    gameState.game.active
-                        ? <form className="PlayGameForm">
+        <>
+            {
+                successState
+                    ? <SuccessAnimation setSuccessState={setSuccessState} />
+                    : loadingState
+                        ? <Loading />
+                        : <div className="Game">
+                            <h1>
+                                {gameState.game.name}
+                            </h1>
+                            <p>{gameState.game.text}</p>
                             {
-                                gameState.game.type !== 0
-                                    ? <Game
-                                        gameState={gameState}
-                                        checkedStrategyState={checkedStrategyState}
-                                        handleCheck={handleCheck}
-                                        handleInput={handleInput}
-                                    />
-                                    : <Quiz
-                                        quizState={gameState.game.questions}
-                                        handleAnswersChange={handleAnswersChange}
-                                        getAnswersState={getAnswersState}
-                                    />
+                                gameState.game.prevInteraction !== undefined
+                                    ? <p id='prevInteraction'>{gameState.game.prevInteraction}</p>
+                                    : null
                             }
-                            <div className="ButtonsAlignRight">
-                                <input type="submit" value="Odigraj" onClick={playAGame}></input>
-                            </div>
-                        </form>
-                        : null
-                }
-                {
-                    gameState.game.chat
-                        ? < Chat id={id} userID={userID} />
-                        : null
-                }
-                {
-                    successState
-                        ? <SuccessAnimation setSuccessState={setSuccessState} />
-                        : null
-                }
-            </div >
+                            {
+                                gameState.game.active
+                                    ? <form className="PlayGameForm">
+                                        {
+                                            gameState.game.type !== 0
+                                                ? <Game
+                                                    gameState={gameState}
+                                                    checkedStrategyState={checkedStrategyState}
+                                                    handleCheck={handleCheck}
+                                                    handleInput={handleInput}
+                                                />
+                                                : <Quiz
+                                                    quizState={gameState.game.questions}
+                                                    handleAnswersChange={handleAnswersChange}
+                                                    getAnswersState={getAnswersState}
+                                                />
+                                        }
+                                        <div className="ButtonsAlignRight">
+                                            <input type="submit" value="Odigraj" onClick={playAGame}></input>
+                                        </div>
+                                    </form>
+                                    : null
+                            }
+                            {
+                                gameState.game.chat
+                                    ? < Chat id={id} userID={userID} />
+                                    : null
+                            }
+                        </div>
+            }
+        </>
     );
 }

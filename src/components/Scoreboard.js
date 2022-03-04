@@ -40,11 +40,11 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
         }
     }
     return (
-        <div className="Scoreboard">
+        <>
             {
                 loadingState
                     ? <Loading />
-                    : <>
+                    : <div className="Scoreboard">
                         <h1>Scoreboard</h1>
                         <table>
                             <thead>
@@ -70,8 +70,8 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
                                 }
                             </tbody>
                         </table>
-                    </>
+                    </div>
             }
-        </div>
+        </>
     )
 }
