@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { useHistory } from 'react-router';
 import logo from '../assets/laboi_logo.png';
 
-function formatUsername(Username) {
-    return Username.split('@')[0];
-}
+// function formatUsername(Username) {
+//     return Username.split('@')[0];
+// }
 
-export default function Sidebar({ logoutLogic, isAdmin, Username }) {
+export default function Sidebar({ logoutLogic, isAdmin, userID, username }) {
 
     let history = useHistory();
     const handleLogout = e => {
@@ -54,9 +54,12 @@ export default function Sidebar({ logoutLogic, isAdmin, Username }) {
                         ? null
                         : <Link to="/report"><i className="fas fa-exclamation-circle fa-2x" id="report"></i></Link>
                 }
-                <Link to="/profile">{formatUsername(Username)}</Link>
+                {
+                    isAdmin
+                        ? <Link to="/profile">{username}</Link>
+                        : <Link to="/profile">{userID}</Link>
+                }
                 <i className="fas fa-sign-out-alt fa-2x" id="logOut" onClick={handleLogout}></i>
-
             </div>
 
         </div>
