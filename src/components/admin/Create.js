@@ -14,17 +14,28 @@ export default function Create() {
         document.title = "Kreiraj igru | Teorija igara"
     }, []);
 
+    var loc = useLocation();
+
+    const getParams = () => {
+        if (loc !== undefined && loc !== null) {
+            if (loc.state !== undefined && loc.state !== null)
+                if (loc.state.gameMainInfo !== undefined && loc.state.gameMainInfo !== null)
+                    return loc.state.gameMainInfo;
+        }
+        return {
+            Model: 0,
+            Name: "", Text: "",
+            ChatEnabled: false,
+            StartDate: "",
+            DueDate: "",
+            MultiStage: false,
+            MultiStageNumber: 2
+        }
+    }
+
     const [loadingState, setLoadingState] = useState(true);
     const [state, setstate] = useState({ page: 1 });
-    const [gameState, setGameState] = useState({
-        Model: 0,
-        Name: "", Text: "",
-        ChatEnabled: false,
-        StartDate: "",
-        DueDate: "",
-        MultiStage: false,
-        MultiStageNumber: 2
-    });
+    const [gameState, setGameState] = useState(getParams());
     const [gameModels, setGameModels] = useState([]);
 
     const fieldsValid = () => {
@@ -76,11 +87,26 @@ export default function Create() {
         e.preventDefault();
 
         if (fieldsValid()) {
-            if (gameState.Model !== gameModels.indexOf("Quiz")) {
-                history.push('/create/game', { gameMainInfo: gameState, gameModels: gameModels });
+            var toPush = {
+                gameMainInfo: gameState,
             }
-            else
-                history.push('/create/quiz', { gameMainInfo: gameState });
+
+
+            if (gameState.Model !== gameModels.indexOf("Quiz")) {
+                if (loc.state !== undefined && loc.state !== null)
+                    if (loc.state.strategies !== undefined && loc.state.strategies !== null)
+                        toPush.strategies = loc.state.strategies;
+
+                toPush.gameModels = gameModels;
+                history.push('/create/game', toPush);
+            }
+            else {
+                if (loc.state !== undefined && loc.state !== null)
+                    if (loc.state.questions !== undefined && loc.state.questions !== null)
+                        toPush.questions = loc.state.questions;
+
+                history.push('/create/quiz', toPush);
+            }
         }
         else {
             alert("Niste popunili sve što je potrebno");

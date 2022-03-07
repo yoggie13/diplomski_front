@@ -9,30 +9,38 @@ import SuccessAnimation from '../SuccessAnimation';
 export default function CreateQuiz() {
 
     let history = useHistory();
-    var gameMainInfo = useLocation().state.gameMainInfo;
+    var loc = useLocation()
+    var gameMainInfo = loc.state.gameMainInfo;
+
+    const getQuestions = () => {
+        if (loc.state.questions !== undefined && loc.state.questions !== null)
+            return loc.state.questions
+
+        return {
+            arr: [
+                {
+                    ID: 1,
+                    show: true,
+                    Text: "",
+                    Type: null,
+                    Answers: [
+                        {
+                            ID: 1,
+                            Text: "",
+                            Right: false
+                        }
+                    ],
+                    ImageUrl: null,
+                    ImageName: null,
+                    Points: 0,
+                    NegativePoints: false
+                }
+            ]
+        }
+    }
     const [loadingState, setLoadingState] = useState(false);
     const [successState, setSuccessState] = useState(false);
-    const [questionsState, setQuestionsState] = useState({
-        arr: [
-            {
-                ID: 1,
-                show: true,
-                Text: "",
-                Type: null,
-                Answers: [
-                    {
-                        ID: 1,
-                        Text: "",
-                        Right: false
-                    }
-                ],
-                ImageUrl: null,
-                ImageName: null,
-                Points: 0,
-                NegativePoints: false
-            }
-        ]
-    })
+    const [questionsState, setQuestionsState] = useState(getQuestions())
     const fieldInvalid = (field) => {
         return field === "" || field === null || field === undefined
     }
@@ -177,6 +185,10 @@ export default function CreateQuiz() {
 
         setQuestionsState({ ...questionsState, arr: questions });
     }
+    const handlePreviousPage = (e) => {
+        e.preventDefault();
+        history.push('create', { gameMainInfo: gameMainInfo, questions: questionsState });
+    }
     return (
         <div className='CreateQuiz'>
             <h1>Kreiranje kviza</h1>
@@ -207,13 +219,19 @@ export default function CreateQuiz() {
                             }
                         </form>
                         < i className="fas fa-plus fa-2x" id="CreateQuizIcon" onClick={e => addNew(e)} ></i>
-                        <div className="ButtonsAlignRight">
-                            <button id="createQuizButton" onClick={e => {
-                                e.preventDefault();
-                                saveQuiz();
-                            }
-                            }>Unesite kviz</button>
-                        </div>
+                        < div className="pageMover">
+                            <div id="back">
+                                <i className="fas fa-chevron-right fa-lg" id="chevron-left" onClick={e => handlePreviousPage(e)}></i>
+                                <p>Povratak na unos osnovnih podataka</p>
+                            </div>
+                            <div id="forward">
+                                <button id="createQuizButton" onClick={e => {
+                                    e.preventDefault();
+                                    saveQuiz();
+                                }
+                                }>Unesite kviz</button>
+                            </div >
+                        </div >
                     </>
             }
             {
