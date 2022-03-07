@@ -4,35 +4,44 @@ import Radio from '@material-ui/core/Radio';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function CreateGame() {
-    var gameMainInfo = useLocation().state.gameMainInfo;
-    var gameModels = useLocation().state.gameModels;
+
+    var loc = useLocation();
+    var gameMainInfo = loc.state.gameMainInfo;
+    var gameModels = loc.state.gameModels;
+
+    const getStrategies = () => {
+        if (loc.state.strategies !== undefined && loc.state !== null)
+            return loc.state.strategies;
+
+        return {
+            firstPlayerStrategies: [
+                {
+                    Text: "",
+                    FirstOrSecondPlayer: 1,
+                    Default: true
+                },
+                {
+                    Text: "",
+                    FirstOrSecondPlayer: 1,
+                    Default: false
+                }
+            ], secondPlayerStrategies: [
+                {
+                    Text: "",
+                    FirstOrSecondPlayer: 2,
+                    Default: true
+                },
+                {
+                    Text: "",
+                    FirstOrSecondPlayer: 2,
+                    Default: false
+                }
+            ]
+        }
+    }
 
     const [gameState, setGameState] = useState(gameMainInfo);
-    const [strategiesState, setStrategiesState] = useState({
-        firstPlayerStrategies: [
-            {
-                Text: "",
-                FirstOrSecondPlayer: 1,
-                Default: true
-            },
-            {
-                Text: "",
-                FirstOrSecondPlayer: 1,
-                Default: false
-            }
-        ], secondPlayerStrategies: [
-            {
-                Text: "",
-                FirstOrSecondPlayer: 2,
-                Default: true
-            },
-            {
-                Text: "",
-                FirstOrSecondPlayer: 2,
-                Default: false
-            }
-        ]
-    })
+    const [strategiesState, setStrategiesState] = useState(getStrategies())
     const [oneTwoState, setOneTwoState] = useState({ MinValue: 0, MaxValue: 0, DefaultValue: 0, timesX: 0, minSum: 0 });
 
     let history = useHistory();
@@ -160,7 +169,7 @@ export default function CreateGame() {
     }
     const handlePreviousPage = e => {
         e.preventDefault();
-        history.goBack({ gameMainInfo: gameMainInfo });
+        history.push('create', { gameMainInfo: gameMainInfo, strategies: strategiesState });
     }
 
     return (
