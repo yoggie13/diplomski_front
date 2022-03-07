@@ -48,7 +48,7 @@ export default function Panel({ logoutLogic, isAdmin, user }) {
         <div className="Panel" onClick={(e) => { handleNotifications(e); closeSidebar(e); }}>
             {
                 sidebarState.sidebarStatus
-                    ? <Sidebar logoutLogic={logoutLogic} changePanelRender isAdmin={isAdmin} Username={user.email} userID={user.id} />
+                    ? <Sidebar logoutLogic={logoutLogic} changePanelRender isAdmin={isAdmin} userID={user.id} username={user.name} />
                     : <i className="fas fa-bars fa-2x" onClick={openSidebar}></i>
             }
             <div id='mainPart'>
