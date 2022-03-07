@@ -6,7 +6,7 @@ export default function Answers({ getAnswerState, setAnswersState, getType, upda
     const handleChoiceCheck = (e) => {
         var answers = [...getAnswerState()];
 
-        if (getType() === 0)
+        if (e === 0)
             answers.forEach(a => a.Right = true);
         else
             answers.forEach(a => a.Right = false);
