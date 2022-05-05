@@ -54,11 +54,6 @@ export default function Sidebar({ logoutLogic, isAdmin, userID, username }) {
                         ? null
                         : <Link to="/report"><i className="fas fa-exclamation-circle fa-2x" id="report"></i></Link>
                 }
-                {
-                    isAdmin
-                        ? <Link to="/profile">{username}</Link>
-                        : <Link to="/profile">{userID}</Link>
-                }
                 <i className="fas fa-sign-out-alt fa-2x" id="logOut" onClick={handleLogout}></i>
             </div>
 

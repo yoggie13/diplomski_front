@@ -59,6 +59,7 @@ i:hover {
 .Panel {
   display: grid;
   grid-template-columns: 25vw 75vw;
+  grid-template-rows: 0;
   height: 100vh;
 }
 .BasicTemplate {
@@ -152,7 +153,6 @@ i:hover {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-
 .sidebar ul li {
   cursor: pointer;
 }
@@ -164,8 +164,7 @@ i:hover {
   width: 80%;
   margin-left: 50px;
   margin-right: 40px;
-  margin-top: 60px;
-  text-align: left;
+  text-align: justify;
   font-family: "Varela";
   font-size: 22px;
   color: #020b3f;
@@ -231,6 +230,37 @@ svg text {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+.GamesArray{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.GameInfo{
+  width: 50%;
+  max-width: 420px;
+  min-width: 280px;
+  box-sizing: border-box;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px rgb(221, 221, 221);
+  margin-right: 10px;
+  margin-bottom: 26px;
+  height: 300px;
+}
+.GameInfo :hover{
+  cursor: pointer;
+}
+.GameInfo h3,
+.GameInfo p{
+  margin-left: 24px;
+}
+.GameInfo h3 {
+  margin-top: 16px;
+}
+.GameInfo p{
+  font-size: 20px;
 }
 .FormClass {
   display: flex;
@@ -794,13 +824,19 @@ hr {
 #sendMessage i:hover {
   color: #e30d63;
 }
-.notificationDiv {
+.PanelHeader{
+  grid-column: 1/3;
+  margin-top: 20px;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  height: 60px;
+}
+.PanelHeader i{
   color: #2b0a55;
-  right: 80px;
-  top: 45px;
-  position: absolute;
-  margin: 0px;
-  padding: 0px;
+  margin-left: 20px;
 }
 .Notifications {
   display: flex;
@@ -809,14 +845,17 @@ hr {
   border: 1px solid #2b0a55;
   border-radius: 10px;
   position: fixed;
-  top: 60px;
-  right: 90px;
+  top: 50px;
+  right: 110px;
   z-index: 50;
   scroll-behavior: smooth;
   overflow-y: scroll;
   height: 600px;
   margin-bottom: 50px;
   background-color: white;
+}
+.Notifications #no-notifications{
+  margin-left: 20px;
 }
 .Notifications div {
   background-color: white;
@@ -825,6 +864,7 @@ hr {
   margin-top: 0px;
   margin-bottom: 0px;
   border: 1px solid lightgray;
+  text-align: justify;
 }
 .Notifications div h4 {
   margin-top: 0px;
@@ -1120,10 +1160,19 @@ hr {
     font-size: 22px;
     margin-left: 0px;
   }
-  .notificationDiv {
+  .PanelHeader{
+    margin-right: 20px;
+    margin-top: 5px;
+  }
+
+  /* .fas.fa-user-circle.fa-lg{
     right: 17.5px;
     top: 22.5px;
-  }
+  } */
+  /* .notificationDiv {
+    right: 52.5px;
+    top: 22.5px;
+  } */
   .css-1s2u09g-control {
     width: 100%;
   }
@@ -1165,8 +1214,9 @@ hr {
     width: 100%;
   }
   .Notifications {
-    right: 30px;
-    top: 40px;
+    right: 90px;
+    top: 30px;
+    width: 65%;
   }
   .Success {
     width: 75%;

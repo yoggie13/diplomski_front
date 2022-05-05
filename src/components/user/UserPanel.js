@@ -17,11 +17,10 @@ import NotificationBell from './NotificationBell.js';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import GameHolder from './GameHolder.js';
 
-export default function UserPanel({ user, openNotifications }) {
+export default function UserPanel({ user }) {
 
     return (
         <>
-            <NotificationBell user={user} openNotifications={openNotifications} />
             <Switch>
                 <Route path="/finishedGames">
                     <FinishedGames userID={user.id} />

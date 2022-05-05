@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Sidebar from '../components/Sidebar.js';
 import UserPanel from '../components/user/UserPanel.js';
 import AdminPanel from '../components/admin/AdminPanel.js';
+import PanelHeader from '../components/PanelHeader.js';
 
 export default function Panel({ logoutLogic, isAdmin, user }) {
     const [sidebarState, setSidebarState] = useState({
@@ -38,7 +39,7 @@ export default function Panel({ logoutLogic, isAdmin, user }) {
     const handleNotifications = (e) => {
         e.preventDefault();
 
-        if (e.target.className === "fas fa-bell fa-lg")
+        if (e.target.className === "fas fa-bell fa-2x")
             setOpenNotifications(!openNotifications);
         else
             setOpenNotifications(false);
@@ -46,6 +47,7 @@ export default function Panel({ logoutLogic, isAdmin, user }) {
 
     return (
         <div className="Panel" onClick={(e) => { handleNotifications(e); closeSidebar(e); }}>
+            <PanelHeader user={user} openNotifications={openNotifications} />
             {
                 sidebarState.sidebarStatus
                     ? <Sidebar logoutLogic={logoutLogic} changePanelRender isAdmin={isAdmin} userID={user.id} username={user.name} />
@@ -55,7 +57,7 @@ export default function Panel({ logoutLogic, isAdmin, user }) {
                 {
                     isAdmin
                         ? <AdminPanel isAdmin={isAdmin} user={user} />
-                        : <UserPanel user={user} openNotifications={openNotifications} />
+                        : <UserPanel user={user} />
                 }
             </div>
         </div >
