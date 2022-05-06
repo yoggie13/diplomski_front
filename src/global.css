@@ -915,6 +915,7 @@ hr {
   flex-direction: row;
   flex-wrap: wrap;
   padding: 0;
+  margin-top: 0px;
 }
 .Filter li{
   list-style-type: none;
