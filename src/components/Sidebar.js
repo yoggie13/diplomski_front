@@ -94,7 +94,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                             setOpened(true)
                         }}>
                     </i>
-                    <div className='sidebar-list'>
+                    <div className='smallSidebar-list'>
                         <Link to='/games'>
                             <i className="fas fa-gamepad fa-lg"></i>
                         </Link>

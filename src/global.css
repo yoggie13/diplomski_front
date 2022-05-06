@@ -182,8 +182,7 @@ i:hover {
   margin: auto;
   display: flex;
   flex-direction: column;
-  width: calc(100%-50px);
-  margin-left: 50px;
+  margin-left: 90px;
   margin-right: 50px;
   text-align: justify;
   font-family: "Varela";
@@ -251,21 +250,27 @@ svg text {
   flex-direction: column;
   align-items: flex-end;
 }
+.GamesWrapper{
+display: flex;
+flex-direction: column;
+
+}
 .GamesArray{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: left;
+  margin-left: calc();
 }
 .GameInfo{
-  width: 50%;
-  max-width: 420px;
+  width: 47.5%;
+  max-width: 400px;
   min-width: 280px;
   box-sizing: border-box;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 8px;
   box-shadow: 5px 5px 10px rgb(221, 221, 221);
-  margin-right: 10px;
+  margin-right: 14px;
   margin-bottom: 26px;
   height: 280px;
 }
@@ -1199,7 +1204,7 @@ hr {
 .smallSidebar{
   left: 0;
   z-index: 2;
-  width: max-content;
+  width: 65px;
   background-color: #0d63e3;
   height: 100vh;
 }
@@ -1208,14 +1213,14 @@ hr {
   color: white;
 }
 
-.sidebar-list {
+.smallSidebar-list {
  margin-top: 12vh;
  margin-left: 15px;
  display: flex;
  flex-direction: column;
  margin-right: 15px;
 }
-.sidebar-list a i {
+.smallSidebar-list a i {
   margin-bottom: 60px;
   color:white;
 }
@@ -1239,7 +1244,9 @@ hr {
     margin-right: 20px;
     margin-top: 5px;
   }
-
+  #mainPart{
+    margin-left: 45px;
+  }
   /* .fas.fa-user-circle.fa-lg{
     right: 17.5px;
     top: 22.5px;
@@ -1296,6 +1303,10 @@ hr {
   .Success {
     width: 75%;
   }
+  .sidebar {
+    position: fixed;
+    z-index: 2;
+  }
 }
 
 .sidebar ul li {
@@ -1305,6 +1316,7 @@ hr {
 .sidebar p {
   margin-left: 12px;
 }
+
 
 @media screen and (min-width: 1441px) {
   .sidebar ul li,
@@ -1321,5 +1333,19 @@ hr {
   .UserInfo .statWrap {
     margin-top: 40px;
     margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .GameInfo{
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
+  }
+  .GameInfo p {
+    font-size: 16px;
+  }
+  .GameInfo h3{
+    font-size: 22px;
   }
 }

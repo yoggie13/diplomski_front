@@ -77,59 +77,61 @@ export default function Games({ userID }) {
 
         <div className="Games">
             <h1>Igre</h1>
-            <ul className='Filter'>
+            <div className='GamesWrapper'>
+                <ul className='Filter'>
+                    {
+                        filterArr.map((filter, index) =>
+                            <li key={index}
+                                id={checkedFilter === index ? "checked" : "unchecked"}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    setCheckedFilter(index)
+                                }}>
+                                {filter}
+                            </li>
+                        )
+                    }
+                </ul>
                 {
-                    filterArr.map((filter, index) =>
-                        <li key={index}
-                            id={checkedFilter === index ? "checked" : "unchecked"}
-                            onClick={(e) => {
-                                e.preventDefault()
-                                setCheckedFilter(index)
-                            }}>
-                            {filter}
-                        </li>
-                    )
+                    loadingState
+                        ? <Loading />
+                        : <>
+                            {
+                                state.games.length > 0
+                                    ? <div className='GamesArray'>
+                                        {
+                                            checkedFilter === 0
+                                                ? state.games.map((game, index) =>
+                                                    <div className="GameInfo" key={index} onClick={e => openGame(e, game.id)}>
+                                                        <h3>{game.name}</h3>
+                                                        <p>Broj igrača: {game.numberOfPlayers}</p>
+                                                        <p>Maks. isplata: {game.maxPayoff}</p>
+                                                        <p>Odigrana: {
+                                                            game.played
+                                                                ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                                : <i className="fas fa-times-circle" id="icon-false"></i>
+                                                        }</p>
+                                                        <p>Datum isteka: {formatDate(game.dueDate)}</p>
+                                                    </div>
+                                                )
+                                                : state.games.map((game, index) =>
+                                                    <div className="GameInfo" key={index} onClick={e => openGame(e, game.id)}>
+                                                        <h3>{game.name}</h3>
+                                                        <p>Odigrana: {
+                                                            game.played
+                                                                ? <i className="fas fa-check-circle" id="icon-true"></i>
+                                                                : <i className="fas fa-times-circle" id="icon-false"></i>
+                                                        }</p>
+                                                        <p>Osvojenih poena: {game.pointsGotten}</p>
+                                                        {/* <p>Datum isteka: {formatDate(game.dueDate)}</p> */}
+                                                    </div>
+                                                )
+                                        }
+                                    </div>
+                                    : <p>Trenutno nema aktivnih igara</p>
+                            }</>
                 }
-            </ul>
-            {
-                loadingState
-                    ? <Loading />
-                    : <>
-                        {
-                            state.games.length > 0
-                                ? <div className='GamesArray'>
-                                    {
-                                        checkedFilter === 0
-                                            ? state.games.map((game, index) =>
-                                                <div className="GameInfo" key={index} onClick={e => openGame(e, game.id)}>
-                                                    <h3>{game.name}</h3>
-                                                    <p>Broj igrača: {game.numberOfPlayers}</p>
-                                                    <p>Maks. isplata: {game.maxPayoff}</p>
-                                                    <p>Odigrana: {
-                                                        game.played
-                                                            ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                                            : <i className="fas fa-times-circle" id="icon-false"></i>
-                                                    }</p>
-                                                    <p>Datum isteka: {formatDate(game.dueDate)}</p>
-                                                </div>
-                                            )
-                                            : state.games.map((game, index) =>
-                                                <div className="GameInfo" key={index} onClick={e => openGame(e, game.id)}>
-                                                    <h3>{game.name}</h3>
-                                                    <p>Odigrana: {
-                                                        game.played
-                                                            ? <i className="fas fa-check-circle" id="icon-true"></i>
-                                                            : <i className="fas fa-times-circle" id="icon-false"></i>
-                                                    }</p>
-                                                    <p>Osvojenih poena: {game.pointsGotten}</p>
-                                                    {/* <p>Datum isteka: {formatDate(game.dueDate)}</p> */}
-                                                </div>
-                                            )
-                                    }
-                                </div>
-                                : <p>Trenutno nema aktivnih igara</p>
-                        }</>
-            }
+            </div>
         </div >
     )
 }
