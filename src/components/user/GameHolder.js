@@ -117,7 +117,7 @@ export default function GameHolder({ userID }) {
                 .then(response => {
                     if (!response) {
                         alert("Ta igra je izbrisana");
-                        history.push('/activeGames');
+                        history.push('/games');
                     }
                     setGameState({
                         ...gameState, game: response
@@ -209,7 +209,7 @@ export default function GameHolder({ userID }) {
             else if (res.status === 404) {
                 alert("Ta igra je izbrisana");
                 setLoadingState(false);
-                history.push('/activeGames');
+                history.push('/games');
             }
             else {
                 alert("Nije uspelo");
