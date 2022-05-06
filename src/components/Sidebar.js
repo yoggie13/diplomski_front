@@ -8,7 +8,7 @@ import logo from '../assets/laboi_logo.png';
 // }
 
 export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
-    const [opened, setOpened] = useState(true)
+    const [opened, setOpened] = useState(window.innerWidth > 900 ? true : false)
 
     let history = useHistory();
     const handleLogout = e => {
