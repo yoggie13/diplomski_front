@@ -4,6 +4,7 @@
 
 html {
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 body {
   margin: 0;
@@ -13,9 +14,6 @@ body {
 .App {
   width: 100vw;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0px;
   padding: 0px;
 }
@@ -56,10 +54,18 @@ button:hover {
 i:hover {
   cursor: pointer;
 }
-.Panel {
+/* .Panel {
   display: grid;
   grid-template-columns: 25vw 75vw;
+  grid-template-rows: 0;
   height: 100vh;
+} */
+.Panel{
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
 }
 .BasicTemplate {
   display: grid;
@@ -73,9 +79,7 @@ i:hover {
 .Panel a i {
   color: #2b0a55;
 }
-.sidebar a i {
-  color: white;
-}
+
 .Success {
   display: flex;
   width: 100%;
@@ -88,18 +92,17 @@ i:hover {
   height: 100px;
 }
 .sidebar {
-  grid-column: 1;
-  position: fixed;
-  left: 0;
+  z-index: 2;
+  left:0;
   min-width: 225px;
-  width: 20vw;
+  width: 25vw;
+  max-width: 350px;
   background-color: #0d63e3;
   height: 100vh;
-  margin: 0;
+  margin: 0px;
   color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  z-index: 2;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
 }
 .sidebar ul {
   padding: 0;
@@ -114,29 +117,48 @@ i:hover {
   margin-bottom: 15px;
   text-align: left;
 }
+.sidebar a i {
+  color: white;
+}
 .sidebar ul li {
   font-size: 20px;
 }
 #sidebarFooter p {
   font-size: 16px;
 }
-.sidebar img {
-  max-width: 80px;
-  height: auto;
+#sidebarFooter i {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+#sidebarHeader{
+  grid-row: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-left: 30px;
   margin-top: 30px;
 }
+#sidebarHeader img {
+  max-width: 80px;
+  height: auto;
+  max-height: 34.987px;
+}
+#sidebarHeader i {
+  margin-right: 20px;
+}
+#siderbarMain{
+  grid-row:2;
+}
 #sidebarFooter {
+  grid-row:3;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   text-align: center;
-  position: absolute;
-  left: 30px;
-  right: 0;
-  margin-right: 30px;
-  bottom: 20px;
+  width: 100%;
 }
 #sidebarFooter p {
   margin-left: 10px;
@@ -152,26 +174,22 @@ i:hover {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-
 .sidebar ul li {
   cursor: pointer;
 }
+
 #mainPart {
-  grid-column: 2;
   margin: auto;
   display: flex;
   flex-direction: column;
-  width: 80%;
-  margin-left: 50px;
-  margin-right: 40px;
-  margin-top: 60px;
-  text-align: left;
+  margin-left: 90px;
+  margin-right: 50px;
+  text-align: justify;
   font-family: "Varela";
   font-size: 22px;
   color: #020b3f;
   height: 80vh;
 }
-
 .Loading {
   display: flex;
   width: 100%;
@@ -231,6 +249,43 @@ svg text {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+.GamesWrapper{
+display: flex;
+flex-direction: column;
+
+}
+.GamesArray{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin-left: calc();
+}
+.GameInfo{
+  width: 47.5%;
+  max-width: 400px;
+  min-width: 280px;
+  box-sizing: border-box;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px rgb(221, 221, 221);
+  margin-right: 14px;
+  margin-bottom: 26px;
+  height: 280px;
+}
+.GameInfo :hover{
+  cursor: pointer;
+}
+.GameInfo h3,
+.GameInfo p{
+  margin-left: 24px;
+}
+.GameInfo h3 {
+  margin-top: 20px;
+}
+.GameInfo p{
+  font-size: 20px;
 }
 .FormClass {
   display: flex;
@@ -599,12 +654,6 @@ form input[type="submit"]:hover {
   font-size: 18px;
 }
 
-.fas.fa-bars.fa-2x {
-  margin-top: 15px;
-  margin-left: 15px;
-  color: #2b0a55;
-}
-
 table {
   width: 90%;
   border-collapse: collapse;
@@ -794,13 +843,26 @@ hr {
 #sendMessage i:hover {
   color: #e30d63;
 }
-.notificationDiv {
+.PanelNotSidebar{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.PanelHeader{
+  width: calc(100%-50px);
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  height: 60px;
+  margin-right: 50px;
+}
+.PanelHeader i{
   color: #2b0a55;
-  right: 80px;
-  top: 45px;
-  position: absolute;
-  margin: 0px;
-  padding: 0px;
+  margin-left: 20px;
 }
 .Notifications {
   display: flex;
@@ -809,14 +871,17 @@ hr {
   border: 1px solid #2b0a55;
   border-radius: 10px;
   position: fixed;
-  top: 60px;
-  right: 90px;
+  top: 50px;
+  right: 110px;
   z-index: 50;
   scroll-behavior: smooth;
   overflow-y: scroll;
   height: 600px;
   margin-bottom: 50px;
   background-color: white;
+}
+.Notifications #no-notifications{
+  margin-left: 20px;
 }
 .Notifications div {
   background-color: white;
@@ -825,6 +890,7 @@ hr {
   margin-top: 0px;
   margin-bottom: 0px;
   border: 1px solid lightgray;
+  text-align: justify;
 }
 .Notifications div h4 {
   margin-top: 0px;
@@ -843,6 +909,31 @@ hr {
   background-color: lightgray;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+.Filter{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-top: 0px;
+}
+.Filter li{
+  list-style-type: none;
+  margin-right: 24px;
+  font-size: 24px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.Filter #checked{
+  text-decoration-line: underline;
+  text-decoration-color: #e30d63;
+  text-decoration-thickness: 4px;
+}
+.Filter li:hover{
+  cursor: pointer;
 }
 .notificationCount {
   width: 10px;
@@ -1104,6 +1195,36 @@ hr {
 #problemType {
   width: 262px;
 }
+.sidebar-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px;
+  height: 40px;
+}
+.smallSidebar{
+  left: 0;
+  z-index: 2;
+  width: 65px;
+  background-color: #0d63e3;
+  height: 100vh;
+}
+.fas.fa-bars.fa-2x {
+  margin-top: 15px;
+  color: white;
+}
+
+.smallSidebar-list {
+ margin-top: 12vh;
+ margin-left: 15px;
+ display: flex;
+ flex-direction: column;
+ margin-right: 15px;
+}
+.smallSidebar-list a i {
+  margin-bottom: 60px;
+  color:white;
+}
 
 /* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
 #58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
@@ -1120,10 +1241,21 @@ hr {
     font-size: 22px;
     margin-left: 0px;
   }
-  .notificationDiv {
+  .PanelHeader{
+    margin-right: 20px;
+    margin-top: 5px;
+  }
+  #mainPart{
+    margin-left: 45px;
+  }
+  /* .fas.fa-user-circle.fa-lg{
     right: 17.5px;
     top: 22.5px;
-  }
+  } */
+  /* .notificationDiv {
+    right: 52.5px;
+    top: 22.5px;
+  } */
   .css-1s2u09g-control {
     width: 100%;
   }
@@ -1165,18 +1297,32 @@ hr {
     width: 100%;
   }
   .Notifications {
-    right: 30px;
-    top: 40px;
+    right: 90px;
+    top: 30px;
+    width: 65%;
   }
   .Success {
     width: 75%;
   }
+  .sidebar {
+    position: fixed;
+    z-index: 2;
+  }
 }
+
+.sidebar ul li {
+  display: flex;
+  flex-direction: row;
+}  
+.sidebar p {
+  margin-left: 12px;
+}
+
 
 @media screen and (min-width: 1441px) {
   .sidebar ul li,
   .sidebar p {
-    font-size: 26px;
+    font-size: 24px;
   }
   #sidebarFooter p {
     font-size: 20px;
@@ -1188,5 +1334,19 @@ hr {
   .UserInfo .statWrap {
     margin-top: 40px;
     margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .GameInfo{
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
+  }
+  .GameInfo p {
+    font-size: 16px;
+  }
+  .GameInfo h3{
+    font-size: 22px;
   }
 }

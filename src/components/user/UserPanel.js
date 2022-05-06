@@ -10,18 +10,17 @@ import ReportProblem from './ReportProblem.js';
 import FinishedGames from './FinishedGames.js';
 import ChangePassword from '../ChangePassword.js';
 import UserInfo from '../UserInfo.js';
-import ActiveGames from './ActiveGames.js';
+import Games from './Games.js';
 import Game from './Game.js';
 import Error from '../Error.js';
 import NotificationBell from './NotificationBell.js';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import GameHolder from './GameHolder.js';
 
-export default function UserPanel({ user, openNotifications }) {
+export default function UserPanel({ user }) {
 
     return (
         <>
-            <NotificationBell user={user} openNotifications={openNotifications} />
             <Switch>
                 <Route path="/finishedGames">
                     <FinishedGames userID={user.id} />
@@ -38,8 +37,8 @@ export default function UserPanel({ user, openNotifications }) {
                 <Route path="/profile">
                     <UserInfo user={user} />
                 </Route>
-                <Route path="/activeGames">
-                    <ActiveGames userID={user.id} />
+                <Route path="/games">
+                    <Games userID={user.id} />
                 </Route>
                 <Route path="/game/:id" children={<GameHolder userID={user.id} />} />
                 <Route path="/profile">

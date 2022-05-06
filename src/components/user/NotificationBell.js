@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import UserServices from '../../services/UserServices';
 import Notifications from './Notifications';
 
@@ -43,7 +42,7 @@ export default function NotificationBell({ user, openNotifications }) {
                     : null
             }
             <div className="notificationDiv">
-                <i className="fas fa-bell fa-lg"></i>
+                <i className="fas fa-bell fa-2x"></i>
                 {
                     notifCounterState !== 0
                         ? <small className='notificationCount'>{notifCounterState}</small>

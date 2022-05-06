@@ -46,7 +46,7 @@ export default function FinishedGames({ userID }) {
                             <thead>
                                 <tr>
                                     <th>Naziv igre</th>
-                                    <th>Broj igrača</th>
+                                    <th>Osvojeni poeni</th>
                                     <th>Odigrao/la</th>
                                     <th>Link do igre</th>
                                 </tr>
