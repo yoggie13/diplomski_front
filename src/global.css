@@ -183,7 +183,7 @@ i:hover {
   display: flex;
   flex-direction: column;
   margin-left: 90px;
-  margin-right: 50px;
+  margin-right: 100px;
   text-align: justify;
   font-family: "Varela";
   font-size: 22px;
@@ -273,12 +273,15 @@ flex-direction: column;
   margin-bottom: 26px;
   height: 280px;
 }
+
 .GameInfo :hover{
   cursor: pointer;
 }
 .GameInfo h3,
 .GameInfo p{
   margin-left: 24px;
+  margin-right: 12px;
+
 }
 .GameInfo h3 {
   margin-top: 20px;
@@ -1246,6 +1249,7 @@ hr {
   }
   #mainPart{
     margin-left: 45px;
+    margin-right: 40px;
   }
   /* .fas.fa-user-circle.fa-lg{
     right: 17.5px;
