@@ -260,7 +260,6 @@ flex-direction: column;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  margin-left: calc();
 }
 .GameInfo{
   width: 47.5%;
