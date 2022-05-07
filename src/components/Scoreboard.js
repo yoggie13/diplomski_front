@@ -49,18 +49,18 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Mesto</th>
+                                    <th id="place">Rang</th>
                                     <th id='left'>Indeks</th>
                                     <th id='left'>Ime i prezime</th>
-                                    <th>Broj poena</th>
-                                    <th>Odigranih igara</th>
+                                    <th>Poeni</th>
+                                    <th>Igre</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     studentsState.map((student, index) =>
                                         <tr key={index + 1}>
-                                            <td>{index + 1}.</td>
+                                            <td id="place">{index + 1}.</td>
                                             <td id='left'>{student.studentID}</td>
                                             <td id='left'>{student.studentName}</td>
                                             <td>{student.pointsTotal}</td>

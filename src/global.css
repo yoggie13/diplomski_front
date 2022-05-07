@@ -226,6 +226,9 @@ i:hover {
   font-weight: 700;
   word-wrap: break-word;
 }
+.Chart{
+  margin-bottom: 20px;
+}
 
 .Charts {
   margin-top: 22px;
@@ -259,11 +262,11 @@ flex-direction: column;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
 }
 .GameInfo{
-  width: 47.5%;
-  max-width: 400px;
+  width: 45%;
+  max-width: 380px;
   min-width: 280px;
   box-sizing: border-box;
   border: 1px solid rgb(221, 221, 221);
@@ -280,7 +283,7 @@ flex-direction: column;
 .GameInfo h3,
 .GameInfo p{
   margin-left: 24px;
-  margin-right: 12px;
+  margin-right: 16px;
 
 }
 .GameInfo h3 {
@@ -672,12 +675,15 @@ td {
   border: 1px solid lightgray;
   border-left: 0px;
   border-right: 0px;
+  height: 25px;
+  max-width: 60px;
 }
 td,
 th {
   padding-left: 10px;
   padding-right: 10px;
 }
+
 #left {
   text-align: left;
 }
@@ -918,10 +924,12 @@ hr {
   flex-wrap: wrap;
   padding: 0;
   margin-top: 0px;
-}
+  justify-content: end;
+  margin-right: 50px;
+  }
 .Filter li{
   list-style-type: none;
-  margin-right: 24px;
+  margin-left: 24px;
   font-size: 24px;
   height: 40px;
   display: flex;
@@ -1216,6 +1224,7 @@ hr {
   color: white;
 }
 
+
 .smallSidebar-list {
  margin-top: 12vh;
  margin-left: 15px;
@@ -1321,7 +1330,11 @@ hr {
   margin-left: 12px;
 }
 
-
+@media screen and (max-width: 740px){
+  .GameInfo{
+    width: 60%;
+  }
+}
 @media screen and (min-width: 1441px) {
   .sidebar ul li,
   .sidebar p {
@@ -1340,7 +1353,7 @@ hr {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 420px) {
   .GameInfo{
     width: 240px;
     min-width: 240px;
@@ -1351,5 +1364,25 @@ hr {
   }
   .GameInfo h3{
     font-size: 22px;
+  }
+  .Filter{
+    margin-right: 0px;
+  }
+  #place{
+    max-width: fit-content;
+    text-align: right;
+    padding: 0;
+  }
+  td#left{
+    font-size: 11px;
+  }
+  td, th{
+    max-width: 50px;
+  }
+  h1{
+    font-size: 40px;
+  }
+  h2{
+    font-size: 26px;
   }
 }

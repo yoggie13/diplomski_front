@@ -42,17 +42,37 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                         {
                             isAdmin
                                 ? <ul>
-                                    <li>
-                                        <Link to="/create">Kreiraj igru</Link>
+                                    <li className='sidebar-li'>
+                                        <Link to="/create">
+                                            <div className='sidebar-div'>
+                                                <i class="fas fa-plus"></i>
+                                                <p>Kreiraj igru</p>
+                                            </div>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard">Dashboard</Link>
+                                        <Link to="/dashboard">
+                                            <div className='sidebar-div'>
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                <p>Dashboard</p>
+                                            </div>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/allGames">Sve igre</Link>
+                                        <Link to="/allGames">
+                                            <div className='sidebar-div'>
+                                                <i class="fas fa-gamepad"></i>
+                                                <p>Sve igre</p>
+                                            </div>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/scoreboards">Tabele</Link>
+                                        <Link to="/scoreboards">
+                                            <div className='sidebar-div'>
+                                                <i class="fas fa-trophy"></i>
+                                                <p>Tabele</p>
+                                            </div>
+                                        </Link>
                                     </li>
                                 </ul>
                                 : <ul>
@@ -95,13 +115,33 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                         }}>
                     </i>
                     <div className='smallSidebar-list'>
-                        <Link to='/games'>
-                            <i className="fas fa-gamepad fa-lg"></i>
-                        </Link>
-                        <Link to='/scoreboard'>
-                            <i className="fas fa-trophy fa-lg"></i>
-                        </Link>
+                        {
+                            isAdmin
+                                ? <>
+                                    <Link to="/create">
+                                        <i class="fas fa-plus fa-lg"></i>
+                                    </Link>
+                                    <Link to="/dashboard">
+                                        <i class="fas fa-tachometer-alt fa-lg"></i>
+                                    </Link>
+                                    <Link to="/allGames">
+                                        <i class="fas fa-gamepad fa-lg"></i>
+                                    </Link>
+                                    <Link to="/scoreboards">
+                                        <i class="fas fa-trophy fa-lg"></i>
+                                    </Link>
+                                </>
+                                : <>
+                                    <Link to='/games'>
+                                        <i className="fas fa-gamepad fa-lg"></i>
+                                    </Link>
+                                    <Link to='/scoreboard'>
+                                        <i className="fas fa-trophy fa-lg"></i>
+                                    </Link>
+                                </>
+                        }
                     </div>
+
                 </div>
         }
         </>
