@@ -46,7 +46,7 @@ export default function Login({ loginLogic }) {
                 </label>
                 <input id="email" type="text" onChange={e => setLoginDetails({ ...loginDetails, email: e.target.value })} value={loginDetails.email} />
                 <label htmlFor="password">
-                    Password
+                    Šifra
                 </label>
                 <input id="password" type="password" onChange={e => setLoginDetails({ ...loginDetails, password: e.target.value })} value={loginDetails.password} />
                 {

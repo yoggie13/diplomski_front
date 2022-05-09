@@ -18,11 +18,11 @@ export default function ChangePassword({ userID }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (state.newPassword !== state.confirmPassword) {
-            setErrorState({ exists: true, text: "Novi passwordi se ne podudaraju" });
+            setErrorState({ exists: true, text: "Nove šifre se ne podudaraju" });
             return;
         }
         else if (state.oldPassword === state.newPassword) {
-            setErrorState({ exists: true, text: "Uneli ste isti password i za stari i za novi" });
+            setErrorState({ exists: true, text: "Uneli ste istu šifru i za staru i za novu" });
             return;
         }
 
@@ -46,12 +46,12 @@ export default function ChangePassword({ userID }) {
         }
         else if (res.status === 415) {
             setLoadingState(false);
-            setErrorState({ exists: true, text: "Pogrešan stari password" });
+            setErrorState({ exists: true, text: "Pogrešna stara šifra" });
             return;
         }
         else if (res.status === 400) {
             setLoadingState(false);
-            setErrorState({ exists: true, text: "Novi password ne može biti stari password" });
+            setErrorState({ exists: true, text: "Nova šifra ne može bita stara šifra" });
             return;
         }
         else {
@@ -68,15 +68,15 @@ export default function ChangePassword({ userID }) {
                     : <div className="FormClass" id="changePasswordDiv">
                         <form id="changePasswordForm">
                             <label htmlFor="oldPassword">
-                                Stari password
+                                Stara šifra
                             </label>
                             <input id="oldPassword" type="password" value={state.oldPassword} onChange={e => setState({ ...state, oldPassword: e.target.value })} />
                             <label htmlFor="newPassword">
-                                Novi password
+                                Nova šifra
                             </label>
                             <input id="newPassword" type="password" value={state.newPassword} onChange={e => setState({ ...state, newPassword: e.target.value })} />
                             <label htmlFor="confirmPassword">
-                                Potvrdi novi password
+                                Potvrdi novu šifru
                             </label>
                             <input id="confirmPassword" type="password" value={state.confirmPassword} onChange={e => setState({ ...state, confirmPassword: e.target.value })} />
                             {
