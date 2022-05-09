@@ -53,8 +53,7 @@ function App() {
       {
         loadingState ?
           <Loading />
-          :
-          <Router>
+          : <Router>
             {
               state.User !== null
                 ? <Panel logoutLogic={logoutLogic} isAdmin={state.isAdmin} user={state.User} />
