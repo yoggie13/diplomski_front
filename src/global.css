@@ -266,9 +266,9 @@ flex-direction: column;
   justify-content: center;
 }
 .GameInfo{
-  width: 45%;
+  width: 30%;
   max-width: 380px;
-  min-width: 280px;
+  min-width: 250px;
   box-sizing: border-box;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 8px;
@@ -1265,7 +1265,7 @@ hr {
   }
   #mainPart{
     margin-left: 45px;
-    margin-right: 40px;
+    margin-right: 20px;
   }
   /* .fas.fa-user-circle.fa-lg{
     right: 17.5px;
@@ -1373,7 +1373,7 @@ hr {
     font-size: 22px;
   }
   .Filter{
-    margin-right: 0px;
+    margin-right: 20px;
   }
   #place{
     max-width: fit-content;

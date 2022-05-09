@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import Sidebar from '../components/Sidebar.js';
 import UserPanel from '../components/user/UserPanel.js';
 import AdminPanel from '../components/admin/AdminPanel.js';
 import PanelHeader from '../components/PanelHeader.js';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export default function Panel({ logoutLogic, isAdmin, user }) {
     const [openNotifications, setOpenNotifications] = useState(false);
+    let history = useHistory()
+    let location = useLocation();
+
+    useEffect(() => {
+        if (location.pathname === "/" || location.pathname === "/login")
+            history.push(isAdmin ? "/dashboard" : "/games")
+    }, [])
 
     const handleNotifications = (e) => {
         e.preventDefault();

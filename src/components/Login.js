@@ -10,8 +10,6 @@ export default function Login({ loginLogic }) {
     const [errorState, setErrorState] = useState(false);
     const [loadingState, setLoadingState] = useState(false);
 
-    let history = useHistory();
-
     useEffect(() => {
         document.title = "Login | Teorija igara"
     }, []);
@@ -27,7 +25,6 @@ export default function Login({ loginLogic }) {
             setLoadingState(false);
             setErrorState(false);
             await loginLogic();
-            history.push("/profile");
         }
         else if (res.status === 400) {
             alert("Pogrešan unos");
