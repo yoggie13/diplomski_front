@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import Chat from './Chat';
 import Loading from '../Loading';
 import Game from './Game';
