@@ -12,10 +12,11 @@ function formatDate(dueDate) {
 }
 export default function Confirmation() {
 
-    var game = useLocation().state.game;
-    var strategies = useLocation().state.strategies;
-    var range = useLocation().state.range;
-    var gameModels = useLocation().state.gameModels;
+    let loc = useLocation()
+    var game = loc.state.game;
+    var strategies = loc.state.strategies;
+    var range = loc.state.range;
+    var gameModels = loc.state.gameModels;
 
     const [loadingState, setLoadingState] = useState(false);
     const [successState, setSuccessState] = useState(false);
@@ -31,6 +32,21 @@ export default function Confirmation() {
     useEffect(() => {
         document.title = "Potvrda igre | Teorija igara"
     }, []);
+
+    useEffect(() => {
+        return () => {
+            if (history.action === "POP") {
+                handlePreviousPage()
+            }
+        }
+    })
+
+    const handlePreviousPage = (e = undefined) => {
+        if (e !== undefined)
+            e.preventDefault()
+
+        history.push('/create', { gameMainInfo: data.game, strategies: data.strategies, range: data.range })
+    }
 
     const saveGame = async (e) => {
         e.preventDefault();

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import Radio from '@material-ui/core/Radio';
-import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export default function CreateGame() {
 
@@ -39,10 +39,16 @@ export default function CreateGame() {
             ]
         }
     }
+    const getRange = () => {
+        if (loc.state.range !== undefined && loc.state !== null) {
+            return loc.state.range;
+        }
+        return { MinValue: 0, MaxValue: 0, DefaultValue: 0, timesX: 0, minSum: 0 }
+    }
 
     const [gameState, setGameState] = useState(gameMainInfo);
     const [strategiesState, setStrategiesState] = useState(getStrategies())
-    const [oneTwoState, setOneTwoState] = useState({ MinValue: 0, MaxValue: 0, DefaultValue: 0, timesX: 0, minSum: 0 });
+    const [oneTwoState, setOneTwoState] = useState(getRange());
 
     let history = useHistory();
 
@@ -167,8 +173,16 @@ export default function CreateGame() {
         else
             alert("Niste sve popunili kako treba");
     }
-    const handlePreviousPage = e => {
-        e.preventDefault();
+    useEffect(() => {
+        return () => {
+            if (history.action === "POP") {
+                handlePreviousPage()
+            }
+        }
+    })
+    const handlePreviousPage = (e = undefined) => {
+        if (e !== undefined)
+            e.preventDefault();
         history.push('create', { gameMainInfo: gameMainInfo, strategies: strategiesState });
     }
 

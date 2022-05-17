@@ -45,7 +45,7 @@ export default function Scoreboard({ admin = false, userID = null, group, handle
                 loadingState
                     ? <Loading />
                     : <div className="Scoreboard">
-                        <h1>Scoreboard</h1>
+                        <h1>Tabela</h1>
                         <table>
                             <thead>
                                 <tr>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import Chat from './Chat';
 import Loading from '../Loading';
 import Game from './Game';
@@ -17,7 +18,6 @@ export default function GameHolder({ userID }) {
     const [successState, setSuccessState] = useState(false);
 
     let { id } = useParams();
-    console.log(id)
     let history = useHistory();
 
     useEffect(() => {
@@ -201,6 +201,7 @@ export default function GameHolder({ userID }) {
                         }
                     }))
                     setLoadingState(false);
+                    GetGame();
                 }, 2000);
             } else if (res.status === 409) {
                 alert("Već ste uneli odgovor na ovu igru");
@@ -237,6 +238,11 @@ export default function GameHolder({ userID }) {
                             {
                                 gameState.game.prevInteraction !== undefined
                                     ? <p id='prevInteraction'>{gameState.game.prevInteraction}</p>
+                                    : null
+                            }
+                            {
+                                gameState.game !== undefined
+                                    ? <p id='prevInteraction'>{gameState.game.answer}</p>
                                     : null
                             }
                             {

@@ -28,6 +28,12 @@ export default function Notifications({ user }) {
             setLoadingState(false);
         }
     }
+
+    function formatDate(dueDate) {
+        var d = new Date(dueDate);
+        return d.toLocaleDateString('sr');
+    }
+
     return (
         <div className='Notifications'>
             {
@@ -39,6 +45,7 @@ export default function Notifications({ user }) {
                                 <div key={index}>
                                     <h4>{notification.subject}</h4>
                                     <p>{notification.text}</p>
+                                    <small>{formatDate(notification.date)}</small>
                                 </div>
                             </Link>
                         )

@@ -89,7 +89,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                                         <Link to="/scoreboard">
                                             <div className='sidebar-div'>
                                                 <i class="fas fa-trophy"></i>
-                                                <p>Scoreboard</p>
+                                                <p>Tabela</p>
                                             </div>
                                         </Link>
                                     </li>

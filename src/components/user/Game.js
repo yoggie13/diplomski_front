@@ -1,7 +1,8 @@
 import React from 'react';
 import { Radio } from '@material-ui/core';
 
-export default function Game({ gameState, checkedStrategyState, handleCheck, handleInput }) {
+export default function Game({ gameState, checkedStrategyState, handleCheck, handleInput, answer }) {
+    console.log(checkedStrategyState)
     return (
         <div>
             {
