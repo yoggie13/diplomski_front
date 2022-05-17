@@ -1,0 +1,144 @@
+.sidebar {
+    z-index: 2;
+    left:0;
+    min-width: 225px;
+    width: 25vw;
+    max-width: 350px;
+    background-color: #0d63e3;
+    height: 100vh;
+    margin: 0px;
+    color: #ffffff;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+  }
+  .sidebar ul {
+    padding: 0;
+    list-style-type: none;
+    margin-top: 10vh;
+    align-self: flex-start;
+    margin-left: 50px;
+  }
+  .sidebar ul li,
+  #sidebarFooter p {
+    font-family: "Varela";
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  .sidebar a i {
+    color: white;
+  }
+  .sidebar ul li {
+    font-size: 20px;
+  }
+  #sidebarFooter p {
+    font-size: 16px;
+  }
+  #sidebarFooter i {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  #sidebarHeader{
+    grid-row: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 30px;
+    margin-top: 30px;
+  }
+  #sidebarHeader img {
+    max-width: 80px;
+    height: auto;
+    max-height: 34.987px;
+  }
+  #sidebarHeader i {
+    margin-right: 20px;
+  }
+  #siderbarMain{
+    grid-row:2;
+  }
+  #sidebarFooter {
+    grid-row:3;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
+  }
+  #sidebarFooter p {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  #sidebarFooter p:hover {
+    cursor: pointer;
+  }
+  .fa-sign-out-alt {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  .sidebar ul li {
+    cursor: pointer;
+  }
+
+  .sidebar ul li {
+    display: flex;
+    flex-direction: row;
+  }  
+  .sidebar p {
+    margin-left: 12px;
+  }  
+
+  .sidebar-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0px;
+    height: 40px;
+  }
+  .smallSidebar{
+    left: 0;
+    z-index: 2;
+    width: 65px;
+    background-color: #0d63e3;
+    height: 100vh;
+  }
+  .fas.fa-bars.fa-2x {
+    margin-top: 15px;
+    color: white;
+  }
+
+  .smallSidebar-list {
+   margin-top: 12vh;
+   margin-left: 15px;
+   display: flex;
+   flex-direction: column;
+   margin-right: 15px;
+  }
+  .smallSidebar-list a i {
+    margin-bottom: 60px;
+    color:white;
+  }
+  @media screen and (max-width: 900px) {
+    .sidebar {
+        position: fixed;
+        z-index: 2;
+      }
+  }
+
+  @media screen and (min-width: 1441px) {
+    .sidebar ul li,
+    .sidebar p {
+      font-size: 24px;
+    }
+    #sidebarFooter p {
+      font-size: 20px;
+    }
+    .sidebar ul {
+      margin-left: 60px;
+    }
+}

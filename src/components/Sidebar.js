@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router';
 import logo from '../assets/laboi_logo.png';
+import '../assets/styles/Sidebar.css';
 
 // function formatUsername(Username) {
 //     return Username.split('@')[0];

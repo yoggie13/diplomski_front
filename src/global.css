@@ -10,7 +10,6 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
-
 .App {
   width: 100vw;
   min-height: 100vh;
@@ -55,30 +54,10 @@ button:hover {
 i:hover {
   cursor: pointer;
 }
-/* .Panel {
-  display: grid;
-  grid-template-columns: 25vw 75vw;
-  grid-template-rows: 0;
-  height: 100vh;
-} */
-.Panel{
-  height: 100vh;
-  width: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-}
+
 .BasicTemplate {
   display: grid;
   grid-template-rows: 7vh 93vh;
-}
-.Panel a {
-  color: white;
-  text-decoration: none;
-  font-family: "Varela";
-}
-.Panel a i {
-  color: #2b0a55;
 }
 
 .Success {
@@ -92,125 +71,7 @@ i:hover {
   width: 100px;
   height: 100px;
 }
-.sidebar {
-  z-index: 2;
-  left:0;
-  min-width: 225px;
-  width: 25vw;
-  max-width: 350px;
-  background-color: #0d63e3;
-  height: 100vh;
-  margin: 0px;
-  color: #ffffff;
-  display: grid;
-  grid-template-rows: 10% 80% 10%;
-}
-.sidebar ul {
-  padding: 0;
-  list-style-type: none;
-  margin-top: 10vh;
-  align-self: flex-start;
-  margin-left: 50px;
-}
-.sidebar ul li,
-#sidebarFooter p {
-  font-family: "Varela";
-  margin-bottom: 15px;
-  text-align: left;
-}
-.sidebar a i {
-  color: white;
-}
-.sidebar ul li {
-  font-size: 20px;
-}
-#sidebarFooter p {
-  font-size: 16px;
-}
-#sidebarFooter i {
-  margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-#sidebarHeader{
-  grid-row: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-left: 30px;
-  margin-top: 30px;
-}
-#sidebarHeader img {
-  max-width: 80px;
-  height: auto;
-  max-height: 34.987px;
-}
-#sidebarHeader i {
-  margin-right: 20px;
-}
-#siderbarMain{
-  grid-row:2;
-}
-#sidebarFooter {
-  grid-row:3;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
-  text-align: center;
-  width: 100%;
-}
-#sidebarFooter p {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-#sidebarFooter p:hover {
-  cursor: pointer;
-}
-.fa-sign-out-alt {
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-.sidebar ul li {
-  cursor: pointer;
-}
 
-#mainPart {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  margin-left: 90px;
-  margin-right: 100px;
-  text-align: justify;
-  font-family: "Varela";
-  font-size: 22px;
-  color: #020b3f;
-  height: 80vh;
-}
-.Loading {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-#LoadingSmaller {
-  height: 50px;
-  width: 50px;
-  margin-top: 10px;
-}
-.Loading img {
-  width: 75px;
-  height: 75px;
-}
-#loginLoadSmaller {
-  width: 40px;
-  height: 40px;
-}
 .statWrap {
   display: flex;
   flex-direction: row;
@@ -227,71 +88,16 @@ i:hover {
   font-weight: 700;
   word-wrap: break-word;
 }
-.Chart{
-  margin-bottom: 20px;
-}
 
-.Charts {
-  margin-top: 22px;
-  display: grid;
-  grid-template-columns: auto;
-  margin-bottom: 20px;
-}
-.Charts #firstPlayer {
-  grid-column: 1;
-  margin-right: 10px;
-}
-.Charts #secondPlayer {
-  grid-column: 2;
-  margin-left: 10px;
-}
-svg text {
-  font-size: 10px;
-  color: white !important;
-}
 #buttons {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-.GamesWrapper{
-display: flex;
-flex-direction: column;
 
-}
-.GamesArray{
-  width: 100%;
+form {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.GameInfo{
-  width: 30%;
-  max-width: 380px;
-  min-width: 250px;
-  box-sizing: border-box;
-  border: 1px solid rgb(221, 221, 221);
-  border-radius: 8px;
-  box-shadow: 5px 5px 10px rgb(221, 221, 221);
-  margin-right: 14px;
-  margin-bottom: 26px;
-  height: 280px;
-}
-
-.GameInfo :hover{
-  cursor: pointer;
-}
-.GameInfo h3,
-.GameInfo p{
-  margin-left: 24px;
-  margin-right: 16px;
-
-}
-.GameInfo h3 {
-  margin-top: 20px;
-}
-.GameInfo p{
-  font-size: 20px;
+  flex-direction: column;
 }
 .FormClass {
   display: flex;
@@ -300,10 +106,6 @@ flex-direction: column;
   align-items: center;
   font-family: "Varela";
   height: 100%;
-}
-form {
-  display: flex;
-  flex-direction: column;
 }
 .FormClass form {
   justify-content: center;
@@ -381,28 +183,6 @@ small {
   font-size: 14px;
   color: gray;
 }
-/* #file-upload-button {
-  background-color: #0d63e3;
-} */
-#gobacktouserlogin {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  align-self: flex-start;
-  margin-bottom: 0px;
-  margin-left: 10%;
-  margin-top: 10px;
-}
-#gobacktouserlogin:hover {
-  cursor: pointer;
-}
-#gobacktouserlogin p {
-  font-size: 14px;
-  margin-left: 10px;
-  margin-bottom: 0px;
-  margin-top: 0px;
-}
 form input[type="text"],
 form input[type="password"],
 form input[type="number"],
@@ -444,59 +224,7 @@ form input[type="submit"]:hover {
   color: #0d63e3;
   font-size: 14px;
 }
-#prevInteraction {
-  font-size: 16px;
-  color: #e30d63;
-}
 
-.PlayGameForm input[type="submit"] {
-  border: none;
-  margin-top: 10px;
-  padding: 12px 14px 12px 14px;
-  width: fit-content;
-  font-size: 16px;
-  background-color: #0d63e3;
-  color: white;
-}
-.PlayGameForm input[type="submit"]:hover {
-  cursor: pointer;
-  background-color: #e30d63;
-}
-/* .PlayGameForm .MuiButtonBase-root {
-  display: none;
-} */
-/* #radioButtons label {
-  width: 100px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #2b0a55;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
-  margin-right: 15px;
-  font-size: 16px;
-}
-#radioButtons label:hover {
-  background-color: #e30d63; 
-}*/
-.RangeGameInput {
-  display: flex;
-  flex-direction: column;
-}
-.GameDashboard {
-  height: 100%;
-}
-.PlayGameForm {
-  margin-bottom: 30px;
-}
-.PlayGameForm #radioButtons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
 #strategyInputWrapper {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -852,27 +580,7 @@ hr {
 #sendMessage i:hover {
   color: #e30d63;
 }
-.PanelNotSidebar{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-.PanelHeader{
-  width: calc(100%-50px);
-  margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: right;
-  height: 60px;
-  margin-right: 50px;
-}
-.PanelHeader i{
-  color: #2b0a55;
-  margin-left: 20px;
-}
+
 .Notifications {
   display: flex;
   flex-direction: column;
@@ -1087,17 +795,6 @@ hr {
 .QuizInput {
   display: block;
 }
-.DashboardQuestion {
-  margin-bottom: 30px;
-}
-.Results {
-  margin-top: 40px;
-  margin-bottom: 50px;
-}
-.ResultsTable {
-  width: 100%;
-  margin-bottom: 30px;
-}
 .QuizQuestion {
   border: lightgray 1px solid;
   border-radius: 10px;
@@ -1222,37 +919,7 @@ hr {
 #problemType {
   width: 262px;
 }
-.sidebar-div{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 0px;
-  height: 40px;
-}
-.smallSidebar{
-  left: 0;
-  z-index: 2;
-  width: 65px;
-  background-color: #0d63e3;
-  height: 100vh;
-}
-.fas.fa-bars.fa-2x {
-  margin-top: 15px;
-  color: white;
-}
 
-
-.smallSidebar-list {
- margin-top: 12vh;
- margin-left: 15px;
- display: flex;
- flex-direction: column;
- margin-right: 15px;
-}
-.smallSidebar-list a i {
-  margin-bottom: 60px;
-  color:white;
-}
 
 /* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
 #58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
@@ -1269,14 +936,7 @@ hr {
     font-size: 22px;
     margin-left: 0px;
   }
-  .PanelHeader{
-    margin-right: 20px;
-    margin-top: 5px;
-  }
-  #mainPart{
-    margin-left: 45px;
-    margin-right: 20px;
-  }
+  
   /* .fas.fa-user-circle.fa-lg{
     right: 17.5px;
     top: 22.5px;
@@ -1290,9 +950,6 @@ hr {
   }
   .css-1pahdxg-control {
     width: 100%;
-  }
-  .Panel {
-    grid-template-columns: 5vw 90vw;
   }
   th {
     font-size: 11px;
@@ -1333,37 +990,10 @@ hr {
   .Success {
     width: 75%;
   }
-  .sidebar {
-    position: fixed;
-    z-index: 2;
-  }
 }
 
-.sidebar ul li {
-  display: flex;
-  flex-direction: row;
-}  
-.sidebar p {
-  margin-left: 12px;
-}
 
-@media screen and (max-width: 740px){
-  .GameInfo{
-    width: 60%;
-  }
-}
 @media screen and (min-width: 1441px) {
-  .sidebar ul li,
-  .sidebar p {
-    font-size: 24px;
-  }
-  #sidebarFooter p {
-    font-size: 20px;
-  }
-  .sidebar ul {
-    margin-left: 60px;
-  }
-
   .UserInfo .statWrap {
     margin-top: 40px;
     margin-bottom: 40px;
@@ -1371,20 +1001,6 @@ hr {
 }
 
 @media screen and (max-width: 420px) {
-  .GameInfo{
-    width: 240px;
-    min-width: 240px;
-    max-width: 240px;
-  }
-  .GameInfo p {
-    font-size: 16px;
-  }
-  .GameInfo h3{
-    font-size: 22px;
-  }
-  .Filter{
-    margin-right: 20px;
-  }
   #place{
     max-width: fit-content;
     text-align: right;
