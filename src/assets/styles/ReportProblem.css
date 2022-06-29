@@ -1,0 +1,19 @@
+#reportProblemForm {
+    height: 570px;
+    margin-right: 20px;
+    width: 330px;
+  }
+  .acceptTerms {
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+  #problemDescription {
+    width: 248px;
+    padding-left: 10px;
+    padding-top: 5px;
+  }
+  #problemType {
+    width: 262px;
+  }

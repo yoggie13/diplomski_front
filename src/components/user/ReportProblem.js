@@ -5,6 +5,7 @@ import Dropzone from '../Dropzone';
 import Loading from '../Loading';
 import UserServices from '../../services/UserServices';
 import SuccessAnimation from '../SuccessAnimation';
+import '../../assets/styles/ReportProblem.css'
 
 export default function ReportProblem({ userID }) {
 

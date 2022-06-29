@@ -105,21 +105,9 @@ form {
   height: 330px;
   padding-top: 10px;
 }
-#reportProblemForm {
-  height: 570px;
-  margin-right: 20px;
-  width: 330px;
-}
+
 #changePasswordForm {
   margin-right: 20px;
-}
-.acceptTerms {
-  margin-left: 30px;
-  margin-top: 20px;
-  margin-right: 20px;
-  margin-bottom: 10px;
-}
-#changePasswordForm {
   min-height: 400px;
 }
 
@@ -253,7 +241,6 @@ th {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 #left {
   text-align: left;
 }
@@ -752,15 +739,6 @@ hr {
   max-width: 80%;
   max-height: 500px;
 }
-#problemDescription {
-  width: 248px;
-  padding-left: 10px;
-  padding-top: 5px;
-}
-#problemType {
-  width: 262px;
-}
-
 
 /* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
 #58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
