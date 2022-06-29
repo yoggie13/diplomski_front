@@ -1,0 +1,78 @@
+#PayoffsMatrix {
+    display: grid;
+    grid-template-columns: 20% 40% 40%;
+    grid-template-rows: 20% 40% 40%;
+  }
+  #PayoffsMatrix input[type="number"] {
+    width: 25%;
+  }
+  #PayoffsMatrix input[type="number"]:nth-child(2) {
+    border-left: 1px solid lightgray;
+  }
+  #PayoffsMatrix div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgray;
+  }
+  #AA {
+    grid-row: 2;
+    grid-column: 2;
+  }
+  #AB {
+    grid-row: 2;
+    grid-column: 3;
+  }
+  #BB {
+    grid-row: 3;
+    grid-column: 3;
+  }
+  #BA {
+    grid-row: 3;
+    grid-column: 2;
+  }
+  #A1 {
+    grid-row: 2;
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    margin: 0px;
+    margin-right: 20px;
+  }
+  #B1 {
+    grid-row: 3;
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    margin: 0px;
+    margin-right: 20px;
+  }
+  #A2 {
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 20px;
+  }
+  #B2 {
+    grid-row: 1;
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 20px;
+  }
+  .Payoffs input[type="submit"] {
+    align-self: flex-end;
+    margin-bottom: 20px;
+  }

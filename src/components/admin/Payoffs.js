@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import Loading from '../Loading';
 import GameServices from '../../services/GameServices';
 import SuccessAnimation from '../SuccessAnimation';
+import '../../assets/styles/Payoffs.css'
 
 export default function Payoffs() {
 
@@ -112,12 +113,12 @@ export default function Payoffs() {
                     ? <SuccessAnimation setSuccessState={setSuccessState} />
                     : loadingState
                         ? <Loading />
-                        : <div className="Rewards">
+                        : <div className="Payoffs">
                             <h1>{gameState.gameName}</h1>
                             <p>{gameState.gameText}</p>
                             <h2>Isplate</h2>
                             <form>
-                                <div id="RewardMatrix">
+                                <div id="PayoffsMatrix">
                                     <p id="A1">{
                                         gameState.gameStrategies[0].text
                                     }</p>

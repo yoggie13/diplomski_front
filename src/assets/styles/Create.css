@@ -1,0 +1,33 @@
+#strategyInputWrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-bottom: 50px;
+  }
+  .StrategyInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 30px;
+  }
+  #firstPlayerStrategies {
+    border-right: 1px solid lightgray;
+  }
+  .StrategyInput h2 {
+    align-self: flex-start;
+  }
+  .StrategyShow {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-right: 30px;
+  }
+  .StrategyShow ul {
+    margin-top: 0px;
+  }
+  
+  .Strategy {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  
