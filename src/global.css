@@ -60,18 +60,6 @@ i:hover {
   grid-template-rows: 7vh 93vh;
 }
 
-.Success {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-.Success img {
-  width: 100px;
-  height: 100px;
-}
-
 .statWrap {
   display: flex;
   flex-direction: row;
@@ -828,9 +816,7 @@ hr {
     top: 30px;
     width: 65%;
   }
-  .Success {
-    width: 75%;
-  }
+ 
 }
 
 
