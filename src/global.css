@@ -694,29 +694,7 @@ hr {
 .Modal form {
   width: 80%;
 }
-.Dropzone {
-  text-align: center;
-  border: dashed 1px lightgray;
-  border-radius: 10px;
-  padding: 15px 20px 30px 20px;
-  margin-bottom: 20px;
-  width: 220px;
-  max-height: 70px;
-  height: fit-content;
-}
-.dropzone-header {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0;
-}
-.Dropzone p {
-  margin: 0;
-  font-size: 20px;
-}
-.Dropzone small li {
-  font-size: 12px;
-  list-style: none;
-}
+
 .ImageButton {
   margin-bottom: 10px;
   display: flex;
