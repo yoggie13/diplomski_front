@@ -1,5 +1,6 @@
 import { Checkbox, Radio } from '@material-ui/core';
 import QuestionIconsArray from './QuestionIconsArray';
+import '../../assets/styles/Answers.css'
 
 export default function Answers({ getAnswerState, setAnswersState, getType, updateType }) {
 

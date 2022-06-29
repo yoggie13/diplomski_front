@@ -1,5 +1,6 @@
 import { Checkbox, Radio } from '@material-ui/core';
 import React from 'react';
+import '../../assets/styles/Quiz.css'
 
 export default function Quiz({ quizState, getAnswersState, handleAnswersChange }) {
 

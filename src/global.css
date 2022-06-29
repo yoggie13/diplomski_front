@@ -465,33 +465,6 @@ hr {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.Filter{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 0;
-  margin-top: 0px;
-  justify-content: end;
-  margin-right: 50px;
-  }
-.Filter li{
-  list-style-type: none;
-  margin-left: 24px;
-  font-size: 24px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.Filter #checked{
-  text-decoration-line: underline;
-  text-decoration-color: #e30d63;
-  text-decoration-thickness: 4px;
-}
-.Filter li:hover{
-  cursor: pointer;
-}
 .notificationCount {
   width: 10px;
   height: 10px;
@@ -512,72 +485,11 @@ hr {
 #CreateQuizIcon {
   margin-left: 50%;
 }
-.Question {
-  margin-bottom: 20px;
-  border: solid 1px lightgray;
-  border-radius: 10px;
-  padding: 20px;
-}
-.QuestionBody {
-  padding-left: 40px;
-}
-.QuestionIconsArray {
-  width: 90%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
-.QuestionIconsArray select {
-  font-family: "FontAwesome", "Varela";
-}
-.QuestionIconsArray i {
-  margin: 10px 15px 10px 15px;
-}
 .css-1s2u09g-control {
   width: 250px;
 }
 .css-1pahdxg-control {
   width: 250px;
-}
-.AnswersTable {
-  max-width: 100%;
-}
-/* .QuestionIconsArray label {
-  margin-left:
-} */
-.QuestionIconsArray i:hover {
-  color: #e30d63;
-}
-.ClosedQuestion {
-  border: lightgray 1px solid;
-  border-radius: 10px;
-  padding: 10px;
-  padding-left: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.ClosedQuestion h2 {
-  margin: 0px;
-  align-self: center;
-}
-.ClosedQuestion i {
-  border-radius: 50%;
-  border: #2b0a55 solid 1px;
-  padding: 3px 7px 3px 8px;
-  margin-right: 10px;
-}
-.QuestionHeader {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.QuestionHeader h2 {
-  margin: 0px;
-  align-self: center;
 }
 #chevron-down {
   border-radius: 50%;
@@ -585,50 +497,6 @@ hr {
   padding: 3px 7px 3px 8px;
   margin-right: 10px;
   transform: rotate(90deg);
-}
-.QuestionHeader:hover {
-  cursor: pointer;
-}
-.QuestionHeader:hover #chevron-down {
-  transform: rotate(0deg);
-}
-.ClosedQuestion:hover {
-  cursor: pointer;
-}
-.ClosedQuestion:hover .fas.fa-chevron-right {
-  transform: rotate(90deg);
-}
-.AnswersTable {
-  margin-top: 30px;
-  width: 600px;
-}
-.AnswersTable td {
-  border: none;
-  padding: 0;
-  text-align: left;
-}
-.AnswersTable th {
-  text-align: left;
-}
-#question-positive-points {
-  display: flex;
-  flex-direction: row;
-}
-#question-positive-points input {
-  max-width: 40px;
-  margin-left: 20px;
-  text-align: right;
-  padding: 0px;
-}
-.QuizInput {
-  display: block;
-}
-.QuizQuestion {
-  border: lightgray 1px solid;
-  border-radius: 10px;
-  padding: 25px;
-  padding-left: 35px;
-  margin-bottom: 30px;
 }
 .Buttons {
   display: grid;
@@ -657,7 +525,6 @@ hr {
 #LeftColumn {
   grid-column: 1;
 }
-
 #RightColumn {
   grid-column: 3;
 }
@@ -695,29 +562,6 @@ hr {
   width: 80%;
 }
 
-.ImageButton {
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.ImageButton:hover {
-  cursor: pointer;
-}
-.ImageButton p {
-  margin-right: 10px;
-}
-.ImageHolder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-.ImageHolder img {
-  max-width: 80%;
-  max-height: 500px;
-}
-
 /* #e30d63, #0d63e3, #e38e0d, #0dcee3, #2b0a55, #ff5733, #ccccff,
 #58d68d, #6495ed, #ff3349, #8e44ad, #f5b7b1, #1a5276, #f7dc6f */
 @media screen and (max-width: 900px) {
@@ -750,22 +594,12 @@ hr {
   .Charts {
     display: block;
   }
-  .StrategyInput h2 {
-    font-size: 18px;
-  }
-  .StrategyInput .Strategy {
-    width: 100%;
-    font-size: 14px;
-  }
   .statWrap .result {
     max-width: 150px;
   }
   .FormClass form {
     height: 300px;
     width: 300px;
-  }
-  .AnswersTable {
-    width: 100%;
   }
   .Notifications {
     right: 90px;

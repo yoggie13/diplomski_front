@@ -1,0 +1,19 @@
+.AnswersTable {
+    margin-top: 30px;
+    width: 600px;
+    max-width: 100%;
+  }
+  .AnswersTable td {
+    border: none;
+    padding: 0;
+    text-align: left;
+  }
+  .AnswersTable th {
+    text-align: left;
+  }
+
+  @media screen and (max-width: 900px) {
+  .AnswersTable {
+    width: 100%;
+  }
+}

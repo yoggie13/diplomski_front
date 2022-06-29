@@ -3,14 +3,12 @@
     flex-direction: column;
 
 }
-
 .GamesArray {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-
 .GameInfo {
     width: 30%;
     max-width: 380px;
@@ -23,26 +21,48 @@
     margin-bottom: 26px;
     height: 280px;
 }
-
 .GameInfo :hover {
     cursor: pointer;
 }
-
 .GameInfo h3,
 .GameInfo p {
     margin-left: 24px;
     margin-right: 16px;
 
 }
-
 .GameInfo h3 {
     margin-top: 20px;
 }
-
 .GameInfo p {
     font-size: 20px;
 }
-
+.Filter{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-top: 0px;
+    justify-content: end;
+    margin-right: 50px;
+    }
+  .Filter li{
+    list-style-type: none;
+    margin-left: 24px;
+    font-size: 24px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .Filter #checked{
+    text-decoration-line: underline;
+    text-decoration-color: #e30d63;
+    text-decoration-thickness: 4px;
+  }
+  .Filter li:hover{
+    cursor: pointer;
+  }
 @media screen and (max-width: 740px) {
     .GameInfo {
         width: 60%;

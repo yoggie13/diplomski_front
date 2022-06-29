@@ -3,6 +3,7 @@ import { Checkbox } from '@material-ui/core';
 import { useEffect } from 'react';
 import Answers from './Answers';
 import Dropzone from '../Dropzone';
+import '../../assets/styles/Question.css'
 
 export default function Question({ question, index, handleText, closeQuestion, setPoints, updateAnswers, updateNegative, updateType, updateImage }) {
     const [answersState, setAnswersState] = useState(question.Answers);
