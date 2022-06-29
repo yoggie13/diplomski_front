@@ -25,7 +25,7 @@
     text-align: left;
   }
   .sidebar a i {
-    color: white;
+    color: white !important;
   }
   .sidebar ul li {
     font-size: 20px;
@@ -121,7 +121,7 @@
   }
   .smallSidebar-list a i {
     margin-bottom: 60px;
-    color:white;
+    color:white !important;
   }
   @media screen and (max-width: 900px) {
     .sidebar {

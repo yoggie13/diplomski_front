@@ -47,7 +47,7 @@ export default function AllGames() {
                                 <div key={game.id} className='GameInfo'
                                     onClick={e => {
                                         e.preventDefault()
-                                        history.pushState(`/game/${game.id}`)
+                                        history.push(`/dashboard/${game.id}`)
                                     }}>
                                     <h3>{game.name}</h3>
                                     <p>Оdigralo: {game.playersPlayed}</p>

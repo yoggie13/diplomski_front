@@ -214,6 +214,10 @@ form input[type="submit"]:hover {
 .FormClass form textarea {
   width: 80%;
 }
+label {
+  text-align: left;
+  display: inline-block;
+}
 
 .FormClass form label {
   align-self: flex-start;
