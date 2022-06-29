@@ -54,7 +54,6 @@ button:hover {
 i:hover {
   cursor: pointer;
 }
-
 .BasicTemplate {
   display: grid;
   grid-template-rows: 7vh 93vh;
@@ -76,13 +75,11 @@ i:hover {
   font-weight: 700;
   word-wrap: break-word;
 }
-
 #buttons {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-
 form {
   display: flex;
   flex-direction: column;
@@ -105,12 +102,6 @@ form {
   height: 330px;
   padding-top: 10px;
 }
-
-#changePasswordForm {
-  margin-right: 20px;
-  min-height: 400px;
-}
-
 form input[type="text"],
 form input[type="password"],
 form input[type="number"],
@@ -139,7 +130,6 @@ form textarea {
   border-radius: 5px;
   resize: none;
 }
-
 form textarea {
   height: 100px;
   width: 89%;
@@ -194,7 +184,6 @@ label {
   text-align: left;
   display: inline-block;
 }
-
 .FormClass form label {
   align-self: flex-start;
   margin-left: 10%;
@@ -204,7 +193,10 @@ label {
   color: #0d63e3;
   font-size: 14px;
 }
-
+#changePasswordForm {
+  margin-right: 20px;
+  min-height: 400px;
+}
 .Header {
   grid-row: 1;
   width: 100vw;
@@ -216,7 +208,6 @@ label {
   margin-left: 30px;
   max-height: 65%;
 }
-
 table {
   width: 90%;
   border-collapse: collapse;
@@ -275,7 +266,6 @@ th {
 .pageMover i {
   margin-left: 30px;
 }
-
 #chevron-left {
   margin-left: 0px;
   -webkit-transform: rotate(180deg);
@@ -300,113 +290,13 @@ th {
   flex-direction: row;
   align-items: center;
 }
-.Strategy .fas.fa-plus {
-  align-self: center;
-}
-.Chat {
-  width: 350px;
-  margin: 20px 0px 20px 0px;
-  z-index: 1;
-  position: fixed;
-  right: 80px;
-  bottom: 30px;
-  display: flex;
-  justify-content: flex-end;
-}
-.Chat #chatIcon {
-  color: #2b0a55;
-  border: 2px solid #2b0a55;
-  border-radius: 50%;
-  padding: 8px;
-}
-.Chat #chatIcon:hover {
-  color: #e30d63;
-  border-color: #e30d63;
-}
-.Chat #chatOpened {
-  border: 1px solid #0d63e3;
-  width: 100%;
-  border-radius: 5px;
-  background: white;
-}
 #error {
   color: #e30d38;
   margin: 0;
 }
-#taskbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 5px;
-  margin-right: 10px;
-}
-#taskbar:hover {
-  cursor: pointer;
-}
-#taskbar small {
-  margin-left: 20px;
-}
 hr {
   margin: 5px 0px 5px 0px;
   color: lightgray;
-}
-#Messages {
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  font-size: 14px;
-  width: 100%;
-  height: 300px;
-}
-#Messages p {
-  word-wrap: break-word;
-  width: fit-content;
-  max-width: 45%;
-  height: fit-content;
-  background-color: #0d63e3;
-  border-radius: 5px;
-  color: white;
-  padding: 5px 7px 5px 7px;
-  text-align: left;
-  margin-top: 0px;
-  margin-bottom: 10px;
-}
-#Messages .Opponent {
-  justify-self: start;
-  margin-left: 10px;
-  padding-right: 9px;
-}
-#Messages .Player {
-  justify-self: end;
-  margin-right: 10px;
-  margin-left: auto;
-  padding-left: 9px;
-}
-#sendMessage {
-  display: flex;
-  flex-direction: row;
-  padding: 0px 10px 0px 10px;
-  align-items: center;
-  height: 40px;
-}
-#sendMessage textarea {
-  font-size: 14px;
-  word-wrap: break-word;
-  height: 20px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  margin: 0px;
-}
-#sendMessage i {
-  margin-left: 10px;
-  margin-right: 10px;
-  color: #2b0a55;
-}
-#sendMessage i:hover {
-  color: #e30d63;
 }
 ::-webkit-scrollbar {
   border-radius: 10px;
@@ -518,13 +408,6 @@ hr {
   table p,
   td {
     font-size: 13px;
-  }
-  .Chat {
-    max-width: 90%;
-    right: 5%;
-  }
-  .Charts {
-    display: block;
   }
   .statWrap .result {
     max-width: 150px;

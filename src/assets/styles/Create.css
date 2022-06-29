@@ -12,6 +12,9 @@
   #firstPlayerStrategies {
     border-right: 1px solid lightgray;
   }
+  .Strategy .fas.fa-plus {
+    align-self: center;
+  }
   .StrategyInput h2 {
     align-self: flex-start;
   }
@@ -30,7 +33,7 @@
     flex-direction: row;
     width: 100%;
   }
-
+  
   @media screen and (max-width: 900px) {
   .StrategyInput h2 {
     font-size: 18px;

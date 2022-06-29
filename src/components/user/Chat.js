@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 import Loading from '../Loading';
 import GameServices from '../../services/GameServices';
+import '../../assets/styles/Chat.css'
 
 export default function Chat({ id, userID }) {
     const [state, setstate] = useState({ renderChat: false, messages: [] });
