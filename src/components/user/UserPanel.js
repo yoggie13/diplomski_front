@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
 import {
     Switch,
     Route,
-    Link
 } from "react-router-dom";
 import Scoreboard from '../Scoreboard.js';
 import ReportProblem from './ReportProblem.js';
@@ -11,11 +8,9 @@ import FinishedGames from './FinishedGames.js';
 import ChangePassword from '../ChangePassword.js';
 import UserInfo from '../UserInfo.js';
 import Games from './Games.js';
-import Game from './Game.js';
 import Error from '../Error.js';
-import NotificationBell from './NotificationBell.js';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import GameHolder from './GameHolder.js';
+import '../../assets/styles/Panel.css'
 
 export default function UserPanel({ user }) {
 

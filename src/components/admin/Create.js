@@ -5,8 +5,9 @@ import {
     useHistory
 } from "react-router-dom";
 import Checkbox from '@material-ui/core/Checkbox';
-import GameServices from '../../services/GameServices.js'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import GameServices from '../../services/GameServices.js'
+import '../../assets/styles/Create.css'
 
 export default function Create() {
 

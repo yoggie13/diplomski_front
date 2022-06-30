@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserServices from '../../services/UserServices';
 import Loading from '../Loading';
+import '../../assets/styles/Notifications.css'
 
 export default function Notifications({ user }) {
     const [loadingState, setLoadingState] = useState(false);

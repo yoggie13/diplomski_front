@@ -1,5 +1,6 @@
 import React from 'react';
 import { Radio } from '@material-ui/core';
+import '../../assets/styles/PlayGame.css'
 
 export default function Game({ gameState, checkedStrategyState, handleCheck, handleInput, answer }) {
     console.log(checkedStrategyState)

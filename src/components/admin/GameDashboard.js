@@ -7,6 +7,7 @@ import AdminServices from '../../services/AdminServices';
 import Loading from '../Loading';
 import GameServices from '../../services/GameServices';
 import SuccessAnimation from '../SuccessAnimation';
+import '../../assets/styles/GameDashboard.css'
 
 function formatDate(dueDate) {
     var d = new Date(dueDate);

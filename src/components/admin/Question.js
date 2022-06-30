@@ -3,6 +3,7 @@ import { Checkbox } from '@material-ui/core';
 import { useEffect } from 'react';
 import Answers from './Answers';
 import Dropzone from '../Dropzone';
+import '../../assets/styles/Question.css'
 
 export default function Question({ question, index, handleText, closeQuestion, setPoints, updateAnswers, updateNegative, updateType, updateImage }) {
     const [answersState, setAnswersState] = useState(question.Answers);
@@ -53,7 +54,7 @@ export default function Question({ question, index, handleText, closeQuestion, s
                             setShowUploadImage(true);
                         }}>
                             <p>Dodaj sliku</p>
-                            <i class="fas fa-image fa-lg" ></i>
+                            <i className="fas fa-image fa-lg" ></i>
                         </div>
                 }
                 <Answers

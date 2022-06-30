@@ -1,0 +1,99 @@
+.Question {
+    margin-bottom: 20px;
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .QuestionBody {
+    padding-left: 40px;
+  }
+  .QuestionIconsArray {
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .QuestionIconsArray select {
+    font-family: "FontAwesome", "Varela";
+  }
+  .QuestionIconsArray i {
+    margin: 10px 15px 10px 15px;
+  }
+#question-positive-points {
+    display: flex;
+    flex-direction: row;
+  }
+  #question-positive-points input {
+    max-width: 40px;
+    margin-left: 20px;
+    text-align: right;
+    padding: 0px;
+  }
+  .ImageButton {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .ImageButton:hover {
+    cursor: pointer;
+  }
+  .ImageButton p {
+    margin-right: 10px;
+  }
+  .ImageHolder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .ImageHolder img {
+    max-width: 80%;
+    max-height: 500px;
+  }
+  .QuestionHeader:hover {
+    cursor: pointer;
+  }
+  .QuestionHeader:hover #chevron-down {
+    transform: rotate(0deg);
+  }
+  .ClosedQuestion:hover {
+    cursor: pointer;
+  }
+  .ClosedQuestion:hover .fas.fa-chevron-right {
+    transform: rotate(90deg);
+  }
+  .QuestionIconsArray i:hover {
+    color: #e30d63;
+  }
+  .ClosedQuestion {
+    border: lightgray 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .ClosedQuestion h2 {
+    margin: 0px;
+    align-self: center;
+  }
+  .ClosedQuestion i {
+    border-radius: 50%;
+    border: #2b0a55 solid 1px;
+    padding: 3px 7px 3px 8px;
+    margin-right: 10px;
+  }
+  .QuestionHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .QuestionHeader h2 {
+    margin: 0px;
+    align-self: center;
+  }

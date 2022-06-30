@@ -1,0 +1,70 @@
+.Panel {
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.Panel a {
+    color: white;
+    text-decoration: none;
+    font-family: "Varela";
+}
+
+.Panel a i {
+    color: #2b0a55;
+}
+
+#mainPart {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-left: 90px;
+    margin-right: 100px;
+    text-align: justify;
+    font-family: "Varela";
+    font-size: 22px;
+    color: #020b3f;
+    height: 80vh;
+}
+
+.PanelNotSidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.PanelHeader {
+    width: calc(100%-50px);
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    height: 60px;
+    margin-right: 50px;
+}
+
+.PanelHeader i {
+    color: #2b0a55;
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 900px) {
+    .Panel {
+        grid-template-columns: 5vw 90vw;
+    }
+
+    .PanelHeader {
+        margin-right: 20px;
+        margin-top: 5px;
+    }
+
+    #mainPart {
+        margin-left: 45px;
+        margin-right: 20px;
+    }
+}

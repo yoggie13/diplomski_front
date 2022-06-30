@@ -1,0 +1,104 @@
+#Messages {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 14px;
+    width: 100%;
+    height: 300px;
+  }
+  #Messages p {
+    word-wrap: break-word;
+    width: fit-content;
+    max-width: 45%;
+    height: fit-content;
+    background-color: #0d63e3;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 7px 5px 7px;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  #Messages .Opponent {
+    justify-self: start;
+    margin-left: 10px;
+    padding-right: 9px;
+  }
+  #Messages .Player {
+    justify-self: end;
+    margin-right: 10px;
+    margin-left: auto;
+    padding-left: 9px;
+  }
+  #sendMessage {
+    display: flex;
+    flex-direction: row;
+    padding: 0px 10px 0px 10px;
+    align-items: center;
+    height: 40px;
+  }
+  #sendMessage textarea {
+    font-size: 14px;
+    word-wrap: break-word;
+    height: 20px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    margin: 0px;
+  }
+  #sendMessage i {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #2b0a55;
+  }
+  #sendMessage i:hover {
+    color: #e30d63;
+  }
+  #taskbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  #taskbar:hover {
+    cursor: pointer;
+  }
+  #taskbar small {
+    margin-left: 20px;
+  }
+  .Chat {
+    width: 350px;
+    margin: 20px 0px 20px 0px;
+    z-index: 1;
+    position: fixed;
+    right: 80px;
+    bottom: 30px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .Chat #chatIcon {
+    color: #2b0a55;
+    border: 2px solid #2b0a55;
+    border-radius: 50%;
+    padding: 8px;
+  }
+  .Chat #chatIcon:hover {
+    color: #e30d63;
+    border-color: #e30d63;
+  }
+  .Chat #chatOpened {
+    border: 1px solid #0d63e3;
+    width: 100%;
+    border-radius: 5px;
+    background: white;
+  }
+
+  @media screen and (max-width: 900px) {
+  .Chat {
+    max-width: 90%;
+    right: 5%;
+  }
+}

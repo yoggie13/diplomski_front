@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import homepage_photo from '../assets/homepage.png'
+import '../assets/styles/Homepage.css'
 
 export default function HomePage() {
     useEffect(() => {

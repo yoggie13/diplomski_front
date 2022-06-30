@@ -15,6 +15,7 @@ import Error from '../Error.js';
 import ChangePassword from '../ChangePassword.js';
 import CreateQuiz from './CreateQuiz.js';
 import Dashboard from './Dashboard.js';
+import '../../assets/styles/Panel.css'
 
 export default function AdminPanel({ isAdmin, user }) {
     return (

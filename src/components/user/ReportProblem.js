@@ -5,6 +5,7 @@ import Dropzone from '../Dropzone';
 import Loading from '../Loading';
 import UserServices from '../../services/UserServices';
 import SuccessAnimation from '../SuccessAnimation';
+import '../../assets/styles/ReportProblem.css'
 
 export default function ReportProblem({ userID }) {
 
@@ -116,7 +117,7 @@ export default function ReportProblem({ userID }) {
                                             setShowUploadImage(true);
                                         }}>
                                             <p>Dodaj sliku</p>
-                                            <i class="fas fa-image fa-lg" ></i>
+                                            <i className="fas fa-image fa-lg" ></i>
                                         </div>
                                 }
                                 <div className="acceptTerms">

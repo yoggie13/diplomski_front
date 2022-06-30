@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
+import '../assets/styles/Dropzone.css'
 
 export default function Dropzone({ setImage, index, setShowUploadImageState, ImageName }) {
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone();

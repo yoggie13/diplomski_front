@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Loading from '../Loading';
 import GameServices from '../../services/GameServices';
-import { useHistory } from 'react-router-dom';
+import '../../assets/styles/Games.css';
 
 function formatDate(dueDate) {
     var d = new Date(dueDate);

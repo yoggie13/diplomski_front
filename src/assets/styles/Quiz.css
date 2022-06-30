@@ -1,0 +1,10 @@
+.QuizQuestion {
+    border: lightgray 1px solid;
+    border-radius: 10px;
+    padding: 25px;
+    padding-left: 35px;
+    margin-bottom: 30px;
+  }
+  .QuizInput {
+    display: block;
+  }
