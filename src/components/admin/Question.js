@@ -54,7 +54,7 @@ export default function Question({ question, index, handleText, closeQuestion, s
                             setShowUploadImage(true);
                         }}>
                             <p>Dodaj sliku</p>
-                            <i class="fas fa-image fa-lg" ></i>
+                            <i className="fas fa-image fa-lg" ></i>
                         </div>
                 }
                 <Answers

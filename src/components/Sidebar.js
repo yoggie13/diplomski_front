@@ -32,7 +32,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                 ? <div className="sidebar">
                     <div id='sidebarHeader'>
                         <img src={logo} alt="laboi logo" />
-                        <i class="fas fa-arrow-left fa"
+                        <i className="fas fa-arrow-left fa"
                             onClick={e => {
                                 e.preventDefault();
                                 setOpened(false)
@@ -46,7 +46,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                                     <li className='sidebar-li'>
                                         <Link to="/create">
                                             <div className='sidebar-div'>
-                                                <i class="fas fa-plus"></i>
+                                                <i className="fas fa-plus"></i>
                                                 <p>Kreiraj igru</p>
                                             </div>
                                         </Link>
@@ -54,7 +54,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                                     <li>
                                         <Link to="/dashboard">
                                             <div className='sidebar-div'>
-                                                <i class="fas fa-tachometer-alt"></i>
+                                                <i className="fas fa-tachometer-alt"></i>
                                                 <p>Dashboard</p>
                                             </div>
                                         </Link>
@@ -62,7 +62,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                                     <li>
                                         <Link to="/allGames">
                                             <div className='sidebar-div'>
-                                                <i class="fas fa-gamepad"></i>
+                                                <i className="fas fa-gamepad"></i>
                                                 <p>Sve igre</p>
                                             </div>
                                         </Link>
@@ -70,7 +70,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                                     <li>
                                         <Link to="/scoreboards">
                                             <div className='sidebar-div'>
-                                                <i class="fas fa-trophy"></i>
+                                                <i className="fas fa-trophy"></i>
                                                 <p>Tabele</p>
                                             </div>
                                         </Link>
@@ -80,7 +80,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                                     <li>
                                         <Link to="/games">
                                             <div className='sidebar-div'>
-                                                <i class="fas fa-gamepad"></i>
+                                                <i className="fas fa-gamepad"></i>
                                                 <p>Igre</p>
                                             </div>
                                         </Link>
@@ -89,7 +89,7 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                                     <li>
                                         <Link to="/scoreboard">
                                             <div className='sidebar-div'>
-                                                <i class="fas fa-trophy"></i>
+                                                <i className="fas fa-trophy"></i>
                                                 <p>Tabela</p>
                                             </div>
                                         </Link>
@@ -120,16 +120,16 @@ export default function Sidebar({ logoutLogic, isAdmin, setSidebarState }) {
                             isAdmin
                                 ? <>
                                     <Link to="/create">
-                                        <i class="fas fa-plus fa-lg"></i>
+                                        <i className="fas fa-plus fa-lg"></i>
                                     </Link>
                                     <Link to="/dashboard">
-                                        <i class="fas fa-tachometer-alt fa-lg"></i>
+                                        <i className="fas fa-tachometer-alt fa-lg"></i>
                                     </Link>
                                     <Link to="/allGames">
-                                        <i class="fas fa-gamepad fa-lg"></i>
+                                        <i className="fas fa-gamepad fa-lg"></i>
                                     </Link>
                                     <Link to="/scoreboards">
-                                        <i class="fas fa-trophy fa-lg"></i>
+                                        <i className="fas fa-trophy fa-lg"></i>
                                     </Link>
                                 </>
                                 : <>

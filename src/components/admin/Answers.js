@@ -120,7 +120,7 @@ export default function Answers({ getAnswerState, setAnswersState, getType, upda
                                                 : null
                                     }
                                 </td>
-                                <td><i class="fas fa-times" onClick={e => deleteAnswer(e, index)}></i></td>
+                                <td><i className="fas fa-times" onClick={e => deleteAnswer(e, index)}></i></td>
                             </tr>
                         )}
                 </tbody>

@@ -117,7 +117,7 @@ export default function ReportProblem({ userID }) {
                                             setShowUploadImage(true);
                                         }}>
                                             <p>Dodaj sliku</p>
-                                            <i class="fas fa-image fa-lg" ></i>
+                                            <i className="fas fa-image fa-lg" ></i>
                                         </div>
                                 }
                                 <div className="acceptTerms">

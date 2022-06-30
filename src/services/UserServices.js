@@ -12,7 +12,7 @@ export default class UserServices {
 
     //POST
     static Login = async (email, password) => {
-        return await API.POST('user/login', {
+        return await API.POST('user/login/', {
             Email: email,
             Password: password
         })
@@ -24,12 +24,12 @@ export default class UserServices {
         return await API.POST('student/report/', data)
     }
     static ChangePassword = async (data) => {
-        return await API.POST('user/changePass', data)
+        return await API.POST('user/changePass/', data)
     }
     static CheckCookie = async (data) => {
-        return await API.GET('user/check-cookie')
+        return await API.GET('user/check-cookie/')
     }
     static Logout = async (data) => {
-        return await API.POST('user/logout')
+        return await API.POST('user/logout/')
     }
 }
