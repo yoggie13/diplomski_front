@@ -16,6 +16,7 @@ import ChangePassword from '../ChangePassword.js';
 import CreateQuiz from './CreateQuiz.js';
 import Dashboard from './Dashboard.js';
 import '../../assets/styles/Panel.css'
+import Attendance from './Attendance.js';
 
 export default function AdminPanel({ isAdmin, user }) {
     return (
@@ -44,6 +45,9 @@ export default function AdminPanel({ isAdmin, user }) {
             </Route>
             <Route path="/create/game" >
                 <CreateGame />
+            </Route>
+            <Route path='/attendance'>
+                <Attendance />
             </Route>
             <Route path="/confirmation" >
                 <Confirmation />

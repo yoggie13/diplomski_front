@@ -75,4 +75,22 @@ export default class API {
                 console.log(error);
             })
     }
+    static GETExternal = async (url) => {
+        return await fetch(
+            url,
+            {
+                method: "GET",
+                mode: "no-cors",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Credentials': true,
+                    'Access-Control-Allow-Headers': 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    "withCredentials": "include"
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 }

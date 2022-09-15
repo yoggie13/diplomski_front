@@ -15,9 +15,15 @@ export default class AdminServices {
     static GetDashboard = async () => {
         return await API.GET('admin/dashboard/');
     }
+    static GetQRForAttendance = (id, key) => {
+        var url = `https://teorijaigara.netlify.app/attend/${id}/${key}`;
+        return `http://api.qrserver.com/v1/create-qr-code/?data=${url}&size=200x200`;
+    }
 
     //POST
-
+    static GenerateNewAttendance = async (event) => {
+        return await API.POST('admin/lesson/' + event + '/');
+    }
 
     //DELETE
 }
